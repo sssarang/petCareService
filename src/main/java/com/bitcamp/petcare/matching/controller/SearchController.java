@@ -17,7 +17,7 @@ public class SearchController {
 
 	@GetMapping("mainService")
 	public String print() {
-		log .debug("page() invoked.");
+		log .debug("page() invoked....");
 		
 		return "search";
 	} //print
