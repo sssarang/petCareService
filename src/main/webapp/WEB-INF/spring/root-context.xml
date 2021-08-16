@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <description>HikariCP Configuration</description>
+
+	
+        <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+		<property name="jdbcUrl" 
+			value = "jdbc:log4jdbc:oracle:thin:@db202106301639_high?TNS_ADMIN=C:/opt/oracleCloudWallet/ATP"/>
+		<property name="username" value = "ADMIN"/>
+		<property name="password" value = ""/>
+
+        <property name="maximumPoolSize" value="10"/>
+        <property name="minimumIdle" value="2"/>
+        <property name="idleTimeout" value="10000"/>
+        <property name="connectionTimeout" value="1000"/>
+        <property name="connectionTestQuery" value="SELECT 1 FROM dual"/>
+        <property name="dataSourceJNDI" value="jdbc/HikariCP"/>
+	</bean>
+	
+	<bean id="hikariDataSource" 
+          class="com.zaxxer.hikari.HikariDataSource"
+          destroy-method="close">
+          <description>HikariCP DataSource</description>
+
+          <constructor-arg ref="hikariConfig"/>
+   </bean>
+   
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+   
+   		<property name="dataSource" ref="hikariDataSource"></property>
+   		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+   	
+    </bean>
+
+	<mybatis-spring:scan base-package="com.bitcamp.petcare.common.mapper"/>
+	<mybatis-spring:scan base-package="com.bitcamp.petcare.home.mapper"/>
+	<mybatis-spring:scan base-package="com.bitcamp.petcare.user.mapper"/>
+	<mybatis-spring:scan base-package="com.bitcamp.petcare.matching.mapper"/>
+	<mybatis-spring:scan base-package="com.bitcamp.petcare.mypage.mapper"/>
+	<mybatis-spring:scan base-package="com.bitcamp.petcare.admin.mapper"/>
+	
+</beans>
