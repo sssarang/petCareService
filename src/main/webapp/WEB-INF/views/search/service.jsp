@@ -29,7 +29,9 @@
 		    
 		<%@include file="/WEB-INF/views/common/header1.jsp" %> 
 		
-		<div class="bg-body" style="height: 1000px;"></div>
+		<!-- <div class="bg-body" style="height: 1000px;"></div> -->
+		
+		<%@include file="/WEB-INF/views/search/service_in.jsp" %> 
 			    
 			    
 		<%@include file="/WEB-INF/views/common/footer.jsp" %> 

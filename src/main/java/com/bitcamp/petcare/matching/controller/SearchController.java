@@ -15,11 +15,10 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class SearchController {
 
-	@GetMapping("mainService")
-	public String print() {
+	@GetMapping("service")
+	public void read() {
 		log .debug("page() invoked....");
 		
-		return "search";
-	} //print
+	} //read
 	
 } //end class
