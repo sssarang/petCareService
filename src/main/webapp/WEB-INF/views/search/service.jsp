@@ -30,7 +30,7 @@
 		
 		<!-- <div class="bg-body" style="height: 1000px;"></div> -->
 		
-		<%@include file="/WEB-INF/views/search/service_in.jsp" %> 
+		<%@include file="/WEB-INF/views/search/service.jsp" %> 
 			    
 			    
 		<%@include file="/WEB-INF/views/common/footer.jsp" %> 
