@@ -5,7 +5,7 @@
 
 
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="/resources/css/mainpagestyles.css" rel="stylesheet" />
+<link href="/resources/css/home/mainpagestyles.css" rel="stylesheet" />
 
 
 <!-- Masthead-->

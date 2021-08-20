@@ -4,8 +4,8 @@
     pageEncoding="UTF-8"%>
 
 
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="/resources/css/styles.css" rel="stylesheet" />
+ <!-- Core theme CSS (includes Bootstrap)-->
+ <link href="/resources/css/common/styles.css" rel="stylesheet" />
 
 
  <!-- Footer-->
