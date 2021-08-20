@@ -4,13 +4,17 @@
     pageEncoding="UTF-8"%>
 
 
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/resources/css/styles.css" rel="stylesheet" />
+
+
  <!-- Footer-->
  <footer class="footer bg-footer text-white">
      <div class="container">
              <div id="footerdiv">
                  <p>
                      <br>
-                     <img src="/resources/assets/img/6.png" style="width: 200px;">
+                     <img src="/resources/assets/img/common/6.png" style="width: 200px;">
                      
                  </p>
                  <br>
