@@ -3,6 +3,8 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/resources/css/styles.css" rel="stylesheet" />
 
  <!-- Footer-->
  <footer class="footer bg-footer text-white">
