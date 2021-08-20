@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.petcare.user.mapper.UserMapper">
+
+	<insert id="joinUser">
+		INSERT INTO tbl_user
+			 (user_no, user_id, user_pw, user_nickname, user_contact, 
+			  user_address, user_latitude, user_longitude, user_gender, user_classify, user_status,
+			  reg_user_no, reg_date
+			  )
+		VALUES 
+			 (user_no_seq.nextval,  #{user_id}, #{user_pw}, #{user_nickname}, #{user_contact}, #{user_address},
+			  #{user_latitude}, #{user_longitude}, #{user_gender}, #{user_classify}, #{user_status},
+			  user_no_seq.CURRVAL, sysdate)
+	</insert>
+	
+	<select id="loginUser" resultType="com.bitcamp.petcare.user.domain.UserVO">
+		SELECT user_id, user_pw
+		FROM tbl_user
+		WHERE user_id = #{user_id}
+		AND user_pw = #{user_pw}
+	</select>
+	
+	<update id="deleteUser">
+		UPDATE
+    		tbl_user
+		SET
+   			 user_status =true
+   		WHERE
+   			user_no = #{user_no}
+	</update>
+	
+	<update id="updateUser">
+		UPDATE 
+    		tbl_user
+		SET
+		    user_pw = #{user_pw}
+		    user_nickname = #{user_nickname}
+		    user_contact = #{user.contact}
+		    user_address = #{user_address}
+		    mod_user_no = #{user_no}
+		    mod_date = sysdate
+		WHERE
+			user_no
+	</update>
+</mapper>
