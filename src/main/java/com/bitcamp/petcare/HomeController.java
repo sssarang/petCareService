@@ -12,12 +12,10 @@ import lombok.extern.log4j.Log4j2;
 
 
 @Log4j2
-
-@Controller
 public class HomeController {
 	
-	@GetMapping("/")
-	public String home(Locale locale, Model model) {
+	
+	public void home(Locale locale, Model model) {
 		log.info("Welcome home! The client locale is {}", locale);
 		
 		Date date = new Date();
@@ -27,7 +25,6 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
 	} //home
 	
 } //end class

@@ -44,11 +44,19 @@
    	
     </bean>
 
+	<context:component-scan base-package="com.bitcamp.petcare.common.service" />
+	<context:component-scan base-package="com.bitcamp.petcare.home.service" />
+	<context:component-scan base-package="com.bitcamp.petcare.user.service" />
+	<context:component-scan base-package="com.bitcamp.petcare.matching.service" />
+	<context:component-scan base-package="com.bitcamp.petcare.mypage.service" />
+	<context:component-scan base-package="com.bitcamp.petcare.admin.service" />	
+
 	<mybatis-spring:scan base-package="com.bitcamp.petcare.common.mapper"/>
 	<mybatis-spring:scan base-package="com.bitcamp.petcare.home.mapper"/>
 	<mybatis-spring:scan base-package="com.bitcamp.petcare.user.mapper"/>
 	<mybatis-spring:scan base-package="com.bitcamp.petcare.matching.mapper"/>
 	<mybatis-spring:scan base-package="com.bitcamp.petcare.mypage.mapper"/>
 	<mybatis-spring:scan base-package="com.bitcamp.petcare.admin.mapper"/>
+	
 	
 </beans>

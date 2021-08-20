@@ -31,12 +31,4 @@
 	<context:component-scan base-package="com.bitcamp.petcare.mypage.controller" />
 	<context:component-scan base-package="com.bitcamp.petcare.admin.controller" />
 
-	<context:component-scan base-package="com.bitcamp.petcare.common.service" />
-	<context:component-scan base-package="com.bitcamp.petcare.home.service" />
-	<context:component-scan base-package="com.bitcamp.petcare.user.service" />
-	<context:component-scan base-package="com.bitcamp.petcare.matching.service" />
-	<context:component-scan base-package="com.bitcamp.petcare.mypage.service" />
-	<context:component-scan base-package="com.bitcamp.petcare.admin.service" />	
-	
-	
 </beans:beans>
