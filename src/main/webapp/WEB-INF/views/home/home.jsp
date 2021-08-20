@@ -22,7 +22,7 @@
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="/resources/css/styles.css?after" rel="stylesheet" />
+    <link href="/resources/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 
