@@ -24,37 +24,29 @@ public class UserController {
 	@Setter(onMethod_=@Autowired)
 	private UserService service;
 	
-	
-	@GetMapping("startPoint")
-	public String start() {
-		log.debug("start() invoked");
-		
-		return "user/join";
-		
-	}//start
-	
-	@GetMapping("test")
-	public String test() {
-		
-		return "user/login";
+	@GetMapping("temp")
+	public String temp() {
+		return "user/articleCheck";
 	}
 	
+	//view controller 매핑
 	@PostMapping("join")
 	public String joinUser(UserDTO dto, RedirectAttributes rttr) {
 		log.debug("joinUser({}) invoked", dto);
 		
-		dto.setUser_latitude(43.123123);
-		dto.setUser_longitude(54.123123);
-		dto.setUser_status('F');
-		dto.setUser_classify('1');
+		dto.setUserLatitude(43.123123);
+		dto.setUserLongitude(54.123123);
+		dto.setUserStatus('F');
+		dto.setUserClassify('1');
 		
 		if(this.service.joinUser(dto) == 1 ) {
 			rttr.addFlashAttribute("result", "success");
-			return "redirect:/user/login";
+			return "redirect:/user/loginPage";
 		}
-		return "user/join";
+		return "user/joinPage";
 	}//joinUser
 	
+	//view controller 매핑
 	@PostMapping("login")
 	public String loginUser(UserDTO dto) {
 		log.debug("loginUser({}) invoked", dto);
@@ -65,7 +57,7 @@ public class UserController {
 			return "redirect:/";
 		}//if
 		
-		return "user/login";
+		return "user/loginPage";
 	}//loginUser
 	
 }//end class

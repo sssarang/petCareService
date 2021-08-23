@@ -1,3 +1,6 @@
+body {
+	padding-top: 0px !important;
+}
 .form-bg{
     background-image: url("../images/img-1.jpg");
     background-size: cover;
@@ -104,6 +107,24 @@ form .form-footer a{
 
 form .form-footer a:hover{
     text-decoration: underline;
+}
+
+/* 부트스트랩 설정 외 추가한 옵션 */
+form .radio-control{
+	font-size: 14px;
+	
+}
+
+/* 부트스트랩 설정 외 추가한 옵션 */
+form .check-button{
+	float: right;
+}
+
+/* 부트스트랩 설정 외 추가한 옵션 */
+form .warning-label{
+    font-size: 12px;
+    color: red;
+    letter-spacing: 1px;
 }
 
 @media screen and (max-width: 990px){
