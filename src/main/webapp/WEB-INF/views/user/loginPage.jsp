@@ -17,14 +17,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	
+	<!--  bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	
+	<!-- 비밀번호 찾기 팝업창 -->
+	<script src="/resources/js/user/findpassword.js"></script>
+	
+	
+	<!--  bootstrap -->
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<link rel="stylesheet" href="../../../resources/css/sign/style.css">
+	<link rel="stylesheet" href="/resources/css/user/userstyle.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<title> 로그인페이지 </title>
 </head>
@@ -34,14 +40,15 @@
 	        <div class="container-fluid">
 	            <div class="row text-center">
 	                <div class="col-lg-12">
-	                    <h1 class="heading-title"> 쓰담쓰담 </h1>
+	               	 	<img src="/resources/assets/img/common/2.png">
+	                    <h1 class="heading-title"></h1>
 	                </div>
 	            </div>
 	
 	            <div class="row">
 	                <div class="col-md-offset-3 col-md-6">
 	                    <form action="/user/login" method="POST">
-	                        <h1 class="heading">sign in</h1>
+	                        <h1 class="heading">로그인</h1>
 	                        <div class="form-group">
 	                            <label class="control-label">아이디</label>
 	                            <input type="text" name="user_id" class="form-control" placeholder="Example@EmailAddress.com"/>
@@ -52,11 +59,15 @@
 	                           
 	                            <button type="submit" class="btn btn-default">Login<i class="fa fa-arrow-circle-right fa-2x"></i></button>
 	                        </div>
+	                        <span class="form-footer">비밀번호를 잊어버리셨나요? &nbsp<a onclick="showPopup()">비밀번호 찾기</a></span>
+	                        <br>
+	                        <span class="form-footer">아직 회원이 아니신가요? &nbsp<a href="joinPage">회원가입하기</a></span>
 	                    </form>
 	                </div>
 	            </div>
 	        </div>
 	    </div>
-
+		<!-- footer -->
+	    <%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

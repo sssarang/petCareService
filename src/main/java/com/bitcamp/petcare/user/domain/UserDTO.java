@@ -6,15 +6,15 @@ import lombok.Data;
 @Data
 public class UserDTO {
 	
-	private String user_id;
-	private String user_pw;
-	private String user_nickname;
-	private String user_contact;
-	private String user_address;
-	private Double user_latitude;
-	private Double user_longitude;
-	private Character user_gender;
-	private Character user_classify;
-	private Character user_status;
+	private String userId;
+	private String userPw;
+	private String userNickname;
+	private String userContact;
+	private String userAddress;
+	private Double userLatitude;
+	private Double userLongitude;
+	private Character userGender;
+	private Character userClassify;
+	private Character userStatus;
 
-}
+}//end class
