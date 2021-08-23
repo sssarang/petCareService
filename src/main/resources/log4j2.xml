@@ -13,7 +13,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="org.zerock.myapp" level="trace" />
+        <Logger name="com.bitcamp.petcare" level="trace" />
         
         
         <Logger name="org.springframework.core" level="info" />

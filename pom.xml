@@ -280,6 +280,22 @@
 
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- ============= 9. 메일 ================ -->
+		<!-- javax.mail -->
+		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
+		
+		<!-- spring-context-support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>5.3.9</version>
+		</dependency>
+		
 
 	</dependencies>
 

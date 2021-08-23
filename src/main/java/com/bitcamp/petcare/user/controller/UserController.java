@@ -5,7 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.bitcamp.petcare.user.domain.UserDTO;
 import com.bitcamp.petcare.user.domain.UserVO;
 import com.bitcamp.petcare.user.service.UserService;
@@ -60,4 +63,13 @@ public class UserController {
 		return "user/loginPage";
 	}//loginUser
 	
+	@RequestMapping(value="authDo", method=RequestMethod.POST)
+	@ResponseBody
+	public String authDo(String email) {
+		log.debug("authDo({}) invoked", email);
+		
+		
+        return "success";
+	}//authDo
+
 }//end class
