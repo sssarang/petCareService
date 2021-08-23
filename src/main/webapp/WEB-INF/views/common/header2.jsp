@@ -10,7 +10,7 @@
 
 
 <!-- Navigation-->
-<nav class="navbar navbar-light bg-white static-top fixed-top">
+<nav class="navbar navbar-light static-top fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/">
             <img src="/resources/assets/img/common/2.png" alt="Logo" width="165px">
