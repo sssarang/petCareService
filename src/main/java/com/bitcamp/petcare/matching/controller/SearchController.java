@@ -18,7 +18,7 @@ public class SearchController {
 	@GetMapping("service")
 	public void read() {
 		
-		log .debug("page() invoked...");
+		log .debug("read() invoked...");
 	
 		
 	} //read
