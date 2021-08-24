@@ -23,7 +23,18 @@
 		SELECT user_id, user_pw
 		FROM tbl_user
 		WHERE user_id = #{userId}
-		AND user_pw = #{userPw}
+	</select>
+	
+	<select id="checkId" resultType="String">
+		SELECT user_id
+		FROM tbl_user
+		WHERE user_id = #{userId}
+	</select> 
+	
+	<select id="checkNickName" resultType="String">
+		SELECT user_nickname
+		FROM tbl_user
+		WHERE user_nickname = #{nickName}
 	</select>
 	
 	<update id="deleteUser">

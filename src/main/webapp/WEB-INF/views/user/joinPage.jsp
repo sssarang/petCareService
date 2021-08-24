@@ -26,13 +26,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
     
-    <script type="text/javascript" src="/resources/js/user/authKey.js"></script>
+    <script type="text/javascript" src="/resources/js/user/userJoin.js"></script>
 	
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	<link rel="stylesheet" href="/resources/css/user/userstyle.css">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-	<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<title> 쓰담쓰담 로그인 </title>
 </head>
 
@@ -52,8 +52,8 @@
 	                        <h1 class="heading">회원가입</h1>
 	                        <div class="form-group">
 	                        		<label class="control-label">아이디 (사용중인 이메일)</label>
-	                        		<label class="warning-label">* 이미 사용중인 아이디입니다.</label>
-	                        		<button type="button" class="check-button">중복확인</button>
+	                        		<label id="emailLabel" class="warning-label"></label>
+	                        		<button type="button" id="emailBtn" class="check-button">중복확인</button>
 		                            <input id="emailId" type="email" name="userId" class="form-control" placeholder="example@naver.com"/>
 									
 									<label class="control-label">인증번호 입력</label>
@@ -65,9 +65,9 @@
 		                            <input type="password" name="userPw" class="form-control" placeholder="비밀번호 설정"/>
 		
 		                            <label class="control-label">닉네임</label>
-		                            <label class="warning-label">* 이미 사용중인 닉네임입니다.</label>
-		                            <button type="button" class="check-button">중복확인</button>
-		                            <input type="text" name="userNickname" class="form-control" />
+		                            <label  id="nickNameLabel" class="warning-label"></label>
+		                            <button id="nickNameBtn" type="button" class="check-button">중복확인</button>
+		                            <input id="nickName" type="text" name="userNickname" class="form-control" />
 		                  
 		                            <label class=" control-label">전화번호</label>
 		                            <input type="tel" name="userContact" class="form-control"/>

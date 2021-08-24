@@ -229,6 +229,22 @@
           <artifactId>spring-security-core</artifactId>
           <version>${org.springsecurity-version}</version>
       </dependency>
+      
+      <!-- spring-security-web -->
+	  <dependency>
+		  <groupId>org.springframework.security</groupId>
+		  <artifactId>spring-security-web</artifactId>
+		  <version>${org.springsecurity-version}</version>
+	  </dependency>
+	  
+	  <!-- spring-security-config -->
+	  <dependency>
+	      <groupId>org.springframework.security</groupId>
+	      <artifactId>spring-security-config</artifactId>
+	      <version>${org.springsecurity-version}</version>
+	  </dependency>
+	  
+      
 		
 		<!-- ===============5. Test================= -->
 		<!-- junit : Test Framwork (Model, View, Controller > Service > DAO > VO, DTO -->
@@ -281,7 +297,7 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- ============= 9. 메일 ================ -->
+		<!-- ============= 9. Mail ================ -->
 		<!-- javax.mail -->
 		<dependency>
 		    <groupId>com.sun.mail</groupId>
