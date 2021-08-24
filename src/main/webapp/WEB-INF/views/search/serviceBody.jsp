@@ -31,9 +31,9 @@ pageEncoding="UTF-8"%>
                  
                  <div class="form-group">
                      <div class="btn-toggle">
-                         <input type="radio" name="dog-size" value="small"><label for="small">소형견</label>
-                         <input type="radio" name="dog-size" value="middle"><label for="middle">중형견</label>
-                         <input type="radio" name="dog-size" value="large"><label for="large">대형견</label>
+                         <input type="radio" id="small" name="dog-size" value="small"><label for="small">소형견</label>
+                         <input type="radio" id="middle" name="dog-size" value="middle"><label for="middle">중형견</label>
+                         <input type="radio" id="large" name="dog-size" value="large"><label for="large">대형견</label>
                      </div>
                  </div>     
                  

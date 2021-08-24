@@ -43,7 +43,7 @@
     padding: 1.5%;
     padding-top: 70px;
 
-    background-color: #fdeee3;
+    background-color: #fff9e8;
 }
 
 .sidebar-list { /*사이드바 %로 단위변경*/
@@ -194,11 +194,11 @@ hr {
     font-weight:bold;
     font-size: 0.9rem;
     font-family: 'Noto Sans KR', sans-serif;
-    font-color: #333;
 }
 
-.btn-toggle input[type=radio]:checked{
-    background-color: #333;
+
+.btn-toggle input[type=radio]:checked +label {
+    background-color: #fdf7b9;
     font-color: #fdfdfc;
 }
 
