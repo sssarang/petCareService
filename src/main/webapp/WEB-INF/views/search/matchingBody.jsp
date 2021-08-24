@@ -3,6 +3,8 @@
 
  <!-- Core theme CSS (includes Bootstrap)-->
  <link href="/resources/css/search/matching.css" rel="stylesheet" />
+ 
+ 
 
 <section class="layout bg-body">
     <div class="container">
@@ -24,7 +26,7 @@
                     </div>
                 </form>
             </div>  
-            <div class="form-item" style="display: inline-block;">
+            <div class="form-item d-inline-block">
                 <select class="form-select" aria-label="Default select example">
                     <option selected>서비스 선택</option>
                     <option value="1">방문-All day</option>
@@ -33,10 +35,10 @@
                     <option value="4">맡김-Half day</option>
                 </select>
             </div> 
-            <div class="pt-3 ms-3" style="display: inline-block;">
-                <spen><input type="text" class="selector" placeholder="시작일" /></spen>
-                <span>&nbsp;~&nbsp;</span> 
-                <spen><input type="text" class="selector" placeholder="종료일" /></spen> 
+            <div class="pt-3 ms-3 d-inline-block">
+                <input type="text" class="selector" placeholder="시작일" />
+                &nbsp;~&nbsp;
+                <input type="text" class="selector" placeholder="종료일" />
 
                 <!-- <a class="input-button" title="toggle" data-toggle><i class="icon-calendar"></i></a> -->
                 

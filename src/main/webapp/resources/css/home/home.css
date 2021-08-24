@@ -53,11 +53,11 @@ body {
 }
 
 hr {
-  margin: 0;
+  margin: 3px;
   color: inherit;
   background-color: currentColor;
   border: 0;
-  opacity: 0.25;
+  opacity: 0.35;
 }
 
 hr:not([size]) {
@@ -805,7 +805,7 @@ progress {
 }
 @media (min-width: 1200px) {
   .col-xl {
-    flex: 1 0 0%;
+    flex: 100%;
   }
 
   .row-cols-xl-auto > * {
@@ -1612,7 +1612,7 @@ progress {
 
   .col-xl-7 {
     flex: 0 0 auto;
-    width: 58.33333333%;
+    width: 56%;
   }
 
   .col-xl-8 {
@@ -4040,6 +4040,7 @@ textarea.form-control-lg {
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
   box-shadow: 0px 3px 16px 0px rgb(0 0 0 / 10%);
+  background-color: rgba(255, 255, 255, 0.63);
 }
 .navbar > .container,
 .navbar > .container-fluid,
@@ -10941,11 +10942,11 @@ textarea.form-control-lg {
 
 header.masthead {
   position: relative;
-  /* background-color: #343a40; */
-  background: url("/resources/assets/img/home/catdog.jpg") no-repeat center center !important;
+  background-color: #343a40;
+  background: url("/resources/assets/img/home/catdog.jpg") no-repeat center center;
   background-size: cover;
-  padding-top: 8rem;
-  padding-bottom: 8rem;
+  padding-top: 6rem !important;
+  padding-bottom: 6rem !important;
 }
 header.masthead:before {
   content: "";
@@ -10962,8 +10963,8 @@ header.masthead h1, header.masthead .h1 {
 }
 @media (min-width: 768px) {
   header.masthead {
-    padding-top: 12rem;
-    padding-bottom: 12rem;
+    padding-top: 8rem !important;
+    padding-bottom: 10rem !important;
   }
   header.masthead h1, header.masthead .h1 {
     font-size: 3rem;
@@ -10992,8 +10993,8 @@ header.masthead h1, header.masthead .h1 {
 .testimonials {
   padding-top: 5rem;
   padding-bottom: 7rem;
-  /* background-color: #d4d1cbc7; */
-  background-color: #eeddbcfd;
+  background-color: #d4d1cbc7;
+  /* background-color: #eeddbcfd; */
 }
 .testimonials .testimonial-item {
   max-width: 18rem;
@@ -11007,10 +11008,10 @@ header.masthead h1, header.masthead .h1 {
 .call-to-action {
   position: relative;
   background-color: #343a40;
-  background: url("/resources/assets/img/home/catdog.jpg") no-repeat center center;
+  background: url("/resources/assets/img/home/bg-masthead.jpg") no-repeat center center;
   background-size: cover;
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 .call-to-action:before {
   content: "";
@@ -11053,7 +11054,7 @@ header.masthead h1, header.masthead .h1 {
   border: 0;
   border-radius: 50% 20% / 10% 40%;
 
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
 
   color: white;
@@ -11074,23 +11075,6 @@ header.masthead h1, header.masthead .h1 {
 
 .wrap  > form-item {
   margin-bottom: 20px;
-}
-.form-item {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
-.form-item > label {
-  width: 115px;
-  padding-right: 10px;
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-}
-.form-item > input {
-  flex-grow: 1;
 }
 
 .select {

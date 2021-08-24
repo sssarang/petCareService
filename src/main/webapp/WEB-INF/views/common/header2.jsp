@@ -13,7 +13,7 @@
 <nav class="navbar navbar-light static-top fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/">
-            <img src="/resources/assets/img/common/2.png" alt="Logo" width="165px">
+            <img class="img-fluid" src="/resources/assets/img/common/2.png" alt="Logo" width="165px">
         </a>
         <div class="btn-group">
             <a class="btn orange" href="#">
