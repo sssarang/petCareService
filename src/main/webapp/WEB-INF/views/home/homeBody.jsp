@@ -130,7 +130,7 @@
                         <fieldset>
                             <div>
                                 <div>Dog Size</div>
-                                </div>
+                                
                                 <div class="input-group">
                                     <div class="select">
                                         <input
@@ -177,7 +177,7 @@
 <div class="blank1"></div>
 
  <!-- Image Showcases-->
- <section class="showcase bg-body">
+<section class="showcase bg-body">
     <div class="container">
         <div class="row g-0">
             <div class="col-lg-6 order-lg-2 text-white showcase-img">
@@ -324,7 +324,8 @@
                                             </div>
                                         </div>
                             
-                                    </div> 
+                                    </div>
+                                </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
                                     <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->

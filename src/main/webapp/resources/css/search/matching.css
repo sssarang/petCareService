@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-@charset "UTF-8";
 
 :root {
   --bs-blue: #0d6efd;
@@ -2338,8 +2337,8 @@ textarea.form-control-lg {
 
 .form-select {
   display: block;
-  width: 100%;
-  padding: 0.55rem 2.5rem 0.55rem 1rem;
+  /* padding: 0.75rem 3rem 0.75rem 1rem; */
+  padding: 0.55rem 2.5rem 0.55rem 1rem !important;
   -moz-padding-start: calc(1rem - 3px);
   font-size: 1rem;
   font-weight: 400;
@@ -2357,6 +2356,7 @@ textarea.form-control-lg {
      -moz-appearance: none;
           appearance: none;
 }
+
 @media (prefers-reduced-motion: reduce) {
   .form-select {
     transition: none;
@@ -10926,3 +10926,6 @@ textarea.form-control-lg {
   background-color:rosybrown;
 }
 
+.selector {
+	width: 175px
+}

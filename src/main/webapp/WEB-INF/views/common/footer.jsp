@@ -14,7 +14,7 @@
              <div id="footerdiv">
                  <p>
                      <br>
-                     <img src="/resources/assets/img/common/6.png" style="width: 200px;">
+                     <img class="img-fluid" src="/resources/assets/img/common/6.png" style="width: 200px;">
                      
                  </p>
                  <br>
@@ -29,7 +29,7 @@
                      <li class="list-inline-item">⋅</li>
                      <li class="list-inline-item"><a href="#!">회사소개</a></li>
                  </ul>
-                 <p class=" small mb-4 mb-lg-0 ">&copy;  2021 쓰담쓰담. All Rights Reserved.</p>
+                 <p class="small mb-4 mb-lg-0 ">&copy;  2021 쓰담쓰담. All Rights Reserved.</p>
              </div>  
      </div>
  </footer>
