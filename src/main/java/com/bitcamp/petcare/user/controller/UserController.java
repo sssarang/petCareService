@@ -63,13 +63,51 @@ public class UserController {
 		return "user/loginPage";
 	}//loginUser
 	
+	//이메일로 인증번호 전송
 	@RequestMapping(value="authDo", method=RequestMethod.POST)
 	@ResponseBody
 	public String authDo(String email) {
 		log.debug("authDo({}) invoked", email);
 		
+		String authKey = service.sendAuthMail(email);
 		
-        return "success";
+        return authKey;
 	}//authDo
+	
+	//이메일 중복확인
+	@RequestMapping(value="emailCheck", method=RequestMethod.GET)
+	@ResponseBody
+	public String emailCheck(String email) {
+		log.debug("emailCheck() invoked");
+		
+		String result = service.checkId(email);
+		
+		if(result.equals("success")) {
+			log.info("아이디 사용가능");
+			return result;
+		} else {
+			log.info("아이디 중복");
+			return result;
+		}//if-else
+		
+	}//emailCheck
 
+	//닉네임 중복 확인
+	@GetMapping("nickNameCheck")
+	@ResponseBody
+	public String nickNameCheck(String nickName) {
+		log.debug("nickNameCheck invoked");
+		
+		String result = service.checkNickName(nickName);
+		
+		if(result.equals("success")) {
+			log.info("닉네임 사용가능");
+			return result;
+		} else {
+			log.info("닉네임 중복");
+			return result;
+		}//if-else
+		
+	}//nickNameCheck
+	
 }//end class

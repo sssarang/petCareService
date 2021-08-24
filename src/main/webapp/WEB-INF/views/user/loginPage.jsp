@@ -35,7 +35,7 @@
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	<link rel="stylesheet" href="/resources/css/user/userstyle.css">
-	<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 	<title> 로그인페이지 </title>
 </head>
@@ -56,10 +56,10 @@
 	                        <h1 class="heading">로그인</h1>
 	                        <div class="form-group">
 	                            <label class="control-label">아이디</label>
-	                            <input type="text" name="user_id" class="form-control" placeholder="Example@EmailAddress.com"/>
+	                            <input type="text" name="userId" class="form-control" placeholder="Example@EmailAddress.com"/>
 	
 	                            <label class="control-label">비밀번호</label>
-	                            <input type="password" name="user_pw" class="form-control" />
+	                            <input type="password" name="userPw" class="form-control" />
 	
 	                           
 	                            <button type="submit" class="btn btn-default">Login<i class="fa fa-arrow-circle-right fa-2x"></i></button>
