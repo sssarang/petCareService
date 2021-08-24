@@ -2,6 +2,12 @@
 /*================전체 레이아웃(반응형적용)==================*/
 /*====================================================*/
 
+.btn-sm, .btn-group-sm > .btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 0.2rem;
+}
+
 #wrapper { /*100%로 너비값*/
     width: 100%;
     margin: 0 auto;

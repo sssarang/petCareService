@@ -7,16 +7,10 @@
 
 <configuration>
 
-	<!-- DataSource는 spring이 제공하니까 환경설정은 생략 -->
-
-<!--   <mappers>
-     <mapper resource="mappers/1/SQL1Mapper.xml"/>
-     <mapper resource="mappers/2/SQL2Mapper.xml"/>
-     <mapper resource="mappers/3/SQL3Mapper.xml"/>
-     <mapper resource="mappers/4/SQL4Mapper.xml"/>
- -->
-	 <!-- <mapper class="FQCN방식으로 인터페이스를 등록" -->
-	 <!-- <mapper class="org.zerock.myapp.mapper.TimeMapper"/> -->
-  <!-- </mappers> -->
+	<settings>
+		<!-- Camel Case, Snake Case로만 다를 경우 
+        	resultMap을 안 써도 이 코드 쓰면 알아서 바꿔줌 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
 
 </configuration>
