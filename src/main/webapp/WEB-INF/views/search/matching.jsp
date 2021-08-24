@@ -28,6 +28,29 @@
     <!-- flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
+    
+    <script>
+
+        $(function () {
+            console.clear();
+            console.debug('jq started...');
+        
+            $("#reserveBtn").click(function () {
+                console.log("#listBtn button clicked..");
+
+                // location ="/board/list";
+                // self.location = "/board/list"
+
+                location ="/mypage/customerResvManage";    /* 이게 정석이다 */
+                //location.href = "/board/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+                
+                // self.location.href ="/board/list";
+            }); //.onclick
+
+            
+        }); //jq
+    </script>
 </head>
 <body>
 

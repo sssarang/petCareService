@@ -8,6 +8,7 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/resources/css/home/home.css" rel="stylesheet" />
 
+
 <!-- Masthead-->
 <header class="masthead">
     <div class="container position-relative">
@@ -162,7 +163,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="regBtn2"type="button">검색</button>
+                                    <button type="button" id="searchBtn" class="regBtn2">검색</button>
                                 </div>
                             </div>
                             

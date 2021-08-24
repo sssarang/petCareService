@@ -113,7 +113,7 @@
 
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">확인</button>
+                                    <button type="button" id="reserveBtn" class="btn btn-danger" data-dismiss="modal">확인</button>
                                 </div>
                             </div>
                         </div>

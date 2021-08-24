@@ -28,6 +28,33 @@
     <!-- flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+	
+    
+
+	<script>
+
+        $(function () {
+            console.clear();
+            console.debug('jq started...');
+        
+            $("#searchBtn").click(function () {
+                console.log("#listBtn button clicked..");
+
+                // location ="/board/list";
+                // self.location = "/board/list"
+
+                location ="/search/matching";    /* 이게 정석이다 */
+                //location.href = "/board/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+                
+                // self.location.href ="/board/list";
+            }); //.onclick
+
+            
+        }); //jq
+    </script>
+	
+    
 </head>
 <body>
 
