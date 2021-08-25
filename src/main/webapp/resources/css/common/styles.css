@@ -364,6 +364,12 @@ svg {
   border-top-right-radius: 0;
 }
 
+.btn-sm, .btn-group-sm > .btn {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  border-radius: 0.2rem;
+}
+
 .navbar {
   position: relative;
   display: flex;

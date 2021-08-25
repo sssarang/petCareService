@@ -10944,7 +10944,7 @@ header.masthead {
   position: relative;
   background-color: #343a40;
   background: url("/resources/assets/img/home/catdog.jpg") no-repeat center center !important;
-  background-size: cover;
+  background-size: cover !important;
   padding-top: 6rem !important;
   padding-bottom: 6rem !important;
 }
