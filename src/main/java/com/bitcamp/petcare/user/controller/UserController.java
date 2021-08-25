@@ -1,5 +1,6 @@
 package com.bitcamp.petcare.user.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,13 +33,16 @@ public class UserController {
 		return "user/articleCheck";
 	}
 	
+	String x;	//경도
+	String y;	//위도
+	
 	//view controller 매핑
 	@PostMapping("join")
 	public String joinUser(UserDTO dto, RedirectAttributes rttr) {
 		log.debug("joinUser({}) invoked", dto);
 		
-		dto.setUserLatitude(43.123123);
-		dto.setUserLongitude(54.123123);
+		dto.setUserLatitude(Double.parseDouble(y));
+		dto.setUserLongitude(Double.parseDouble(x));
 		dto.setUserStatus('F');
 		dto.setUserClassify('1');
 		
@@ -109,5 +113,16 @@ public class UserController {
 		}//if-else
 		
 	}//nickNameCheck
+	
+	//좌표값 받아오는 메소드
+	@RequestMapping(value="coordinate", method=RequestMethod.POST)
+	@ResponseBody
+	public String coordinate(String x, String y) {
+		log.debug("coordinate({}, {}) invoked",x, y);
+		this.x = x;
+		this.y = y;
+		
+		return null;
+	}//authDo
 	
 }//end class

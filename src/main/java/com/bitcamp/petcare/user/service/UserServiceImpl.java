@@ -157,7 +157,7 @@ public class UserServiceImpl implements UserService {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
+          log.info("\t + authKey : {}", authKey);
           return authKey;
 	}//sendAuthMail
 
