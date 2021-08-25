@@ -7,7 +7,7 @@ import lombok.Value;
 
 
 @Value
-public class PetSitterVO extends CommonDTO {
+public class PetSitterVO extends CommonDTO{
 
 	//TBL_PETSITTER_PROFILE
 	private Integer userNo;

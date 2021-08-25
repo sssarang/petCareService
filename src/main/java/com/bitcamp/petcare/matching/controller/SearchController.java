@@ -1,5 +1,6 @@
 package com.bitcamp.petcare.matching.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitcamp.petcare.matching.domain.PetSitterDTO;
 import com.bitcamp.petcare.matching.service.SearchService;
@@ -29,13 +31,20 @@ public class SearchController {
 	
 	
 	@GetMapping("service")
-	public void getPsList(Model model) {
+	public void getPsList(
+//			@RequestParam("petTypeCode") String petTypeCode,
+//			@RequestParam("serviceTypeCode") String serviceTypeCode,
+//			@RequestParam("location") String location,
+//			@RequestParam("serviceDate") Date serviceDate,
+//			@RequestParam("price") Integer price,
+//			@RequestParam("skillTypeCode") String skillTypeCode,
+			Model model) {
 		log .debug("read() invoked...");
 	
 		List<PetSitterDTO> list = this.service.getPsList();
 		
 		Objects.requireNonNull(list);
-		list.forEach(log::info);
+		log.info("\t+ list: {}", list);
 		
 		model.addAttribute("list", list);
 		

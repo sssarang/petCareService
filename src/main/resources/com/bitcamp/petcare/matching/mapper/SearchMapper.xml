@@ -9,7 +9,10 @@
 
 	<select id="getPsList" resultType="com.bitcamp.petcare.matching.domain.PetSitterDTO">
 		SELECT /*+ index_desc(tbl_petsitter_profile) */ *
-        FROM tbl_petsitter_profile WHERE user_no > 0
+		FROM tbl_user
+		LEFT OUTER JOIN  tbl_petsitter_profile on tbl_user.user_no 
+		                                        = tbl_petsitter_profile.user_no
+		WHERE user_classify = 2
 	</select>
 	
 	<select id="getPs" resultType="com.bitcamp.petcare.matching.domain.PetSitterDTO">
