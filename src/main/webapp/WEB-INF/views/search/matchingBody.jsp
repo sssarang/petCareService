@@ -11,23 +11,25 @@
         <div class="content">
             <h2 class="text-center">- 예약하기 -</h2>
             <div class="wrap pt-5">
-                <form action="#" method="POST">
+            
+                <form action="/search/matching" method="POST">
+                
                     <div class="form-item pb-3">
-                        <label for="neckname">닉네임</label>&nbsp;&nbsp;
-                        <input type="text" id="neckname" name="neckname" value="도복희" readonly>
+                        <label for="nickname">닉네임</label>&nbsp;&nbsp;
+                        <input type="text" id="nickname" name="nickname" placeholder="${matching.userNickname}" readonly>
                     </div>
                     <div class="form-item pb-3">
-                        <label for="number">연락처</label>&nbsp;&nbsp;
-                        <input type="text" id="number" name="number" value="010-2528-0747" readonly>
+                        <label for="contact">연락처</label>&nbsp;&nbsp;
+                        <input type="text" id="contact" name="contact" value="${matching.userContact}" readonly>
                     </div>
                     <div class="form-item pb-3">
                         <label for="address">주&nbsp;&nbsp;&nbsp;&nbsp; 소</label>&nbsp;&nbsp;
-                        <input type="text" id="address" name="title" value="서울 성동구 용답동" readonly>
+                        <input type="text" id="address" name="address" value="${matching.userAddress}" readonly>
                     </div>
                 </form>
             </div>  
             <div class="form-item d-inline-block">
-                <select class="form-select" aria-label="Default select example">
+                <select name="service_type_code" class="form-select" aria-label="Default select example">
                     <option selected>서비스 선택</option>
                     <option value="1">방문-All day</option>
                     <option value="2">방문-Half day</option>
@@ -36,9 +38,9 @@
                 </select>
             </div> 
             <div class="pt-3 ms-3 d-inline-block">
-                <input type="text" class="selector" placeholder="시작일" />
+                <input type="text" name="start_date" class="selector" placeholder="시작일" />
                 &nbsp;~&nbsp;
-                <input type="text" class="selector" placeholder="종료일" />
+                <input type="text" name ="end_date" class="selector" placeholder="종료일" />
 
                 <!-- <a class="input-button" title="toggle" data-toggle><i class="icon-calendar"></i></a> -->
                 
@@ -60,34 +62,35 @@
             
             <div class="wrap pt-5">
                 <h3 class="ms-4">Pet</h3>
-                <form action="#" method="POST">
+                <form action="#">
                     <div class="form-item pb-3 text-center" style="display: inline-block;">
                         <img class="img-fluid rounded-circle img-thumbnail" src="/resources/assets/img/matching/profile.jpg"/>
-                        <div class="pt-2">복희</div>
+                        <div class="pt-2">${matching.petName}</div>
                     </div>
                     <div class="form-item pb-3">
-                        <label for="neckname">반려동물 유형</label>
-                        <input type="text" id="neckname" name="neckname" value="고양이" readonly>
+                        <label for="petType">반려동물 유형</label>
+                        <input type="text" id="petType" name="petType" value="${matching.codeName}" readonly>
                     </div>
                     <div class="form-item pb-3">
-                        <label for="number">나이</label>
-                        <input type="text" id="number" name="number" value="4살" readonly>
+                        <label for="patAge">나이</label>
+                        <input type="text" id="patAge" name="patAge" value="${matching.petBirthday}" readonly>
                     </div>
                     <div class="form-item pb-3">
-                        <label for="number">성별</label>
-                        <input type="text" id="address" name="title" value="암컷" readonly>
+                        <label for="petGender">성별</label>
+                        <input type="text" id="petGender" name="petGender" value="${matching.petGender}" readonly>
+                    </div>
+                    <div class="form-item">암컷(F) &nbsp;&nbsp;수컷(M)</div>
+                    <div class="form-item pb-3">
+                        <label for="isNeutralization">중성화 여부</label>
+                        <input type="text" id="isNeutralization" name="isNeutralization" value="${matching.neutralization}" readonly>
                     </div>
                     <div class="form-item pb-3">
-                        <label for="number">중성화 여부</label>
-                        <input type="text" id="number" name="number" value="중성화 완료" readonly>
+                        <label for="isMedicine">약 복용</label>
+                        <input type="text" id="isMedicine" name="isMedicine" value="${matching.medicine}" readonly>
                     </div>
                     <div class="form-item pb-3">
-                        <label for="number">약 복용</label>
-                        <input type="text" id="address" name="title" value="-" readonly>
-                    </div>
-                    <div class="form-item pb-3">
-                        <label for="content">특이사항</label>
-                        <textarea name="content" id="content" rows="10" cols="60" placeholder="내용 블라블라" ></textarea>
+                        <label for="specialNote">특이사항</label>
+                        <textarea name="content" id="specialNote" rows="10" cols="60" placeholder="${matching.specialNote}" readonly ></textarea>
                     </div>
                 </form>
                 <div class="pt-3">

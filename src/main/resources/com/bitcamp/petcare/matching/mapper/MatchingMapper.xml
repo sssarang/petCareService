@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.petcare.matching.mapper.MatchingMapper">
+
+	<select id="getUserPet" resultType="com.bitcamp.petcare.matching.domain.MatchingVO">
+		<![CDATA[ 
+			SELECT u.user_no, u.user_nickname, u.user_contact, u.user_address, 
+				   p.pet_name, c.code_name, 
+					(SELECT TRUNC(MONTHS_BETWEEN(SYSDATE, PET_BIRTHDAY)/12)
+						   || '살 '
+						   || MOD(TRUNC(MONTHS_BETWEEN(SYSDATE, PET_BIRTHDAY)), 12)
+						   || '개월' 
+					 FROM tbl_pet_profile
+					 WHERE user_no = #{user_no}) AS petAge, 
+			       p.pet_gender, p.neutralization, p.medicine, p.special_note
+			FROM tbl_user u
+			INNER JOIN tbl_pet_profile p ON u.user_no = p.user_no
+			INNER JOIN tbl_common_code c ON p.pet_type_code = c.code
+			WHERE u.user_no = #{user_no}
+		]]>
+	</select>
+	
+	
+	<insert id="insertMatcingSelectKey">
+		<selectKey keyProperty="service_id" order="BEFORE" resultType="int">
+			SELECT ISEQ$$_100496.nextval FROM dual
+		</selectKey>
+	
+		INSERT INTO tbl_service_matching
+		    (service_id, start_date, end_date, service_type_code, pet_type_code, pet_user_no, pet_sitter_no, reg_user_no)
+		VALUES (#{service_id}, #{start_date}, #{end_date}, #{service_type_code}, #{pet_type_code}, #{pet_user_no}, #{pet_sitter_no}, #{reg_user_no})
+	</insert>
+	
+	
+</mapper>
