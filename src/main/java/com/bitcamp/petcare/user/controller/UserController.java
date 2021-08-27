@@ -1,8 +1,11 @@
 package com.bitcamp.petcare.user.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,28 +26,30 @@ import lombok.extern.log4j.Log4j2;
 
 @Controller
 @RequestMapping("/user/")
+
 public class UserController {
 	
 	@Setter(onMethod_=@Autowired)
 	private UserService service;
 	
-	@GetMapping("temp")
-	public String temp() {
-		return "user/articleCheck";
-	}
+//	@GetMapping("temp")
+//	public String temp() {
+//		return "user/articleCheckPage";
+//	}
 	
-	String x;	//경도
-	String y;	//위도
+	Double x;			//경도
+	Double y;			//위도
+	char classify;	//회원 구분
 	
 	//view controller 매핑
 	@PostMapping("join")
 	public String joinUser(UserDTO dto, RedirectAttributes rttr) {
 		log.debug("joinUser({}) invoked", dto);
 		
-		dto.setUserLatitude(Double.parseDouble(y));
-		dto.setUserLongitude(Double.parseDouble(x));
-		dto.setUserStatus('F');
-		dto.setUserClassify('1');
+		dto.setUserLatitude(y);		//회원가입시 주소의 위도
+		dto.setUserLongitude(x);	//회원가입시 주소의 경도
+		dto.setUserStatus('F');							//회원가입시 회원탈퇴 항목 'F'설정
+		dto.setUserClassify(classify);
 		
 		if(this.service.joinUser(dto) == 1 ) {
 			rttr.addFlashAttribute("result", "success");
@@ -119,10 +124,36 @@ public class UserController {
 	@ResponseBody
 	public String coordinate(String x, String y) {
 		log.debug("coordinate({}, {}) invoked",x, y);
-		this.x = x;
-		this.y = y;
+		this.x = Double.parseDouble(x);
+		this.y = Double.parseDouble(y);
 		
 		return null;
-	}//authDo
+	}//coordinate
+	
+	//회원 구분
+	@RequestMapping(value="userClassify", method=RequestMethod.POST)
+	@ResponseBody
+	public String userClassify(String classify) {
+		log.debug("classify({}) invoked",classify);
+		
+		if(classify != null) {
+			this.classify = classify.charAt(0);
+		}
+		return null;
+	}//userClassify
+	
+	@PostMapping(value="userAgreeCheck")
+	public String userAgree(HttpServletRequest req) throws Exception{
+		log.debug("userAgree({}) invoked", req);
+		
+		//사용자 동의사항 데이터 처리
+
+		if( (this.classify == '1') || (this.classify == '2') ) {
+			return "user/joinPage";
+			
+		}//if
+		
+		return "user/articleCheckPage";
+	}//userAgree
 	
 }//end class

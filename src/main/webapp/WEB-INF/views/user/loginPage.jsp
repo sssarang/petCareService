@@ -66,7 +66,7 @@
 	                        </div>
 	                        <span class="form-footer">비밀번호를 잊어버리셨나요? &nbsp<a onclick="showPopup()">비밀번호 찾기</a></span>
 	                        <br>
-	                        <span class="form-footer">아직 회원이 아니신가요? &nbsp<a href="joinPage">회원가입하기</a></span>
+	                        <span class="form-footer">아직 회원이 아니신가요? &nbsp<a href="articleCheckPage">회원가입하기</a></span>
 	                    </form>
 	                </div>
 	            </div>

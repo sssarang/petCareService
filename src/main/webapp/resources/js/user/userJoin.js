@@ -1,6 +1,7 @@
 
-var authKey = "";	//사용자가 입력한 인증번호(값이 일치하는지 비교해야함)
-
+var authKey = "";		//사용자가 입력한 인증번호(값이 일치하는지 비교해야함)
+var emailCheck = "";	//페이지 제출시 최종확인용 변수
+var nickNameCheck = "";//페이지 제출시 최종확인용 변수
 $(function() {
 	
 	$('#keyBtn').on('click', authAjax)			//인증번호 발급버튼 클릭
@@ -14,7 +15,7 @@ $(function() {
 		
 		if(email.trim() == ''){
 			//이메일을 입력하지 않은 경우
-	        $('#emailLabel').text("* 아이디를 입력하세요.");
+	        $('#emailLabel').text("* 이메일을 입력하세요.");
 	        return;
 		} else {
 			//이메일 정규식
@@ -35,9 +36,10 @@ $(function() {
 			success : function(resp){
 				if(resp == 'success'){
 					//인증 성공
-					$('#emailLabel').text("* 사용 가능한 아이디입니다.");
+					$('#emailLabel').text("* 사용 가능한 이메일입니다.");
+					emailCheck = email;
 				} else{
-					$('#emailLabel').text("* 이미 사용중인 아이디 입니다.");
+					$('#emailLabel').text("* 이미 사용중인 이메일입니다.");
 				}//if-else\
 			}
 		})//.ajax
@@ -68,6 +70,7 @@ $(function() {
 				if(resp == 'success'){
 					//인증성공
 					$('#nickNameLabel').text("* 사용 가능한 닉네임입니다.");
+					nickNameCheck = nickName;
 				} else{
 					$('#nickNameLabel').text("* 이미 사용중인 닉네임입니다.");
 				}//if-else
@@ -154,24 +157,45 @@ function beforeSubmit() {
 		}//if
 	}//if-else
 	
-	if(checkExistData($('#emailId').val(), "아이디를") == false){
+	if(checkExistData($('#emailId').val(), "이메일을") == false){
+		$('#emailLabel').text("* 이메일을 입력하세요");
+		return false;
+	} else if(emailCheck != $('#emailId').val()) {
+		alert('이메일 중복확인 버튼을 클릭하세요.')
+		$('#emailLabel').text("* 이메일을 입력하세요");
 		return false;
 	}
+	
 	if(checkExistData($('#inputKey').val(), "인증번호를") == false){
+		$('#keyLabel').text("* 인증번호를 입력하세요");
 		return false;
-	}
+	} else if(authKey != $('#inputKey').val()) {
+		alert('인증번호가 일치하지 않습니다.')
+		$('#keyLabel').text("* 인증번호를 입력하세요");
+		return false;
+	}//if-else
+	
 	if(checkExistData($('#inputPw').val(), "비밀번호를") == false){
 		return false;
-	}
+	}//if
+	
 	if(checkExistData($('#nickName').val(), "닉네임을") == false){
+		$('#nickNameLabel').text("* 닉네임을 입력하세요");
+		return false;
+	} else if(nickNameCheck != $('#nickName').val()) {
+		alert('닉네임 중복확인 버튼을 클릭하세요.')
+		$('#nickNameLabel').text("* 닉네임을 입력하세요");
 		return false;
 	}
+	
 	if(checkExistData($('#inputPhone').val(), "전화번호를") == false){
 		return false;
-	}
+	}//if
+	
 	if(checkExistData($('#inputAddress').val(), "주소를") == false){
 		return false;
-	}
+	}//if
+	
 	//최종 확인
 	joinForm.submit();
 }//beforeSubmit

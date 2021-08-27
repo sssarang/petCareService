@@ -27,7 +27,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     
 	<!-- 이용약관 jsp -->
-	<script type="text/javascript" src="/resources/js/user/articleCheck.js"></script>
+	<script type="text/javascript" src="/resources/js/user/articleCheck.js?ver=113"></script>
+	<script type="text/javascript" src="/resources/js/user/articleModal.js?ver=113"></script>
 	<link rel="stylesheet" href="/resources/css/user/articleCheck.css">
 	<!-- https://ddorang-d.tistory.com/10?category=664194 -->
 
@@ -42,7 +43,13 @@
 
 <body>
 
- <form action="" id="joinForm">
+<!-- The Modal -->
+<div id="myModal" class="modal">
+ 
+   <!-- Modal content -->
+   <div class="modal-content">
+
+ 		<form action="userAgreeCheck" name="joinForm" id="joinForm" method="post">
             <ul class="join_box">
                 <li class="checkBox check01">
                     <ul class="clearfix">
@@ -50,7 +57,7 @@
                             위치정보 이용약관(선택), 프로모션 안내
                             메일 수신(선택)에 모두 동의합니다.</li>
                         <li class="checkAllBtn">
-                            <input type="checkbox" name="chkAll" id="chk" class="chkAll">
+                            <input type="checkbox" name="chkAll" onclick="selectAll(this)" class="chkAll">
                         </li>
                     </ul>
                 </li>
@@ -58,52 +65,61 @@
                     <ul class="clearfix">
                         <li>이용약관 동의(필수)</li>
                         <li class="checkBtn">
-                            <input type="checkbox" name="chk"> 
+                            <input type="checkbox" name="chk" id="necessary1" onclick="checkSelectAll()"> 
                         </li>
                     </ul>
                     <textarea name="" id="">여러분을 환영합니다.
-네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
-       </textarea>
+쓰담쓰담 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 쓰담쓰담 서비스의 이용과 관련하여 쓰담쓰담 서비스를 제공하는 쓰담쓰담 주식회사(이하 ‘쓰담쓰담’)와 이를 이용하는 쓰담쓰담 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 쓰담쓰담 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+     				</textarea>
                 </li>
                 <li class="checkBox check03">
                     <ul class="clearfix">
                         <li>개인정보 수집 및 이용에 대한 안내(필수)</li>
                         <li class="checkBtn">
-                            <input type="checkbox" name="chk">
+                            <input type="checkbox" name="chk" id="necessary2" onclick="checkSelectAll()">
                         </li>
                     </ul>
  
                     <textarea name="" id="">여러분을 환영합니다.
-네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
-       </textarea>
+쓰담쓰담 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 쓰담쓰담 서비스의 이용과 관련하여 쓰담쓰담 서비스를 제공하는 쓰담쓰담 주식회사(이하 ‘쓰담쓰담’)와 이를 이용하는 쓰담쓰담 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 쓰담쓰담 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+       				</textarea>
                 </li>
                 <li class="checkBox check03">
                     <ul class="clearfix">
-                        <li>위치정보 이용약관 동의(선택)</li>
+                        <li>위치정보 이용약관 동의(필수)</li>
                         <li class="checkBtn">
-                            <input type="checkbox" name="chk">
+                            <input type="checkbox" name="chk" id="necessary3" onclick="checkSelectAll()">
                         </li>
                     </ul>
  
                     <textarea name="" id="">여러분을 환영합니다.
-네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
-       </textarea>
+쓰담쓰담 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 쓰담쓰담 서비스의 이용과 관련하여 쓰담쓰담 서비스를 제공하는 쓰담쓰담 주식회사(이하 ‘쓰담쓰담’)와 이를 이용하는 쓰담쓰담 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 쓰담쓰담 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+      				</textarea>
                 </li>
                 <li class="checkBox check04">
                     <ul class="clearfix">
                         <li>이벤트 등 프로모션 알림 메일 수신(선택)</li>
                         <li class="checkBtn">
-                            <input type="checkbox" name="chk">
+                            <input type="checkbox" name="chk" onclick="checkSelectAll()">
                         </li>
                     </ul>
  
                 </li>
             </ul>
             <ul class="footBtwrap clearfix">
-                <li><button class="fpmgBt1">비동의</button></li>
-                <li><button class="fpmgBt2">동의</button></li>
+                <li><button id="petSitter" class="fpmgBt1" onclick="pJoin()">펫시터 가입</button></li>
+                <li><button id="normalUser" class="fpmgBt2" onclick="nJoin()">반려인 가입</button></li>
             </ul>
         </form>
+      <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
+	      <span class="pop_bt" style="font-size: 13pt;" >
+	           닫기
+	      </span>
+      </div>
+  </div>
+ 
+</div>
+<!--End Modal-->
 
 </body>
 </html>
