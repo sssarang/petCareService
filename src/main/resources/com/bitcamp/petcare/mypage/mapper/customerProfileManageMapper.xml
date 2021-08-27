@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.petcare.mypage.mapper.customerProfileManageMapper">
+
+    <select id="readProfile">
+		SELECT 
+		    p.pro_photo,
+		    c.code_name,
+		    p.pet_name,
+		    p.pet_birthday,
+		    p.pet_gender,
+		    p.neutralization,
+		    p.medicine,
+		    p.special_note
+		FROM tbl_pet_profile p
+		INNER JOIN tbl_common_code c ON p.pet_type_code = c.code
+		where p.user_no = #{userNo}
+	 </select>
+	 
+	 <insert id="insertProfile">
+	 	INSERT INTO tbl_pet_profile(
+    			user_no,
+    			pro_photo, 
+    			pet_type_code, 
+    			pet_name, 
+    			pet_birthday, 
+    			pet_gender, 
+    			neutralization, 
+    			medicine, 
+    			special_note, 
+    			reg_user_no, 
+    			reg_date)
+		VALUES (
+			#{userNo}, 
+			#{proPhoto}, 
+			#{petTypeCode}, 
+			#{petName}, 
+			#{petBirthday}, 
+			#{petGender}, 
+			#{neutralization}, 
+			#{medicine}, 
+			#{specialNote}, 
+			#{userNo}, 
+			current_date)
+	 </insert>
+	 
+	 <update id="updateProfile">
+	 	UPDATE
+		    tbl_pet_profile
+		SET
+		    pro_photo = #{proPhoto},
+		    pet_type_code = #{petTypeCode},
+		    pet_name = #{petName},
+		    pet_birthday = #{petBirthday},
+		    pet_gender = #{petGender},
+		    neutralization = #{neutralization},
+		    medicine = #{medicine},
+		    special_note = #{specialNote}
+		    mod_user_no = #{user_no},
+		    mod_date = current_date
+		WHERE user_no = #{user_no}
+	  </update>
+</mapper>
