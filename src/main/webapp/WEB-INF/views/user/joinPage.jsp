@@ -83,7 +83,7 @@
 		                            여자<input type="radio" name="userGender" class="radio-control" value="F" checked="checked"/>
 		                            남자<input type="radio" name="userGender" class="radio-control" value="M"/>
 		
-		                            <input type="button" class="btn btn-default" onclick="beforeSubmit()" value="회원가입"/>
+		                            <input type="button" class="btn btn-default" id="submitBtn" value="회원가입"/>
 	                        		
 	                        </div>
 	                        <span class="form-footer">이미 가입되어있는 회원인가요? <a href="loginPage">로그인 하기</a></span>

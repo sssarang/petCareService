@@ -1,13 +1,14 @@
-
 var authKey = "";		//사용자가 입력한 인증번호(값이 일치하는지 비교해야함)
 var emailCheck = "";	//페이지 제출시 최종확인용 변수
 var nickNameCheck = "";//페이지 제출시 최종확인용 변수
+
 $(function() {
 	
 	$('#keyBtn').on('click', authAjax)			//인증번호 발급버튼 클릭
 	$('#emailBtn').on('click', emailAjax)		//이메일 중복체크
 	$('#nickNameBtn').on('click', nickNameAjax)	//닉네임 중복체크
 	$('#keyCheckBtn').on('click', authKeyCheck)	//인증번호 체크
+	$('#submitBtn').on('click', beforeSubmit)
 	
 	//이메일 중복검사
 	function emailAjax(){
@@ -118,87 +119,89 @@ $(function() {
 		}//if-else
 	}//authKeyCheck
 	
-});//end function
-
-//전체 확인 (submit)버튼시 검사하는 항목들
-//비밀번호, 전화번호, 주소, 성별
-function beforeSubmit() {
-	var joinForm = document.joinForm;
-	
-	kakaoMap();
-	
-	//비밀번호 체크
-	var pwReg = /^[A-Za-z0-9]{6,12}$/;
-	var pw = $('#inputPw').val();
-	if(pw.trim() == ''){
-		$('#pwLabel').text("* 비밀번호를 입력하세요");
-		return;
-	} else {
-		if(pw.match(pwReg) == null){
-			//비밀번호 형식에 맞지 않는 경우
-			$('#pwLabel').text("* 숫자와 문자포함 6~12자리 이내");
+	//전체 확인 (submit)버튼시 검사하는 항목들
+	//비밀번호, 전화번호, 주소, 성별
+	function beforeSubmit() {
+		var joinForm = document.joinForm;
+		
+		kakaoMap();
+		
+		//비밀번호 체크
+		var pwReg = /^[A-Za-z0-9]{6,12}$/;
+		var pw = $('#inputPw').val();
+		if(pw.trim() == ''){
+			$('#pwLabel').text("* 비밀번호를 입력하세요");
 			return;
 		} else {
-			$('#pwLabel').text("* 사용할 수 있는 비밀번호 입니다");
-		}
-	}//if-else
-	
-	//전화번호 유효성 체크
-	var phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;
-	var phone = $('#inputPhone').val();
-	if(phone.trim() == ''){
-		$('#phoneLabel').text("* 전화번호를 입력하세요");
-		return;
-	} else {
-		if(phone.match(phoneReg) == null){
-			//전화번호 형식에 맞지 않는 경우
-			$('#phoneLabel').text("* 전화번호를 정확히 입력하세요");
+			if(pw.match(pwReg) == null){
+				//비밀번호 형식에 맞지 않는 경우
+				$('#pwLabel').text("* 숫자와 문자포함 6~12자리 이내");
+				return;
+			} else {
+				$('#pwLabel').text("* 사용할 수 있는 비밀번호 입니다");
+			}
+		}//if-else
+		
+		//전화번호 유효성 체크
+		var phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;
+		var phone = $('#inputPhone').val();
+		if(phone.trim() == ''){
+			$('#phoneLabel').text("* 전화번호를 입력하세요");
 			return;
+		} else {
+			if(phone.match(phoneReg) == null){
+				//전화번호 형식에 맞지 않는 경우
+				$('#phoneLabel').text("* 전화번호를 정확히 입력하세요");
+				return;
+			}//if
+		}//if-else
+		
+		if(checkExistData($('#emailId').val(), "이메일을") == false){
+			$('#emailLabel').text("* 이메일을 입력하세요");
+			return false;
+		} else if(emailCheck != $('#emailId').val()) {
+			alert('이메일 중복확인 버튼을 클릭하세요.')
+			$('#emailLabel').text("* 이메일을 입력하세요");
+			return false;
+		}
+		
+		if(checkExistData($('#inputKey').val(), "인증번호를") == false){
+			$('#keyLabel').text("* 인증번호를 입력하세요");
+			return false;
+		} else if(authKey != $('#inputKey').val()) {
+			alert('인증번호가 일치하지 않습니다.')
+			$('#keyLabel').text("* 인증번호를 입력하세요");
+			return false;
+		}//if-else
+		
+		if(checkExistData($('#inputPw').val(), "비밀번호를") == false){
+			return false;
 		}//if
-	}//if-else
+		
+		if(checkExistData($('#nickName').val(), "닉네임을") == false){
+			$('#nickNameLabel').text("* 닉네임을 입력하세요");
+			return false;
+		} else if(nickNameCheck != $('#nickName').val()) {
+			alert('닉네임 중복확인 버튼을 클릭하세요.')
+			$('#nickNameLabel').text("* 닉네임을 입력하세요");
+			return false;
+		}
+		
+		if(checkExistData($('#inputPhone').val(), "전화번호를") == false){
+			return false;
+		}//if
+		
+		if(checkExistData($('#inputAddress').val(), "주소를") == false){
+			return false;
+		}//if
+		
+		//최종 확인
+		joinForm.submit();
+	}//beforeSubmit
 	
-	if(checkExistData($('#emailId').val(), "이메일을") == false){
-		$('#emailLabel').text("* 이메일을 입력하세요");
-		return false;
-	} else if(emailCheck != $('#emailId').val()) {
-		alert('이메일 중복확인 버튼을 클릭하세요.')
-		$('#emailLabel').text("* 이메일을 입력하세요");
-		return false;
-	}
-	
-	if(checkExistData($('#inputKey').val(), "인증번호를") == false){
-		$('#keyLabel').text("* 인증번호를 입력하세요");
-		return false;
-	} else if(authKey != $('#inputKey').val()) {
-		alert('인증번호가 일치하지 않습니다.')
-		$('#keyLabel').text("* 인증번호를 입력하세요");
-		return false;
-	}//if-else
-	
-	if(checkExistData($('#inputPw').val(), "비밀번호를") == false){
-		return false;
-	}//if
-	
-	if(checkExistData($('#nickName').val(), "닉네임을") == false){
-		$('#nickNameLabel').text("* 닉네임을 입력하세요");
-		return false;
-	} else if(nickNameCheck != $('#nickName').val()) {
-		alert('닉네임 중복확인 버튼을 클릭하세요.')
-		$('#nickNameLabel').text("* 닉네임을 입력하세요");
-		return false;
-	}
-	
-	if(checkExistData($('#inputPhone').val(), "전화번호를") == false){
-		return false;
-	}//if
-	
-	if(checkExistData($('#inputAddress').val(), "주소를") == false){
-		return false;
-	}//if
-	
-	//최종 확인
-	joinForm.submit();
-}//beforeSubmit
+});//end function
+
+
 
 // 공백확인 함수
 function checkExistData(value, dataName) {
