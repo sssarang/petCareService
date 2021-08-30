@@ -28,7 +28,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
 	
 	<!-- 비밀번호 찾기 팝업창 -->
-	<script src="/resources/js/user/findpassword.js"></script>
+	<script src="/resources/js/user/openPopUp.js"></script>
 	
 	
 	<!--  bootstrap -->

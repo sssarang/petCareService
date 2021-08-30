@@ -153,6 +153,7 @@ public class UserServiceImpl implements UserService {
             sendMail.setTo(email);
             sendMail.send();
         } catch (MessagingException e) {
+        	
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

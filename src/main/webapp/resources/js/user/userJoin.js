@@ -40,7 +40,7 @@ $(function() {
 					emailCheck = email;
 				} else{
 					$('#emailLabel').text("* 이미 사용중인 이메일입니다.");
-				}//if-else\
+				}//if-else
 			}
 		})//.ajax
 	}//end emailAjax
@@ -57,7 +57,7 @@ $(function() {
 			 if(nickName.length < 1 || nickName.length > 8){
 				$('#nickNameLabel').text("* 닉네임은 1~8자 이내로 가능합니다.");
 				return;
-			}//if
+			 }//if
 		}//if-else
 		
 		var sendData = "nickName="+nickName;

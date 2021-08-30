@@ -49,14 +49,15 @@
                         <h1 class="heading">비밀번호 찾기</h1>
                         <div class="form-group">
                        		<label class="control-label">아이디 (사용중인 이메일)</label>
-                       		<label class="warning-label">* 이미 사용중인 아이디입니다.</label>
-                       		<button type="button" class="check-button">인증하기</button>
-                            <input type="email" name="user_id" class="form-control" placeholder="example@naver.com"/>
+                       		<label id="emailLabel"class="warning-label"></label>
+                       		<button id="emailBtn" type="button" class="check-button">확인하기</button>
+                            <input id="emailId" type="email" name="user_id" class="form-control" placeholder="example@naver.com"/>
 
 							<label class="control-label">인증번호 입력</label>
-							<label class="warning-label">* 인증번호가 일치하지 않습니다.</label>
-                       		<button type="button" class="check-button">인증확인</button>
-                            <input type="text" name="" class="form-control" placeholder="인증번호를 입력하세요"/>
+							<label id="keyLabel" class="warning-label"></label>
+							<button id="keyBtn" type="button" class="check-button">인증하기</button>
+                       		<button id="keyCheckBtn" type="button" class="check-button">인증확인</button>
+                            <input id="keyInput" type="text" name="" class="form-control" placeholder="인증번호를 입력하세요"/>
                             
                             <label class="control-label">변경할 비밀번호</label>
                             <input type="password" name="user_pw" class="form-control" />

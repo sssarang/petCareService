@@ -32,11 +32,6 @@ public class UserController {
 	@Setter(onMethod_=@Autowired)
 	private UserService service;
 	
-//	@GetMapping("temp")
-//	public String temp() {
-//		return "user/articleCheckPage";
-//	}
-	
 	Double x;			//경도
 	Double y;			//위도
 	char classify;	//회원 구분
@@ -48,7 +43,7 @@ public class UserController {
 		
 		dto.setUserLatitude(y);		//회원가입시 주소의 위도
 		dto.setUserLongitude(x);	//회원가입시 주소의 경도
-		dto.setUserStatus('F');							//회원가입시 회원탈퇴 항목 'F'설정
+		dto.setUserStatus('F');		//회원가입시 회원탈퇴 항목 'F'설정
 		dto.setUserClassify(classify);
 		
 		if(this.service.joinUser(dto) == 1 ) {
@@ -142,6 +137,7 @@ public class UserController {
 		return null;
 	}//userClassify
 	
+	//사용자 동의 
 	@PostMapping(value="userAgreeCheck")
 	public String userAgree(HttpServletRequest req) throws Exception{
 		log.debug("userAgree({}) invoked", req);
@@ -155,5 +151,21 @@ public class UserController {
 		
 		return "user/articleCheckPage";
 	}//userAgree
+	
+	//비밀번호찾기 - 아이디 확인
+	@GetMapping(value="checkId")
+	@ResponseBody
+	public String checkId(String email) {
+		log.debug("checkId() invoked");
+		
+		String isCheck = service.checkId(email);
+		
+		if( isCheck.equals("fail") ) {
+			//아이디가 있는경우
+			return "success";
+		}
+		return "fail";
+	}//checkId
+	
 	
 }//end class
