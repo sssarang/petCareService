@@ -173,6 +173,7 @@ $(function() {
 	//비밀번호, 전화번호, 주소, 성별
 	$('#submitBtn').click(function (){
 		var joinForm = document.joinForm;
+		kakaoMap();
 		
 		if(checkExistData($('#emailId').val(), "이메일을") == false){
 			$('#emailLabel').text("");
@@ -231,8 +232,8 @@ $(function() {
 			return false;
 		} else {
 			//최종 확인
-			kakaoMap();
-			joinForm.submit();
+			$(this).attr("type","submit");
+			window.location.href="http://localhost:8090/user/loginPage";
 		}//if-else
 	});//beforeSubmit
 	

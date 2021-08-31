@@ -48,7 +48,7 @@
    <!-- Modal content -->
    <div class="modal-content">
 
- 		<form action="userAgreeCheck" name="joinForm" id="joinForm" method="post">
+ 		<form action="joinPage" name="joinForm" id="joinForm" method="post">
             <ul class="join_box">
                 <li class="checkBox check01">
                     <ul class="clearfix">

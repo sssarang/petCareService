@@ -1,6 +1,7 @@
 var emailCheck = "";		//페이지 제출시 최종확인용 변수(이메일)
 var authKey = "";			//페이지 제출시 최종확인용 변수(인증번호)
 var passwordCheck = "";		//페이지 제출시 최종확인용 변수(비밀번호)
+var submitCheck = "";
 
 $(function() {
 
@@ -144,16 +145,17 @@ $(function() {
 			$('#inputPw').val('');
 			return false;
 		} else { 
-			$(this).attr("type","submit");
-			
+			/*$(this).attr("type","submit");*/
+			//submitCheck = true;
+			//비밀번호 변경 후 팝업창 닫기 구현해야함
 		}//if
-		//closePopup(); 왜 
+
 	});//beforeSubmit
 });//jq    
 
 //popup창 종료
 function closePopup(){
-	window.close();
+	window.open("about:blank", "_self").close();
 }//closePopup
 
 // 공백확인 함수

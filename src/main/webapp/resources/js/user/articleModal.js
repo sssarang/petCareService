@@ -28,7 +28,8 @@ function pJoin(){
 			data: sendData,
 			success : function(resp){}
 		})//.ajax
-		joinForm.submit();
+		$(this).attr("type","submit");
+		window.location.href="http://localhost:8090/user/joinPage";
 	}//if-else
 }//pJoin
 
@@ -55,7 +56,8 @@ function nJoin(){
 			data: sendData,
 			success : function(resp){}
 		})//.ajax
-		joinForm.submit();
+		$(this).attr("type","submit");
+		window.location.href="http://localhost:8090/user/joinPage";
 	} else {
 		alert('필수항목을 체크해주세요');
 	}//if-else
@@ -89,7 +91,7 @@ function checkSelectAll() {
 }//checkSelectAll
 
 //팝업 Close 기능
-function close_pop(flag) {
+function close_pop() {
      $('#myModal').hide();
 	 window.location.href="http://localhost:8090/user/loginPage";
 };
