@@ -6,7 +6,4 @@ function showPopup() {
     window.open(url, atag, size);
 }//showPopup
 
-//popup창 종료
-function closePopup(){
-	window.close();
-}//closePopup
+

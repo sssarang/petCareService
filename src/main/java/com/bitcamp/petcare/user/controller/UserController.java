@@ -1,6 +1,8 @@
 package com.bitcamp.petcare.user.controller;
 
 
+import java.util.Objects;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +81,7 @@ public class UserController {
 	}//authDo
 	
 	//이메일 중복확인
-	@RequestMapping(value="emailCheck", method=RequestMethod.GET)
+	@PostMapping(value="emailCheck")
 	@ResponseBody
 	public String emailCheck(String email) {
 		log.debug("emailCheck() invoked");
@@ -152,14 +154,14 @@ public class UserController {
 		return "user/articleCheckPage";
 	}//userAgree
 	
-	//비밀번호찾기 - 아이디 확인
+	//비밀번호 찾기 - 아이디 확인
 	@GetMapping(value="checkId")
 	@ResponseBody
 	public String checkId(String email) {
 		log.debug("checkId() invoked");
 		
 		String isCheck = service.checkId(email);
-		
+
 		if( isCheck.equals("fail") ) {
 			//아이디가 있는경우
 			return "success";
@@ -167,5 +169,22 @@ public class UserController {
 		return "fail";
 	}//checkId
 	
+	//비밀번호 찾기 - 비밀번호 변경
+	@PostMapping(value="chagePw")
+	@ResponseBody
+	public String changePw(UserDTO dto) {
+		log.debug("changePw({}) invoked", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		int result = this.service.changePw(dto);
+		
+		if(result == 1) {
+			log.info("성공");
+		} else {
+			log.info("실패");
+		}
+		return null;
+	}//changePw
 	
 }//end class

@@ -27,7 +27,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
     
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36768b2f76471ae95e3d92b023d2b626&libraries=services"></script>
-    <script type="text/javascript" src="/resources/js/user/userJoin.js?ver=1234"></script>
+    <script type="text/javascript" src="/resources/js/user/userJoin.js"></script>
 	
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -60,7 +60,6 @@
 									<label class="control-label">인증번호 입력</label>
 									<label id="keyLabel" class="warning-label"></label>
 	                        		<button type="button" id="keyBtn" class="check-button">인증하기</button>
-	                        		<button type="button" id="keyCheckBtn" class="check-button">인증확인</button>
 		                            <input id="inputKey" type="text" name="" class="form-control" placeholder="인증번호를 입력하세요"/>
 									
 		                            <label class="control-label">비밀번호</label>
@@ -73,7 +72,7 @@
 		                            <input id="nickName" type="text" name="userNickname" class="form-control" />
 		                  
 		                            <label class=" control-label">전화번호</label>
-		                            <label id="phoneLabel" class="warning-label"></label>
+		                            <label id="phoneLabel" class="warning-label">* ex)010-1234-5678</label>
 		                            <input id="inputPhone" type="text" name="userContact" class="form-control" placeholder="'-'을 포함하여 작성해 주세요"/>
 
 		                            <label class=" control-label">주소</label>

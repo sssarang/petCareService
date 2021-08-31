@@ -23,6 +23,10 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     
+    <!-- jquery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+    
     <!-- 비밀번호 찾기 팝업창 -->
 	<script src="/resources/js/user/findpassword.js"></script>
 	
@@ -45,25 +49,25 @@
 
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
-                    <form action="" method="POST">
+                    <form action="/user/chagePw" method="POST" id="findForm">
                         <h1 class="heading">비밀번호 찾기</h1>
                         <div class="form-group">
                        		<label class="control-label">아이디 (사용중인 이메일)</label>
                        		<label id="emailLabel"class="warning-label"></label>
                        		<button id="emailBtn" type="button" class="check-button">확인하기</button>
-                            <input id="emailId" type="email" name="user_id" class="form-control" placeholder="example@naver.com"/>
+                            <input id="emailId" type="email" name="userId" class="form-control" placeholder="example@naver.com"/>
 
 							<label class="control-label">인증번호 입력</label>
 							<label id="keyLabel" class="warning-label"></label>
 							<button id="keyBtn" type="button" class="check-button">인증하기</button>
-                       		<button id="keyCheckBtn" type="button" class="check-button">인증확인</button>
-                            <input id="keyInput" type="text" name="" class="form-control" placeholder="인증번호를 입력하세요"/>
+                            <input id="inputKey" type="text" class="form-control" placeholder="인증번호를 입력하세요"/>
                             
                             <label class="control-label">변경할 비밀번호</label>
-                            <input type="password" name="user_pw" class="form-control" />
+                            <label id="pwLabel" class="warning-label"></label>
+                            <input type="password" id="inputPw" name="userPw" class="form-control" />
 
                            
-                            <button type="submit" class="btn btn-default" onclick="closePopup();">확인<i class="fa fa-arrow-circle-right fa-2x"></i></button>
+                            <input type="button" id="submitBtn" class="btn btn-default"  value="변경하기">
                         </div>
                     </form>
                 </div>

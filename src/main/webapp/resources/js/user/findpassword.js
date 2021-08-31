@@ -1,14 +1,13 @@
-var authKey = "";		//사용자가 입력한 인증번호(값이 일치하는지 비교해야함)
+var emailCheck = "";		//페이지 제출시 최종확인용 변수(이메일)
+var authKey = "";			//페이지 제출시 최종확인용 변수(인증번호)
+var passwordCheck = "";		//페이지 제출시 최종확인용 변수(비밀번호)
 
 $(function() {
-	
-	$('#emailBtn').on('click', emailAjax)		//이메일 인증버튼
-	$('#keyCheckBtn').on('click', authKeyCheck)	//인증번호 인증확인버튼
-	$('#keyBtn').on('click', authAjax)			//인증번호 발급버튼
 
 	//가입되어있는 이메일이 있는지 확인
-	function emailAjax(){
+	$('#emailBtn').click(function (){
 		var email = $('#emailId').val();
+		$('#emailLabel').css("color", "red");
 		
 		if(email.trim() == ''){
 			//이메일을 입력하지 않은 경우
@@ -33,19 +32,22 @@ $(function() {
 			success : function(resp){
 				if(resp == 'success'){
 					//인증 성공
-					$('#emailLabel').text("* 존재하는 아이디입니다.");
+					$('#emailLabel').css("color", "blue");
+					$('#emailLabel').text("* 존재하는 이메일입니다.");
 					emailCheck = email;
 				} else{
-					$('#emailLabel').text("* 존재하지 않는 아이디입니다.");
+					$('#emailLabel').text("* 존재하지 않는 이메일입니다.");
 				}//if-else
 			}
 		})//.ajax
-	}//end emailAjax
+	});//end function
 	
-	function authAjax() {
-		var email = $("#emailId").val();
-		
-	    if(email.trim() == ''){
+	//인증번호 발급
+	$('#keyBtn').click(function (){
+	    var email = $("#emailId").val();
+		$('#keyLabel').css("color", "red");
+	    
+		if(email.trim() == ''){
 			//이메일을 입력하지 않은 경우
 	        $('#keyLabel').text("* 이메일을 입력하세요");
 	        return;
@@ -54,31 +56,111 @@ $(function() {
 	    //서버로 보낼 데이터 준비 : 파라미터로 만들기
 	    var sendData = "email="+email;
 	    $.ajax({
-	        url:'authDo'
-	        , method : 'POST'
-	        , data: sendData
-	        , success :function(resp){
+	        url:'authDo',
+	        method : 'POST',
+	        data: sendData,
+	        success :function(resp){
 				$('#keyLabel').text("* 인증번호가 발급되었습니다.");
 				authKey = resp;
+				console.log(resp);
 			}
 	    })//.ajax	
-	}//authAjax
+	});//end function
 	
-	function authKeyCheck() {
-		var inputKey = $('#keyInput').val();
+	//인증번호 체크
+	$('#inputKey').on("propertychange change keyup paste input", function (){
+		var inputKey = $('#inputKey').val();
+		$('#keyLabel').css("color", "red");
+		$('#keyLabel').text("* 인증번호를 입력하세요");
 		
 		if(inputKey.trim() == ''){
 			$('#keyLabel').text("* 인증번호를 입력하세요");
 			return;
 		} else {
 			if(inputKey == authKey){
-				$('#keyLabel').text("* 인증 성공");
+				$('#keyLabel').css("color", "blue");
+				$('#keyLabel').text("* 인증번호가 일치합니다.");
 				return;
 			} else{
-				$('#keyLabel').text("* 인증 실패");
+				$('#keyLabel').text("* 인증번호가 일치하지 않습니다.");
 				return;
 			}//if-else
 		}//if-else
-	}//authKeyCheck
+	});//end function
 	
+	//비밀번호 체크
+	$('#inputPw').on("propertychange change keyup paste input", function (){
+		var pwReg = /^[A-Za-z0-9]{6,12}$/;
+		var pw = $('#inputPw').val();
+		
+		$('#pwLabel').css("color", "red");
+		
+		if(pw.trim() == ''){
+			$('#pwLabel').text("* 비밀번호를 입력하세요");
+			return;
+		} else {
+			if(pw.match(pwReg) == null){
+				//비밀번호 형식에 맞지 않는 경우
+				$('#pwLabel').text("* 숫자와 문자포함 6~12자리 이내");
+				return;
+			} else {
+				$('#pwLabel').css("color", "blue");
+				$('#pwLabel').text("* 사용할 수 있는 비밀번호 입니다");
+				passwordCheck = pw;
+			}
+		}//if-else
+	});//end function
+	
+	$('#submitBtn').click(function (){
+		var findForm = document.findForm;
+		
+		if(checkExistData($('#emailId').val(), "이메일을") == false){
+			$('#emailLabel').text("");
+			$('#emailId').val('');
+			return false;
+		} else if(emailCheck != $('#emailId').val()) {
+			alert('이메일 중복확인 버튼을 클릭하세요.')
+			$('#emailLabel').text("");
+			return false;
+		}//if
+		
+		if(checkExistData($('#inputKey').val(), "인증번호를") == false){
+			$('#keyLabel').text("");
+			$('#inputKey').val('');
+			return false;
+		} else if(authKey != $('#inputKey').val()) {
+			alert('인증번호가 일치하지 않습니다.')
+			$('#keyLabel').text("");
+			return false;
+		}//if
+		
+		if(checkExistData($('#inputPw').val(), "비밀번호를") == false){
+			$('#pwLabel').text("");
+			$('#inputPw').val('');
+			return false;
+		} else if(passwordCheck != $('#inputPw').val()) {
+			alert('비밀번호를 다시 설정해주세요.')
+			$('#pwLabel').text("");
+			$('#inputPw').val('');
+			return false;
+		} else { 
+			$(this).attr("type","submit");
+			
+		}//if
+		//closePopup(); 왜 
+	});//beforeSubmit
 });//jq    
+
+//popup창 종료
+function closePopup(){
+	window.close();
+}//closePopup
+
+// 공백확인 함수
+function checkExistData(value, dataName) {
+    if (value == "") {
+        alert(dataName + " 입력해주세요!");
+        return false;
+    }
+    return true;
+}//end checkExistData

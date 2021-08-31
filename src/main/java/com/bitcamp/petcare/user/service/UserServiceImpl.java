@@ -107,6 +107,40 @@ public class UserServiceImpl implements UserService {
 		}
 	}//chekNickName
 	
+	public boolean login(UserDTO dto, UserVO vo) throws Exception {
+		log.debug("login() invoked");
+		
+	    log.info("\t + 로그인 시도 비밀번호 : {}", dto.getUserPw());
+	    
+	    String voPw = vo.getUser_pw();
+	    log.info("\t + 저장된 비밀번호 : {}", voPw);
+	    
+	    if(encoder.matches(dto.getUserPw(), voPw)) {
+	    	log.info("비밀번호 일치");
+	    	return true;
+	    }else {
+		   log.info("비밀번호 불일치");  
+		   return false;
+	    }//if-else
+	}//login
+	
+	@Override
+	public int changePw(UserDTO dto) {
+		log.debug("changePw({}) invoked", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		try {
+			encryption(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}//try-catch
+		
+		int result = this.mapper.changePw(dto);
+		
+		return result;
+	}//changePw
+	
 	//인증키 생성
 	private String getKey(int size) {
 		log.debug("getKey({}) invoked", size);
@@ -173,22 +207,5 @@ public class UserServiceImpl implements UserService {
 	  log.info("암호화된 비밀번호 : "+dto.getUserPw());
 		
 	}//encryption
-	
-	public boolean login(UserDTO dto, UserVO vo) throws Exception {
-		log.debug("login() invoked");
-		
-	    log.info("\t + 로그인 시도 비밀번호 : {}", dto.getUserPw());
-	    
-	    String voPw = vo.getUser_pw();
-	    log.info("\t + 저장된 비밀번호 : {}", voPw);
-	    
-	    if(encoder.matches(dto.getUserPw(), voPw)) {
-	    	log.info("비밀번호 일치");
-	    	return true;
-	    }else {
-		   log.info("비밀번호 불일치");  
-		   return false;
-	    }//if-else
-	}//login
 	
 }//end class

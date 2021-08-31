@@ -27,8 +27,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     
 	<!-- 이용약관 jsp -->
-	<script type="text/javascript" src="/resources/js/user/articleCheck.js?ver=113"></script>
-	<script type="text/javascript" src="/resources/js/user/articleModal.js?ver=113"></script>
+	<script type="text/javascript" src="/resources/js/user/articleModal.js"></script>
 	<link rel="stylesheet" href="/resources/css/user/articleCheck.css">
 	<!-- https://ddorang-d.tistory.com/10?category=664194 -->
 
@@ -107,8 +106,8 @@
                 </li>
             </ul>
             <ul class="footBtwrap clearfix">
-                <li><button id="petSitter" class="fpmgBt1" onclick="pJoin()">펫시터 가입</button></li>
-                <li><button id="normalUser" class="fpmgBt2" onclick="nJoin()">반려인 가입</button></li>
+                <li><Button type="button" id="petSitter" class="fpmgBt1" onclick="pJoin()">펫시터 가입</Button></li>
+                <li><Button type="button" id="normalUser" class="fpmgBt2" onclick="nJoin()">반려인 가입</Button></li>
             </ul>
         </form>
       <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
