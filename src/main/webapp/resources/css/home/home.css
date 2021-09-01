@@ -145,6 +145,7 @@ ul,
 dl {
   margin-top: 0;
   margin-bottom: 1rem;
+  list-style:none;
 }
 
 ol ol,
@@ -5411,6 +5412,7 @@ textarea.form-control-lg {
   border-bottom: 1px solid #dee2e6;
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px);
+  display:inline-block;
 }
 .modal-header .btn-close {
   padding: 0.5rem 0.5rem;
@@ -7437,7 +7439,7 @@ textarea.form-control-lg {
 }
 
 .text-secondary {
-  color: #6c757d !important;
+  color: #474c52 !important;
 }
 
 .text-success {
@@ -11027,11 +11029,11 @@ header.search h1, header.search .h1 {
 
 .blank1 
 {
-  height: 13rem;
+  height: 11rem;
   background-color: rgb(252, 250, 246);
 }
 
-.regBtn {
+.mainBtn {
   float: left;
   
   width: 100px;
@@ -11044,10 +11046,9 @@ header.search h1, header.search .h1 {
 
   color: white;
   background-color:palevioletred;
-  /* background-color:rosybrown; */
 }
 
-.regBtn2 {
+#searchBtn {
   float: right;
   width: 150px;
   height: 60px;
@@ -11059,7 +11060,22 @@ header.search h1, header.search .h1 {
 
   color: white;
   background-color:steelblue;
-  /* background-color:rosybrown; */
+}
+
+.modalBtn {
+  float: left;
+  
+  width: 80px;
+  height: 30px;
+  border: 0;
+  border-radius: 50% 20% / 10% 40%;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  color: white;
+  /* background-color: #ecc44eb9; */
+  background-color: #8f8e8db9;
 }
 
 .wrap {
@@ -11128,3 +11144,6 @@ header.search h1, header.search .h1 {
   border-top: 5px solid orange;
 }
 
+.info {
+	font-size: 15px;
+}

@@ -85,7 +85,7 @@
                                 <div id="dogType" class="pt-2">
                                     <div>Dog Size</div>
                                     
-                                    <div class="input-group select">
+                                    <div class="input-group">
                                         <div class="select">
                                             <input type="radio" id="small" name="dogType" value="small" >
                                             <label for="small">소형견<br>7kg 미만</label>
@@ -104,7 +104,7 @@
 
                                 </div>
                                 <div>
-                                    <button type="button" id="searchBtn" class="regBtn2">검색</button>
+                                    <button type="button" id="searchBtn" >검색</button>
                                 </div>
                             </fieldset>
                         </form>
@@ -127,11 +127,13 @@
             </div>
             <div class="col-lg-6 order-lg-1 my-auto showcase-text pt-5">
                 <h2>안심하고 맡길 수 있는<br> 우리 아이를 위한 맞춤 케어</h2>
-                <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
+                <p class="lead mb-0">여행, 출장, 늦은 퇴근에 집에 혼자있는 우리아이..<br>
+									 쓰담쓰담과 함께라면 이제 걱정 끝!<br>
+									 가족같은 펫시터가 내 아이와 함께합니다.</p>
                 
                 <!-- Button to Open the Modal -->
                 <div class="button">
-                    <button type="button" class="regBtn" data-toggle="modal" data-target="#serviceInfo">상세보기</button>
+                    <button type="button" class="mainBtn" data-toggle="modal" data-target="#serviceInfo">상세보기</button>
 
                     <!-- The Modal -->
                     <div class="modal fade" id="serviceInfo">
@@ -140,23 +142,27 @@
 
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Modal Heading</h4>
+                                	<img class="img-fluid float-start" src="/resources/assets/img/home/manual.png" width="50px"/>
+                                    <h3 class="modal-title">&nbsp;&nbsp;쓰담쓰담 안내서</h3>
                                 </div>
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <h3>Some text to enable scrolling..</h3>
-
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolores, obcaecati minima maxime numquam voluptatem aut esse libero, error inventore corrupti distinctio pariatur rerum debitis facilis delectus odit maiores dignissimos.</p>
-
-                                    <p>The name of the waters, and let it separate the waters from the waters. The LORD God said to the serpent, We may eat of the air, and over the birds of the air, and to the birds of the field; but for the LORD God made the wild animals of the sea and over the fish of the sea, and over the night, and to the birds of the garden, nor shall you touch it, or you shall die. And to every beast of the earth, and over every living thing that moves upon the earth. And it was very good. And there was evening and there he put the man and for seasons and for days and years. Out of the ground of every kind: cattle and creeping things and wild animals of the field and every bird of the tree that is pleasant to the tree of life also in the image of God he created them; male and female he created them. He said, I heard the sound of the sea and over the fish of the sea, and over every creeping thing that moves upon the earth. He said, Who told you that you were taken; you are dust, and to the birds of the fruit of the trees in the image of God he created them; male and female he created them.</p>
-
-                                    <p>Mit Ausnahme von Bedienungsrechten von Hypotheken ist der volle Betrag in Abzug zu bringen, nach Bereinigung um entsprechende latente Steuerverbindlichkeiten, die erlöschen würden, falls sich der Betrag, der vom Ergänzungskapital abzuziehen ist, ergibt sich aus dem nachfolgenden Abschnitt „Abzug von Beträgen über dem Schwellenwert“. Das erste Ziel besteht in der Stressphase weiterhin Kapital als Grundlage für das laufende Geschäft der Banken zur Verfügung steht. Das Rahmenkonzept reduziert den Ermessensspielraum von Banken, die die auf internationaler Ebene hat der Ausschuss eine Reihe einheitlicher Kennzahlen entwickelt, dies als das Minimum an Informationen anzusehen sind, über das die Aufsichtsinstanzen verfügen sollten. Dies wäre im Rahmen der standardisierten CVA-Risikokapitalanforderungen gemäss Absatz 104 für anwendbar. Mit Ausnahme von Bedienungsrechten von Hypotheken abzuziehen ist, als die Summe sämtlicher Beteiligungspositionen, die insgesamt mehr als 10% des harten Kernkapitals in voller Höhe abgezogen werden. Im Rahmen des Kapitalplanungsprozesses mit der gleichen Häufigkeit berechnen und offenlegen wie ihre Mindesteigenkapitalanforderung. Banken, die die auf internen Modellen basierende Methode anwenden, müssen über eine Sicherheitenverwaltungseinheit verfügen. Die Einheit muss ferner darauf achten, ob Konzentrationen auf einzelne Kategorien von Vermögenswerten bestehen, die von der Bank weiterverwendet werden und welche Rechte die Bank beim Stellen von Sicherheiten ihren Kontrahenten abtritt. Derartige zum Ausgleich herangezogene Vermögenswerte sollten mit dem prozentualen Anteil der Positionen des harten Kernkapitals am gesamten Eigenkapital.</p>
+									<ul class="list-inline">
+										<li><b>방문 All day</b></li>
+										<li class="info mb-3 text-secondary">펫시터가 고객의 집으로 찾아가 반려동물과 집을 돌봅니다.<br>반려동물은 집을 떠나는 스트레스를 줄일 수 있고 편안한 공간에서 안전하게 관리 받습니다.<br><p class="text-danger">※ 귀중품은 따로 보관부탁드립니다. 분실 시 책임지지 않습니다.</p></li>
+										<li><b>방문 Half day</b></li>
+										<li class="info mb-3 text-secondary">고객의 집으로 찾아가 돌봄을 진행하는것은 '방문 All day'와 같지만, Half day는 일정기간동안 반려동물과 놀고, 사료를 채워주고, 배변처리를 제공합니다.<br><p class="text-danger">※ 귀중품은 따로 보관부탁드립니다. 분실 시 책임지지 않습니다.</p></li>
+										<li><b>맡김 All day</b></li>
+										<li class="info mb-3 text-secondary">고객의 반려동물이 시터의 집에서 하룻밤을 지냅니다.<br>여러마리의 반려동물을 수용하여 맞춤케어가 힘든 호텔이나 병원과는 달리 가정집에서 밀착케어를 통해 안전하게 지낼 수 있습니다.<br><p class="text-danger">※ 펫시터에게 필요한 물품을 제공해주시기 바랍니다.</p></li>
+										<li><b>맡김 Half day</b></li>
+										<li class="info mb-3 text-secondary">반나절동안 고객의 반려동물이 시터의 집에서 시간을 보냅니다.<br>펫시터의 집에 머무는 동안 가족의 일원과 같이 대우받으며 편안하고 즐거운 시간을 보냅니다.<br><p class="text-danger">※ 펫시터에게 필요한 물품을 제공해주시기 바랍니다.</p></li>
+									</ul>
                                 </div>
 
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn" data-dismiss="modal">Close</button>
+                                   <button type="button" class="modalBtn" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>            
@@ -172,12 +178,12 @@
                 </div>
             </div>
             <div class="col-lg-6 order-lg-2 my-auto showcase-text pt-5">
-                <h2>FAQ. <br> 자주 묻는 질문</h2>
-                <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
+                <h2>FAQs. <br> 자주 묻는 질문</h2>
+                <p class="lead mb-0">펫시터가 되고 싶으신가요?<br>펫시터가 필요 하신가요?<br>이용하시기전에 궁금증을 여기서 해결하세요!<br>다양한 질문과 답변이 준비되어 있습니다.</p>
                 
                 <!-- Button to Open the Modal -->
                 <div class="button">
-                    <button type="button" id="faqBtn" class="regBtn" data-toggle="modal" data-target="#faq">질문보기</button>
+                    <button type="button" id="faqBtn" class="mainBtn" data-toggle="modal" data-target="#faq">질문보기</button>
 
                     <!-- The Modal -->
                     <div class="modal fade" id="faq">
@@ -186,7 +192,8 @@
 
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Modal Heading</h4>
+                                <img class="img-fluid float-start" src="/resources/assets/img/home/questionMark.png" width="40px"/>
+                                    <h3 class="modal-title">&nbsp;&nbsp;자주 묻는 질문과 답변</h3>
                                 </div>
 
                                 <!-- Modal body -->
@@ -197,7 +204,7 @@
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                	<button type="button" class="modalBtn" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>            
