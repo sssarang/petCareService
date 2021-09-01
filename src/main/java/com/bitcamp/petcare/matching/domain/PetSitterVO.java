@@ -2,12 +2,11 @@ package com.bitcamp.petcare.matching.domain;
 
 import java.util.Date;
 
-import lombok.Data;
 import lombok.Value;
 
 
 @Value
-public class PetSitterVO extends CommonDTO{
+public class PetSitterVO {
 
 	//TBL_PETSITTER_PROFILE
 	private Integer userNo;
