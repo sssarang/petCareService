@@ -16,12 +16,12 @@
             <img class="img-fluid" src="/resources/assets/img/common/2.png" alt="Logo" width="165px">
         </a>
         <div class="btn-group">
-            <a class="btn orange" href="#">
+            <a class="btn orange" href="/user/loginPage">
                 <span class="btn-sm">
                     로그인
                 </span>
             </a>
-            <a class="btn orange" href="#">
+            <a class="btn orange" href="/user/articleCheckPage">
                 <span class="btn-sm">
                     회원가입
                 </span>

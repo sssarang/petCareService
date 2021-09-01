@@ -21,39 +21,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet" type="text/css" />
+    
     <!-- jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
+	
     <!-- flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-	
-    
-
-	<script>
-
-        $(function () {
-            console.clear();
-            console.debug('jq started...');
-        
-            $("#searchBtn").click(function () {
-                console.log("#listBtn button clicked..");
-
-                // location ="/board/list";
-                // self.location = "/board/list"
-
-                location ="/search/matching";    /* 이게 정석이다 */
-                //location.href = "/board/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
-                
-                // self.location.href ="/board/list";
-            }); //.onclick
-
-            
-        }); //jq
-    </script>
-	
     
 </head>
 <body>
@@ -67,6 +45,19 @@
 	<!-- footer -->
     <%@include file="/WEB-INF/views/common/footer.jsp" %>
     
+    
+    <!-- 달력 js -->
+	<script type="text/javascript" src="/resources/js/home/flatpickr.js"></script>
+    <!-- 리뷰 js -->
+	<script type="text/javascript" src="/resources/js/home/review.js"></script>
+	<!-- faq js -->
+	<script type="text/javascript" src="/resources/js/home/faq.js"></script>
+	<!-- 버튼 js -->
+	<script type="text/javascript" src="/resources/js/home/button.js"></script>
+	<!-- search js -->
+	<script type="text/javascript" src="/resources/js/home/search.js"></script>
+	<!-- address.js-->
+	<script type="application/javascript" src="/resources/js/common/address.js"></script>
     
 </body>
 </html>

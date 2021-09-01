@@ -43,7 +43,7 @@ public class MatchingController {
 	
 	
 	// 예약하기 완료시, 예약테이블에 데이터 넣기. 
-	@PostMapping("matching")
+	@PostMapping("booking")
 	public void booking(MatchingDTO matching) {
 		log.debug("booking({}) invoked." , matching);
 		

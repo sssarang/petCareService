@@ -27,13 +27,13 @@
 	
 	
 	<insert id="insertMatcingSelectKey">
-		<selectKey keyProperty="service_id" order="BEFORE" resultType="int">
+		<selectKey keyProperty="serviceId" order="BEFORE" resultType="int">
 			SELECT ISEQ$$_100496.nextval FROM dual
 		</selectKey>
 	
 		INSERT INTO tbl_service_matching
 		    (service_id, start_date, end_date, service_type_code, pet_type_code, pet_user_no, pet_sitter_no, reg_user_no)
-		VALUES (#{service_id}, #{start_date}, #{end_date}, #{service_type_code}, #{pet_type_code}, #{pet_user_no}, #{pet_sitter_no}, #{reg_user_no})
+		VALUES (#{serviceId}, #{startDate}, #{endDate}, #{serviceTypeCode}, #{petTypeCode}, #{petUserNo}, #{petSitterNo}, #{regUserNo})
 	</insert>
 	
 	

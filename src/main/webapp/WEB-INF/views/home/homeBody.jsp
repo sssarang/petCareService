@@ -3,171 +3,111 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!-- address.js-->
-<script src="/resources/js/common/address.js" type="application/javascript"></script>
+
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/resources/css/home/home.css" rel="stylesheet" />
 
 
-<!-- Masthead-->
-<header class="masthead">
+<!-- 통합검색 -->
+<header class="search">
     <div class="container position-relative">
         <div class="row justify-content-center">
             <div class="col-xl-7">
-                <div class="">
+                <div>
                     <div class="text-center text-white">
-                        <!-- Page heading-->
+                        <!-- Page heading -->
                         <h1>펫시터가 필요하신가요?</h1>
                         <h2 class="mb-5">펫시터를 찾아보세요!</h2>
                     </div>
                     <div class="wrap">
                         <form class="" action="/search/" method="GET">
+                        	<!-- 동물 유형 선택 -->
                             <fieldset>
-                                
                                 I'm looking for service for my: &nbsp;&nbsp;
                                 
-                                <label for="pet-type-checkbox-dog-search-form">Dog </label>
-                                <input
-                                    type="checkbox"
-                                    id="pet-type-checkbox-dog-search-form"
-                                    name="pet-type-checkbox-search-form"
-                                    value="dog"
-                                />
-                                <label for="pet-type-checkbox-cat-search-form">Cat </label>
-                                <input
-                                    type="checkbox"
-                                    id="pet-type-checkbox-cat-search-form"
-                                    name="pet-type-checkbox-search-form"
-                                    value="cat"
-                                />    
+                                Dog <input type="radio" id="dog" name="petType" value="dog" />&nbsp;
+                                Cat <input type="radio" id="cat" name="petType" value="cat"/>    
                             </fieldset>
-                        </form>
-                        <hr>
-                        <input type="hidden" value="dog" name="pet_type"/>
-                    
-                        <fieldset>
-                            <div>서비스 선택</div>
-                            <div class="input-group">
-                                <div class="select">
-                                    <input
-                                        id="visit-All-day"
-                                        type="checkbox"
-                                        name="homepage_service_type"
-                                        value="방문-All day"
-                                    />
-                                    <label for="visit-All-day">방문<br>All day</label>
-                                </div>
+                        
+                            <hr>
 
-                                <div class="select">
-                                    <input
-                                        id="visit-Half-day"
-                                        type="checkbox"
-                                        name="homepage_service_type"
-                                        value="방문-All day"
-                                    />
-                                    <label for="visit-Half-day">방문<br>Half day</label>
-                                </div>
-
-                                <div class="select">
-                                    <input
-                                        id="bb-All-day"
-                                        type="checkbox"
-                                        name="homepage_service_type"
-                                        value="방문-All day"
-                                    />
-                                    <label for="bb-All-day">맡김<br>All day</label>
-                                </div>
-
-                                <div class="select">
-                                    <input
-                                        id="bb-Half-day"
-                                        type="checkbox"
-                                        name="homepage_service_type"
-                                        value="방문-All day"
-                                    />
-                                    <label for="bb-Half-day">맡김<br>Half day</label>
-                                </div>
-                            </div>
-                            
-                        </fieldset>
-                        <fieldset>
-                            <div class="pt-3 d-inline-block">
-                                <div>돌봄날짜</div>
-                                <spen><input type="text" class="selector" placeholder="시작일" /></spen>
-                                <span>&nbsp;~&nbsp;</span> 
-                                <spen><input type="text" class="selector" placeholder="종료일" /></spen> 
-            
-                                <!-- <a class="input-button" title="toggle" data-toggle><i class="icon-calendar"></i></a> -->
-                                
-                                <script type="text/javascript">
-            
-                                    $(".selector").flatpickr({ 
-                                    
-                                    dateFormat: "Y-m-d",
-                                    
-                                    minDate:"today",
-                                    
-                                    maxDate: new Date().fp_incr(30)
-                                    
-                                    });
-                                    
-                                </script> 
-                            </div>  
-                            <div class="pb-3">
-                                <div>주소</div> 
-                                <select id="sido">
-                                    <option value="">선택</option>
-                                </select>
-                                <select id="sigugun">
-                                    <option value="">선택</option>
-                                </select>
-                                <select id="dong">
-                                    <option value="">선택</option>
-                                </select>
-                            </div>
-                        </fieldset>
-
-                        <fieldset>
-                            <div>
-                                <div>Dog Size</div>
-                                
+                            <input type="hidden" value="dog" name="pet_type"/>
+                        
+                            <fieldset>
+                                <div class="pt-2">서비스 선택</div>
                                 <div class="input-group">
                                     <div class="select">
-                                        <input
-                                        id="small"
-                                        type="checkbox"
-                                        name="homepage_service_type"
-                                        value="방문-All day"
-                                        />
-                                        <label for="small">소형견<br>0-6.9kg</label>
+                                        <input type="checkbox" id="visit-All-day" value="visit-All-day" />
+                                        <label for="visit-All-day">방문<br>All day</label>
                                     </div>
 
                                     <div class="select">
-                                        <input
-                                        id="medium"
-                                        type="checkbox"
-                                        name="homepage_service_type"
-                                        value="방문-All day"
-                                        />
-                                        <label for="medium">중형견<br>7-14.9kg</label>
+                                        <input type="checkbox" id="visit-Half-day" value="visit-Half-day" />
+                                        <label for="visit-Half-day">방문<br>Half day</label>
                                     </div>
 
                                     <div class="select">
-                                        <input
-                                        id="large"
-                                        type="checkbox"
-                                        name="homepage_service_type"
-                                        value="방문-All day"
-                                        />
-                                        <label for="large">대형견<br>15kg +</label>
+                                        <input type="checkbox" id="leave-All-day" value="leave-All-day" />
+                                        <label for="leave-All-day">맡김<br>All day</label>
                                     </div>
+
+                                    <div class="select">
+                                        <input type="checkbox" id="leave-Half-day" value="leave-Half-day" />
+                                        <label for="leave-Half-day"">맡김<br>Half day</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <div class="pt-2 d-inline-block">
+                                    <div>돌봄날짜</div>
+                                    <spen><input type="text" class="selector" placeholder="시작일" /></spen>
+                                    <span>&nbsp;~&nbsp;</span> 
+                                    <spen><input type="text" class="selector" placeholder="종료일" /></spen> 
+                                    <!-- <a class="input-button" title="toggle" data-toggle><i class="icon-calendar"></i></a> -->
+                                </div>  
+
+                                <div class="pt-2 pb-2">
+                                    <div>주소</div> 
+                                    <select id="sido">
+                                        <option value="">선택</option>
+                                    </select>
+                                    <select id="sigugun">
+                                        <option value="">선택</option>
+                                    </select>
+                                    <select id="dong">
+                                        <option value="">선택</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <div id="dogType" class="pt-2">
+                                    <div>Dog Size</div>
+                                    
+                                    <div class="input-group select">
+                                        <div class="select">
+                                            <input type="radio" id="small" name="dogType" value="small" >
+                                            <label for="small">소형견<br>7kg 미만</label>
+                                        </div>
+
+                                        <div class="select">
+                                            <input type="radio" id="medium" name="dogType" value="medium" />
+                                            <label for="medium">중형견<br>7 - 14.9kg</label>
+                                        </div>
+
+                                        <div class="select">
+                                            <input type="radio" id="large" name="dogType" value="large" />
+                                            <label for="large">대형견<br>15kg 이상</label>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div>
                                     <button type="button" id="searchBtn" class="regBtn2">검색</button>
                                 </div>
-                            </div>
-                            
-                        </fieldset>
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -176,7 +116,7 @@
 </header>
 <div class="blank1"></div>
 
- <!-- Image Showcases-->
+ <!-- 서비스 설명, faq-->
 <section class="showcase bg-body">
     <div class="container">
         <div class="row g-0">
@@ -195,18 +135,12 @@
 
                     <!-- The Modal -->
                     <div class="modal fade" id="serviceInfo">
-                        <!-- NOTE 4: if ( class="modal-dialog" ) not exists, modal window appeared by full width on viewport. -->
                         <div class="modal-dialog modal-dialog-scrollable">
-
-                            <!-- NOTE 5: if ( class="modal-content" ) not exists, the background of modal window not appeared. -->
                             <div class="modal-content">
 
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                     <h4 class="modal-title">Modal Heading</h4>
-
-                                    <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
 
                                 <!-- Modal body -->
@@ -222,8 +156,7 @@
 
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>            
@@ -244,91 +177,26 @@
                 
                 <!-- Button to Open the Modal -->
                 <div class="button">
-                    <button type="button" class="regBtn" data-toggle="modal" data-target="#faq">질문보기</button>
+                    <button type="button" id="faqBtn" class="regBtn" data-toggle="modal" data-target="#faq">질문보기</button>
 
                     <!-- The Modal -->
                     <div class="modal fade" id="faq">
-                        <!-- NOTE 4: if ( class="modal-dialog" ) not exists, modal window appeared by full width on viewport. -->
                         <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
-
-                            <!-- NOTE 5: if ( class="modal-content" ) not exists, the background of modal window not appeared. -->
                             <div class="modal-content">
 
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                     <h4 class="modal-title">Modal Heading</h4>
-
-                                    <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-
                                     <div id="accordion">
-
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <!-- NOTE 1 : A ( data-toggle="collapse" ) attribute must be used 
-                                                                in a ( <a> ) element to control ( show / hide ) the ( collapsible ) content.
-                                                                    
-                                                    * For ( <a> ) elements, you can use the ( href ) attribute instead of the ( data-target ) attribute. -->
-                                                <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                                                    Collapsible Group Item #1
-                                                </a>
-                                            </div>
-                            
-                                            <!-- NOTE 2 : Collapsible ( <div> ) element to contain contents must have ( .collapse ) class. -->
-                                            <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    Lorem ipsum..
-                                                </div>
-                                            </div>
-                                        </div>
-                            
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <!-- NOTE 1 : A ( data-toggle="collapse" ) attribute must be used 
-                                                                in a ( <a> ) element to control ( show / hide ) the ( collapsible ) content.
-                                                                    
-                                                    * For ( <a> ) elements, you can use the ( href ) attribute instead of the ( data-target ) attribute. -->
-                                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-                                                    Collapsible Group Item #2
-                                                </a>
-                                            </div>
-                            
-                                            <!-- NOTE 2 : Collapsible ( <div> ) element to contain contents must have ( .collapse ) class. -->
-                                            <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    Lorem ipsum..
-                                                </div>
-                                            </div>
-                                        </div>
-                            
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <!-- NOTE 1 : A ( data-toggle="collapse" ) attribute must be used 
-                                                                in a ( <a> ) element to control ( show / hide ) the ( collapsible ) content.
-                                                                    
-                                                    * For ( <a> ) elements, you can use the ( href ) attribute instead of the ( data-target ) attribute. -->
-                                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-                                                    Collapsible Group Item #3
-                                                </a>
-                                            </div>
-                            
-                                            <!-- NOTE 2 : Collapsible ( <div> ) element to contain contents must have ( .collapse ) class. -->
-                                            <div id="collapseThree" class="collapse" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    Lorem ipsum..
-                                                </div>
-                                            </div>
-                                        </div>
-                            
+                                        <!-- 동적으로 faq목록 생성 -->
                                     </div>
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
@@ -342,30 +210,30 @@
 
 <div class="blank1"></div>
 
- <!-- Testimonials-->
- <section class="testimonials text-center">
+ <!-- 후기 -->
+ <section class="reviews text-center">
     <div class="container">
         <h2 class="mb-5">쓰담쓰담의<br> 솔직담백 후기!</h2>
         <div class="row">
             <div class="col-lg-4">
-                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                <div class="reviews-item mx-auto mb-5 mb-lg-0">
                     <img class="img-fluid rounded-circle mb-3" src="/resources/assets/img/home/testimonials-1.jpg" alt="..." />
-                    <h5>Margaret E.</h5>
-                    <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+                    <h5 id="writer1"></h5>
+                    <p id="content1" class="font-weight-light mb-0"></p>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                <div class="reviews-item mx-auto mb-5 mb-lg-0">
                     <img class="img-fluid rounded-circle mb-3" src="/resources/assets/img/home/testimonials-2.jpg" alt="..." />
-                    <h5>Fred S.</h5>
-                    <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p>
+                    <h5 id="writer2"></h5>
+                    <p id="content2" class="font-weight-light mb-0"></p>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                <div class="reviews-item mx-auto mb-5 mb-lg-0">
                     <img class="img-fluid rounded-circle mb-3" src="/resources/assets/img/home/testimonials-3.jpg" alt="..." />
-                    <h5>Sarah W.</h5>
-                    <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
+                    <h5 id="writer3"></h5>
+                    <p id="content3" class="font-weight-light mb-0"></p>
                 </div>
             </div>
         </div>
