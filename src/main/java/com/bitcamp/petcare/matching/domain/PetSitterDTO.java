@@ -3,13 +3,14 @@ package com.bitcamp.petcare.matching.domain;
 import java.util.Date;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class PetSitterDTO extends CommonDTO {
 
 	//TBL_PETSITTER_PROFILE
-	private Integer userNo;
 	private String proPhoto;
 	private String introduce;
 

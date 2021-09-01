@@ -3847,22 +3847,26 @@ $(document).ready(function(){
         //sido 변경시 시군구 option 추가
         $('#sido').change(function(){
                 $('#sigugun').show();
+				$('.sigugunException').show();
+				
                 $('#sigugun').empty();
                 $('#sigugun').append(fn_option('','선택')); 
                 $.each(address.sigugun, function(idx, code){
-                if($('#sido > option:selected').val() == code.sido)
-                $('#sigugun').append(fn_option(code.sigugun, code.codeNm));
+	                if($('#sido > option:selected').val() == code.sido)
+	                	$('#sigugun').append(fn_option(code.sigugun, code.codeNm));
                 });
 
                 //세종특별자치시 예외처리
                 //옵션값을 읽어 비교
                 if($('#sido option:selected').val() == '36'){
-                $('#sigugun').hide();
-                //index를 이용해서 selected 속성(attr)추가
-                //기본 선택 옵션이 최상위로 index 0을 가짐
-                $('#sigugun option:eq(1)').attr('selected', 'selected');
-                //trigger를 이용해 change 실행
-                $('#sigugun').trigger('change');
+	                $('#sigugun').hide();
+					$('.sigugunException').hide();
+					
+	                //index를 이용해서 selected 속성(attr)추가
+	                //기본 선택 옵션이 최상위로 index 0을 가짐
+	                $('#sigugun option:eq(1)').attr('selected', 'selected');
+	                //trigger를 이용해 change 실행
+	                $('#sigugun').trigger('change');
                 }
         });
 
@@ -3871,8 +3875,8 @@ $(document).ready(function(){
                 //option 제거
                 $('#dong').empty();
                 $.each(address.dong, function(idx, code){
-                if($('#sido > option:selected').val() == code.sido && $('#sigugun > option:selected').val() == code.sigugun)
-                $('#dong').append(fn_option(code.dong, code.codeNm));
+	                if($('#sido > option:selected').val() == code.sido && $('#sigugun > option:selected').val() == code.sigugun)
+	               	 $('#dong').append(fn_option(code.dong, code.codeNm));
                 });
                 //option의 맨앞에 추가
                 $('#dong').prepend(fn_option('','선택'));

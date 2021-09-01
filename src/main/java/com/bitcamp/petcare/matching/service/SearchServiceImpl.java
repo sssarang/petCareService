@@ -6,6 +6,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bitcamp.petcare.matching.domain.FilterDTO;
 import com.bitcamp.petcare.matching.domain.PetSitterDTO;
 import com.bitcamp.petcare.matching.mapper.SearchMapper;
 
@@ -25,14 +26,15 @@ public class SearchServiceImpl implements SearchService {
 	
 	
 	@Override
-	public List<PetSitterDTO> getPsList() {
-		log.debug("getPsList() invoked.");
+	public List<PetSitterDTO> getList(FilterDTO filterDTO) {
+		log.debug("getList() invoked.");
 		
 		Objects.requireNonNull(this.mapper);
 		
-		return this.mapper.getPsList();
+		return this.mapper.getList(filterDTO);
 	} //getPsList
 
+	
 	@Override
 	public PetSitterDTO getPs(Integer userNo) {
 		log.debug("getPs({}) invoked.", userNo);
@@ -41,6 +43,65 @@ public class SearchServiceImpl implements SearchService {
 		
 		return this.mapper.getPs(userNo);
 	} //getPs
+
+	@Override
+	public List<PetSitterDTO> getServiceType(Integer userNO) {
+		log.debug("getServiceType() invoked.");
+		
+		Objects.requireNonNull(this.mapper);
+		
+		return this.mapper.getServiceType(userNO);
+	} //getServiceType
+
+
+	@Override
+	public List<PetSitterDTO> getServiceCalendar(Integer userNO) {
+		log.debug("getServiceCalendar() invoked.");
+		
+		Objects.requireNonNull(this.mapper);
+		
+		return this.mapper.getServiceCalendar(userNO);
+	} //getServiceCalendar
+
+
+	@Override
+	public List<PetSitterDTO> getServicePetKinds(Integer userNO) {
+		log.debug("getServicePetKinds() invoked.");
+		
+		Objects.requireNonNull(this.mapper);
+		
+		return this.mapper.getServicePetKinds(userNO);
+	} //getServicePetKinds
+
+
+	@Override
+	public List<PetSitterDTO> getPsSkill(Integer userNO) {
+		log.debug("getPsSkill() invoked.");
+		
+		Objects.requireNonNull(this.mapper);
+		
+		return this.mapper.getPsSkill(userNO);
+	} //getPsSkill
+
+
+	@Override
+	public List<PetSitterDTO> getActivityPhoto(Integer userNO) {
+		log.debug("getActivityPhoto() invoked.");
+		
+		Objects.requireNonNull(this.mapper);
+		
+		return this.mapper.getActivityPhoto(userNO);
+	} //getActivityPhoto
+
+
+	@Override
+	public List<PetSitterDTO> getReview(Integer userNO) {
+		log.debug("getReview() invoked.");
+		
+		Objects.requireNonNull(this.mapper);
+		
+		return this.mapper.getReview(userNO);
+	} //getReview
 	
 
 } //end class

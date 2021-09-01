@@ -2,11 +2,6 @@
 /*================전체 레이아웃(반응형적용)==================*/
 /*====================================================*/
 
-.btn-sm, .btn-group-sm > .btn {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-    border-radius: 0.2rem;
-}
 
 #wrapper { /*100%로 너비값*/
     width: 100%;
@@ -54,6 +49,7 @@
 
 .sidebar-list { /*사이드바 %로 단위변경*/
     float: left;
+    overflow: auto;
     position: relative;
     
     width: 20%;
@@ -65,7 +61,8 @@
 }
 
 .content { /*본문 %로 단위변경*/
-   float: left;
+    float: left;
+    position: relative;
     
     width: 60%;
     height: 1300px;
@@ -101,6 +98,18 @@
     }
 }  /* 스마트폰 */
 
+.sidebar-list::-webkit-scrollbar {
+    width: 10px;
+  }
+.sidebar-list::-webkit-scrollbar-thumb {
+  background-color: #dddddd;
+  border-radius: 15px;
+}
+.sidebar-list::-webkit-scrollbar-track {
+  background-color: #white;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px #f0f0f0;
+}
 
 /*====================================================*/
 /*================ 필터링조건(반응형적용) ===================*/
@@ -146,7 +155,7 @@ hr {
 
 /*필터링조건항목(공통)*/
 .form-group {
-	margin: 1.5rem auto; 
+	margin: 1.7rem auto; 
     padding-left: 1rem;
 }
 
@@ -179,7 +188,8 @@ hr {
 
 /*필터링조건항목-반려동물종류(라디오버튼)*/
 .btn-toggle{	
-    margin: 0 auto;    
+	display: none;
+	margin: 0 auto;    
 }
 
 .btn-toggle input[type=radio]{
@@ -223,11 +233,172 @@ hr {
 	margin: 20px 0px;
 }
 
+.form-group > input[type=button]{
+	align-items: right;
+}
+
+
 /*====================================================*/
-/*============== 펫시터리스트(반응형적용)================*/
+/*================ 펫시터리스트(반응형적용)==================*/
 /*====================================================*/
 
-#psList{
+#psTable {
+	
+}
+
+.line{
+	border-bottom: 1px solid #bebebe;
+}
+
+/*====================================================*/
+/*===================== 펫시터프로필 ======================*/
+/*====================================================*/
+.profile{
+    display: none;
+    position: absolute;
+    
+    width: 60%;
+    height: 1300px;
+    top: 70px;
+    right: 0%;
+    background-color: #fff7e8;
+    z-index: 5;
+}
+@media (max-width: 768px) {
+    .profile {
+      width: 100%;
+      padding-top: 70px;
+      
+    }
+} /* 태블릿 */
+@media (max-width: 576px) {
+    .profile {
+      width: 100%;
+      padding-top: 100px;
+    }
+}  /* 스마트폰 */
+
+.profile_close{
+	position: absolute;
+	
+    width: 26px;
+    height: 26px;
+    top: 10px;
+    right: 10px;
+}
+
+.profile_close> a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background:url(https://img.icons8.com/metro/26/000000/close-window.png);
+    text-indent: -9999px;
+}
+
+#profile_wrap{	
+	margin: 0 auto;
+	padding: 5%;
+	
+	width: 100%;
+	height:1301px;
+	
+	background-color: orange;
+}
+
+#profile_head{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	
+	margin: 0 auto;
+	padding: 3%;
+	
+	width: 100%;
+    height: 330px; 
+}
+
+#profile_photo {
+	/* margin: 3%; */
+    width: 250px;
+    height: 250px;
+	margin-right: 3%;
+     
+    border-radius: 30%;
+    
+    overflow: hidden;
+}
+
+#photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+    background: #BDBDBD;
+}
+
+#psInfo{
+	padding: 3%;
+	
+	width: 70%;
+	height: 100%;	
+}
+
+#profile_content{
+	display: flex;
+	flex-direction: row;		
+}
+
+#profile_side{
+	padding: 3%;
+	width: 35%;
+	height:810px;
+	
+	background-color: #ffd993;
+}
+
+#profile_body{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	
+	padding: 3% 3% 3% 0;
+	width: 65%;
+	height:810px;
+	
+	background-color: #ffd993;
+}
+
+#serviceInfo{
+	padding: 3%;
+	
+	width: 100%;
+	height: 100%;
+
+	background-color: white;
+}
+
+#active_photo{
+	padding: 3%;
+	margin-bottom:5%;
+	
+	width: 100%;
+	height: 350px;
+
+	background-color: white;
+}
+
+#review-list{
+	padding: 3%;
+	
+	width: 100%;
+	height: 420px;
+    overflow: auto;
+
+	background-color: white;
+}
+
+.flex_item{
+	
 }
 
 /*====================================================*/
@@ -235,7 +406,7 @@ hr {
 /*====================================================*/
 #map {
 	position: relative;
-    z-index: 400;
+    z-index: 2;
 }
 
 /*====================================================*/

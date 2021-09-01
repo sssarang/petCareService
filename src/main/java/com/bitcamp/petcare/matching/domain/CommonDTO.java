@@ -2,7 +2,10 @@ package com.bitcamp.petcare.matching.domain;
 
 import java.util.Date;
 
+import lombok.Data;
 
+
+@Data
 public class CommonDTO {
 
 	private Character userYn;		//사용여부
@@ -18,7 +21,7 @@ public class CommonDTO {
 	private Character userGender;	//성별
 	private Character userClassify;	//회원구분
 	private Character userStatus;	//회원상태
-
+	
 	private Integer regUserNo;		//등록자회원번호
 	private Date regDate;			//등록일자
 	private Integer modUserNo;		//수정자회원번호
