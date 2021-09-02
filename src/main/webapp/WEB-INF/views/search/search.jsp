@@ -58,7 +58,7 @@
 		<script src="/resources/js/search/flatpickr.js"></script>						     
 
 	    <!-- map API(App-key 포함) -->
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services&libraries=clusterer"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85bd66ba89e1b1e36ee4a86c8e2b9443&libraries=services&libraries=clusterer"></script>
 		<script src="/resources/js/search/map.js"></script>
 		
 		<script>

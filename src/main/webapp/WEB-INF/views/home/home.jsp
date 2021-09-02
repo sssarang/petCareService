@@ -55,8 +55,8 @@
 	<script type="text/javascript" src="/resources/js/home/faq.js"></script>
 	<!-- 버튼 js -->
 	<script type="text/javascript" src="/resources/js/home/button.js"></script>
-	<!-- search js -->
-	<script type="text/javascript" src="/resources/js/home/search.js"></script>
+	<!-- searchForm js -->
+	<script type="text/javascript" src="/resources/js/home/searchForm.js"></script>
 	<!-- address.js-->
 	<script type="application/javascript" src="/resources/js/common/address.js"></script>
     

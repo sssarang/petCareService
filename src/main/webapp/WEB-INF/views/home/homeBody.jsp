@@ -20,20 +20,77 @@
                         <h2 class="mb-5">펫시터를 찾아보세요!</h2>
                     </div>
                     <div class="wrap">
-                        <form action="/search/main" method="GET">
+                        <form action="/search/main" method="GET" name="search" onsubmit="return check();">
                         	<!-- 동물 유형 선택 -->
                             <fieldset>
                                 I'm looking for service for my: &nbsp;&nbsp;
                                 
-                                Dog <input type="radio" id="dog" name="petType" value="dog" />&nbsp;
-                                Cat <input type="radio" id="cat" name="petType" value="cat"/>    
+                                Dog <input type="radio" id="dog" name="petType" checked />&nbsp;
+                                Cat <input type="radio" id="cat" name="petType" value="4"/>    
                             </fieldset>
                         
                             <hr>
                         
+                        	<fieldset>
+                                <div id="dogType" class="pt-2">
+                                    <div>Dog Size</div>
+                                    
+                                    <div class="input-group">
+                                        <div class="select">
+                                            <input type="radio" id="small" name="dogType" value="3" checked>
+                                            <label for="small">소형견<br>7kg 미만</label>
+                                        </div>
+
+                                        <div class="select">
+                                            <input type="radio" id="medium" name="dogType" value="2" />
+                                            <label for="medium">중형견<br>7 - 14.9kg</label>
+                                        </div>
+
+                                        <div class="select">
+                                            <input type="radio" id="large" name="dogType" value="1" />
+                                            <label for="large">대형견<br>15kg 이상</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </fieldset>
+
                             <fieldset>
-                                <div class="pt-2">Service Type</div>
-                                <div class="input-group">
+	                            <div class="pt-1 pb-2 d-flex">
+								  	<div>
+									    <span>Service Date</span>
+									    <br>
+									    <input class="flatpickr" data-id="rangePlugin" type="text" placeholder="Start date" name="startDate" readonly="readonly">
+								  	</div>
+								  	<div>
+									    <br>
+									    <input class="flatpickr" id="secondRangeInput" type="text" placeholder="End date" name="endDate" readonly="readonly">
+								  	</div>
+								</div>
+								
+                                <div>
+                                    <div>Service Location</div> 
+                                    <select id="sido" name="addrSido">
+                                        <option value="">::시/도::</option>
+                                    </select>
+                                    <select id="sigugun" name="addrSigugun">
+                                        <option value="">::시/군/구::</option>
+                                    </select>
+                                    <select id="dong" name="addrDong">
+                                        <option value="">::읍/면/동:</option>
+                                    </select>
+                                </div>
+                                                            
+	                            <input type="hidden" id="sidoHd" name="addrSidoNm" value="" >
+	                            <input type="hidden" id="sigugunHd" name="addrSigugunNm" value="" >
+	                            <input type="hidden" id="dongHd" name="addrDongNm" value="" >
+                            
+                            </fieldset>
+                            
+                            <fieldset>
+                                <div class="pt-3">Service Type</div>
+                                
+                                <div class="input-group pb-3">
                                     <div class="select">
                                         <input type="checkbox" id="visit-All-day" name="serviceType" value="13" />
                                         <label for="visit-All-day">방문<br>All day</label>
@@ -56,59 +113,8 @@
                                 </div>
                             </fieldset>
 
-                            <fieldset>
-	                            <div style="display: flex;">
-								  	<p>
-									    <span>Service Date</span>
-									    <br>
-									    <input class="flatpickr" data-id="rangePlugin" type="text" placeholder="Select Date.." name="startDate" readonly="readonly">
-								  	</p>
-								  	<p>
-									    <br>
-									    <input class="flatpickr" id="secondRangeInput" type="text" placeholder="Select Date.." name="endDate" readonly="readonly">
-								  	</p>
-								</div>
-
-                                <div class="pt-2 pb-2">
-                                    <div>Service Location</div> 
-                                    <select id="sido" name="addrSido">
-                                        <option value="">::시/도::</option>
-                                    </select>
-                                    <select id="sigugun" name="addrSigugun">
-                                        <option value="">::시/군/구::</option>
-                                    </select>
-                                    <select id="dong" name="addrDong">
-                                        <option value="">::읍/면/동:</option>
-                                    </select>
-                                </div>
-                            </fieldset>
-
-                            <fieldset>
-                                <div id="dogType" class="pt-2">
-                                    <div>Dog Size</div>
-                                    
-                                    <div class="input-group">
-                                        <div class="select">
-                                            <input type="radio" id="small" name="dogType" value="3" >
-                                            <label for="small">소형견<br>7kg 미만</label>
-                                        </div>
-
-                                        <div class="select">
-                                            <input type="radio" id="medium" name="dogType" value="2" />
-                                            <label for="medium">중형견<br>7 - 14.9kg</label>
-                                        </div>
-
-                                        <div class="select">
-                                            <input type="radio" id="large" name="dogType" value="1" />
-                                            <label for="large">대형견<br>15kg 이상</label>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div>
-                                    <button type="submit" id="searchBtn" >검색</button>
-                                </div>
-                            </fieldset>
+                            <!-- 검색버튼 -->
+                           	<input type="submit" value="검색" id="searchBtn">
                         </form>
                     </div>
                 </div>
