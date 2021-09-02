@@ -40,14 +40,21 @@ public class SearchController {
 				FilterDTO filterDto, 
 				Model model) {
 		log .debug("getList({}, {}) invoked...", model);
-		
-		log.info(filterDto);
-		List<PetSitterDTO> ps = this.service.getList(filterDto);
-		Objects.requireNonNull(ps);
-		
-		log.info("\t+ list: {}", ps);
 
-		model.addAttribute("list",ps);
+		if(filterDto.getPetType() == null || "".equals(filterDto.getPetType())) {
+			new RuntimeException("펫타입이 없습니다.");
+		}else {
+			List<PetSitterDTO> ps = this.service.getList(filterDto);
+			Objects.requireNonNull(ps);
+			log.info("\t+ list: {}", ps);
+			model.addAttribute("list",ps);
+		}
+		
+		log.info("\t+ filterDto : {}", filterDto);
+		
+
+		model.addAttribute("filter", filterDto);
+		
 		
 		return "/search/search";
 	} //getPsList
@@ -79,34 +86,43 @@ public class SearchController {
 		Objects.requireNonNull(ps);
 		log.info("\t+ ps : {}", ps);
 		
+		model.addAttribute("ps", ps);
+		
 		List<PetSitterDTO> serviceTypeList = this.service.getServiceType(userNo);
 		Objects.requireNonNull(serviceTypeList);
 		log.info("\t+ serviceTypeList : {}", serviceTypeList);
 
+		model.addAttribute("serviceType", serviceTypeList);
 		
 		List<PetSitterDTO> serviceCalendarList = this.service.getServiceCalendar(userNo);
 		Objects.requireNonNull(serviceCalendarList);
 		log.info("\t+ serviceCalendarList : {}", serviceCalendarList);
 
+		model.addAttribute("pserviceCalendar", serviceCalendarList);
 		
 		List<PetSitterDTO> servicePetKindsList = this.service.getServicePetKinds(userNo);
 		Objects.requireNonNull(servicePetKindsList);
 		log.info("\t+ servicePetKindsList : {}", servicePetKindsList);
 
+		model.addAttribute("servicePetKinds", servicePetKindsList);
 		
 		List<PetSitterDTO> psSkillList = this.service.getPsSkill(userNo);
 		Objects.requireNonNull(psSkillList);
 		log.info("\t+ psSkillList : {}", psSkillList);
 
+		model.addAttribute("psSkill", psSkillList);
 		
 		List<PetSitterDTO> activityPhotoList = this.service.getActivityPhoto(userNo);
 		Objects.requireNonNull(activityPhotoList);
 		log.info("\t+ activityPhotoList : {}", activityPhotoList);
 
+		model.addAttribute("activityPhoto", activityPhotoList);
 		
 		List<PetSitterDTO> reviewList = this.service.getReview(userNo);
 		Objects.requireNonNull(reviewList);
 		log.info("\t+ reviewList : {}", reviewList);
+
+		model.addAttribute("review", reviewList);
 
 	} //getPs
 	

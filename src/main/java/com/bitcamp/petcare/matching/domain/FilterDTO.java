@@ -14,9 +14,13 @@ public class FilterDTO {
 	
 	private List<String> serviceType;	//서비스유형
 	
-	private String addrSido;			//시/도
-	private String addrSigugun;			//시/군/구
-	private String addrDong;			//동
+	private String addrSido;			//코드: 시/도 
+	private String addrSigugun;			//코드: 시/군/구
+	private String addrDong;			//코드: 동
+	
+	private String addrSidoNm;			//이름: 시/도
+	private String addrSigugunNm;		//이름: 시/군/구
+	private String addrDongNm;			//이름: 동
 	
 	private String startDate;			//서비스 시작일
 	private String endDate;				//서비스 종료일

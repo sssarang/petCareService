@@ -23,18 +23,25 @@
         AND U.USER_STATUS = 'N'
         AND U.USER_LATITUDE IS NOT NULL		/*좌표필수*/
         AND U.USER_LONGITUDE IS NOT NULL	/*좌표필수*/
-        <if test="petType != null">
+        <if test='petType != null'>
         AND EXISTS(
             SELECT 1 
             FROM TBL_SERVICE_PETKINDS 
             WHERE 1=1
-            AND U.USER_NO = USER_NO 
-            AND PET_TYPE_CODE = DECODE(#{petType},'dog',#{dogType},#{petType})
-            AND USE_YN = 'Y'
+            AND U.USER_NO = USER_NO
+            AND USE_YN = 'Y'            
+            <choose>
+            	<when test='petType eq "dog"'>
+	            AND PET_TYPE_CODE = #{dogType}
+	            </when>
+	            <otherwise>
+	            AND PET_TYPE_CODE = #{petType}
+	            </otherwise>
+            </choose> 
         )
         </if>
           
-        <if test="(serviceType != null and serviceType.size != 0) or (minPrice != null or maxPrice)">        
+        <if test="(serviceType != null and serviceType.size != 0) or (minPrice != null or maxPrice != null)">        
         AND EXISTS(
             SELECT 1 
             FROM TBL_SERVICE_TYPE 
@@ -54,15 +61,16 @@
         )
         </if>
         
-        <if test="startDate != null and !''.toString eq startDate 
-         		and endDate != null and !''.toString eq endDate">                
+        <if test='startDate != null and endDate != null'>                
         AND EXISTS(
             SELECT 1 
             FROM TBL_SERVICE_CALENDAR 
             WHERE 1=1
-            AND U.USER_NO = USER_NO 
+            AND U.USER_NO = USER_NO
+            <if test='!"".toString() eq startDate and !"".toString() eq endDate'> 
             AND SERVICE_DATE BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
             		             AND TO_DATE(#{endDate},'YYYY-MM-DD')
+            </if>
         )
         </if>
         
@@ -79,10 +87,10 @@
             </foreach>
         )
         </if>        
-        <if test="addrSido != null and !''.toString eq addrSido 
-        	  and addrSigugun != null and !''.toString eq addrSigugun
-        	  and addrDong != null and !''.toString eq addrDong ">
-        AND REPLACE(U.USER_ADDRESS,' ','') LIKE REPLACE(#{addrSido}||#{addrSigugun}||#{addrDong},' ','')||'%'
+        <if test='addrSidoNm != null and !"" eq addrSidoNm
+        	  and addrSigugunNm != null and !"" eq addrSigugunNm
+        	  and addrDongNm != null and !"" eq addrDongNm'>
+        AND REPLACE(U.USER_ADDRESS,' ','') LIKE REPLACE(#{addrSidoNm}||#{addrSigugunNm}||#{addrDongNm},' ','')||'%'
         </if>
 	</select>
 	

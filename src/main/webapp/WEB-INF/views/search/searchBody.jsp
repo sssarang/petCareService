@@ -24,9 +24,11 @@ pageEncoding="UTF-8"%>
             <form id="searchForm">
                 <div class="form-group">
                     <p>Pet Type</p>
-                    <input type="radio" id="dog" name="petType" value="dog"">
+                    <input type="radio" id="dog" name="petType" value="dog"
+                    	    <c:if test='${filter.petType eq "dog"}'>checked</c:if>>
                     <label for="dog">&nbsp;강아지</label>
-                    <input type="radio" id="cat" name="petType" value="4"">
+                    <input type="radio" id="cat" name="petType" value="4"
+                    		<c:if test='${filter.petType eq "4"}'>checked</c:if>>
                     <label for="cat">&nbsp;고양이</label>
                 </div>
                  
@@ -34,10 +36,33 @@ pageEncoding="UTF-8"%>
                      <div class="btn-toggle">
                          <input type="radio" id="small" name="dogType" value="3" checked><label for="small">소형견</label>
                          <input type="radio" id="middle" name="dogType" value="2"><label for="middle">중형견</label>
-                         <input type="radio" id="large" name="dogType" value="1"><label for="large">대형견</label>
+                         <input type="radio" id="large" name="dogType" value="1" ><label for="large">대형견</label>
                      </div>
                  </div>     
                  
+                 <hr>
+                 
+                 <div class="form-group">
+                     <p>Service Location</p>
+                     <ul>
+                     <li>시/도 : 
+                     	<select id="sido" title="시/도선택" name="addrSidoList">
+                        	<option value="">::시/도::</option>
+                        </select>
+                     <input type="hidden" id="addrSido" name="addrSido" value="">   
+                     <li class="sigugunException" >시/군/구 : 
+                     	<select id="sigugun" class="sigugunException" title="시/군/구선택" name="addrSigugunList">
+                        	<option value="">::시/군/구::</option>
+                     	</select>
+                     	<input type="hidden" id="addrSigugun" name="addrSigugun" value="">
+                     <li>읍/면/동 : 
+                     	<select id="dong" title="읍/면/동선택" name="addrDongList">
+                        	<option value="">::읍/면/동::</option>
+                     	</select>
+                     	<input type="hidden" id="addrDong" name="addrDong" value="">
+                     </ul>
+                 </div>
+
                  <hr>
                  
                  <div class="form-group">
@@ -50,37 +75,11 @@ pageEncoding="UTF-8"%>
 
                  <hr>
 
-                 <div class="form-group">
-                     <p>Service Location</p>
-                     <ul>
-                     <li>시/도 : 
-                     	<select id="sido" title="시/도선택" name="addrSidoList">
-                        	<option value="">::시/도::</option>
-                        </select>
-                     <input type = "hidden" id = "addrSido" name = "addrSido" value="">   
-                     <li class="sigugunException" >시/군/구 : 
-                     	<select id="sigugun" class="sigugunException" title="시/군/구선택" name="addrSigugunList">
-                        	<option value="">::시/군/구::</option>
-                     	</select>
-                     	<input type = "hidden" id = "addrSigugun" name = "addrSigugun" value = "">
-                     <li>읍/면/동 : 
-                     	<select id="dong" title="읍/면/동선택" name="addrDongList">
-                        	<option value="">::읍/면/동::</option>
-                     	</select>
-                     	<input type = "hidden" id = "addrDong" name = "addrDong" value="">
-                     </ul>
-                 </div>
-
-                 <hr>
-
-                 <div class="form-group">
+				 <div class="form-group">
                      <p>Service Date</p>
                      <span>
-                         <p/> 시작일 : <input type="text" class="selector" name="startDate" placeholder="Start" /> 
-						 <a class="input-button" title="toggle" data-toggle><i class="icon-calendar"></i></a>
-                         
-                         <p/> 종료일 : <input type="text" class="selector" name="endDate" placeholder="End" /> 
-						 <a class="input-button" title="toggle" data-toggle><i class="icon-calendar"></i></a>
+                         <p/> 시작일 : <input type="text" class="flatpickr" data-id="rangePlugin" name="startDate" placeholder="Start" value="${filter.startDate}" readonly="readonly"/>
+                         <p/> 종료일 : <input type="text" class="flatpickr" id="secondRangeInput" name="endDate" placeholder="End" value="${filter.endDate}" readonly="readonly"/> 
                      </span>
                  </div>
 
@@ -90,8 +89,8 @@ pageEncoding="UTF-8"%>
                      <p>Service Cost(1Day)</p>  
                      
                      <span>
-                         <input type="number" name="minPrice" value="1000" min="1000" max="500000" />&nbsp;&nbsp;-&nbsp;&nbsp;
-                         <input type="number" name="maxPrice" value="500000" min="1000" max="500000" />
+                         <input id="cost" type="number" name="minPrice" value="" min="1000" max="500000" placeholder="최소"/>&nbsp;원&nbsp;&nbsp;-&nbsp;&nbsp;
+                         <input id="cost" type="number" name="maxPrice" value="" min="1000" max="500000" placeholder="최대"/>&nbsp;원
                      </span>
                      <br>
                      
@@ -171,7 +170,7 @@ pageEncoding="UTF-8"%>
      <!-------------펫시터프로필----------------->
 
      <div class="profile">
-        <div class="profile_close" id = "profileClose"><a href="">close</a></div>
+        <div class="profile_close" id="profileClose"><a href="">close</a></div>
         
         <div id="profile_wrap">
         	<h1>프로필</h1>
@@ -224,7 +223,20 @@ pageEncoding="UTF-8"%>
  <!----------------- script --------------------->
  
  <script>
- 
+	<!----------금액에 콤마 찍기-------------->
+ 	const input = document.querySelector('#cost');
+ 	input.addEventListener('keyup', function(e){
+ 		let value = e.target.value;
+     	value = Number(value.replaceAll(',', ''));
+     	
+     	if(isNaN(value)) {         //NaN인지 판별
+     		input.value = 0;   
+     	} else {                   //NaN이 아닌 경우
+     	    const formatValue = value.toLocaleString('ko-KR');
+     	    input.value = formatValue;
+     	}
+ 	})
+	
 	<!----------해당 id의 value로 주소 name 가져오기-------------->
 	
 	$("#sido").change(function(){
@@ -276,7 +288,6 @@ pageEncoding="UTF-8"%>
 	        	
 	        	//html에 strHtml 내용 추가 --> 리스트 생성
 	        	$("#psTable").html(strHtml);
-	        	console.log(list);
 	        	
 	        	//map API 호출+출력
 	        	displayPlaces(list);	
@@ -287,27 +298,10 @@ pageEncoding="UTF-8"%>
 	document.getElementById("searchBtn").addEventListener("click", fnSearch);
 
 	
-	<!-------------강아지타입 선택필터 생성----------------->
-	
-	function fnDogTypeOn(){
-    	$('.btn-toggle').show();		
-//		document.querySelector('.btn-toggle').style.display ='block';
-
-	} //fnDogTypeOn
-
-	function fnDogTypeOff(){
-    	$('.btn-toggle').hide();    	
-//		document.querySelector('.btn-toggle').style.display ='none';
-
-	} //fnDogTypeOff
-
-	document.getElementById("dog").addEventListener("click", fnDogTypeOn);
-	document.getElementById("cat").addEventListener("click", fnDogTypeOff);
-	
 	<!-------------선택된 펫시터프로필 생성----------------->
 	
 	function fnProfileOn(){
-    	$('.profile').show();
+		$('.profile').show();
 //		document.querySelector('.profile').style.display ='block';
 	} //fnProfileOn
 

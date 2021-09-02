@@ -1,5 +1,9 @@
-$(".selector").flatpickr({ 
-	dateFormat: "Y-m-d",
+const config = {
+	"plugins": [new rangePlugin({ input: "#secondRangeInput"})],
+	// 현재 날짜부터 시작
 	minDate:"today",
-	maxDate: new Date().fp_incr(30)
-});
+	// 현재로부터 3개월까지 활성화
+	maxDate: new Date().fp_incr(90)
+  };
+
+flatpickr('.flatpickr', config);
