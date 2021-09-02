@@ -30,6 +30,7 @@ public class HomeController {
 	public String home() {
 		log.debug("homepage() invoked.");
 		
+
 		return "home/home";
 	} //homepage
 	

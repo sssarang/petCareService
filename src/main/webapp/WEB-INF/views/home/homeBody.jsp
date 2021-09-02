@@ -20,7 +20,7 @@
                         <h2 class="mb-5">펫시터를 찾아보세요!</h2>
                     </div>
                     <div class="wrap">
-                        <form class="" action="/search/" method="GET">
+                        <form action="/search/main" method="GET">
                         	<!-- 동물 유형 선택 -->
                             <fieldset>
                                 I'm looking for service for my: &nbsp;&nbsp;
@@ -30,53 +30,55 @@
                             </fieldset>
                         
                             <hr>
-
-                            <input type="hidden" value="dog" name="pet_type"/>
                         
                             <fieldset>
-                                <div class="pt-2">서비스 선택</div>
+                                <div class="pt-2">Service Type</div>
                                 <div class="input-group">
                                     <div class="select">
-                                        <input type="checkbox" id="visit-All-day" value="visit-All-day" />
+                                        <input type="checkbox" id="visit-All-day" name="serviceType" value="13" />
                                         <label for="visit-All-day">방문<br>All day</label>
                                     </div>
 
                                     <div class="select">
-                                        <input type="checkbox" id="visit-Half-day" value="visit-Half-day" />
+                                        <input type="checkbox" id="visit-Half-day" name="serviceType" value="14" />
                                         <label for="visit-Half-day">방문<br>Half day</label>
                                     </div>
 
                                     <div class="select">
-                                        <input type="checkbox" id="leave-All-day" value="leave-All-day" />
+                                        <input type="checkbox" id="leave-All-day" name="serviceType" value="11" />
                                         <label for="leave-All-day">맡김<br>All day</label>
                                     </div>
 
                                     <div class="select">
-                                        <input type="checkbox" id="leave-Half-day" value="leave-Half-day" />
-                                        <label for="leave-Half-day"">맡김<br>Half day</label>
+                                        <input type="checkbox" id="leave-Half-day" name="serviceType" value="12" />
+                                        <label for="leave-Half-day">맡김<br>Half day</label>
                                     </div>
                                 </div>
                             </fieldset>
 
                             <fieldset>
-                                <div class="pt-2 d-inline-block">
-                                    <div>돌봄날짜</div>
-                                    <spen><input type="text" class="selector" placeholder="시작일" /></spen>
-                                    <span>&nbsp;~&nbsp;</span> 
-                                    <spen><input type="text" class="selector" placeholder="종료일" /></spen> 
-                                    <!-- <a class="input-button" title="toggle" data-toggle><i class="icon-calendar"></i></a> -->
-                                </div>  
+	                            <div style="display: flex;">
+								  	<p>
+									    <span>Service Date</span>
+									    <br>
+									    <input class="flatpickr" data-id="rangePlugin" type="text" placeholder="Select Date.." name="startDate" readonly="readonly">
+								  	</p>
+								  	<p>
+									    <br>
+									    <input class="flatpickr" id="secondRangeInput" type="text" placeholder="Select Date.." name="endDate" readonly="readonly">
+								  	</p>
+								</div>
 
                                 <div class="pt-2 pb-2">
-                                    <div>주소</div> 
-                                    <select id="sido">
-                                        <option value="">선택</option>
+                                    <div>Service Location</div> 
+                                    <select id="sido" name="addrSido">
+                                        <option value="">::시/도::</option>
                                     </select>
-                                    <select id="sigugun">
-                                        <option value="">선택</option>
+                                    <select id="sigugun" name="addrSigugun">
+                                        <option value="">::시/군/구::</option>
                                     </select>
-                                    <select id="dong">
-                                        <option value="">선택</option>
+                                    <select id="dong" name="addrDong">
+                                        <option value="">::읍/면/동:</option>
                                     </select>
                                 </div>
                             </fieldset>
@@ -87,24 +89,24 @@
                                     
                                     <div class="input-group">
                                         <div class="select">
-                                            <input type="radio" id="small" name="dogType" value="small" >
+                                            <input type="radio" id="small" name="dogType" value="3" >
                                             <label for="small">소형견<br>7kg 미만</label>
                                         </div>
 
                                         <div class="select">
-                                            <input type="radio" id="medium" name="dogType" value="medium" />
+                                            <input type="radio" id="medium" name="dogType" value="2" />
                                             <label for="medium">중형견<br>7 - 14.9kg</label>
                                         </div>
 
                                         <div class="select">
-                                            <input type="radio" id="large" name="dogType" value="large" />
+                                            <input type="radio" id="large" name="dogType" value="1" />
                                             <label for="large">대형견<br>15kg 이상</label>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div>
-                                    <button type="button" id="searchBtn" >검색</button>
+                                    <button type="submit" id="searchBtn" >검색</button>
                                 </div>
                             </fieldset>
                         </form>
