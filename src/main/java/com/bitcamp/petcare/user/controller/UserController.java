@@ -1,9 +1,13 @@
 package com.bitcamp.petcare.user.controller;
 
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bitcamp.petcare.user.domain.UserDTO;
 import com.bitcamp.petcare.user.domain.UserVO;
 import com.bitcamp.petcare.user.service.UserService;
+import com.bitcamp.petcare.user.utils.ScriptUtils;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,11 +39,13 @@ public class UserController {
 	@Setter(onMethod_=@Autowired)
 	private UserService service;
 	
+	private static final String loginKey = "__LOGIN__";
 	Double x;			//경도
 	Double y;			//위도
 	char classify;	//회원 구분
 	
 	//view controller 매핑
+	//회원가입
 	@PostMapping("join")
 	public String joinUser(UserDTO dto, RedirectAttributes rttr) {
 		log.debug("joinUser({}) invoked", dto);
@@ -56,18 +63,72 @@ public class UserController {
 	}//joinUser
 	
 	//view controller 매핑
+	//로그인
 	@PostMapping("login")
-	public String loginUser(UserDTO dto) {
+	public String loginUser(UserDTO dto, Model model, HttpSession session, HttpServletRequest req, HttpServletResponse res) throws Exception {
 		log.debug("loginUser({}) invoked", dto);
 
-		
+		//==============================================================//
+		//1. 전송파라미터에 해당되는 사용자가 있는지 확인
+		//==============================================================//
 		UserVO user = service.loginUser(dto);
 		if(user != null) {
+			model.addAttribute(UserController.loginKey, user);
+			
+			if(dto.isRememberMe()) {
+				int maxAge = 1000 * 60 * 60 * 24 * 7;		//일주일(7일)
+				
+				String userId = dto.getUserId();
+//				String rememberMe = session.getId();
+				
+				Date rememberMeMaxAge = new Date(System.currentTimeMillis() + maxAge);
+				
+				//사용자 테이블에 해당 사용자의 rememberMe 관련 2개 컬럼 업데이트 수행
+				UserDTO rememberUpdate = new UserDTO();
+				rememberUpdate.setUserId(userId);
+				rememberUpdate.setRemember(session.getId());
+				rememberUpdate.setRememberAge(rememberMeMaxAge);
+				
+				int affectedLines = this.service.modifyUserWithRememberMe(rememberUpdate);
+				log.info("\t + affectedLines : {}", affectedLines);
+			} //if : Remember-Me 옵션이 on일 때....
+			
 			return "redirect:/";
-		}//if
-		
-		return "user/loginPage";
+		} else {
+			//로그인 실패시
+			try {
+				ScriptUtils.alert(res, "회원정보가 잘못되었습니다. 다시 입력하세요.");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "user/loginPage";			
+		}//if-else
 	}//loginUser
+	
+//	@ResponseStatus(code=HttpStatus.OK)
+	//로그아웃
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		log.debug("logout({}) invoked", session.getId());
+		
+		//================================================================//
+		// 1. 로그아웃을 수행한 사용자 정보를 출력
+		//================================================================//
+		UserVO user = (UserVO) session.getAttribute(loginKey);
+		log.info("\t + user : {}", user);
+		
+		//================================================================//
+		// 2. 세션 객체 무효화
+		//================================================================//
+		session.invalidate();		//현재의 세션을 무효화시킴
+		log.debug("\t + Session destroyed");
+		
+		//================================================================//
+		// N. 다시 로그인 창으로 이동
+		//================================================================//
+		
+		return "redirect:/";
+	}//logout
 	
 	//이메일로 인증번호 전송
 	@RequestMapping(value="authDo", method=RequestMethod.POST)

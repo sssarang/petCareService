@@ -61,16 +61,26 @@ public class UserServiceImpl implements UserService {
 		
 		UserVO user = this.mapper.loginUser(dto);
 		
-		try {
-			if(login(dto, user)) {
-				return user;
-			} else {
-				return null;
-			}//if-else
+		if(user == null) {
+			//존재하지 않는 아이디인 경우
+			log.info("아이디가 존재하지 않습니다.");
+			return null;
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}//try-catch
+		} else { 
+			//아이디가 존재하는경우 비밀번호 검사
+			try {
+				if(login(dto, user)) {
+					//아이디와 비밀번호가 일치하는 경우
+					return user;
+				} else {
+					//비밀번호가 틀린경우
+					return null;
+				}//if-else
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}//try-catch
+		}//if-else
 		
 		return null;
 	}//loginUser
@@ -107,12 +117,13 @@ public class UserServiceImpl implements UserService {
 		}
 	}//chekNickName
 	
+	//로그인시 암호화된 비밀번호 바교
 	public boolean login(UserDTO dto, UserVO vo) throws Exception {
 		log.debug("login() invoked");
 		
 	    log.info("\t + 로그인 시도 비밀번호 : {}", dto.getUserPw());
 	    
-	    String voPw = vo.getUser_pw();
+	    String voPw = vo.getUserPw();
 	    log.info("\t + 저장된 비밀번호 : {}", voPw);
 	    
 	    if(encoder.matches(dto.getUserPw(), voPw)) {
@@ -124,6 +135,7 @@ public class UserServiceImpl implements UserService {
 	    }//if-else
 	}//login
 	
+	//비밀번호 변경
 	@Override
 	public int changePw(UserDTO dto) {
 		log.debug("changePw({}) invoked", dto);
@@ -140,6 +152,28 @@ public class UserServiceImpl implements UserService {
 		
 		return result;
 	}//changePw
+	
+	@Override
+	public int modifyUserWithRememberMe(UserDTO dto) throws Exception {
+		log.debug("modifyUserWithRememberMe({}, {}, {}) invoked", dto.getUserId(), dto.getRemember(), dto.getRememberAge());
+		
+		Objects.requireNonNull(this.mapper);
+		
+		log.info("\t + dao : {}", this.mapper);
+		
+		return this.mapper.updateUserWithRememberMe(dto);
+	}//modifyUserWithRememberMe
+
+	@Override
+	public UserVO findUserByRememberMe(String rememberMe) throws Exception {
+		log.debug("findUserByRememberMe({}) invoked", rememberMe);
+		
+		Objects.requireNonNull(this.mapper);
+		
+		log.info("\t + dao : {}", this.mapper);
+		
+		return this.mapper.selectUserWithRememberMe(rememberMe);
+	}//findUserByRememberMe
 	
 	//인증키 생성
 	private String getKey(int size) {

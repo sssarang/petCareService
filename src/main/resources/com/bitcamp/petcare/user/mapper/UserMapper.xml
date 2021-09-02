@@ -6,7 +6,8 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bitcamp.petcare.user.mapper.UserMapper">
-
+	
+	<!-- 회원가입 -->
 	<insert id="joinUser">
 		INSERT INTO tbl_user
 			 (user_no, user_id, user_pw, user_nickname, user_contact, 
@@ -19,24 +20,32 @@
 			  user_no_seq.CURRVAL, sysdate)
 	</insert>
 	
+	<!-- 로그인 -->
 	<select id="loginUser" resultType="com.bitcamp.petcare.user.domain.UserVO">
-		SELECT user_id, user_pw
-		FROM tbl_user
-		WHERE user_id = #{userId}
+		SELECT 
+			user_id AS userId, 
+			user_pw AS UserPw
+		FROM 
+			tbl_user
+		WHERE 
+			user_id = #{userId}
 	</select>
 	
+	<!-- 아이디 중복확인 -->
 	<select id="checkId" resultType="String">
 		SELECT user_id
 		FROM tbl_user
 		WHERE user_id = #{userId}
 	</select> 
 	
+	<!-- 닉네임 중복확인 -->
 	<select id="checkNickName" resultType="String">
 		SELECT user_nickname
 		FROM tbl_user
 		WHERE user_nickname = #{nickName}
 	</select>
 	
+	<!-- 비밀번호 변경 -->
 	<update id="changePw">
 		UPDATE tbl_user
 		SET 
@@ -45,26 +54,24 @@
 			user_id = #{userId}
 	</update>
 	
-	<update id="deleteUser">
-		UPDATE
-    		tbl_user
-		SET
-   			 user_status =true
-   		WHERE
-   			user_no = #{userNo}
-	</update>
+	<!-- RememberMe관련 sql -->
+	<select id="selectUserWithRememberMe" resultType="com.bitcamp.petcare.user.domain.UserVO">
+		SELECT
+			user_id, user_pw, user_nickname, user_classify
+		FROM
+			tbl_user
+		WHERE 
+			remember = #{rememberMe}	
+		AND 
+			rememberage > sysdate
+	</select>
 	
-	<update id="updateUser">
-		UPDATE 
-    		tbl_user
-		SET
-		    user_pw = #{userPw}
-		    user_nickname = #{userNickname}
-		    user_contact = #{userContact}
-		    user_address = #{userAddress}
-		    mod_user_no = #{userNo}
-		    mod_date = sysdate
-		WHERE
-			user_no
+	<update id="updateUserWithRememberMe">
+		UPDATE tbl_user
+		SET	
+			remember = #{rememberMe},
+			rememberage = #{rememberMeMaxAge}
+	  WHERE 
+	  		user_id = #{userId}
 	</update>
 </mapper>

@@ -38,5 +38,23 @@
 	<view-controller path="/user/loginPage" view-name="user/loginPage" status-code="200"/>
 	<view-controller path="/user/articleCheckPage" view-name="user/articleCheckPage" status-code="200"/>
 
+	<beans:bean id="loginInterceptor" class="com.bitcamp.petcare.user.interceptor.LoginInterceptor"/>
+	
+	<beans:bean id="authInterceptor" class="com.bitcamp.petcare.user.interceptor.AuthInterceptor"/>
+	
+<!-- 	<interceptors>
+		<interceptor>
+			<mapping path="/user/*" />
+	
+			<beans:ref bean="loginInterceptor" />
+		</interceptor> 
 
+		<interceptor>
+			<mapping path="/search/*" />
+
+			<beans:ref bean="authInterceptor"/>
+			<beans:bean class="org.zerock.myapp.interceptor.AuthInterceptor"/>
+		</interceptor>
+	</interceptors> -->
+	
 </beans:beans>
