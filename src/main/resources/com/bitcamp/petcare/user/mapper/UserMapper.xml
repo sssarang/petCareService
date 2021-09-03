@@ -23,6 +23,7 @@
 	<!-- 로그인 -->
 	<select id="loginUser" resultType="com.bitcamp.petcare.user.domain.UserVO">
 		SELECT 
+			user_no AS userNo,
 			user_id AS userId, 
 			user_pw AS UserPw
 		FROM 

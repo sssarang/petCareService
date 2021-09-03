@@ -42,9 +42,9 @@
 	
 	<beans:bean id="authInterceptor" class="com.bitcamp.petcare.user.interceptor.AuthInterceptor"/>
 	
-<!-- 	<interceptors>
+	<interceptors>
 		<interceptor>
-			<mapping path="/user/*" />
+			<mapping path="/user/login" />
 	
 			<beans:ref bean="loginInterceptor" />
 		</interceptor> 
@@ -53,8 +53,8 @@
 			<mapping path="/search/*" />
 
 			<beans:ref bean="authInterceptor"/>
-			<beans:bean class="org.zerock.myapp.interceptor.AuthInterceptor"/>
+			<!-- <beans:bean class="org.zerock.myapp.interceptor.AuthInterceptor"/> -->
 		</interceptor>
-	</interceptors> -->
+	</interceptors>
 	
 </beans:beans>

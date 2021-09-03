@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.ui.ModelMap;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,14 +41,14 @@ public class LoginInterceptor
 		
 		log.info("\t + handler : {}", handler);
 		
-//		HandlerMethod handlerMethod = (HandlerMethod) handler;
-//		Object beanObj = handlerMethod.getBean();
-//		Method method = handlerMethod.getMethod();
-//		
-//		log.info("\t + handlerMethod : " + handlerMethod);
-//		log.info("\t + beanObj : " + beanObj);			//우리가 만든 컨트롤러 객체
-//		log.info("\t + method : " + method);			//우리가 만든 컨트롤러 객체의 핸들러 메소드
-//		log.info("");
+		HandlerMethod handlerMethod = (HandlerMethod) handler;
+		Object beanObj = handlerMethod.getBean();
+		Method method = handlerMethod.getMethod();
+		
+		log.info("\t + handlerMethod : " + handlerMethod);
+		log.info("\t + beanObj : " + beanObj);			//우리가 만든 컨트롤러 객체
+		log.info("\t + method : " + method);			//우리가 만든 컨트롤러 객체의 핸들러 메소드
+		log.info("");
 		
 		//사용자가 로그인 성공한 상태인지 체크 ------ x : 여기서 하면 안된다.
 		// 다른 Interceptor에서 해야만 하는일
@@ -60,6 +61,7 @@ public class LoginInterceptor
 			log.info("\t + 기존에 바인딩된 UserVO 객체를 SEssion Scope에서 삭제완료");
 		}//if
 		
+		log.info("\t + user : {}", user);
 		return true;
 	}//preHandle
 	
@@ -75,8 +77,9 @@ public class LoginInterceptor
 		
 		//Session Scope에 UserVO객체를 바인딩하는 작업수행
 		HttpSession session = request.getSession();
-		
-		UserVO user = (UserVO) modelAndView.getModelMap().get(loginKey);
+        Object user = session.getAttribute(loginKey);
+        
+//		UserVO user = (UserVO) modelAndView.getModelMap().get(LoginInterceptor.loginKey);
 		if(user != null) {	//로그인이 성공했다면
 		
 			//=============================================================//
@@ -130,14 +133,13 @@ public class LoginInterceptor
 					response.addCookie(rememberMeCookie);
 					
 					log.info("\t + rememberMeCookie : " + rememberMeKey);
-					log.info("\t + 응답문서의 헤더에 rememberMeCookie 쿠키설정 완료");
+					log.info("\t + 응답문서의 헤더에 rememberMeCookie 쿠키설정 완료");					
 				}//if
-				
 				
 			}//if-else
 		} else {	//로그인에 실패했다면
 			//postHandle 메소드가 수행되는 지점과 시점을 잘 기억해야함
-			response.sendRedirect("/user/loginPage");
+//			response.sendRedirect("/user/loginPage");
 			
 			log.info("\t + 1. 로그인 실패 - 다시 로그인 창으로 되돌림");
 		}//if-else

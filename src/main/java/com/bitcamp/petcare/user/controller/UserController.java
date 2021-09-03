@@ -39,7 +39,7 @@ public class UserController {
 	@Setter(onMethod_=@Autowired)
 	private UserService service;
 	
-	private static final String loginKey = "__LOGIN__";
+	public static final String loginKey = "__LOGIN__";
 	Double x;			//경도
 	Double y;			//위도
 	char classify;	//회원 구분
@@ -67,13 +67,21 @@ public class UserController {
 	@PostMapping("login")
 	public String loginUser(UserDTO dto, Model model, HttpSession session, HttpServletRequest req, HttpServletResponse res) throws Exception {
 		log.debug("loginUser({}) invoked", dto);
+		StringBuilder to = new StringBuilder("redirect:");
 
 		//==============================================================//
 		//1. 전송파라미터에 해당되는 사용자가 있는지 확인
 		//==============================================================//
 		UserVO user = service.loginUser(dto);
+		log.info("\t + user : {}", user);
+		
 		if(user != null) {
 			model.addAttribute(UserController.loginKey, user);
+			log.info("\t + model : {}", model);
+			
+			//model에 넣은 user객체가 interceptor의 modelandview에 담기지않아 controller에서 처리함
+			session.setAttribute(loginKey, user);
+			log.info("\t + 1. UserVO 객체를 Session Scope에 바인딩 완료");
 			
 			if(dto.isRememberMe()) {
 				int maxAge = 1000 * 60 * 60 * 24 * 7;		//일주일(7일)
@@ -91,18 +99,21 @@ public class UserController {
 				
 				int affectedLines = this.service.modifyUserWithRememberMe(rememberUpdate);
 				log.info("\t + affectedLines : {}", affectedLines);
-			} //if : Remember-Me 옵션이 on일 때....
+			} //if : Remember-Me 옵션이 on일 때..
 			
-			return "redirect:/";
-		} else {
+			to.append("/");
+		} 
+		else {
 			//로그인 실패시
-			try {
-				ScriptUtils.alert(res, "회원정보가 잘못되었습니다. 다시 입력하세요.");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return "user/loginPage";			
+//			try {
+//				ScriptUtils.alert(res, "회원정보가 잘못되었습니다. 다시 입력하세요.");
+//				
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}		
+			to.append("/user/loginPage");
 		}//if-else
+		return to.toString();
 	}//loginUser
 	
 //	@ResponseStatus(code=HttpStatus.OK)

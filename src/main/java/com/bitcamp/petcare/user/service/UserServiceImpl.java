@@ -72,10 +72,7 @@ public class UserServiceImpl implements UserService {
 				if(login(dto, user)) {
 					//아이디와 비밀번호가 일치하는 경우
 					return user;
-				} else {
-					//비밀번호가 틀린경우
-					return null;
-				}//if-else
+				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
