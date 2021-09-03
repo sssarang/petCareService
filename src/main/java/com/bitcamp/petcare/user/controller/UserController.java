@@ -44,6 +44,11 @@ public class UserController {
 	Double y;			//위도
 	char classify;	//회원 구분
 	
+	@GetMapping("temp")
+	public void temp() {
+		;;
+	}
+	
 	//view controller 매핑
 	//회원가입
 	@PostMapping("join")

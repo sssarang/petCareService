@@ -50,10 +50,9 @@
 		</interceptor> 
 
 		<interceptor>
-			<mapping path="/search/*" />
+			<mapping path="/user/temp" />
 
 			<beans:ref bean="authInterceptor"/>
-			<!-- <beans:bean class="org.zerock.myapp.interceptor.AuthInterceptor"/> -->
 		</interceptor>
 	</interceptors>
 	
