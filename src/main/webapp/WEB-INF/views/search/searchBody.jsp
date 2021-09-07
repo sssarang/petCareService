@@ -10,7 +10,8 @@ pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/resources/css/search/search.css" />
 <!-- Font-family-->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
- 
+<!-- 프로필 : 활동사진 -->
+<link rel="stylesheet" href="/resources/css/search/swiper.css" > 
  
  <!----------------- 전체 div ----------------->
  <div id="wrapper">
@@ -21,7 +22,7 @@ pageEncoding="UTF-8"%>
          
             <div class="title"><span>상세조건선택</span></div>
 
-            <form id="searchForm">
+            <form id="searchForm" onsubmit="return check();">
                 <div class="form-group">
                     <p>Pet Type</p>
                     <input type="radio" id="dog" name="petType" value="dog"
@@ -46,20 +47,20 @@ pageEncoding="UTF-8"%>
                      <p>Service Location</p>
                      <ul>
                      <li>시/도 : 
-                     	<select id="sido" title="시/도선택" name="addrSidoList">
+                     	<select id="sido" title="시/도선택" name="addrSido">
                         	<option value="">::시/도::</option>
                         </select>
-                     <input type="hidden" id="addrSido" name="addrSido" value="">   
+                     <input type="hidden" id="addrSido" name="addrSidoNm" value="${filter.addrSidoNm}">   
                      <li class="sigugunException" >시/군/구 : 
-                     	<select id="sigugun" class="sigugunException" title="시/군/구선택" name="addrSigugunList">
+                     	<select id="sigugun" class="sigugunException" title="시/군/구선택" name="addrSigugun">
                         	<option value="">::시/군/구::</option>
                      	</select>
-                     	<input type="hidden" id="addrSigugun" name="addrSigugun" value="">
+                     	<input type="hidden" id="addrSigugun" name="addrSigugunNm" value="${filter.addrSigugunNm}">
                      <li>읍/면/동 : 
-                     	<select id="dong" title="읍/면/동선택" name="addrDongList">
+                     	<select id="dong" title="읍/면/동선택" name="addrDong">
                         	<option value="">::읍/면/동::</option>
                      	</select>
-                     	<input type="hidden" id="addrDong" name="addrDong" value="">
+                     	<input type="hidden" id="addrDong" name="addrDongNm" value="${filter.addrDongNm}">
                      </ul>
                  </div>
 
@@ -67,8 +68,8 @@ pageEncoding="UTF-8"%>
                  
                  <div class="form-group">
                      <p>Service Type</p>
-                     <input id="careAll" type="checkbox" name="serviceType" value="11"><label for="careAll">&nbsp; 돌봄(All Day)</label><br>
-                     <input id="careHalf" type="checkbox" name="serviceType" value="12"><label for="careHalf">&nbsp; 돌봄(Half Day)</label><br>
+                     <input id="careAll" type="checkbox" name="serviceType" value="11"><label for="careAll">&nbsp; 맡김(All Day)</label><br>
+                     <input id="careHalf" type="checkbox" name="serviceType" value="12"><label for="careHalf">&nbsp; 맡김(Half Day)</label><br>
                      <input id="visitAll" type="checkbox" name="serviceType" value="13"><label for="visitAll">&nbsp; 방문(All Day)</label><br>
                      <input id="visitHalf" type="checkbox" name="serviceType" value="14"><label for="visitHalf">&nbsp; 방문(Half Day)</label><br>
                  </div>
@@ -89,8 +90,8 @@ pageEncoding="UTF-8"%>
                      <p>Service Cost(1Day)</p>  
                      
                      <span>
-                         <input id="cost" type="number" name="minPrice" value="" min="1000" max="500000" placeholder="최소"/>&nbsp;원&nbsp;&nbsp;-&nbsp;&nbsp;
-                         <input id="cost" type="number" name="maxPrice" value="" min="1000" max="500000" placeholder="최대"/>&nbsp;원
+                         <input id="min" type="number" name="minPrice" value="${filter.minPrice}" min="1000" max="500000" placeholder="최소"/>&nbsp;원&nbsp;&nbsp;-&nbsp;&nbsp;
+                         <input id="max" type="number" name="maxPrice" value="${filter.maxPrice}" min="1000" max="500000" placeholder="최대"/>&nbsp;원
                      </span>
                      <br>
                      
@@ -118,11 +119,13 @@ pageEncoding="UTF-8"%>
                              </p>
                          </div>
                  </div>
+                 
+                 <div class="form-group">
+                     <input type="submit" id="searchBtn" value="검색">
+            	 </div>
 
              </form>
-             <div class="form-group">
-                     <input type="button" id="searchBtn" class="btn btn-primary py-3 px-5">
-             </div>
+             
          </div>
      </aside>
      
@@ -141,7 +144,8 @@ pageEncoding="UTF-8"%>
 		                    <c:forEach items="${list}" var="ps">
 		                          <tr>
 		                              <td rowspan="3" class="line">사진 ${ps.proPhoto}
-		                              <input type="button" class="profileBtn" onclick="fnProfileOn()" name="detail" value="프로필보기">
+		                              <input type="hidden" class="userNo" name="userNo" value="${ps.userNo}">
+		                              <input type="button" class="profileBtn" onclick="fnProfileOn(${ps.userNo})" name="detail" value="프로필보기">
 		                              </td>
 		                              <td class="line">이 름 : ${ps.userNickname}</td>
 		                          </tr>
@@ -181,15 +185,15 @@ pageEncoding="UTF-8"%>
 					    <img id="photo" src="">
 					</div>
 	        		<div id="psInfo" class="flex_item">
-	        			<h4>닉네임 : </h4>
+	        			<h4>닉네임 : ${ps.userNickname}</h4>
 	        			<hr>
 	        			<h4>평 점 : </h4>
 	        			<hr>
-	        			<h4>지 역 : </h4>
+	        			<h4>지 역 : ${ps.userAddress}</h4>
 	        			<hr>
-	        			<h4>소개글 : </h4>
+	        			<h4>소개글 : ${ps.introduce}</h4>
 		        		<hr>
-		        		<input type="button" name="matching" value="matching">        			
+		        		<input type="button" onclick="fnMatchingOn(${ps.userNo})" name="matching" value="matching">        			
 	        		</div>
 	        	</div>
 			</header>
@@ -197,15 +201,41 @@ pageEncoding="UTF-8"%>
 			<div id="profile_content">
 				<aside id="profile_side">
 					<div id="serviceInfo" class="flex_item">
-	        			서비스 정보
+	        			서비스 종료 : ${serviceType.serviceTypeCode}<br>
+	        			서비스 비용 : ${serviceType.price}<br>
+	        			이용가능 날짜 : <br>
+	        			이용가능 반려동물 : <br>
+	        			
 	        		</div>
 				</aside>
 	        	
 	        	<section id="profile_body">
-	        		
-	        		<div id="active_photo" class="flex_item">
-	        			활동사진
+	        		<div class="active_photo">
+        				<div class="inWrap">
+							<div class="fInner swiper-container">
+								<ul class="swiper-wrapper">
+									<li class="swiper-slide"><a href="#"></a></li>
+									<li class="swiper-slide"><a href="#"></a></li>
+									<li class="swiper-slide"><a href="#"></a></li>
+									<li class="swiper-slide"><a href="#"></a></li>
+									<li class="swiper-slide"><a href="#"></a></li>
+									<li class="swiper-slide"><a href="#"></a></li>
+									<li class="swiper-slide"><a href="#"></a></li>
+									<li class="swiper-slide"><a href="#"></a></li>
+									<li class="swiper-slide"><a href="#"></a></li>
+									<li class="swiper-slide"><a href="#"></a></li>
+								</ul>
+								<!-- Add Pagination -->
+								<div class="swiper-pagination"></div>
+							</div>
+			
+							<div class="button">
+								<div class="back"><a href="#"><span class="hidden">back</span></a></div>
+								<div class="next"><a href="#"><span class="hidden">next</span></a></div>
+							</div>
+						</div>
 	        		</div>
+	        		
 	        		<div id="review-list" class="flex_item">
 	        			리뷰목록
 	        		</div>
@@ -218,101 +248,5 @@ pageEncoding="UTF-8"%>
 
  <!----------------- float 해제----------------->
  <div id="clear"></div>    
-
-
- <!----------------- script --------------------->
  
- <script>
-	<!----------금액에 콤마 찍기-------------->
- 	const input = document.querySelector('#cost');
- 	input.addEventListener('keyup', function(e){
- 		let value = e.target.value;
-     	value = Number(value.replaceAll(',', ''));
-     	
-     	if(isNaN(value)) {         //NaN인지 판별
-     		input.value = 0;   
-     	} else {                   //NaN이 아닌 경우
-     	    const formatValue = value.toLocaleString('ko-KR');
-     	    input.value = formatValue;
-     	}
- 	})
-	
-	<!----------해당 id의 value로 주소 name 가져오기-------------->
-	
-	$("#sido").change(function(){
-		var selectVal  = $("#sido option:selected").text();
-		
-		$("#addrSido").val(selectVal);
-	})
-	
-	$("#sigugun").change(function(){
-		var selectVal  = $("#sigugun option:selected").text();
-		
-		$("#addrSigugun").val(selectVal);
-	})
-	
-	$("#dong").change(function(){
-		var selectVal  = $("#dong option:selected").text();
-		
-		$("#addrDong").val(selectVal);
-	})
-
-	
-	
-	<!-------------필터조건에 따른 리스트 생성----------------->
-	
-	function fnSearch(){
-		$.ajax({
-	          url:"/search/searchList"
-	        , method : 'POST'
-	        , data : $("form").serialize() 
-	        , success :  function(result){
-	        	//프로필창 닫기
-	        	fnProfileOff();
-	        	
-	        	var list = result.list;
-	        	var strHtml = "";
-	        	$.each(list, function(i){
-	        		strHtml += "<tr>";
-	        		strHtml += "<td rowspan='3' class='line'>사진"+ list[i].proPhoto;
-	        		strHtml += "<input type='button' class='profileBtn' onclick='fnProfileOn()' name='detail' value='프로필보기'></td>";
-	        		strHtml += "<td class='line'>이 름 :"+ list[i].userNickname+"</td>";
-	        		strHtml += "</tr>";
-	        		strHtml += "<tr>";
-	        		strHtml += "<td class='line'>평점 :"+"5.0(★★★★★)"+"</td>";
-	        		strHtml += "</tr>";
-	        		strHtml += "<tr>";
-	        		strHtml += "<td class='line'>지역 :"+list[i].userAddress+"</td>";
-	        		strHtml += "</tr>";
-	        	})
-	        	
-	        	//html에 strHtml 내용 추가 --> 리스트 생성
-	        	$("#psTable").html(strHtml);
-	        	
-	        	//map API 호출+출력
-	        	displayPlaces(list);	
-	        }
-	    })	
-	} //fnSearch
-
-	document.getElementById("searchBtn").addEventListener("click", fnSearch);
-
-	
-	<!-------------선택된 펫시터프로필 생성----------------->
-	
-	function fnProfileOn(){
-		$('.profile').show();
-//		document.querySelector('.profile').style.display ='block';
-	} //fnProfileOn
-
-	function fnProfileOff(){
-    	$('.profile').hide();    			
-//		document.querySelector('.profile').style.display ='none';
-	} //fnProfileOff
-
-	document.getElementById("profileClose").addEventListener("click", fnProfileOff);
-	
-
-    
- 	
- </script>
+ 

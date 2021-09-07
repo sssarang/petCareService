@@ -29,10 +29,8 @@
 		<!-- flatpickr -->
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/rangePlugin.js"></script>
 		
-		<!-- address.js-->
-		<script src="/resources/js/common/address.js" type="application/javascript"></script>
-     
 		
 	</head>
 	
@@ -52,22 +50,85 @@
 	    <!-- * *                               SB Forms JS                               * *-->
 	    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
 	    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-	    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 					
-		<!-- 달력폼 -->
+		<!-- 기본 js -->
+		<script src="/resources/js/search/search.js"></script>						     
+
+		<!-- 달력 js -->
 		<script src="/resources/js/search/flatpickr.js"></script>						     
 
-	    <!-- map API(App-key 포함) -->
+		<!-- address.js-->
+		<script src="/resources/js/common/address.js" type="application/javascript"></script>
+
+	    <!-- map(App-key 포함) js -->
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services&libraries=clusterer"></script>
 		<script src="/resources/js/search/map.js"></script>
-		
+		     	
+     	<!-- 프로필 활동사진 -->
+		<script src="/resources/js/search/swiper.js"></script>
+
 		<script>
 		
-		 <!-- get방식으로 받은 데이터 바탕으로 리스트 출력 -->
+		
 		 $(function(){
             console.log('jq started.')
-			//document.getElementsByClassName("profile_close").addEventListener("click", fnProfileOff);
-			var list = new Array();
+            
+            <!-- ================================ -->
+			<!-- 1. 쿼리스트링으로 받은 데이터 조작         -->
+            <!-- ================================ -->
+            //petType, serviceDate는 form태그에 추가
+
+            //dogType
+            if($("input[type='radio'][name='petType'][value='dog']").is(":checked")){
+            	$('.btn-toggle').show();
+            	$("input[type='radio'][name='dogType'][value='${filter.dogType}']").attr("checked", true);
+            	
+            	console.log(${filter.dogType});
+            } //if
+            
+            //serviceLocation
+            console.log(${filter.addrSido});
+            console.log(${filter.addrSigugun});
+            console.log(${filter.addrDong});
+
+            //1. ${filter.addrSido} 선택
+            if(${filter.addrSido} != null){
+	            $("select[id='sido'] > option[value='${filter.addrSido}']").attr("selected", true);
+    	        $("#sido").prop('selected',true).change();
+            }
+            
+          	//2. ${filter.addrSigugun} 선택
+          	if(${filter.addrSigugun} != null){
+	            $("select[id='sigugun'] > option[value='${filter.addrSigugun}']").attr("selected", true);
+	            $("#sigugun").prop('selected',true).change();
+          	}
+          	
+          	//3. ${filter.addrDong} 선택
+            if(${filter.addrDong} != null){
+            	$("select[id='dong'] > option[value='${filter.addrDong}']").attr("selected", true);
+            }
+   
+        
+            //serviceType
+            <c:forEach items="${filter.serviceType}" var="item">
+				$("input[type='checkbox'][name='serviceType'][value='${item}']").attr("checked", true);        
+				console.log(${item});
+			</c:forEach>
+			
+			
+			//skillType
+            <c:forEach items="${filter.skillType}" var="item">
+				$("input[type='checkbox'][name='skillType'][value='${item}']").attr("checked", true);        
+				console.log(${item});
+			</c:forEach>
+            
+			
+            
+            <!-- ================================ -->
+			<!-- 2. 필터검색에 따른 리스트 생성           -->
+            <!-- ================================ -->  
+            
+            var list = new Array();
 			 
 			<c:forEach items="${list}" var="item">
 				var jsonObject = new Object(); 

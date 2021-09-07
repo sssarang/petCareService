@@ -198,6 +198,7 @@ hr {
 
 .btn-toggle input[type=radio] + label{
     display: inline-block;
+    cursor: pointer;
 
     width: 30%;
     height: 40px;
@@ -234,11 +235,25 @@ hr {
 	margin-bottom:5px;
 }	
 
-.form-group > input[type=button]{
-	align-items: right;
+#searchBtn {
+  float: right;
+  margin: 2%;
+  width: 55%;
+  height: 50px;
+  border: 0;
+  border-radius: 50% 20% / 10% 40%;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: white;
+  background-color:#f9c802;
 }
 
-
+[type=button]:not(:disabled), 
+[type=submit]:not(:disabled) {
+    cursor: pointer;
+}
 /*====================================================*/
 /*================ 펫시터리스트(반응형적용)==================*/
 /*====================================================*/
@@ -377,7 +392,7 @@ hr {
 	background-color: white;
 }
 
-#active_photo{
+.active_photo{
 	padding: 3%;
 	margin-bottom:5%;
 	
@@ -397,9 +412,183 @@ hr {
 	background-color: white;
 }
 
-.flex_item{
+
+/*====================================================*/
+/*=============== 활동사진리스트(반응형적용) =================*/
+/*====================================================*/
+.active_photo .inWrap {
+	position: relative;
+	height: 300px;
+}
+
+.active_photo .fInner {
+	margin: 0 auto;	
+	width: 85%; 
+	overflow: hidden;
+	padding-bottom: 1%;
+}
+
+.active_photo li {
+	float: left; width: 188px; height: 282px; list-style: none
+}
+
+.active_photo li a {
+	position: relative;
+	display: block; 
+	background: #f0f0f0; 
+	height: 100%; 
+	margin: 0 3%;
+	box-shadow: 2px 2px 5px gray;
+	text-align: center;
+}
+.active_photo li span {
+	display: block;
+	position: absolute;
+	bottom: -3em;
+	width: 100%;
+    color:#333;
+	font-size: 1em;
+	font-weight: 400;
+}
+
+.active_photo li:nth-child(1) a{
+	background: url() center center no-repeat;
+	background-size: cover;
+}
+.active_photo li:nth-child(2) a{
+	background: url() center center no-repeat;
+	background-size: cover;
+}
+.active_photo li:nth-child(3) a{
+	background: url() center center no-repeat;
+	background-size: cover;
+}
+.active_photo li:nth-child(4) a{
+	background: url() center center no-repeat;
+	background-size: cover;
+}
+.active_photo li:nth-child(5) a{
+	background: url() center center no-repeat;
+	background-size: cover;
+}
+.active_photo li:nth-child(6) a{
+	background: url() center center no-repeat;
+	background-size: cover;
+}
+.active_photo li:nth-child(7) a{
+	background: url() center center no-repeat;
+	background-size: cover;
+}
+.active_photo li:nth-child(8) a{
+	background: url() center center no-repeat;
+	background-size: cover;
+}
+.active_photo li:nth-child(9) a{
+	background: url() center center no-repeat;
+	background-size: cover;
+}
+.active_photo li:nth-child(10) a{
+	background: url() center center no-repeat;
+	background-size: cover;
+}
+
+.active_photo .swiper-pagination {
+	position: relative;
+	top: 0;
+	left: 0;
+	margin: 25px auto 0 auto;
+}
+.active_photo .swiper-pagination-progress .swiper-pagination-progressbar{
+	background: #f4bc71;
+}
+
+.active_photo .button div {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	background: #f7cd95;
+	color: #fff;
+	border-radius: 50%;
+	text-align: center;
+	top: 50%;
+	box-shadow: 2px 2px 5px gray;
+	transition: all 0.2s
+}
+.active_photo .button div:active {
+	transform: translate(2px,2px);
+}
+.active_photo .button a {
+	display: block;
+	height: 100%;
+}
+
+.active_photo .back a {
+	background: url(/resources/assets/img/search/back.svg) center center no-repeat;
+	background-size: 20px 20px;
+    text-indent: -999px; overflow: hidden;
+}
+
+.active_photo .next a {
+	background: url(/resources/assets/img/search/next.svg) center center no-repeat;
+	background-size: 30px 30px;
+    text-indent: -999px; overflow: hidden;
+}
+
+.active_photo .back {
+	left: 1%;
+}
+.active_photo .next {
+	right: 1%;
+}
+
+/* 일반 pc */
+@media screen and (max-width:1280px) {
+
+}
+
+
+/* 테블릿 */
+@media screen and (max-width:1024px) {
+
+}
+
+/* 소형 테블릿 */
+@media screen and (max-width:768px) {
+	.active_photo .button div{
+		width: 40px;
+		height: 40px;
+	}
+	.active_photo .button div a {
+		background-size: 20px 20px;
+	}
+}
+
+/* 모바일 */
+@media screen and (max-width:640px) {
+
+}
+
+/* 소형 모바일 */
+@media screen and (max-width:480px) {
+	.active_photo .fInner {
+		width: 95%;
+	}
+	.active_photo li {
+		width: 140px; height: 210px;
+	}
+	.active_photo li span {
+		font-size: 1.1667em;
+	}
+	.active_photo .button {
+		display: none;
+	}
+}
+
+/* 최소 사이즈 처리 */
+@media screen and (max-width:480px) {
 	
 }
+
 
 /*====================================================*/
 /*================ 지도조회(반응형적용) ===================*/

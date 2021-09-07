@@ -3850,7 +3850,7 @@ $(document).ready(function(){
 				$('.sigugunException').show();
 				
                 $('#sigugun').empty();
-                $('#sigugun').append(fn_option('','선택')); 
+                $('#sigugun').append(fn_option('','::시/군/구::')); 
                 $.each(address.sigugun, function(idx, code){
 	                if($('#sido > option:selected').val() == code.sido)
 	                	$('#sigugun').append(fn_option(code.sigugun, code.codeNm));
@@ -3879,7 +3879,7 @@ $(document).ready(function(){
 	               	 $('#dong').append(fn_option(code.dong, code.codeNm));
                 });
                 //option의 맨앞에 추가
-                $('#dong').prepend(fn_option('','선택'));
+                $('#dong').prepend(fn_option('','::읍/면/동::'));
                 //option중 선택을 기본으로 선택
                 $('#dong option:eq("")').attr('selected', 'selected');
 
