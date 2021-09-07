@@ -26,12 +26,12 @@ function check(){
 		document.search.addrSido.focus();
 		
 		return false; 
-	} else if(sigugun == ""){
+	} else if(sigugun == "" || sigugun == null){
 		alert("검색할 지역을 선택해주세요.")
 		document.search.addrSigugun.focus();
 		
 		return false;
-	} else if(dong == ""){
+	} else if(dong == "" || dong == null){
 		alert("검색할 지역을 선택해주세요.")
 		document.search.addrDong.focus();
 		

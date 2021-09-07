@@ -1,5 +1,6 @@
 package com.bitcamp.petcare.matching.service;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.bitcamp.petcare.matching.domain.MatchingDTO;
 import com.bitcamp.petcare.matching.domain.MatchingVO;
+import com.bitcamp.petcare.matching.domain.ServiceCalendarVO;
+import com.bitcamp.petcare.matching.domain.ServiceTypeVO;
 import com.bitcamp.petcare.matching.mapper.MatchingMapper;
 
 import lombok.NoArgsConstructor;
@@ -31,7 +34,7 @@ public class MatchingServiceImpl implements MatchingService{
 		Objects.requireNonNull(this.mapper);
 		
 		return this.mapper.getUserPet(userNo);
-	}
+	} //getUserPet
 
 
 	@Override
@@ -44,5 +47,25 @@ public class MatchingServiceImpl implements MatchingService{
 		
 		return (affectedLines == 1);
 	} //registerMatcing
+
+
+	@Override
+	public List<ServiceTypeVO> getServiceType(Integer userNo) {
+		log.debug("getServiceType({})", userNo);
+		
+		Objects.requireNonNull(this.mapper);
+		
+		return mapper.getServiceType(userNo);
+	} //getServiceType
+
+
+	@Override
+	public List<ServiceCalendarVO> getServiceCalendar(Integer userNo) {
+		log.debug("getServiceCalendar({})", userNo);
+		
+		Objects.requireNonNull(this.mapper);
+		
+		return mapper.getServiceCalendar(userNo);
+	} //getServiceCalendar
 
 } //end class

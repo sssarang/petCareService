@@ -25,7 +25,7 @@
                             <fieldset>
                                 I'm looking for service for my: &nbsp;&nbsp;
                                 
-                                Dog <input type="radio" id="dog" name="petType" checked />&nbsp;
+                                Dog <input type="radio" id="dog" name="petType" value="dog" checked />&nbsp;
                                 Cat <input type="radio" id="cat" name="petType" value="4"/>    
                             </fieldset>
                         
@@ -62,6 +62,7 @@
 									    <br>
 									    <input class="flatpickr" data-id="rangePlugin" type="text" placeholder="Start date" name="startDate" readonly="readonly">
 								  	</div>
+								  	<br>&nbsp;~&nbsp;
 								  	<div>
 									    <br>
 									    <input class="flatpickr" id="secondRangeInput" type="text" placeholder="End date" name="endDate" readonly="readonly">
@@ -103,12 +104,12 @@
 
                                     <div class="select">
                                         <input type="checkbox" id="leave-All-day" name="serviceType" value="11" />
-                                        <label for="leave-All-day">맡김<br>All day</label>
+                                        <label for="leave-All-day">돌봄<br>All day</label>
                                     </div>
 
                                     <div class="select">
                                         <input type="checkbox" id="leave-Half-day" name="serviceType" value="12" />
-                                        <label for="leave-Half-day">맡김<br>Half day</label>
+                                        <label for="leave-Half-day">돌봄<br>Half day</label>
                                     </div>
                                 </div>
                             </fieldset>
@@ -130,7 +131,7 @@
         <div class="row g-0">
             <div class="col-lg-6 order-lg-2 text-white showcase-img">
                 <div>
-                    <img class="img-fluid" src="/resources/assets/img/home/dog.png"/>
+                    <img class="img-fluid d-block mx-auto" src="/resources/assets/img/home/dog.png"/>
                 </div>
             </div>
             <div class="col-lg-6 order-lg-1 my-auto showcase-text pt-5">
@@ -182,10 +183,10 @@
         <div class="row g-0 ">
             <div class="col-lg-6 order-lg-1 text-white showcase-img">
                 <div>
-                    <img class="img-fluid" src="/resources/assets/img/home/cat.png" alt="..." />
+                    <img class="img-fluid d-block" src="/resources/assets/img/home/cat.png" alt="..." />
                 </div>
             </div>
-            <div class="col-lg-6 order-lg-2 my-auto showcase-text pt-5">
+            <div class="col-lg-6 order-lg-2 my-auto showcase-text">
                 <h2>FAQs. <br> 자주 묻는 질문</h2>
                 <p class="lead mb-0">펫시터가 되고 싶으신가요?<br>펫시터가 필요 하신가요?<br>이용하시기전에 궁금증을 여기서 해결하세요!<br>다양한 질문과 답변이 준비되어 있습니다.</p>
                 

@@ -1,14 +1,18 @@
 package com.bitcamp.petcare.matching.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bitcamp.petcare.matching.domain.MatchingDTO;
 import com.bitcamp.petcare.matching.domain.MatchingVO;
+import com.bitcamp.petcare.matching.domain.ServiceCalendarVO;
+import com.bitcamp.petcare.matching.domain.ServiceTypeVO;
 import com.bitcamp.petcare.matching.service.MatchingService;
 
 import lombok.NoArgsConstructor;
@@ -43,13 +47,39 @@ public class MatchingController {
 	
 	
 	// 예약하기 완료시, 예약테이블에 데이터 넣기. 
-	@PostMapping("booking")
-	public void booking(MatchingDTO matching) {
-		log.debug("booking({}) invoked." , matching);
-		
-		this.service.registerMatcing(matching);
-		
-		
-	} //booking
+//	@PostMapping("booking")
+//	public void booking(MatchingDTO matching) {
+//		log.debug("booking({}) invoked." , matching);
+//		
+//		this.service.registerMatcing(matching);
+//		
+//	} //booking
 	
+	
+	// 비동기식 ajax를 사용할 때 db에서 불러올 데이터 리스트
+	@ResponseBody
+	@PostMapping("serviceType")
+	public List<ServiceTypeVO> showServiceType(Integer userNo) {
+		log.info("\t ===================userNo: ",userNo);
+		
+		List<ServiceTypeVO> resultServiceType = this.service.getServiceType(userNo);
+		
+		assert resultServiceType != null;
+		log.info("\t+resultServiceType: {}", resultServiceType);
+		
+		return resultServiceType;
+	} //showFaq
+	
+	// 비동기식 ajax를 사용할 때 db에서 불러올 데이터 리스트
+	@ResponseBody
+	@PostMapping("ableDate")
+	public List<ServiceCalendarVO> showAbleDate(Integer userNo) {
+		
+		List<ServiceCalendarVO> resultAbleDates = this.service.getServiceCalendar(userNo);
+		
+		assert resultAbleDates != null;
+		log.info("\t+resultAbleDates: {}", resultAbleDates);
+		
+		return resultAbleDates;
+	} //showFaq
 } //end class

@@ -21,7 +21,7 @@
 			FROM tbl_user u
 			INNER JOIN tbl_pet_profile p ON u.user_no = p.user_no
 			INNER JOIN tbl_common_code c ON p.pet_type_code = c.code
-			WHERE u.user_no = #{user_no}
+			WHERE u.user_no = #{userNo}
 		]]>
 	</select>
 	
@@ -35,6 +35,26 @@
 		    (service_id, start_date, end_date, service_type_code, pet_type_code, pet_user_no, pet_sitter_no, reg_user_no)
 		VALUES (#{serviceId}, #{startDate}, #{endDate}, #{serviceTypeCode}, #{petTypeCode}, #{petUserNo}, #{petSitterNo}, #{regUserNo})
 	</insert>
+	
+	
+	<select id="getServiceType" resultType="com.bitcamp.petcare.matching.domain.ServiceTypeVO">
+	
+		SELECT s.user_no, s.service_type_code, s.use_yn, s.price, c.code_name
+		FROM tbl_service_type s
+		INNER JOIN tbl_common_code c ON s.service_type_code = c.code
+		WHERE s.user_no = #{userNo}
+		AND s.use_yn = 'Y'
+		
+	</select>
+	
+	
+	<select id="getServiceCalendar" resultType="com.bitcamp.petcare.matching.domain.ServiceCalendarVO">
+	
+		SELECT user_no, service_date
+		FROM tbl_service_calendar
+		WHERE user_no = #{user_no}
+		
+	</select>
 	
 	
 </mapper>
