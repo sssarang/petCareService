@@ -53,13 +53,13 @@ public class MatchingServiceTests {
 		
 		MatchingDTO newMatching = new MatchingDTO(
 									null,
-									"20210826",
-									"20210826",
-									"12",
-									"2",
-									9,
-									15, 
-									9
+									"20210916",
+									"20210920",
+									"11",
+									100000,
+									54,
+									8, 
+									54
 								);
 
 		log.info("\t+ newMatching: " + newMatching);

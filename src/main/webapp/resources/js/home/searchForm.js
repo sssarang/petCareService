@@ -46,21 +46,21 @@ $(document).ready(function() {
 	
 	$("#sido").change(function() {
 		var selectVal  = $("#sido option:selected").text();
-		console.log($("#sido option:selected").text());
+		console.log(selectVal);
 		
 	    $('#sidoHd').val(selectVal);
 	});
 	
 	$("#sigugun").change(function() {
 		var selectVal  = $("#sigugun option:selected").text();
-		console.log($("#sigugun option:selected").text());
+		console.log(selectVal);
 		
 	    $('#sigugunHd').val(selectVal);
 	});
 	
 	$("#dong").change(function() {
 		var selectVal  = $("#dong option:selected").text();
-		console.log($("#dong option:selected").text());
+		console.log(selectVal);
 		
 	    $('#dongHd').val(selectVal);
 	});

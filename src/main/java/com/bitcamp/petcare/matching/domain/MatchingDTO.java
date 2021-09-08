@@ -14,7 +14,7 @@ public class MatchingDTO {
 	private String startDate;
 	private String endDate;
 	private String serviceTypeCode;
-	private String petTypeCode;
+	private Integer totalAmount;
 	private Integer petUserNo;
 	private Integer petSitterNo;
 	private Integer regUserNo;

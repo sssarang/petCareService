@@ -2,6 +2,9 @@ package com.bitcamp.petcare.matching.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bitcamp.petcare.matching.domain.MatchingDTO;
 import com.bitcamp.petcare.matching.domain.MatchingVO;
 import com.bitcamp.petcare.matching.domain.ServiceCalendarVO;
 import com.bitcamp.petcare.matching.domain.ServiceTypeVO;
 import com.bitcamp.petcare.matching.service.MatchingService;
+import com.bitcamp.petcare.user.controller.UserController;
+import com.bitcamp.petcare.user.domain.UserVO;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,11 +38,22 @@ public class MatchingController {
 
 	// 예약화면에 회원, 반려동물 정보 띄우기
 	@GetMapping("matching")
-	public void getUserPet(Integer userNo, Model model) {
+	public void getUserPet(Integer userNo, Model model, HttpSession session, HttpServletRequest req) {
 		
 		log .debug("getUserPet({}, {}) invoked...", userNo, model);
+		
+		// 세션객체를 가져온다. 
+		HttpSession sessioncheck = req.getSession(false);
+		log.info("sessioncheck: {}", sessioncheck );
+
+		UserVO loginInfo = (UserVO) session.getAttribute(UserController.loginKey);
+		log.info("loginInfo: {}", loginInfo );
+		
+		int petUserNo = Integer.parseInt(loginInfo.getUserNo());
+		log.info("petUserNo: {}", petUserNo );
 	
-		MatchingVO matching = this.service.getUserPet(userNo);
+		
+		MatchingVO matching = this.service.getUserPet(petUserNo);
 		
 		assert matching != null;
 		log.info("\t+matching: {}", matching);
@@ -46,14 +63,14 @@ public class MatchingController {
 	} //getUserPet
 	
 	
-	// 예약하기 완료시, 예약테이블에 데이터 넣기. 
-//	@PostMapping("booking")
-//	public void booking(MatchingDTO matching) {
-//		log.debug("booking({}) invoked." , matching);
-//		
-//		this.service.registerMatcing(matching);
-//		
-//	} //booking
+	@PostMapping("booking")
+	public String booking(MatchingDTO matching) {
+		log.debug("booking({}) invoked." , matching);
+		
+		this.service.registerMatcing(matching);
+		
+		return "mypage/customerResvManage";
+	} //booking
 	
 	
 	// 비동기식 ajax를 사용할 때 db에서 불러올 데이터 리스트

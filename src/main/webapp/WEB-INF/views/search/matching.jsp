@@ -47,14 +47,8 @@
     <%@include file="/WEB-INF/views/common/footer.jsp" %>
     
     
-    <!-- 달력 js -->
-	<script type="text/javascript" src="/resources/js/matching/flatpickr.js"></script>
-	<!-- 버튼 js -->
-	<!--<script type="text/javascript" src="/resources/js/search/button.js"></script>-->
 	<!-- bookingForm js -->
 	<script type="text/javascript" src="/resources/js/matching/bookingForm.js"></script>
-	<!-- comma js -->
-	<script type="text/javascript" src="/resources/js/common/comma.js"></script>
-    
+	
 </body>
 </html>

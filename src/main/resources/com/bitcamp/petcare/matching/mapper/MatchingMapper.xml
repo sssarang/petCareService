@@ -32,8 +32,8 @@
 		</selectKey>
 	
 		INSERT INTO tbl_service_matching
-		    (service_id, start_date, end_date, service_type_code, pet_type_code, pet_user_no, pet_sitter_no, reg_user_no)
-		VALUES (#{serviceId}, #{startDate}, #{endDate}, #{serviceTypeCode}, #{petTypeCode}, #{petUserNo}, #{petSitterNo}, #{regUserNo})
+		    (service_id, start_date, end_date, service_type_code, total_amount, pet_user_no, pet_sitter_no, reg_user_no)
+		VALUES (#{serviceId}, #{startDate}, #{endDate}, #{serviceTypeCode}, #{totalAmount}, #{petUserNo}, #{petSitterNo}, #{regUserNo})
 	</insert>
 	
 	
