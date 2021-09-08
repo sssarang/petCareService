@@ -102,6 +102,7 @@ public class UserController {
 				rememberUpdate.setRemember(session.getId());
 				rememberUpdate.setRememberAge(rememberMeMaxAge);
 				
+				log.info("\t + userDTO : {}", rememberUpdate.getRememberAge());
 				int affectedLines = this.service.modifyUserWithRememberMe(rememberUpdate);
 				log.info("\t + affectedLines : {}", affectedLines);
 			} //if : Remember-Me 옵션이 on일 때..
@@ -117,6 +118,7 @@ public class UserController {
 //				e.printStackTrace();
 //			}		
 			to.append("/user/loginPage");
+//			ScriptUtils.alert(res, "회원정보가 잘못되었습니다. 다시 입력하세요.");
 		}//if-else
 		return to.toString();
 	}//loginUser

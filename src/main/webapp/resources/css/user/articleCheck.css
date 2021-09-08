@@ -23,7 +23,6 @@ a{
 }
 
 #joinForm{
-	width: 460px;
 	margin: 0 auto;
 }
 
@@ -103,7 +102,7 @@ ul.join_box{
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(30,30,30,0.4); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */

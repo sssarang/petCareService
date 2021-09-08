@@ -45,7 +45,7 @@
 	        <div class="container-fluid">
 	            <div class="row text-center">
 	                <div class="col-lg-12">
-	               	 	<img src="/resources/assets/img/common/2.png">
+	               	 	<a href="/"><img  src="/resources/assets/img/common/2.png"></a>
 	                    <h1 class="heading-title"></h1>
 	                </div>
 	            </div>
@@ -60,6 +60,9 @@
 	
 	                            <label class="control-label">비밀번호</label>
 	                            <input type="password" name="userPw" class="form-control" />
+	                            
+	                            <label class="control-label">자동 로그인</label>
+	                            <input type="checkbox" name="rememberMe" />
 	
 	                           
 	                            <button type="submit" class="btn btn-default">Login<i class="fa fa-arrow-circle-right fa-2x"></i></button>

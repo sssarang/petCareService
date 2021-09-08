@@ -58,20 +58,20 @@
 	<!-- RememberMe관련 sql -->
 	<select id="selectUserWithRememberMe" resultType="com.bitcamp.petcare.user.domain.UserVO">
 		SELECT
-			user_id, user_pw, user_nickname, user_classify
+			user_no, user_id, user_pw, user_nickname, user_classify
 		FROM
 			tbl_user
 		WHERE 
 			remember = #{rememberMe}	
 		AND 
-			rememberage > sysdate
+			REMEMBERAGE > sysdate
 	</select>
 	
 	<update id="updateUserWithRememberMe">
 		UPDATE tbl_user
 		SET	
 			remember = #{rememberMe},
-			rememberage = #{rememberMeMaxAge}
+			REMEMBERAGE = #{rememberAge}
 	  WHERE 
 	  		user_id = #{userId}
 	</update>
