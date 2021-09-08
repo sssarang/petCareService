@@ -27,6 +27,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
     
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36768b2f76471ae95e3d92b023d2b626&libraries=services"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="/resources/js/user/userJoin.js"></script>
 	
 	<!-- Optional theme -->
@@ -42,7 +43,7 @@
 	        <div class="container-fluid">
 	            <div class="row text-center">
 	                <div class="col-lg-12">
-	                	<img src="/resources/assets/img/common/2.png">
+	                	<a href="/"><img src="/resources/assets/img/common/2.png"></a>
 	                    <h1 class="heading-title"></h1>
 	                </div>
 	            </div>
@@ -76,7 +77,8 @@
 		                            <input id="inputPhone" type="text" name="userContact" class="form-control" placeholder="'-'을 포함하여 작성해 주세요"/>
 
 		                            <label class=" control-label">주소</label>
-		                            <input id="inputAddress" type="text" name="userAddress" class="form-control"/>
+		                            <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
+		                            <input id="inputAddress" type="text" name="userAddress" class="form-control" placeholder="지번주소"/>
 		                            
 		                            <label class=" control-label">성별</label>
 		                            여자<input type="radio" name="userGender" class="radio-control" value="F" checked="checked"/>
