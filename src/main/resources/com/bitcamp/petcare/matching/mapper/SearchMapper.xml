@@ -16,7 +16,11 @@
 		     U.USER_ADDRESS,
 		     U.USER_LATITUDE,
 		     U.USER_LONGITUDE,
-		     PS.PRO_PHOTO
+		     PS.PRO_PHOTO,
+		     (SELECT ROUND(AVG(r.grade), 1) 
+			  FROM tbl_service_matching sm
+			  INNER JOIN tbl_review r ON sm.service_id = r.service_id 
+			  WHERE sm.pet_sitter_no = U.USER_NO) as avg
         FROM TBL_USER U,
              TBL_PETSITTER_PROFILE PS
         WHERE 1=1

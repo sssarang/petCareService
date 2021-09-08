@@ -8,7 +8,7 @@ import com.bitcamp.petcare.matching.domain.PetSitterDTO;
 public interface SearchService {
 
 	public abstract List<PetSitterDTO> getList(FilterDTO filterDTO);		//펫시터리스트조회
-	
+		
 	public abstract PetSitterDTO getPs(Integer userNO);						//특정 펫시터프로필 정보조회
 
 	public abstract List<PetSitterDTO> getServiceType(Integer userNO);		//특정 펫시터프로필 정보조회(서비스유형)

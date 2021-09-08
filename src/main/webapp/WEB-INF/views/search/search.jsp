@@ -3,6 +3,9 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+    
     
 <!DOCTYPE html>
 
@@ -54,6 +57,9 @@
 		<!-- 기본 js -->
 		<script src="/resources/js/search/search.js"></script>						     
 
+		<!-- alert js -->
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		
 		<!-- 달력 js -->
 		<script src="/resources/js/search/flatpickr.js"></script>						     
 
@@ -71,8 +77,8 @@
 		
 		
 		 $(function(){
-            console.log('jq started.')
-            
+            console.log('jq started.');
+                                    
             <!-- ================================ -->
 			<!-- 1. 쿼리스트링으로 받은 데이터 조작         -->
             <!-- ================================ -->
@@ -91,30 +97,28 @@
             console.log(${filter.addrSigugun});
             console.log(${filter.addrDong});
 
-            //1. ${filter.addrSido} 선택
-            if(${filter.addrSido} != null){
+            //${filter.addrSido} 선택
+            if("${filter.addrSido}" != null && "${filter.addrSido}" != ""){
 	            $("select[id='sido'] > option[value='${filter.addrSido}']").attr("selected", true);
     	        $("#sido").prop('selected',true).change();
             }
             
-          	//2. ${filter.addrSigugun} 선택
-          	if(${filter.addrSigugun} != null){
+          	//${filter.addrSigugun} 선택
+          	if("${filter.addrSigugun}" != null && "${filter.addrSigugun}" != ""){
 	            $("select[id='sigugun'] > option[value='${filter.addrSigugun}']").attr("selected", true);
 	            $("#sigugun").prop('selected',true).change();
           	}
           	
-          	//3. ${filter.addrDong} 선택
-            if(${filter.addrDong} != null){
+          	//${filter.addrDong} 선택
+            if("${filter.addrDong}" != null && "${filter.addrDong}" != ""){
             	$("select[id='dong'] > option[value='${filter.addrDong}']").attr("selected", true);
             }
-   
         
             //serviceType
             <c:forEach items="${filter.serviceType}" var="item">
 				$("input[type='checkbox'][name='serviceType'][value='${item}']").attr("checked", true);        
 				console.log(${item});
 			</c:forEach>
-			
 			
 			//skillType
             <c:forEach items="${filter.skillType}" var="item">
@@ -125,23 +129,41 @@
 			
             
             <!-- ================================ -->
-			<!-- 2. 필터검색에 따른 리스트 생성           -->
+			<!-- 2. 필터검색에 따른 리스트 생성/지도 적용    -->
             <!-- ================================ -->  
             
             var list = new Array();
-			 
-			<c:forEach items="${list}" var="item">
-				var jsonObject = new Object(); 
+			var listLength = '${fn:length(list)}';
+			
+			if(listLength > 0 ){
+				<c:forEach items="${list}" var="item">
+					var jsonObject = new Object(); 
+					
+					jsonObject.userNickname = '${item.userNickname}';	//닉네임
+					jsonObject.userLatitude = '${item.userLatitude}';	//위도
+					jsonObject.userLongitude = '${item.userLongitude}'; //경도
+					
+					list.push(jsonObject);
+				</c:forEach>
 				
-				jsonObject.userNickname = '${item.userNickname}';	//닉네임
-				jsonObject.userLatitude = '${item.userLatitude}';	//위도
-				jsonObject.userLongitude = '${item.userLongitude}'; //경도
-				
-				list.push(jsonObject);
-			</c:forEach>
+				//map API 호출+출력
+				$('#noSearch').hide();
+				displayPlaces(list);		
+			}else{
+				$('#noSearch').show();
+				$('#map').hide();
+			} //if-else
+			
 			 
-			//map API 호출+출력
-			displayPlaces(list);
+			/* <c:choose>
+				<c:when test="${fn:length(list) > 0}">
+					//map API 호출+출력
+					displayPlaces(list);
+				</c:when>
+				<c:otherwise>
+					
+				</c:otherwise>
+			</c:choose> */
 		
 		 });
 

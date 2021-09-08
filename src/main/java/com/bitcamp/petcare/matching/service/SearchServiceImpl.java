@@ -27,14 +27,14 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Override
 	public List<PetSitterDTO> getList(FilterDTO filterDTO) {
-		log.debug("getList() invoked.");
+		log.debug("getList({}) invoked.", filterDTO);
 		
 		Objects.requireNonNull(this.mapper);
 		
 		return this.mapper.getList(filterDTO);
 	} //getPsList
 
-	
+
 	@Override
 	public PetSitterDTO getPs(Integer userNo) {
 		log.debug("getPs({}) invoked.", userNo);

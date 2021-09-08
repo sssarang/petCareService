@@ -3,7 +3,7 @@ language="java"
 contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 
 
 <!-- Core theme CSS -->
@@ -136,24 +136,40 @@ pageEncoding="UTF-8"%>
               <div class="title">Pet Sitter List</div>
                   
               <div id="psList">
-               	 <table id="psTable" class="table table-hover">
+               	 <table id="psTable">
 						<colgroup>
 							<col>
 						</colgroup>
 	                    <tbody>
 		                    <c:forEach items="${list}" var="ps">
 		                          <tr>
-		                              <td rowspan="3" class="line">사진 ${ps.proPhoto}
-		                              <input type="hidden" class="userNo" name="userNo" value="${ps.userNo}">
-		                              <input type="button" class="profileBtn" onclick="fnProfileOn(${ps.userNo})" name="detail" value="프로필보기">
-		                              </td>
-		                              <td class="line">이 름 : ${ps.userNickname}</td>
+		                          <c:choose>
+			                          <c:when test="${ps.proPhoto == null}">
+			                          	<td rowspan="3" class="line" background='/resources/assets/img/search/basic.jpg'
+			                          								 style="background-size: cover;">
+			                          		<input type="hidden" class="userNo" name="userNo" value="${ps.userNo}">
+		                              		<input type="button" class="profileBtn" onclick="fnProfileOn(${ps.userNo})" name="detail" value="프로필보기">
+		                              	</td>
+			                          </c:when>
+			                          <c:otherwise>
+		                              	<td rowspan="3" class="line" background='${ps.proPhoto}' 
+		                              								 style="background-size: cover;">
+		                              		<input type="hidden" class="userNo" name="userNo" value="${ps.userNo}">
+		                              		<input type="button" class="profileBtn" onclick="fnProfileOn(${ps.userNo})" name="detail" value="프로필보기">
+		                              	</td>
+		                              </c:otherwise>
+		                          </c:choose>
+		                              
+		                              <td class="line">&nbsp; 이 름 :</td>
+		                              <td class="line">&nbsp;${ps.userNickname}</td>
 		                          </tr>
 		                          <tr>
-		                              <td class="line">평 점 : 5.0(★★★★★)</td>
+		                              <td class="line">&nbsp; 평 점 :</td>
+		                              <td class="line">&nbsp;${ps.avg}</td>
 		                          </tr>
 		                          <tr>
-		                              <td class="line">지 역 : ${ps.userAddress}</td>
+		                              <td class="line">&nbsp; 지 역 </td>
+		                              <td class="line">&nbsp;${ps.userAddress}</td>
 		                          </tr>
 	 	                    </c:forEach>
 	                    </tbody>
@@ -164,14 +180,23 @@ pageEncoding="UTF-8"%>
      </aside>   
      
 
-     <!-------------지도조회----------------->
+     <!-------------content 1. 지도조회----------------->
      <section>
-         <div id="map" class="content" ></div>
+         <div id="map" class="content" >
+         </div>
      </section>
 
+     <!-------------content 2. 검색결과 없을때--------------->
+	 <div id="noSearch">
+	 	<div class="noSearch"> 
+	 		<img id="imgId1" src="/resources/assets/img/search/g.jpg">
+	 		<span>요청하신 내역에 대한 검색결과가 없습니다. <br>
+	 		선택하신 검색항목을 확인해주세요.</span>
+	 	</div>
+	 	<img id="imgId2" src="/resources/assets/img/search/gg.jpg">
+	 </div>
 
-
-     <!-------------펫시터프로필----------------->
+     <!-------------content 3. 펫시터프로필----------------->
 
      <div class="profile">
         <div class="profile_close" id="profileClose"><a href="">close</a></div>
@@ -185,13 +210,13 @@ pageEncoding="UTF-8"%>
 					    <img id="photo" src="">
 					</div>
 	        		<div id="psInfo" class="flex_item">
-	        			<h4>닉네임 : ${ps.userNickname}</h4>
+	        			<h4>닉네임 : <span id="psNickname"></span></h4>
 	        			<hr>
 	        			<h4>평 점 : </h4>
 	        			<hr>
-	        			<h4>지 역 : ${ps.userAddress}</h4>
+	        			<h4>지 역 : <span id="psAddress"></span></h4>
 	        			<hr>
-	        			<h4>소개글 : ${ps.introduce}</h4>
+	        			<h4>소개글 : <span id="psIntroduce"></span></h4>
 		        		<hr>
 		        		<input type="button" onclick="fnMatchingOn(${ps.userNo})" name="matching" value="matching">        			
 	        		</div>
@@ -201,10 +226,11 @@ pageEncoding="UTF-8"%>
 			<div id="profile_content">
 				<aside id="profile_side">
 					<div id="serviceInfo" class="flex_item">
-	        			서비스 종료 : ${serviceType.serviceTypeCode}<br>
-	        			서비스 비용 : ${serviceType.price}<br>
-	        			이용가능 날짜 : <br>
-	        			이용가능 반려동물 : <br>
+	        			서비스 유형 : <span id="psServiceTypeCode"></span><br>
+	        			서비스 비용 : <span id="psPrice"></span><br>
+	        			이용가능 반려동물 : <span id="psPetTypeCode"></span><br>
+	        			이용가능 날짜 : <span id="psServiceDate"></span><br>
+	        			스킬 : <span id="psSkillTypeCode"></span><br>
 	        			
 	        		</div>
 				</aside>

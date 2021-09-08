@@ -31,4 +31,7 @@ public class PetSitterDTO extends CommonDTO {
 	private Integer phtoNo;
 	private String actPhoto;
 	
+	//리뷰평균평점
+	private Double avg;
+	
 } //end class

@@ -41,59 +41,33 @@ public class SearchController {
 				Model model) {
 		log .debug("getList({}, {}) invoked...", model);
 
-		if(filterDto.getPetType() == null || "".equals(filterDto.getPetType())) {
-			new RuntimeException("펫타입이 없습니다.");
-		}else {
-			List<PetSitterDTO> ps = this.service.getList(filterDto);
-			Objects.requireNonNull(ps);
-			log.info("\t+ list: {}", ps);
-			model.addAttribute("list",ps);
-		}
-		
-		log.info("\t+ filterDto : {}", filterDto);
-		
-		model.addAttribute("filter", filterDto);
-		
-		
-		return "/search/search";
-	} //getPsList
-	
-
-	@ResponseBody
-	@PostMapping("searchList")
-	public Map<String,Object> getSearchList(FilterDTO filterDto) {
-		log .debug("getServiceList({}) invoked...");
-		log.info(filterDto);
-		
 		List<PetSitterDTO> ps = this.service.getList(filterDto);
 		Objects.requireNonNull(ps);
 		
-		log.info("\t+ list: {}", ps);
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("list", ps);
-		
-		return map;
-	} //getPsList
+		log.info("\t+ list: {}", ps);	
+		log.info("\t+ filterDto : {}", filterDto);
+	
+		model.addAttribute("list",ps);
+		model.addAttribute("filter", filterDto);	
+
+		return "/search/search";
+	} //getList
 	
 	
 	@ResponseBody
 	@PostMapping("psProfile")
-	public Map<String,Object> getPs(@RequestParam("userNo")Integer userNo, Model model) {
+	public Map<String,Object> getPs(@RequestParam("userNo")Integer userNo) {
 		log.debug("getPs({}) invoked.", userNo);
 		
 		//리턴객체 map
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("userNo", userNo);
-		model.addAttribute("userNo", userNo);
-		
+		map.put("userNo", userNo);		
 		
 		PetSitterDTO ps = this.service.getPs(userNo);
 		Objects.requireNonNull(ps);
 		log.info("\t+ ps : {}", ps);
 
 		map.put("ps", ps);
-		model.addAttribute("ps", ps);
 		
 		
 		List<PetSitterDTO> serviceTypeList = this.service.getServiceType(userNo);
@@ -101,15 +75,13 @@ public class SearchController {
 		log.info("\t+ serviceTypeList : {}", serviceTypeList);
 
 		map.put("serviceType", serviceTypeList);
-		model.addAttribute("serviceType", serviceTypeList);
 		
 		
 		List<PetSitterDTO> serviceCalendarList = this.service.getServiceCalendar(userNo);
 		Objects.requireNonNull(serviceCalendarList);
 		log.info("\t+ serviceCalendarList : {}", serviceCalendarList);
 
-		map.put("pserviceCalendar", serviceCalendarList);
-		model.addAttribute("pserviceCalendar", serviceCalendarList);
+		map.put("serviceCalendar", serviceCalendarList);
 		
 		
 		List<PetSitterDTO> servicePetKindsList = this.service.getServicePetKinds(userNo);
@@ -117,7 +89,6 @@ public class SearchController {
 		log.info("\t+ servicePetKindsList : {}", servicePetKindsList);
 
 		map.put("servicePetKinds", servicePetKindsList);
-		model.addAttribute("servicePetKinds", servicePetKindsList);
 		
 		
 		List<PetSitterDTO> psSkillList = this.service.getPsSkill(userNo);
@@ -125,7 +96,6 @@ public class SearchController {
 		log.info("\t+ psSkillList : {}", psSkillList);
 
 		map.put("psSkill", psSkillList);
-		model.addAttribute("psSkill", psSkillList);
 		
 		
 		List<PetSitterDTO> activityPhotoList = this.service.getActivityPhoto(userNo);
@@ -133,7 +103,6 @@ public class SearchController {
 		log.info("\t+ activityPhotoList : {}", activityPhotoList);
 
 		map.put("activityPhoto", activityPhotoList);
-		model.addAttribute("activityPhoto", activityPhotoList);
 		
 		
 		List<PetSitterDTO> reviewList = this.service.getReview(userNo);
@@ -141,7 +110,6 @@ public class SearchController {
 		log.info("\t+ reviewList : {}", reviewList);
 
 		map.put("review", reviewList);
-		model.addAttribute("review", reviewList);
 
 		
 		return map;
