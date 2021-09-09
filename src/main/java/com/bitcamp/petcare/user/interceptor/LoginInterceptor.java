@@ -75,6 +75,8 @@ public class LoginInterceptor
 		log.debug("2. postHandle(request, response, {}, {}) invoked", handler, modelAndView);
 		log.debug("=========================================================================");
 		
+		StringBuilder to = new StringBuilder("http://localhost:8090");
+		
 		//Session Scope에 UserVO객체를 바인딩하는 작업수행
 		HttpSession session = request.getSession();
         Object user = session.getAttribute(loginKey);
@@ -85,8 +87,8 @@ public class LoginInterceptor
 			//=============================================================//
 			// 1. Session Scope에 로그인 정보로, UserVO객체를 바인딩
 			//=============================================================//
-			session.setAttribute(LoginInterceptor.loginKey, user);
-			log.info("\t + 1. UserVO 객체를 Session Scope에 바인딩 완료");
+//			session.setAttribute(LoginInterceptor.loginKey, user);
+//			log.info("\t + 1. UserVO 객체를 Session Scope에 바인딩 완료");
 			
 			//=============================================================//
 			// 2. 원래 사용자의 Request URI를 복구하여, 이동시킴
@@ -137,10 +139,13 @@ public class LoginInterceptor
 				}//if
 				
 			}//if-else
+			to.append("/");
+			response.sendRedirect(to.toString());
+			
 		} else {	//로그인에 실패했다면
 			//postHandle 메소드가 수행되는 지점과 시점을 잘 기억해야함
-//			response.sendRedirect("/user/loginPage");
-			
+			to.append("/user/loginPage");
+			response.sendRedirect(to.toString());
 			log.info("\t + 1. 로그인 실패 - 다시 로그인 창으로 되돌림");
 		}//if-else
 	}//postHandle
