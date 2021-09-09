@@ -75,8 +75,6 @@ public class LoginInterceptor
 		log.debug("2. postHandle(request, response, {}, {}) invoked", handler, modelAndView);
 		log.debug("=========================================================================");
 		
-		StringBuilder to = new StringBuilder("http://localhost:8090");
-		
 		//Session Scope에 UserVO객체를 바인딩하는 작업수행
 		HttpSession session = request.getSession();
         Object user = session.getAttribute(loginKey);
@@ -137,15 +135,13 @@ public class LoginInterceptor
 					log.info("\t + rememberMeCookie : " + rememberMeKey);
 					log.info("\t + 응답문서의 헤더에 rememberMeCookie 쿠키설정 완료");					
 				}//if
+				response.sendRedirect("/");
 				
 			}//if-else
-			to.append("/");
-			response.sendRedirect(to.toString());
 			
 		} else {	//로그인에 실패했다면
 			//postHandle 메소드가 수행되는 지점과 시점을 잘 기억해야함
-			to.append("/user/loginPage");
-			response.sendRedirect(to.toString());
+			response.sendRedirect("/user/loginPage");
 			log.info("\t + 1. 로그인 실패 - 다시 로그인 창으로 되돌림");
 		}//if-else
 	}//postHandle
