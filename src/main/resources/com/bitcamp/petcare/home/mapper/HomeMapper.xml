@@ -10,6 +10,7 @@
 	<select id="getFaq" resultType="com.bitcamp.petcare.home.domain.FaqVO">
 		SELECT faq_sequence, faq_question, faq_answer
 		FROM tbl_faq
+		ORDER BY 1
 	</select>
 	
 	
@@ -18,7 +19,7 @@
 		FROM tbl_review r
 		INNER JOIN tbl_service_matching m ON m.service_id = r.service_id  
 		INNER JOIN tbl_pet_profile p ON p.user_NO = m.pet_user_no
-		WHERE r.service_id IN(16, 11, 9)
+		WHERE r.service_id IN(16, 22, 19)
 	</select>
 	
 	

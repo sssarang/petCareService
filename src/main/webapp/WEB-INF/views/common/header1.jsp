@@ -21,7 +21,7 @@
                     마이페이지
                 </span>
             </a>
-            <a class="btn orange" href="#">
+            <a class="btn orange" href="/user/logout">
                 <span class="btn-sm">
                     로그아웃
                 </span>

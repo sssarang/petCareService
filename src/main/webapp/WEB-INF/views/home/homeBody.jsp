@@ -146,7 +146,7 @@
 
                     <!-- The Modal -->
                     <div class="modal fade" id="serviceInfo">
-                        <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                             <div class="modal-content">
 
                                 <!-- Modal Header -->

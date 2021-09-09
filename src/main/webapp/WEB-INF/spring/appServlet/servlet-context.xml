@@ -51,9 +51,11 @@
 
 		<interceptor>
 			<mapping path="/user/temp" />
+			<mapping path="/search/matching" />
 
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
+		
 	</interceptors>
 	
 </beans:beans>
