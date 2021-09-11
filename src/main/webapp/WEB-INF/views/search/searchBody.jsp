@@ -10,6 +10,7 @@ pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/resources/css/search/search.css" />
 <!-- Font-family-->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <!-- 프로필 : 활동사진 -->
 <link rel="stylesheet" href="/resources/css/search/swiper.css" > 
  
@@ -22,7 +23,7 @@ pageEncoding="UTF-8"%>
          
             <div class="title"><span>상세조건선택</span></div>
 
-            <form id="searchForm" onsubmit="return check();">
+            <form id="searchForm" onsubmit="return fnCheck();">
                 <div class="form-group">
                     <p>Pet Type</p>
                     <input type="radio" id="dog" name="petType" value="dog"
@@ -68,8 +69,8 @@ pageEncoding="UTF-8"%>
                  
                  <div class="form-group">
                      <p>Service Type</p>
-                     <input id="careAll" type="checkbox" name="serviceType" value="11"><label for="careAll">&nbsp; 맡김(All Day)</label><br>
-                     <input id="careHalf" type="checkbox" name="serviceType" value="12"><label for="careHalf">&nbsp; 맡김(Half Day)</label><br>
+                     <input id="careAll" type="checkbox" name="serviceType" value="11"><label for="careAll">&nbsp; 돌봄(All Day)</label><br>
+                     <input id="careHalf" type="checkbox" name="serviceType" value="12"><label for="careHalf">&nbsp; 돌봄(Half Day)</label><br>
                      <input id="visitAll" type="checkbox" name="serviceType" value="13"><label for="visitAll">&nbsp; 방문(All Day)</label><br>
                      <input id="visitHalf" type="checkbox" name="serviceType" value="14"><label for="visitHalf">&nbsp; 방문(Half Day)</label><br>
                  </div>
@@ -145,31 +146,63 @@ pageEncoding="UTF-8"%>
 		                          <tr>
 		                          <c:choose>
 			                          <c:when test="${ps.proPhoto == null}">
-			                          	<td rowspan="3" class="line" background='/resources/assets/img/search/basic.jpg'
-			                          								 style="background-size: cover;">
+			                          	<td rowspan="3" class="line1" background='/resources/assets/img/search/petsitter.jpg'>
 			                          		<input type="hidden" class="userNo" name="userNo" value="${ps.userNo}">
-		                              		<input type="button" class="profileBtn" onclick="fnProfileOn(${ps.userNo})" name="detail" value="프로필보기">
 		                              	</td>
 			                          </c:when>
 			                          <c:otherwise>
-		                              	<td rowspan="3" class="line" background='${ps.proPhoto}' 
-		                              								 style="background-size: cover;">
+		                              	<td rowspan="3" class="line1" background='${ps.proPhoto}'>
 		                              		<input type="hidden" class="userNo" name="userNo" value="${ps.userNo}">
-		                              		<input type="button" class="profileBtn" onclick="fnProfileOn(${ps.userNo})" name="detail" value="프로필보기">
 		                              	</td>
 		                              </c:otherwise>
 		                          </c:choose>
 		                              
-		                              <td class="line">&nbsp; 이 름 :</td>
-		                              <td class="line">&nbsp;${ps.userNickname}</td>
+		                              <td class="line2">&nbsp; 이 름 :</td>
+		                              <td class="line3">${ps.userNickname}
+ 		                              		<input type="button" class="profileBtn" onclick="fnProfileOn(${ps.userNo})" name="detail" value="프로필보기">		                              
+		                              </td>
 		                          </tr>
 		                          <tr>
-		                              <td class="line">&nbsp; 평 점 :</td>
-		                              <td class="line">&nbsp;${ps.avg}</td>
+		                              <td class="line2">&nbsp; 지 역 :</td>
+		                              <td class="line3">${ps.userAddress}</td>
 		                          </tr>
 		                          <tr>
-		                              <td class="line">&nbsp; 지 역 </td>
-		                              <td class="line">&nbsp;${ps.userAddress}</td>
+		                              <td class="line2">&nbsp; 평 점 :</td>
+		                              <c:choose>
+		                              	<c:when test="${ps.avg > 0 && ps.avg < 1}">
+		                                	<td class="line3"><span class="star">☆</span>(${ps.avg})</td>
+		                              	</c:when>
+		                              	<c:when test="${ps.avg == 1}">
+		                                	<td class="line3"><span class="star">★</span>(${ps.avg})</td>
+		                              	</c:when>
+		                              	<c:when test="${ps.avg > 1 && ps.avg < 2}">
+		                                	<td class="line3"><span class="star">★☆</span>(${ps.avg})</td>
+		                              	</c:when>
+		                              	<c:when test="${ps.avg == 2}">
+		                                	<td class="line3"><span class="star">★★</span>(${ps.avg})</td>
+		                              	</c:when>
+		                              	<c:when test="${ps.avg > 2 && ps.avg < 3}">
+		                                	<td class="line3"><span class="star">★★☆</span>(${ps.avg})</td>
+		                              	</c:when>
+		                              	<c:when test="${ps.avg == 3}">
+		                                	<td class="line3"><span class="star">★★★</span>(${ps.avg})</td>
+		                              	</c:when>
+		                              	<c:when test="${ps.avg > 3 && ps.avg < 4}">
+		                                	<td class="line3"><span class="star">★★★☆</span>(${ps.avg})</td>
+		                              	</c:when>
+		                              	<c:when test="${ps.avg == 4}">
+		                                	<td class="line3"><span class="star">★★★★</span>(${ps.avg})</td>
+		                              	</c:when>
+		                              	<c:when test="${ps.avg > 4 && ps.avg < 5}">
+		                                	<td class="line3"><span class="star">★★★★☆</span>(${ps.avg})</td>
+		                              	</c:when>
+		                              	<c:when test="${ps.avg == 5}">
+		                                	<td class="line3"><span class="star">★★★★★</span>(${ps.avg})</td>
+		                              	</c:when>
+		                              	<c:otherwise>
+		                                	<td class="line3"><span class="star">☆☆☆☆☆</span>(0.0)</td>		                              	
+		                              	</c:otherwise>
+		                              </c:choose>
 		                          </tr>
 	 	                    </c:forEach>
 	                    </tbody>
@@ -199,7 +232,7 @@ pageEncoding="UTF-8"%>
      <!-------------content 3. 펫시터프로필----------------->
 
      <div class="profile">
-        <div class="profile_close" id="profileClose"><a href="">close</a></div>
+        <div class="profile_close" id="profileClose"><a>close</a></div>
         
         <div id="profile_wrap">
         	<h1>프로필</h1>
@@ -210,27 +243,45 @@ pageEncoding="UTF-8"%>
 					    <img id="photo" src="">
 					</div>
 	        		<div id="psInfo" class="flex_item">
+	        			<h3 align="right"><span id="star"></span><span id="psAvg"></span></h3>
 	        			<h4>닉네임 : <span id="psNickname"></span></h4>
 	        			<hr>
-	        			<h4>평 점 : </h4>
-	        			<hr>
-	        			<h4>지 역 : <span id="psAddress"></span></h4>
+	        			<h4>지&nbsp;&nbsp;&nbsp;역 : <span id="psAddress"></span></h4>
 	        			<hr>
 	        			<h4>소개글 : <span id="psIntroduce"></span></h4>
 		        		<hr>
-		        		<input type="button" onclick="fnMatchingOn(${ps.userNo})" name="matching" value="matching">        			
-	        		</div>
+		        		<form action="/search/matching" method="GET">
+			        		<input type="hidden" id="matching" name="userNo" value="">        			
+			        		<input type="submit" id="matchingBtn" value="matching">  
+		        		</form>  			
+	        		</div>        		
 	        	</div>
 			</header>
 			
 			<div id="profile_content">
 				<aside id="profile_side">
 					<div id="serviceInfo" class="flex_item">
-	        			서비스 유형 : <span id="psServiceTypeCode"></span><br>
-	        			서비스 비용 : <span id="psPrice"></span><br>
-	        			이용가능 반려동물 : <span id="psPetTypeCode"></span><br>
-	        			이용가능 날짜 : <span id="psServiceDate"></span><br>
-	        			스킬 : <span id="psSkillTypeCode"></span><br>
+						<div id = service1>						
+		        			<h5>서비스제공 날짜</h5>
+		        			<span id="psServiceDate"></span>
+		        			<table id="calendar">
+						    </table>
+						</div>
+						
+						<div id = service2>						
+							<h5>반려동물 유형</h5>
+		        			<ul id="psPetTypeCode"></ul>
+						</div>
+	        			
+						<div id = service3>						
+		        			<h5>서비스 유형 및 비용</h5>
+		        			<ul id="psServiceTypeCode"></ul>
+						</div>
+	        			
+						<div id = service4>						
+		        			<h5>스킬</h5>
+		        			<ul id="psSkillTypeCode"></ul>
+						</div>
 	        			
 	        		</div>
 				</aside>
@@ -262,9 +313,13 @@ pageEncoding="UTF-8"%>
 						</div>
 	        		</div>
 	        		
-	        		<div id="review-list" class="flex_item">
-	        			리뷰목록
-	        		</div>
+	        		<div id="review-list" class="flex_item"> <!-- 리뷰리스트 출력 --> </div>
+		        	
+		        	<div class="black_bg"></div>
+		        	<div id="modalBox">
+		        		<div class="reviewModal" >  <!-- 모달창-리뷰 --> </div>
+		        	</div>
+		        	
 	        	</section>
 			</div>
         </div>

@@ -21,7 +21,7 @@ public interface SearchService {
 	
 	public abstract List<PetSitterDTO> getActivityPhoto(Integer userNO);	//특정 펫시터프로필 정보조회(활동사진)
 	
-	public abstract List<PetSitterDTO> getReview(Integer userNO);			//특정 펫시터프로필 정보조회(리뷰&답글)
-	
+	public abstract List<PetSitterDTO> getReview(Integer userNO);			//특정 펫시터프로필 정보조회(리뷰+답글)
+
 	
 } //end interface

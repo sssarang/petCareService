@@ -110,13 +110,18 @@
 	<!-- 펫시터프로필 -기본정보(+. 평점추가예정★★★★★) -->
 	<select id="getPs" resultType="com.bitcamp.petcare.matching.domain.PetSitterDTO">
 		SELECT /*+ index_desc(tbl_user) */ 
+		     u.user_no,
 		     u.user_nickname,
 		     u.user_address,
 		     u.user_latitude,
 		     u.user_longitude,
 		     u.user_gender,
 		     ps.pro_photo,		     
-		     ps.introduce
+		     ps.introduce,
+		     (SELECT ROUND(AVG(r.grade), 1) 
+			  FROM tbl_service_matching sm
+			  INNER JOIN tbl_review r ON sm.service_id = r.service_id 
+			  WHERE sm.pet_sitter_no = U.USER_NO) as avg
 		FROM tbl_user u
 		INNER JOIN  tbl_petsitter_profile ps on u.user_no 
 		                                      = ps.user_no
@@ -141,11 +146,12 @@
 	<select id="getServiceCalendar" resultType="com.bitcamp.petcare.matching.domain.PetSitterDTO">
 		SELECT /*+ index_desc(tbl_petsitter_profile) */ 
 		     ps.user_no,
-		     sc.service_date
+		     TO_CHAR(sc.service_date,'yyyy-MM-dd') as service_date
 		FROM tbl_petsitter_profile ps
 		INNER JOIN tbl_service_calendar sc on ps.user_no 
                                             = sc.user_no
 		WHERE ps.user_no = #{userNo} 
+		AND service_date BETWEEN (sysdate-1) AND (sysDate+90)
 	</select>
 	
 	
@@ -186,20 +192,25 @@
 	</select>	
 	
 	
-	<!-- 리뷰&답글 -->
+	<!-- 리뷰 -->
 	<select id="getReview" resultType="com.bitcamp.petcare.matching.domain.PetSitterDTO">
 		SELECT /*+ index_desc(tbl_service_matching) */ 
-		     sm.pet_sitter_no,
+		     sm.service_id,
+             ps.pro_photo as petPhoto,
+             revu.user_Nickname as revWriter,
+             rev.grade,
              rev.rev_content,
-             rev.writer,
-             rev.writer_date,
+             rev.writer_no,
+             TO_CHAR(rev.writer_date,'yyyy-MM-dd') as revDate,
              rep.rep_content,
              rep.writer,
-             rep.writer_date
+             TO_CHAR(rep.writer_date,'yyyy-MM-dd') as repDate
 		FROM tbl_service_matching sm
 		INNER JOIN tbl_review rev on sm.service_id = rev.service_id
-        INNER JOIN tbl_reply rep on rev.service_id = rep.service_id
-		WHERE sm.pet_sitter_no = #{userNo}
+        INNER JOIN tbl_user revu on rev.writer_no = revu.user_no
+        INNER JOIN tbl_pet_profile ps on revu.user_no = ps.user_no
+        LEFT OUTER JOIN tbl_reply rep on sm.service_id = rep.service_id
+        WHERE sm.pet_sitter_no = #{userNo}
 	</select>
 	
 	

@@ -135,6 +135,7 @@
             var list = new Array();
 			var listLength = '${fn:length(list)}';
 			
+			//리스트가 존재하는 경우
 			if(listLength > 0 ){
 				<c:forEach items="${list}" var="item">
 					var jsonObject = new Object(); 
@@ -146,24 +147,23 @@
 					list.push(jsonObject);
 				</c:forEach>
 				
-				//map API 호출+출력
+				//noSearch화면 숨기기
 				$('#noSearch').hide();
-				displayPlaces(list);		
-			}else{
+
+				//map API 호출+출력
+				displayPlaces(list);
+				
+			//리스트가 존재하지 않는 경우
+			} else{
+
+				//noSearch화면 호출
 				$('#noSearch').show();
+
+				//map화면 숨기기
 				$('#map').hide();
+				
 			} //if-else
 			
-			 
-			/* <c:choose>
-				<c:when test="${fn:length(list) > 0}">
-					//map API 호출+출력
-					displayPlaces(list);
-				</c:when>
-				<c:otherwise>
-					
-				</c:otherwise>
-			</c:choose> */
 		
 		 });
 
