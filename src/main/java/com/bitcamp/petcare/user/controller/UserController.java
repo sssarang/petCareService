@@ -44,6 +44,11 @@ public class UserController {
 	Double y;			//위도
 	char classify;	//회원 구분
 	
+	@GetMapping("test")
+	public String test() {
+		return "admin/adminPage";
+	}
+	
 	@GetMapping("temp")
 	public void temp() {
 		;;
@@ -67,13 +72,12 @@ public class UserController {
 		return "user/joinPage";
 	}//joinUser
 	
+	
 	//view controller 매핑
 	//로그인
 	@PostMapping("login")
-	public String loginUser(UserDTO dto, Model model, HttpSession session, HttpServletRequest req, HttpServletResponse res) throws Exception {
+	public void loginUser(UserDTO dto, Model model, HttpSession session, HttpServletRequest req, HttpServletResponse res) throws Exception {
 		log.debug("loginUser({}) invoked", dto);
-		StringBuilder to = new StringBuilder("redirect:");
-
 		//==============================================================//
 		//1. 전송파라미터에 해당되는 사용자가 있는지 확인
 		//==============================================================//
@@ -106,21 +110,7 @@ public class UserController {
 				int affectedLines = this.service.modifyUserWithRememberMe(rememberUpdate);
 				log.info("\t + affectedLines : {}", affectedLines);
 			} //if : Remember-Me 옵션이 on일 때..
-			
-			to.append("/");
-		} 
-		else {
-			//로그인 실패시
-//			try {
-//				ScriptUtils.alert(res, "회원정보가 잘못되었습니다. 다시 입력하세요.");
-//				
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}		
-			to.append("/user/loginPage");
-//			ScriptUtils.alert(res, "회원정보가 잘못되었습니다. 다시 입력하세요.");
-		}//if-else
-		return to.toString();
+		}
 	}//loginUser
 	
 //	@ResponseStatus(code=HttpStatus.OK)
