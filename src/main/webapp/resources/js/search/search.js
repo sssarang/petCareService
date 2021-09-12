@@ -420,7 +420,7 @@
 				//펫시터스킬------------------------------//	
 				var resultSk = result.psSkill;			 
 				var sk ="";
-
+				
 				$.each(resultSk, function(i){
 					console.log(">>>>"+resultSk[i].skillTypeCode);
 					
@@ -454,70 +454,87 @@
 				var resultRv = result.review;			 
 				var rev ="";
 				
-				$.each(resultRv, function(i){
-					console.log(">>>>"+resultRv[i].petPhoto);
-					console.log(">>>>"+resultRv[i].grade);
-					console.log(">>>>"+resultRv[i].revContent);
-					console.log(">>>>"+resultRv[i].revWriter);
-					console.log(">>>>"+resultRv[i].revDate);
+				
+				if(resultRv.length === 0){
+					var noReview = '/resources/assets/img/search/review.jpg';
 					
-					console.log(">>>>"+resultRv[i].repContent);
-					console.log(">>>>"+resultRv[i].writer);
-					console.log(">>>>"+resultRv[i].repDate);
+					rev += "<div class='noReview'>";
+					rev += "<img class='noReviewImg' src='"+ noReview +"'>";										
+					rev += "<p>등록된 리뷰가 없습니다.</p></div>";
 					
-					//평점(별표시)
-					var grade = parseFloat(resultRv[i].grade).toFixed(1);
-					var star;
-					
-					if(grade == 1){
-						star = "★";
-					} else if(grade == 2){
-						star = "★★";					
-					} else if(grade == 3){
-						star = "★★★";					
-					} else if(grade == 4){
-						star = "★★★★";					
-					} else if(grade == 5){
-						star = "★★★★★";					
-					} //if-else	
-					
-					//기본프로필사진-----------------------//
-					var petUserBasic = '/resources/assets/img/search/petuser.jpg';
-					console.log("ggg"+resultRv[i].revContent);
-					
-					
-					//리뷰div
-					rev += "<div class='review'>"; 
-					
-					if(resultRv[i].petPhoto === null){
-						rev += "<img class='revImg' src='"+ petUserBasic+"'>";										
-					} else{
-						rev += "<img class='revImg' src='"+ resultRv[i].petPhoto+"'>";					
-					};
-			
-					rev += "<div>";
-					rev += "<span class='star'>" + star + "</span>(" + grade + ")<br>";
-					rev += "<span>" + resultRv[i].revWriter + " ("+resultRv[i].revDate + ")</span></div>";
-					rev += "</div>";
-					rev += "<div class='revContent'>" + resultRv[i].revContent + "</div>";
-					rev += "</div>";
-					
-					//답글div
-					if(resultRv[i].repContent != null){
-						rev += "<div class='reply'>"; 
+					$("#review-list").html(rev);
+
+				} else{
+					$.each(resultRv, function(i){
+						console.log(">>>>"+resultRv[i].petPhoto);
+						console.log(">>>>"+resultRv[i].grade);
+						console.log(">>>>"+resultRv[i].revContent);
+						console.log(">>>>"+resultRv[i].revWriter);
+						console.log(">>>>"+resultRv[i].revDate);
+						
+						console.log(">>>>"+resultRv[i].repContent);
+						console.log(">>>>"+resultRv[i].writer);
+						console.log(">>>>"+resultRv[i].repDate);
+						
+						//평점(별표시)
+						var grade = parseFloat(resultRv[i].grade).toFixed(1);
+						var star;
+						
+						if(grade == 1){
+							star = "★";
+						} else if(grade == 2){
+							star = "★★";					
+						} else if(grade == 3){
+							star = "★★★";					
+						} else if(grade == 4){
+							star = "★★★★";					
+						} else if(grade == 5){
+							star = "★★★★★";					
+						} //if-else	
+						
+						//기본프로필사진-----------------------//
+						var petUserBasic = '/resources/assets/img/search/petuser.jpg';
+						
+						//리뷰div
+						rev += "<div class='review'>"; 
+						
+						if(resultRv[i].petPhoto === null){
+							rev += "<img class='revImg' src='"+ petUserBasic+"'>";										
+						} else{
+							rev += "<img class='revImg' src='"+ resultRv[i].petPhoto+"'>";					
+						};
+				
 						rev += "<div>";
-						rev += "<span>" + resultRv[i].writer + " ("+resultRv[i].repDate + ")</span></div>";
-						rev += "<div class='repContent'>" + resultRv[i].repContent + "</div>";
+						rev += "<span class='star'>" + star + "</span>(" + grade + ")<br>";
+						rev += "<span>" + resultRv[i].revWriter + " ("+resultRv[i].revDate + ")</span></div>";
 						rev += "</div>";
-					}
+						rev += "<div class='revContent'>" + resultRv[i].revContent + "</div>";
+						rev += "</div>";
+						
+						//답글div
+						if(resultRv[i].repContent != null){
+							rev += "<div class='reply'>"; 
+							rev += "<div>";
+							rev += "<span>" + resultRv[i].writer + " ("+resultRv[i].repDate + ")</span></div>";
+							rev += "<div class='repContent'>" + resultRv[i].repContent + "</div>";
+							rev += "</div>";
+							
+						}
+							rev += "<hr>";
+						
+					}); //each
 					
-					rev += "<hr>";
+					$("#review-list").html(rev);
+					$("#review-list").append("<input type='button' id='moreBtn' value='more'>");
 					
-				}); //each
-				
-				$("#review-list").html(rev);
-				$("#review-list").append("<input type='button' id='moreBtn' value='more'>");
-				
+					$("#modalBox").html(rev);
+					$("#modalBox").append("<div id='closeBtn'><a>close</a></div>");
+					
+					document.getElementById("moreBtn").addEventListener("click", fnModalOpen);
+					document.getElementById("closeBtn").addEventListener("click", fnModalClose);
+					
+				} //if-else
+  
 				 
 				//---------------리뷰 모달창 생성-------------------//
 				
@@ -531,11 +548,7 @@
 					$('.black_bg').hide();  
 				}; //fnModalOpen
 
-				$("#modalBox").html(rev);
-				$("#modalBox").append("<div id='closeBtn'><a>close</a></div>");
 				
-				document.getElementById("moreBtn").addEventListener("click", fnModalOpen);
-				document.getElementById("closeBtn").addEventListener("click", fnModalClose);
 
 				//================================//
 				//           2.프로필 호출
