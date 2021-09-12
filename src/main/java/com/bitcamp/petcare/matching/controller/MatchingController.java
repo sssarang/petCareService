@@ -36,19 +36,22 @@ public class MatchingController {
 	@Setter(onMethod_=@Autowired)
 	private MatchingService service;
 
+	
 	// 예약화면에 회원, 반려동물 정보 띄우기
 	@GetMapping("matching")
 	public void getUserPet(Integer userNo, Model model, HttpSession session, HttpServletRequest req) {
 		
 		log .debug("getUserPet({}, {}) invoked...", userNo, model);
 		
-		// 세션객체를 가져온다. 
+		// 세션객체를 확인한다. 
 		HttpSession sessioncheck = req.getSession(false);
 		log.info("sessioncheck: {}", sessioncheck );
-
+		
+		// 세션객체를 가져온다
 		UserVO loginInfo = (UserVO) session.getAttribute(UserController.loginKey);
 		log.info("loginInfo: {}", loginInfo );
 		
+		// 로그인 세션의 userNo정보를 가져온다
 		int petUserNo = Integer.parseInt(loginInfo.getUserNo());
 		log.info("petUserNo: {}", petUserNo );
 	
@@ -59,10 +62,10 @@ public class MatchingController {
 		log.info("\t+matching: {}", matching);
 		
 		model.addAttribute("matching", matching);
-		
 	} //getUserPet
 	
 	
+	// 예약정보를 서버로 전송한 뒤에 마이페이지로 이동
 	@PostMapping("booking")
 	public String booking(MatchingDTO matching) {
 		log.debug("booking({}) invoked." , matching);
@@ -87,6 +90,7 @@ public class MatchingController {
 		return resultServiceType;
 	} //showFaq
 	
+	
 	// 비동기식 ajax를 사용할 때 db에서 불러올 데이터 리스트
 	@ResponseBody
 	@PostMapping("ableDate")
@@ -99,4 +103,5 @@ public class MatchingController {
 		
 		return resultAbleDates;
 	} //showFaq
+	
 } //end class

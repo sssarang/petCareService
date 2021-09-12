@@ -8,8 +8,9 @@ public class ReviewVO {
 	//tbl_review
 	private Integer serviceId;
 	private String revContent;
-	private Double grade;
-	private String writer;
+	
+	//tbl_user
+	private String userNickname;
 	
 	
 	//tbl_petsitter_profile

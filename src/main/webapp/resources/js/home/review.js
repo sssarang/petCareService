@@ -22,7 +22,7 @@ $(function(){
 				
 				
 				// 작성자
-				var resultWriter = getFields(list, 'writer');
+				var resultWriter = getFields(list, 'userNickname');
 				
 				$('#writer1').text(resultWriter[0]);
 				$('#writer2').text(resultWriter[1]);
@@ -37,9 +37,9 @@ $(function(){
 				
 				// 프로필사진
 				var resultPhoto = getFields(list, 'proPhoto');
-				$('#photo1').text(resultPhoto[0]);
-				$('#photo2').text(resultPhoto[1]);
-				$('#photo3').text(resultPhoto[2]);
+				$('#photo1').attr('src', resultPhoto[0]);
+				$('#photo2').attr('src', resultPhoto[1]);
+				$('#photo3').attr('src', resultPhoto[2]);
 				
 			} //success
 			

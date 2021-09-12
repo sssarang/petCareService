@@ -15,11 +15,11 @@
 	
 	
 	<select id="getReview" resultType="com.bitcamp.petcare.home.domain.ReviewVO">
-		SELECT r.service_id, r.rev_content, r.grade, r.writer, r.writer_date, p.pro_photo
+		SELECT r.service_id, r.rev_content, u.user_nickname, p.pro_photo
 		FROM tbl_review r
-		INNER JOIN tbl_service_matching m ON m.service_id = r.service_id  
-		INNER JOIN tbl_pet_profile p ON p.user_NO = m.pet_user_no
-		WHERE r.service_id IN(16, 22, 19)
+		INNER JOIN tbl_user u ON u.user_no = r.writer_no  
+		INNER JOIN tbl_pet_profile p ON p.user_NO = r.writer_no
+		WHERE r.service_id IN(16, 20, 19)
 	</select>
 	
 	

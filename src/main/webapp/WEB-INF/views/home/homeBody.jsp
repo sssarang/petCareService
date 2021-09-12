@@ -233,21 +233,21 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="reviews-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3" src="/resources/assets/img/home/testimonials-1.jpg" alt="..." />
+                    <img id="photo1" class="img-fluid rounded-circle mb-3" src="" alt="..." />
                     <h5 id="writer1"></h5>
                     <p id="content1" class="font-weight-light mb-0"></p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="reviews-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3" src="/resources/assets/img/home/testimonials-2.jpg" alt="..." />
+                    <img id="photo2" class="img-fluid rounded-circle mb-3" src="" alt="..." />
                     <h5 id="writer2"></h5>
                     <p id="content2" class="font-weight-light mb-0"></p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="reviews-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3" src="/resources/assets/img/home/testimonials-3.jpg" alt="..." />
+                    <img id="photo3" class="img-fluid rounded-circle mb-3" src="" alt="..." />
                     <h5 id="writer3"></h5>
                     <p id="content3" class="font-weight-light mb-0"></p>
                 </div>
