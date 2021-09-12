@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.petcare.mypage.mapper.CustomerInfoManageMapper">
+
+
+<select id="readInfo" resultType="com.bitcamp.petcare.mypage.domain.CustomerInfoManageVO">
+
+	SELECT user_nickname,
+		   user_id,
+		   user_pw,
+		   user_contact,
+		   user_address,
+		   user_gender
+	FROM tbl_user
+	WHERE user_no = ${userNo}
+
+</select>
+
+</mapper>

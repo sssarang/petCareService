@@ -319,6 +319,20 @@
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.12.0</version>
 		</dependency>
+		
+		<!-- ============= 11. 파일업로드/다운로드 ================ -->
+		<!-- MultipartHttpServletRequset -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.0.1</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.2.2</version>
+		</dependency>
 
 	</dependencies>
 

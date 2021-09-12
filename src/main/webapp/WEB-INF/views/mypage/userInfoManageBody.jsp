@@ -38,12 +38,13 @@
                         <form action="/mypage/userInfoModify" method="POST">
                             <h1 id="head">회원정보관리</h1>
                             <div id="form-group">
+                                <div>
                                     <label>닉네임 </label>
-                                    <input type="text" name="user_nickname" class="form-control" placeholder="Nickname">
+                                    <input type="text" name="userNickname" class="form-control" placeholder="Nickname" value="${info.userNickname}">
                                     <button tpye="submit" class="btn_nickname">확인</button>
-
+                                </div>
                                     <label>아이디 </label>
-                                    <input type="text" name="user_id" class="form-control" placeholder="ID" readonly>
+                                    <input type="text" name="user_id" class="form-control" placeholder="${info.userId}" readonly>
                                     
                                     <label>비밀번호 </label>
                                     <input type="password" name="user_pw" class="form-control" >
@@ -52,10 +53,10 @@
                                     <input type="password" name="user_pw" class="form-control" >
                                     
                                     <label>연락처 </label>
-                                    <input type="tel" name="user_contact" class="form-control" placeholder="010-4786-3153">
+                                    <input type="tel" name="user_contact" class="form-control" placeholder="전화번호" value="${info.userContact}">
                                     
                                     <label>주소 </label>
-                                    <input type="text" name="user_address" class="form-control" placeholder="서울시 영등포구 여의도동">
+                                    <input type="text" name="user_address" class="form-control" placeholder="주소" value="${info.userAddress}">
                                     
                                     <label>성별</label>
                                     <input type="radio" name="gender" class="gender" value="female" checked>여성

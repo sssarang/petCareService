@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.petcare.mypage.mapper.CustomerHistoryManageMapper">
+
+
+<select id="readHistory" resultType="com.bitcamp.petcare.mypage.domain.CustomerHistoryManageVO">
+	SELECT 
+		m.start_date,
+	    c.code_name,
+	    u.user_nickname,
+	    u.user_contact,
+	    p.pro_photo,
+	    m.service_id
+	FROM tbl_service_matching m
+	INNER JOIN tbl_user u ON (m.pet_sitter_no = u.user_no)
+	INNER JOIN tbl_petsitter_profile p ON ( u.user_no = p.user_no )
+	INNER JOIN tbl_common_code c ON ( m.service_type_code = c.code )
+	WHERE m.pet_user_no = #{petUserNo}
+		AND m.step_type_code = 34
+	ORDER BY m.service_id DESC
+</select>
+
+<insert id="insertReview">						
+		INSERT INTO tbl_review (service_id, 
+						   rev_content, 
+						   grade, 
+						   writer, 
+						   writer_date)
+		VALUES (#{serviceId},
+	        	#{revContent},
+	        	#{grade},
+	        	#{userNickname},
+	        	current_date)
+</insert>
+
+<update id="updateReview">						
+	UPDATE
+		tbl_review
+	SET
+		grade = #{grade},
+		rev_content = #{revContent}
+	WHERE service_id = #{serviceId}
+
+</update>
+
+</mapper>

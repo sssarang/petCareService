@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.petcare.mypage.mapper.CustomerResvManageMapper">
+
+	<select id="readResv" resultType="com.bitcamp.petcare.mypage.domain.CustomerResvManageVO">
+		SELECT m.service_id "서비스 아이디",
+			   TO_CHAR(m.reg_date , 'YYYY-MM-DD') "예약등록일자",
+		       s.code_name "예약진행단계코드",
+		       p.pro_photo "프로필 사진",
+		       u.user_nickname "펫시터 닉네임",
+		       u.user_contact "펫시터 연락처",
+		       d.code_name "서비스유형",
+		       m.total_amount "금액",
+		       m.start_date "서비스날짜",
+		       m.pet_user_no "반려인 회원번호"
+		FROM tbl_service_matching m
+		INNER JOIN tbl_user u ON ( m.pet_sitter_no = u.user_no)
+		INNER JOIN tbl_petsitter_profile p ON ( m.pet_sitter_no = p.user_no )
+		INNER JOIN tbl_common_code d ON (m.service_type_code = d.code)
+        INNER JOIN tbl_common_code s ON (m.step_type_code = s.code)
+		WHERE m.pet_user_no = #{petUserNo}
+			AND m.step_type_code BETWEEN 31 AND 33
+	</select>
+	
+	<select id="readPayment" resultType="com.bitcamp.petcare.mypage.domain.CustomerPaymentManageVO">
+		SELECT p.user_no "결제자회원번호"
+		FROM tbl_payment p
+		WHERE p.service_id = #{serviceId}
+	</select>	
+	
+	<insert id="insertPayment">
+		INSERT INTO tbl_payment
+		VALUES (
+				#{serviceId},
+				#{paymentTypeCode},
+				#{price},
+				current_date,
+				#{userNo}
+		)
+	</insert>
+	
+	<update id="cancelResv">
+		UPDATE 
+			tbl_service_matching
+		SET 
+			step_type_code = 35
+		WHERE service_id = ${serviceId}
+	</update>
+
+</mapper>
+

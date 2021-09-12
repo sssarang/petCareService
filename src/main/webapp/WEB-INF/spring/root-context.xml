@@ -80,5 +80,8 @@
 	<mybatis-spring:scan base-package="com.bitcamp.petcare.mypage.mapper"/>
 	<mybatis-spring:scan base-package="com.bitcamp.petcare.admin.mapper"/>
 	
+	<!-- 프로필사진 업로드 관련 -->
+    <bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
 	
 </beans>

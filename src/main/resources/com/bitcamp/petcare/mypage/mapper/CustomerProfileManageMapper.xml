@@ -5,20 +5,19 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bitcamp.petcare.mypage.mapper.customerProfileManageMapper">
+<mapper namespace="com.bitcamp.petcare.mypage.mapper.CustomerProfileManageMapper">
 
-    <select id="readProfile">
+    <select id="readProfile" resultType="com.bitcamp.petcare.mypage.domain.CustomerProfileManageVO">
 		SELECT 
 		    p.pro_photo,
-		    c.code_name,
+		    p.pet_type_code,
 		    p.pet_name,
-		    p.pet_birthday,
+		    TO_CHAR(p.pet_birthday, 'YYYY-MM-DD'),
 		    p.pet_gender,
 		    p.neutralization,
 		    p.medicine,
 		    p.special_note
 		FROM tbl_pet_profile p
-		INNER JOIN tbl_common_code c ON p.pet_type_code = c.code
 		where p.user_no = #{userNo}
 	 </select>
 	 
@@ -40,7 +39,7 @@
 			#{proPhoto}, 
 			#{petTypeCode}, 
 			#{petName}, 
-			#{petBirthday}, 
+			TO_DATE(#{petBirthday} , 'yyyy-MM-dd'),
 			#{petGender}, 
 			#{neutralization}, 
 			#{medicine}, 
@@ -56,13 +55,13 @@
 		    pro_photo = #{proPhoto},
 		    pet_type_code = #{petTypeCode},
 		    pet_name = #{petName},
-		    pet_birthday = #{petBirthday},
+		    pet_birthday = TO_DATE(#{petBirthday} , 'yyyy-MM-dd'),
 		    pet_gender = #{petGender},
 		    neutralization = #{neutralization},
 		    medicine = #{medicine},
-		    special_note = #{specialNote}
-		    mod_user_no = #{user_no},
+		    special_note = #{specialNote},
+		    mod_user_no = #{userNo},
 		    mod_date = current_date
-		WHERE user_no = #{user_no}
+		WHERE user_no = #{userNo}
 	  </update>
 </mapper>

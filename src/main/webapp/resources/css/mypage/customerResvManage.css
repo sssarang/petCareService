@@ -2184,7 +2184,7 @@ progress {
 
 .form-control {
   display: block;
-  width: 100%;
+  width: 130%;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
@@ -5470,7 +5470,7 @@ textarea.form-control-lg {
 }
 
 .modal {
-  position: fixed;
+  position: flex;
   top: 0;
   left: 0;
   z-index: 1055;
@@ -11378,7 +11378,7 @@ body{
 
 #reservation{
     width: 600px;
-    height: 320px;
+    height: 580px;
   
     border: 2px solid;
     border-radius: 20px;
@@ -11395,12 +11395,10 @@ body{
     display: inline;   
 }
 
-#reservation #btn_state{
+#reservation #stepTypeCodeName{
     display: inline;
     width:100px;
-    background-color: #f8585b;
     border: solid rgb(201, 201, 243);
-    background-color: #198754;
     margin-top: 1px;
     margin-bottom: 10px;
     margin-left: 200px;
@@ -11419,6 +11417,7 @@ body{
     float: left;
   
     width: 30%;
+    margin-top: 60px;
     margin-left: 20px;  
   
     border-radius: 40px;
@@ -11454,17 +11453,19 @@ body{
   text-decoration: none;
   font-size: 15px;
   cursor: pointer;
+  
 
   border-radius: 30px;
   left: 50px;
 }
 
 #psInfo #btn_charge{
-    margin-left: 120px;
+    margin-left: 300px; !important
 }
 
 #psInfo #btn_cancel{
-    margin-left: 10px;
+    float: right;
+    margin-right: 40px;
 }
 
 #psInfo #btn_charge:hover,
@@ -11524,16 +11525,133 @@ body{
     left: 50px;
 }
 
-#resvExplain #btn_wait{ 
-    background-color: #ffc107;
+
+.form-control {
+  display: block;
+  width: 130%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-#resvExplain #btn_approve{
-    background-color: #198754;
+.form-control[readonly] {
+  background-color: #F9C7A1;
+  opacity: 1;
 }
 
 
 
-#resvExplain #btn_refuse{
-    background-color: #f8585b;
+/* 새로고침 버튼 */
+
+#reload-btn{
+  margin-left: 20px;
+
+  transition: all ease 1s;
 }
+
+#reload-btn:hover{
+  
+  transform: rotate( 720deg )
+}
+
+/* 결제창 관련 */
+
+.btn-payment{
+  margin-top: 30px;
+  margin-right: 200px;
+  
+  float: right;
+
+  width:80px;
+  background-color: #f8585b;
+  border: solid rgb(201, 201, 243);
+  background-color:#fff;
+  padding: 10px 0;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  cursor: pointer;
+  
+
+  border-radius: 30px;
+  left: 50px;
+}
+
+.btn-payment:hover{
+  background-color: #f9c7a1;
+}
+
+
+.dataExist {
+  width: 600px;
+  height: 150px;
+
+  border: 2px solid;
+  border-radius: 20px;
+
+  border-color: #f9c7a1;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+
+  margin-top: 20px;
+  margin-left: 100px;
+
+  text-align: center;
+  text-decoration: none;
+  color: #f9c7a1;
+}
+
+ .nonDataForm{
+   margin-top: 50px;
+   margin-left: 300px;
+ }
+
+ .modal-body{
+   height: 300px;
+ }
+
+ .modal-content2{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 180%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+ }
+
+ .cancelResv{
+  width: 470px;
+  height: 200px;
+
+  border: 2px solid;
+  border-radius: 20px;
+
+  border-color: #f9c7a1;
+
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+
+  margin-top: 10px;
+  margin-left: 20px;
+
+  text-align: center;
+  text-decoration: none;
+  color: #f9c7a1;
+ }
