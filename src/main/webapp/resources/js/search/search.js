@@ -532,6 +532,7 @@
 					
 					document.getElementById("moreBtn").addEventListener("click", fnModalOpen);
 					document.getElementById("closeBtn").addEventListener("click", fnModalClose);
+
 					
 				} //if-else
   
@@ -543,24 +544,36 @@
 					$('.black_bg').show();  
 				}; //fnModalOpen
 				
+				
 				function fnModalClose(){
 					$('#modalBox').hide();  
 					$('.black_bg').hide();  
 				}; //fnModalOpen
 
+
+				//매칭버튼			
+				//-------------로그인세션 회원유형 check-----------------//		
+				var classify = result.classifySession;
+				console.log('>>>>>' + classify);
 				
+				document.getElementById("matchingBtn").addEventListener("click", function fnMatching(classify){
+					if(classify != 1){
+						swal("", "반려인만 사용가능한 서비스입니다.", "warning");
+						event.preventDefault();
+					} //if	
+				});
+
 
 				//================================//
 				//           2.프로필 호출
 				//================================//
 		  		$('.profile').show();
-	      }
-	  })	
+	      
+			} //success
+
+	  }) //ajax	
 	
 	} //fnProfileOn(userNo: 해당회원번호)  
-	
-
-	
 	
 	
 	function fnProfileOff(){
@@ -568,6 +581,8 @@
 	} //fnProfileOff
 
 	document.getElementById("profileClose").addEventListener("click", fnProfileOff);
+
+
     
 	//-------------프로필 활동사진 생성-----------------//
 	

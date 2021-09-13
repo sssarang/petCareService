@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bitcamp.petcare.matching.domain.FilterDTO;
 import com.bitcamp.petcare.matching.domain.PetSitterDTO;
 import com.bitcamp.petcare.matching.service.SearchService;
+import com.bitcamp.petcare.user.controller.UserController;
+import com.bitcamp.petcare.user.domain.UserVO;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -56,12 +61,31 @@ public class SearchController {
 	
 	@ResponseBody
 	@PostMapping("psProfile")
-	public Map<String,Object> getPs(@RequestParam("userNo")Integer userNo) {
-		log.debug("getPs({}) invoked.", userNo);
+	public Map<String,Object> getPs(
+			@RequestParam("userNo")Integer userNo, 
+			HttpSession session) {
+		log.debug("getPs({}, {}) invoked.", userNo, session);
 		
 		//리턴객체 map
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<String,Object>();		
+
+		
+		//세션객체 loginSession
+		UserVO loginSession = (UserVO) session.getAttribute(UserController.loginKey);
+		log.info("loginSession: {}", loginSession);
+		
+		if(loginSession != null) {
+			// 로그인 세션의 userClassify 정보
+			String classifySession = loginSession.getUserClassify();
+			log.info("classifySession: {}", classifySession);
+			
+			map.put("classifySession", classifySession);
+		} //if
+		
+		
+		//ps 회원번호
 		map.put("userNo", userNo);		
+		
 		
 		PetSitterDTO ps = this.service.getPs(userNo);
 		Objects.requireNonNull(ps);
