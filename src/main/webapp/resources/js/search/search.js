@@ -554,13 +554,15 @@
 				//매칭버튼			
 				//-------------로그인세션 회원유형 check-----------------//		
 				var classify = result.classifySession;
-				console.log('>>>>>' + classify);
 				
 				document.getElementById("matchingBtn").addEventListener("click", function fnMatching(classify){
 					if(classify != 1){
-						swal("", "반려인만 사용가능한 서비스입니다.", "warning");
+						console.log('>>>>> 접근권한' + classify);
+						
+						swal("", "반려인 회원만 사용가능한 서비스입니다.", "warning");
 						event.preventDefault();
 					} //if	
+					
 				});
 
 
