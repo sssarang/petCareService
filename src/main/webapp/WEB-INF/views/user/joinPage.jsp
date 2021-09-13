@@ -84,7 +84,7 @@
 		                            여자<input type="radio" name="userGender" class="radio-control" value="F" checked="checked"/>
 		                            남자<input type="radio" name="userGender" class="radio-control" value="M"/>
 		
-		                            <input type="button" class="btn btn-default" id="submitBtn" value="회원가입"/>
+		                            <button type="button" class="btn btn-default" id="submitBtn">회원가입<i class="fa fa-arrow-circle-right fa-2x"></i></button>
 	                        		
 	                        </div>
 	                        <span class="form-footer">이미 가입되어있는 회원인가요? <a href="loginPage">로그인 하기</a></span>

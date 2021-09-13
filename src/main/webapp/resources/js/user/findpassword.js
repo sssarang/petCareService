@@ -3,7 +3,7 @@ var authKey = "";			//페이지 제출시 최종확인용 변수(인증번호)
 var passwordCheck = "";		//페이지 제출시 최종확인용 변수(비밀번호)
 var submitCheck = "";
 
-$(function() {
+$(document).ready(function() {
 
 	//가입되어있는 이메일이 있는지 확인
 	$('#emailBtn').click(function (){
@@ -112,7 +112,7 @@ $(function() {
 		}//if-else
 	});//end function
 	
-	$('#submitBtn').click(function (){
+/*	$('#submitBtn').click(function (){
 		var findForm = document.findForm;
 		
 		if(checkExistData($('#emailId').val(), "이메일을") == false){
@@ -145,13 +145,76 @@ $(function() {
 			$('#inputPw').val('');
 			return false;
 		} else { 
-			/*$(this).attr("type","submit");*/
-			//submitCheck = true;
-			//비밀번호 변경 후 팝업창 닫기 구현해야함
+			//alter("비밀번호가 변경되었습니다.");
+			//$(this).attr("type","submit");
+			
+			var queryString = $("#findForm").serialize() ;
+ 
+      		$.ajax({
+	            type : 'post',
+	            url : 'chagePw',
+	            data : queryString,
+				dataType : 'json',
+	            success : function(json){
+					alter("비밀번호가 변경되었습니다.");
+					closePopup();
+	            }
+	        });
+		//return true;
 		}//if
 
-	});//beforeSubmit
+	});//beforeSubmit*/
 });//jq    
+
+//최종 제출
+function check() {
+	
+	var findForm = document.findForm;
+	
+	if(checkExistData($('#emailId').val(), "이메일을") == false){
+		$('#emailLabel').text("");
+		$('#emailId').val('');
+		return false;
+	} else if(emailCheck != $('#emailId').val()) {
+		alert('이메일 중복확인 버튼을 클릭하세요.')
+		$('#emailLabel').text("");
+		return false;
+	}//if
+	
+	if(checkExistData($('#inputKey').val(), "인증번호를") == false){
+		$('#keyLabel').text("");
+		$('#inputKey').val('');
+		return false;
+	} else if(authKey != $('#inputKey').val()) {
+		alert('인증번호가 일치하지 않습니다.')
+		$('#keyLabel').text("");
+		return false;
+	}//if
+	
+	if(checkExistData($('#inputPw').val(), "비밀번호를") == false){
+		$('#pwLabel').text("");
+		$('#inputPw').val('');
+		return false;
+	} else if(passwordCheck != $('#inputPw').val()) {
+		alert('비밀번호를 다시 설정해주세요.')
+		$('#pwLabel').text("");
+		$('#inputPw').val('');
+		return false;
+	} else{
+		
+		var queryString = $("#findForm").serialize();
+ 
+        $.ajax({
+            type : 'post',
+            url : 'chagePw',
+            data : queryString,
+            success : function(json){
+				window.close();
+            }
+        });
+		//return true;
+	}
+}
 
 //popup창 종료
 function closePopup(){

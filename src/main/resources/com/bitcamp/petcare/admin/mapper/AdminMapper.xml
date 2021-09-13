@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.petcare.admin.mapper.AdminMapper">
+	
+	<insert id="insertFAQ">
+		INSERT INTO 
+			tbl_faq 
+				(faq_question AS faqQuestion, 
+				 faq_answer AS faqAnswer, 
+				 reg_user_no AS regUserNo, 
+				 reg_date AS regDate)
+		VALUES 
+			(#{faqQeustion}, 
+			 #{faqAnswer},
+			 #{regUserNo},
+			 sysdate)
+	</insert>
+	
+	<delete id="deleteFAQ">
+		DELETE 
+		FROM
+			 tbl_faq
+		WHERE 
+			faq_sequence = #{faqSequence};
+	</delete>
+	
+	<update id="updateFAQ">
+		UPDATE 
+			tbl_faq
+		SET
+		    faq_question = #{faqQuestion},
+		    faq_answer = #{faqAnswer},
+		    mod_user_no = #{modUserNo},
+		    mod_date = sysdate
+		WHERE
+		    faq_sequence = #{faqSequence}
+	</update>
+	
+	<select id="selectFAQ" resultType="com.bitcamp.petcare.admin.domain.AdminVO">
+		
+	</select>
+
+</mapper>

@@ -239,6 +239,72 @@ $(function() {
 	
 });//end function
 
+/*function submitBtn(){
+	var joinForm = document.joinForm;
+	kakaoMap();
+	
+	if(checkExistData($('#emailId').val(), "이메일을") == false){
+		$('#emailLabel').text("");
+		$('#emailId').val('');
+		return false;
+	} else if(emailCheck != $('#emailId').val()) {
+		alert('이메일 중복확인 버튼을 클릭하세요.')
+		$('#emailLabel').text("");
+		return false;
+	}
+	
+	if(checkExistData($('#inputKey').val(), "인증번호를") == false){
+		$('#keyLabel').text("");
+		$('#inputKey').val('');
+		return false;
+	} else if(authKey != $('#inputKey').val()) {
+		alert('인증번호가 일치하지 않습니다.')
+		$('#keyLabel').text("");
+		return false;
+	}//if-else
+	
+	if(checkExistData($('#inputPw').val(), "비밀번호를") == false){
+		$('#pwLabel').text("");
+		$('#inputPw').val('');
+		return false;
+	} else if(passwordCheck != $('#inputPw').val()) {
+		alert('비밀번호를 다시 설정해주세요.')
+		$('#pwLabel').text("");
+		$('#inputPw').val('');
+		return false;
+	}//if-else
+	
+	if(checkExistData($('#nickName').val(), "닉네임을") == false){
+		$('#nickNameLabel').text("");
+		$('#nickName').val('');
+		return false;
+	} else if(nickNameCheck != $('#nickName').val()) {
+		alert('닉네임 중복확인 버튼을 클릭하세요.')
+		$('#nickNameLabel').text("");
+		return false;
+	}
+	
+	if(checkExistData($('#inputPhone').val(), "전화번호를") == false){
+		$('#phoneLabel').text("");
+		$('#inputPhone').val('');
+		return false;
+	} else if(phoneNumberCheck != $('#inputPhone').val()) {
+		alert('전화번호를 정확히 입력해주세요.');
+		$('#phoneLabel').text("* ex)010-1234-5678");
+		return false;
+	}
+	
+	if(checkExistData($('#inputAddress').val(), "주소를") == false){
+		$('#inputAddress').text("");
+		$('#inputAddress').val('');
+		return false;
+	} else {
+		//최종 확인
+		$(this).attr("type","submit");
+		window.location.href="http://localhost:8090/user/loginPage";
+	}//if-else
+};//beforeSubmit*/
+
 // 공백확인 함수
 function checkExistData(value, dataName) {
     if (value == "") {

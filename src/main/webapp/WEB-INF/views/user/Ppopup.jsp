@@ -49,7 +49,7 @@
 
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
-                    <form action="/user/chagePw" method="POST" id="findForm">
+                    <form action="/user/chagePw" method="POST" id="findForm" onsubmit="return check();">
                         <h1 class="heading">비밀번호 찾기</h1>
                         <div class="form-group">
                        		<label class="control-label">아이디 (사용중인 이메일)</label>
@@ -67,7 +67,7 @@
                             <input type="password" id="inputPw" name="userPw" class="form-control" />
 
                            
-                            <input type="button" id="submitBtn" class="btn btn-default"  value="변경하기">
+                            <button type="button" class="btn btn-default" id="submitBtn">변경하기<i class="fa fa-arrow-circle-right fa-2x"></i></button>
                         </div>
                     </form>
                 </div>
