@@ -69,7 +69,7 @@
                             		<label for="price">금액</label>
                             		<input type="text" name="price" class="form-control" value="${resv.totalAmount}원" readonly>
                             		<br>
-                            		<label for="startDate">서비스 일자</label>
+                            		<label for="startDate">서비스 시작 일자</label>
                             		<input type="text" name="startDate" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${resv.startDate}" />" readonly>
                             		
                                 </ul>    
@@ -201,7 +201,9 @@
                 </div>
             </div>
         </div>
-        
+        <!-- alert js -->
+      	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      	
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
         <script>
@@ -256,7 +258,29 @@
         				}
         			})	// ajax
         			
+        			
         		})	// click
+        		
+        		//==================== 예약 없을 시 알림창 + 메인 마이페이지로 이동 ======
+        	        		
+        		if($('input[name=userNickname]').val() == ""){
+        			
+        			swal({
+        				title : '예약이 없습니다!',
+        				text : '서비스를 예약하시면 확인하실 수 있습니다.',
+        				icon : 'info',
+        				closeOnClickOutside: false,
+        				button: {
+        					text: "돌아가기"
+        					
+        				}
+        			});
+        			
+        			$('.swal-button').click(function(){
+        				location.href="main";
+        			});
+        			
+        		}	// if
         		
         		//==================== 서비스 시작일자까지 남은 일 수 계산 =============
         		

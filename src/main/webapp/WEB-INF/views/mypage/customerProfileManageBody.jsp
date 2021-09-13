@@ -40,7 +40,8 @@
                         <h1 id="head">프로필관리</h1>
                         <div id="proImg">
                             <!-- <img src="C:\Users\HeeChan\Desktop\러블리빌런즈\스토리보드\cat-04.png" id="proPhoto"> -->
-                            <img src="/resources/assets/img/mypage/proPhoto_${userNo}.jpg" id="proPhoto" style="width: 300px; height: 300px; object-fit: fill; box-shadow: 0px 5px 10px #F9C7A1; border-radius: 5px;">
+                            <!-- <img src="/resources/assets/img/mypage/proPhoto_${userNo}.jpg" id="proPhoto" style="width: 300px; height: 300px; object-fit: fill; box-shadow: 0px 5px 10px #F9C7A1; border-radius: 5px;"> -->
+                            <img src="${profile.proPhoto}" id="proPhoto" style="width: 300px; height: 300px; object-fit: fill; box-shadow: 0px 5px 10px #F9C7A1; border-radius: 5px;" onerror="this.src='/resources/assets/img/mypage/petsitter.jpg'">
                             <label for="proPhotoUpload">사진 변경</label>
                             <input type="file" name="proPhotoFile" id="proPhotoUpload">
                             <!-- <button type="" id="btn_proPhotoModify">변경</button> -->
