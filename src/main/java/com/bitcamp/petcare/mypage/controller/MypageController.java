@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ import com.bitcamp.petcare.mypage.domain.CustomerResvManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerReviewManageDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerReviewManageVO;
 import com.bitcamp.petcare.mypage.service.MypageService;
+import com.bitcamp.petcare.user.domain.UserVO;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,10 +45,20 @@ public class MypageController {
 	@Setter(onMethod_= @Autowired)
 	private MypageService service;
 
+	private String loginKey = "__LOGIN__";
+	
+	
+
 	@GetMapping("main")							// 마이페이지 메인
-	public String  main() {
+	public String  main(HttpSession session) {
 		log.debug("main() invoked.");
 		
+		log.info(session.getClass().getName());
+		log.info(session.getAttribute(loginKey));
+		UserVO vo = (UserVO) session.getAttribute(loginKey);
+		vo.getUserId();
+		
+		log.info(vo.getUserNo());
 		return "mypage/myPageMain";
 	} //main
 	
@@ -54,10 +66,12 @@ public class MypageController {
 	//  ========================회원정보관리 페이지==========================
 	
 	@GetMapping("userInfoManage")				// 회원정보관리
-	public void userInfoManage(Integer userNo, Model model) {
+	public void userInfoManage(Integer userNo, Model model, HttpSession session) {
 		log.debug("userInfoManage() invoked.");
 		
-		CustomerInfoManageVO info = this.service.readInfo(userNo);
+		UserVO vo = (UserVO) session.getAttribute(loginKey);
+		
+		CustomerInfoManageVO info = this.service.readInfo(vo.getUserNo());
 		
 		Objects.requireNonNull(info);
 		
@@ -73,49 +87,55 @@ public class MypageController {
 	//  ========================프로필 페이지==========================
 	
 	@GetMapping("customerProfileManage")		// 반려인 프로필 페이지(조회)
-	public void getProfile(Integer userNo, Model model) {
+	public void getProfile( Model model, HttpSession session) {
 		log.debug("customerProfileManage() invoked.");
 		
-		CustomerProfileManageVO profile = this.service.readProfile(userNo);
+		UserVO vo = (UserVO) session.getAttribute(loginKey);
+		
+		CustomerProfileManageVO profile = this.service.readProfile(vo.getUserNo());
 		
 		assert profile != null;
 		
 		log.info("\t+ getProfile : {} ", profile);
 		
-		model.addAttribute("userNo", userNo);
+		model.addAttribute("userNo", vo.getUserNo());
 		model.addAttribute("profile", profile);
 	}	//customerProfileManage
 	
 	@PostMapping("customerProfileModify")		// 반려인 프로필 페이지(수정)
-	public String modifyProfile(HttpServletRequest req, Integer userNo, CustomerProfileManageDTO modify) throws IOException {
-		log.debug("modifyProfile({}) invoked.",modify);
+	public String modifyProfile(HttpServletRequest req, Integer userNo, CustomerProfileManageDTO modify, HttpSession session) throws IOException {
+		log.debug("modifyProfile() invoked.");
 		
-		String fileName = "proPhoto_"+modify.getUserNo()+".jpg";
+		UserVO vo = (UserVO) session.getAttribute(loginKey);
+		
+		String fileName = "proPhoto_"+vo.getUserNo()+".jpg";
 		//String path = req.getServletContext().getRealPath("/resources/assets/img/mypage");
-		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareServiceTest2\\src\\main\\webapp\\resources\\assets\\img\\mypage";
+		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareService\\src\\main\\webapp\\resources\\assets\\img\\mypage";
 		log.info("path : {}", path);
 		File file = new File(path, fileName);
 		modify.getProPhotoFile().transferTo(file);
 		
 		modify.setProPhoto("/resources/assets/img/mypage/"+fileName);
-		
-		
-		if(this.service.readProfile(userNo).getPetTypeCode()==null) {
+
+		CustomerProfileManageVO vo2 = this.service.readProfile(vo.getUserNo());
+		if(vo2 == null) {
 			this.service.registerProfile(modify);
 		}else {
 			this.service.modifyProfile(modify);
 		}
-		return "mypage/myPageMain";
+		return "redirect: /mypage/main";
 	}	// modifyProfile
 	
 	
 	//  ========================이력관리 페이지==========================
 	
 	@GetMapping("customerHistoryManage")		// 반려인 이력관리 페이지(조회)
-	public void customerHistoryManage(Integer petUserNo, Model model) {
+	public void customerHistoryManage(Integer petUserNo, Model model, HttpSession session) {
 		log.debug("customerHistoryManage() invoked.");
 		
-		List<CustomerHistoryManageVO> history = this.service.readHistory(petUserNo);
+		UserVO vo = (UserVO) session.getAttribute(loginKey);
+		
+		List<CustomerHistoryManageVO> history = this.service.readHistory(vo.getUserNo());
 		//CustomerReviewManageVO review = this.service.readReview(serviceId);
 		
 		
@@ -161,17 +181,22 @@ public class MypageController {
 	//  ========================예약관리 페이지==========================
 	
 	@GetMapping("customerResvManage")
-	public void customerResvManage(Integer petUserNo, Model model) {
+	public void customerResvManage(Integer petUserNo, Model model, HttpSession session) {
 		log.debug("customerResvMange() invoked.");
 		
-		CustomerResvManageVO resv = this.service.readResv(petUserNo);
 		
-		if(resv.getServiceId() != null) {
+		UserVO vo = (UserVO) session.getAttribute(loginKey);
+		log.info(vo.getUserNo());
+		
+		CustomerResvManageVO resv = this.service.readResv(vo.getUserNo());
+		
+		
+		if(resv != null) {
 		CustomerPaymentManageVO payment = this.service.readPayment(resv.getServiceId());
 		model.addAttribute("payment", payment);
 		}
 		
-		model.addAttribute("petUserNo", petUserNo);
+		model.addAttribute("petUserNo", vo.getUserNo());
 		model.addAttribute("resv", resv);
 		
 	}	// customerResvManage
