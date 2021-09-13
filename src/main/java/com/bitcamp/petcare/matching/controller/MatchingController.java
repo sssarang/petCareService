@@ -52,7 +52,7 @@ public class MatchingController {
 		log.info("loginInfo: {}", loginInfo );
 		
 		// 로그인 세션의 userNo정보를 가져온다
-		int petUserNo = Integer.parseInt(loginInfo.getUserNo());
+		int petUserNo = loginInfo.getUserNo();
 		log.info("petUserNo: {}", petUserNo );
 	
 		

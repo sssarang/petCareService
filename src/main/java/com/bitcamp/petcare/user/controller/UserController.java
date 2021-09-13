@@ -42,12 +42,7 @@ public class UserController {
 	public static final String loginKey = "__LOGIN__";
 	Double x;			//경도
 	Double y;			//위도
-	char classify;	//회원 구분
-	
-	@GetMapping("test")
-	public String test() {
-		return "admin/adminPage";
-	}
+	String classify;	//회원 구분
 	
 	@GetMapping("temp")
 	public void temp() {
@@ -62,7 +57,7 @@ public class UserController {
 		
 		dto.setUserLatitude(y);		//회원가입시 주소의 위도
 		dto.setUserLongitude(x);	//회원가입시 주소의 경도
-		dto.setUserStatus('F');		//회원가입시 회원탈퇴 항목 'F'설정
+		dto.setUserStatus("F");		//회원가입시 회원탈퇴 항목 'F'설정
 		dto.setUserClassify(classify);
 		
 		if(this.service.joinUser(dto) == 1 ) {
@@ -203,7 +198,7 @@ public class UserController {
 		log.debug("classify({}) invoked",classify);
 		
 		if(classify != null) {
-			this.classify = classify.charAt(0);
+			this.classify = classify;
 		}
 		return null;
 	}//userClassify
@@ -215,7 +210,7 @@ public class UserController {
 		
 		//사용자 동의사항 데이터 처리
 
-		if( (this.classify == '1') || (this.classify == '2') ) {
+		if( (this.classify.equals("1")) || (this.classify == "2") ) {
 			return "user/joinPage";
 			
 		}//if
@@ -250,10 +245,12 @@ public class UserController {
 		
 		if(result == 1) {
 			log.info("성공");
+			return "성공";
+			
 		} else {
 			log.info("실패");
-		}
-		return null;
+			return "실패";
+		}//if-else
 	}//changePw
 	
 }//end class

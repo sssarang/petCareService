@@ -15,9 +15,9 @@ public class UserDTO {
 	private String userAddress;
 	private Double userLatitude;
 	private Double userLongitude;
-	private Character userGender;
-	private Character userClassify;
-	private Character userStatus;
+	private String userGender;
+	private String userClassify;
+	private String userStatus;
 	private String remember;
 	private Date rememberAge;
 	
