@@ -21,10 +21,13 @@ pageEncoding="UTF-8"%>
      <aside>
          <div class="sidebar-search">
          
-            <div class="title"><span>상세조건선택</span></div>
-
+            <!-- <div class="title"><span>상세조건선택</span></div> -->
+			
             <form id="searchForm" onsubmit="return fnCheck();">
                 <div class="form-group">
+                    <p id="searchTitle">상세검색</p>
+                    <hr>
+                    <p></p>
                     <p>Pet Type</p>
                     <input type="radio" id="dog" name="petType" value="dog"
                     	    <c:if test='${filter.petType eq "dog"}'>checked</c:if>>
@@ -47,17 +50,17 @@ pageEncoding="UTF-8"%>
                  <div class="form-group">
                      <p>Service Location</p>
                      <ul>
-                     <li>시/도 : 
+                     <li>시/도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 
                      	<select id="sido" title="시/도선택" name="addrSido">
                         	<option value="">::시/도::</option>
                         </select>
                      <input type="hidden" id="addrSido" name="addrSidoNm" value="${filter.addrSidoNm}">   
-                     <li class="sigugunException" >시/군/구 : 
+                     <li class="sigugunException" >시/군/구 | 
                      	<select id="sigugun" class="sigugunException" title="시/군/구선택" name="addrSigugun">
                         	<option value="">::시/군/구::</option>
                      	</select>
                      	<input type="hidden" id="addrSigugun" name="addrSigugunNm" value="${filter.addrSigugunNm}">
-                     <li>읍/면/동 : 
+                     <li>읍/면/동 | 
                      	<select id="dong" title="읍/면/동선택" name="addrDong">
                         	<option value="">::읍/면/동::</option>
                      	</select>
@@ -69,10 +72,12 @@ pageEncoding="UTF-8"%>
                  
                  <div class="form-group">
                      <p>Service Type</p>
-                     <input id="careAll" type="checkbox" name="serviceType" value="11"><label for="careAll">&nbsp; 돌봄(All Day)</label><br>
-                     <input id="careHalf" type="checkbox" name="serviceType" value="12"><label for="careHalf">&nbsp; 돌봄(Half Day)</label><br>
-                     <input id="visitAll" type="checkbox" name="serviceType" value="13"><label for="visitAll">&nbsp; 방문(All Day)</label><br>
-                     <input id="visitHalf" type="checkbox" name="serviceType" value="14"><label for="visitHalf">&nbsp; 방문(Half Day)</label><br>
+                     <span>
+	                     <p><input id="careAll" type="checkbox" name="serviceType" value="11"><label for="careAll">&nbsp; 돌봄(All Day)</label></p>
+	                     <p><input id="careHalf" type="checkbox" name="serviceType" value="12"><label for="careHalf">&nbsp; 돌봄(Half Day)</label></p>
+	                     <p><input id="visitAll" type="checkbox" name="serviceType" value="13"><label for="visitAll">&nbsp; 방문(All Day)</label></p>
+	                     <p><input id="visitHalf" type="checkbox" name="serviceType" value="14"><label for="visitHalf">&nbsp; 방문(Half Day)</label></p>
+					</span>
                  </div>
 
                  <hr>
@@ -80,8 +85,8 @@ pageEncoding="UTF-8"%>
 				 <div class="form-group">
                      <p>Service Date</p>
                      <span>
-                         <p/> 시작일 : <input type="text" class="flatpickr" data-id="rangePlugin" name="startDate" placeholder="Start" value="${filter.startDate}" readonly="readonly"/>
-                         <p/> 종료일 : <input type="text" class="flatpickr" id="secondRangeInput" name="endDate" placeholder="End" value="${filter.endDate}" readonly="readonly"/> 
+                         시작일 | <input type="text" class="flatpickr" data-id="rangePlugin" name="startDate" placeholder="Start" value="${filter.startDate}" readonly="readonly"/><br>
+                         종료일 | <input type="text" class="flatpickr" id="secondRangeInput" name="endDate" placeholder="End" value="${filter.endDate}" readonly="readonly"/> 
                      </span>
                  </div>
 
@@ -91,7 +96,7 @@ pageEncoding="UTF-8"%>
                      <p>Service Cost(1Day)</p>  
                      
                      <span>
-                         <input id="min" type="number" name="minPrice" value="${filter.minPrice}" min="1000" max="500000" placeholder="최소"/>&nbsp;원&nbsp;&nbsp;-&nbsp;&nbsp;
+                         <input id="min" type="number" name="minPrice" value="${filter.minPrice}" min="1000" max="500000" placeholder="최소"/>&nbsp;원&nbsp;-&nbsp;
                          <input id="max" type="number" name="maxPrice" value="${filter.maxPrice}" min="1000" max="500000" placeholder="최대"/>&nbsp;원
                      </span>
                      <br>
@@ -104,19 +109,19 @@ pageEncoding="UTF-8"%>
                      <p>Petsitter Skill</p>  
                          <div class="checklist"> 
                              <p><input type="checkbox" name="skillType" id="check1" class="checklist-input" value="21">
-                             <label for="check1">약 먹이기 가능여부</label>
+                             <label for="check1">&nbsp; 약 먹이기 가능여부</label>
                              </p>
 
                              <p><input type="checkbox" name="skillType" id="check2" class="checklist-input" value="22">
-                             <label for="check2">노령견 경험유무</label>
+                             <label for="check2">&nbsp; 노령견 경험유무</label>
                              </p>
 
                              <p><input type="checkbox" name="skillType" id="check3" class="checklist-input" value="23">
-                             <label for="check3">환견/환묘 경험유무</label>
+                             <label for="check3">&nbsp; 환견/환묘 경험유무</label>
                              </p>
                          
                              <p><input type="checkbox" name="skillType" id="check4" class="checklist-input" value="24">
-                             <label for="check4">애견관련 업종 경험유무</label>
+                             <label for="check4">&nbsp; 애견관련 업종 경험유무</label>
                              </p>
                          </div>
                  </div>
@@ -134,7 +139,7 @@ pageEncoding="UTF-8"%>
      <!-------------펫시터리스트----------------->
      <aside>
          <div class="sidebar-list">
-              <div class="title">Pet Sitter List</div>
+              <!-- <div class="title">Pet Sitter List</div> --> 
                   
               <div id="psList">
                	 <table id="psTable">
@@ -146,20 +151,30 @@ pageEncoding="UTF-8"%>
 		                          <tr>
 		                          <c:choose>
 			                          <c:when test="${ps.proPhoto == null}">
-			                          	<td rowspan="3" class="line1" background='/resources/assets/img/search/petsitter.jpg'>
-			                          		<input type="hidden" class="userNo" name="userNo" value="${ps.userNo}">
+			                          	<td rowspan="3" class="line1">
+			                          		<div id="pslistphoto">
+			                          			<a href="javascript:fnProfileOn(${ps.userNo});">
+			                          				<img id="listphoto" src='/resources/assets/img/search/petsitter.jpg'>
+			                          			</a>
+			                          			<input type="hidden" class="userNo" name="userNo" value="${ps.userNo}">
+		                              		</div>
 		                              	</td>
 			                          </c:when>
 			                          <c:otherwise>
-		                              	<td rowspan="3" class="line1" background='${ps.proPhoto}'>
-		                              		<input type="hidden" class="userNo" name="userNo" value="${ps.userNo}">
+		                              	<td rowspan="3" class="line1">
+			                          		<div id="pslistphoto">
+			                          			<a href="javascript:fnProfileOn(${ps.userNo});">
+			                          				<img id="listphoto" src='${ps.proPhoto}'>
+												</a>
+			                          			<input type="hidden" class="userNo" name="userNo" value="${ps.userNo}">
+		                              		</div>
 		                              	</td>
 		                              </c:otherwise>
 		                          </c:choose>
 		                              
-		                              <td class="line2">&nbsp; 이 름 :</td>
+		                              <td class="line2">&nbsp; 닉네임 :</td>
 		                              <td class="line3">${ps.userNickname}
- 		                              		<input type="button" class="profileBtn" onclick="fnProfileOn(${ps.userNo})" name="detail" value="프로필보기">		                              
+ 		                              		<%-- <input type="button" class="profileBtn" onclick="fnProfileOn(${ps.userNo})" name="detail" value="프로필보기"> --%>		                              
 		                              </td>
 		                          </tr>
 		                          <tr>
@@ -247,9 +262,7 @@ pageEncoding="UTF-8"%>
 	        			<h4>닉네임 : <span id="psNickname"></span></h4>
 	        			<hr>
 	        			<h4>지&nbsp;&nbsp;&nbsp;역 : <span id="psAddress"></span></h4>
-	        			<hr>
-	        			<h4>소개글 : <span id="psIntroduce"></span></h4>
-		        		<hr>
+	        			<div id="psIntroduce"></div> 
 		        		<form action="/search/matching" method="GET">
 			        		<input type="hidden" id="matching" name="userNo" value="">        			
 			        		<input type="submit" id="matchingBtn" value="matching">  

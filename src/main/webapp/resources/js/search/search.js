@@ -421,22 +421,29 @@
 				var resultSk = result.psSkill;			 
 				var sk ="";
 				
-				$.each(resultSk, function(i){
-					console.log(">>>>"+resultSk[i].skillTypeCode);
+				if(resultSk.length === 0){
+					$("#service4").hide();
 					
-					if(resultSk[i].skillTypeCode == 21){
-						sk += "<li>약 먹이기 가능 </li>";					
-					}					
-					if(resultSk[i].skillTypeCode == 22){
-						sk += "<li>노령견 경험 有 </li>";					
-					}					
-					if(resultSk[i].skillTypeCode == 23){
-						sk += "<li>환견/환묘 경험 有 </li>";					
-					}					
-					if(resultSk[i].skillTypeCode == 24){
-						sk += "<li>애견관련 업종 경험 有 </li>";					
-					}					
-				})
+				} else{
+					$("#service4").show();
+					
+					$.each(resultSk, function(i){
+						console.log(">>>>"+resultSk[i].skillTypeCode);
+						
+						if(resultSk[i].skillTypeCode == 21){
+							sk += "<li>약 먹이기 가능 </li>";					
+						}					
+						if(resultSk[i].skillTypeCode == 22){
+							sk += "<li>노령견 경험 有 </li>";					
+						}					
+						if(resultSk[i].skillTypeCode == 23){
+							sk += "<li>환견/환묘 경험 有 </li>";					
+						}					
+						if(resultSk[i].skillTypeCode == 24){
+							sk += "<li>애견관련 업종 경험 有 </li>";					
+						}					
+					}) //each
+				} //if-else
 
 				$("#psSkillTypeCode").html(sk);
 
@@ -554,12 +561,11 @@
 				//매칭버튼			
 				//-------------로그인세션 회원유형 check-----------------//		
 				var classify = result.classifySession;
+				console.log('>>>>> 접근권한' + classify);
 				
-				document.getElementById("matchingBtn").addEventListener("click", function fnMatching(classify){
-					if(classify != 1){
-						console.log('>>>>> 접근권한' + classify);
-						
-						swal("", "반려인 회원만 사용가능한 서비스입니다.", "warning");
+				document.getElementById("matchingBtn").addEventListener("click", function (e){					
+					if(classify != 1){						
+						swal("", "반려인 회원만 이용가능한 서비스입니다.", "warning");
 						event.preventDefault();
 					} //if	
 					
