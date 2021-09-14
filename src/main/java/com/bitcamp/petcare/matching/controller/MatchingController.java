@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bitcamp.petcare.matching.domain.MatchingDTO;
 import com.bitcamp.petcare.matching.domain.MatchingVO;
 import com.bitcamp.petcare.matching.domain.ServiceCalendarVO;
+import com.bitcamp.petcare.matching.domain.ServiceMatchingVO;
 import com.bitcamp.petcare.matching.domain.ServiceTypeVO;
 import com.bitcamp.petcare.matching.service.MatchingService;
 import com.bitcamp.petcare.user.controller.UserController;
@@ -72,7 +73,7 @@ public class MatchingController {
 		
 		this.service.registerMatcing(matching);
 		
-		return "mypage/customerResvManage";
+		return "redirect:/mypage/customerResvManage";
 	} //booking
 	
 	
@@ -103,5 +104,20 @@ public class MatchingController {
 		
 		return resultAbleDates;
 	} //showFaq
+	
+	
+	// 비동기식 ajax를 사용할 때 db에서 불러올 데이터 리스트
+		@ResponseBody
+		@PostMapping("bookingList")
+		public List<ServiceMatchingVO> showBookingList() {
+			
+			List<ServiceMatchingVO> bookingList = this.service.getServiceMatching();
+			
+			assert bookingList != null;
+			log.info("\t+bookingList: {}", bookingList);
+			
+			return bookingList;
+		} //showFaq
+		
 	
 } //end class

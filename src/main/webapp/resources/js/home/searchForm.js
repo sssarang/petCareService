@@ -22,17 +22,17 @@ function check(){
 	
 	
 	if(sido == "" || sido == null){
-		alert("검색할 지역을 선택해주세요.")
+		swal("", "검색할 지역을 선택해주세요.", "warning")
 		document.search.addrSido.focus();
 		
 		return false; 
 	} else if(sigugun == "" || sigugun == null){
-		alert("검색할 지역을 선택해주세요.")
+		swal("", "검색할 지역을 선택해주세요.", "warning")
 		document.search.addrSigugun.focus();
 		
 		return false;
 	} else if(dong == "" || dong == null){
-		alert("검색할 지역을 선택해주세요.")
+		swal("", "검색할 지역을 선택해주세요.", "warning")
 		document.search.addrDong.focus();
 		
 		return false;

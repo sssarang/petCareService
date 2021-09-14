@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.bitcamp.petcare.home.domain.FaqVO;
 import com.bitcamp.petcare.matching.domain.MatchingDTO;
 import com.bitcamp.petcare.matching.domain.MatchingVO;
 import com.bitcamp.petcare.matching.domain.ServiceCalendarVO;
+import com.bitcamp.petcare.matching.domain.ServiceMatchingVO;
 import com.bitcamp.petcare.matching.domain.ServiceTypeVO;
 
 import lombok.NoArgsConstructor;
@@ -108,6 +108,22 @@ public class MatchingTests {
 		list = null;
 		
 	} //testGetServiceCalendar
+	
+	
+	@Test
+	public void testGetServiceMatching() {
+		log.debug("testGetServiceMatching() invoked.");
+		
+		List<ServiceMatchingVO> list = this.mapper.getServiceMatching();
+		
+		assert list != null;
+		
+		list.forEach(log::info);
+		
+		list.clear();
+		list = null;
+		
+	} //testGetServiceMatching
 	
 	@After
 	public void tearDown() {
