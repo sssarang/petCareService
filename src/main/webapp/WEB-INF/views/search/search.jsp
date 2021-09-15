@@ -140,6 +140,7 @@
 				<c:forEach items="${list}" var="item">
 					var jsonObject = new Object(); 
 					
+					jsonObject.userNo = '${item.userNo}';				//회원번호
 					jsonObject.userNickname = '${item.userNickname}';	//닉네임
 					jsonObject.userLatitude = '${item.userLatitude}';	//위도
 					jsonObject.userLongitude = '${item.userLongitude}'; //경도
@@ -163,7 +164,7 @@
 				$('#map').hide();
 				
 			} //if-else
-			
+				
 		
 		 });
 

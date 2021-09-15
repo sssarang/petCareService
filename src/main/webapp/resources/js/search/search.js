@@ -449,12 +449,60 @@
 
 				//활동사진-------------------------------//	
 				var resultAp = result.activityPhoto;
-				var str ="";
+				var ap ="";
 
-				$.each(resultAp, function(i){
-					console.log(">>>>"+resultAp[i].phtoNo);
-					console.log(">>>>"+resultAp[i].actPhoto);
-				})
+				if(resultAp.length === 0){
+					var noActivityPhoto = '/resources/assets/img/search/act.png';
+					
+					ap += "<div class='noActivityPhoto'>";
+					ap += "<img class='noActivityPhotoImg' src='"+ noActivityPhoto +"'></div>";
+					
+					$(".active_photo").empty();
+					$(".active_photo").html(ap);
+
+				} else{
+					$.each(resultAp, function(i){
+						console.log(">>>>"+resultAp[i].photoNo);
+						console.log(">>>>"+resultAp[i].actPhoto);
+						
+						switch(resultAp[i].photoNo){
+							case 1 : ap += "<div id='ap1'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 2 : ap += "<div id='ap2'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 3 : ap += "<div id='ap3'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 4 : ap += "<div id='ap4'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 5 : ap += "<div id='ap5'><img class='apImg' src='"+ resultAp[i].actPhoto +"'>";
+  									 ap += "<div id='plusap'><p style='text-align: center; font-size: 100px; color: white;'>+</p></div></div>";
+										break;
+						} //switch
+												
+					}); //each
+					
+					$(".active_photo").empty();
+					$(".active_photo").html(ap);
+					
+					$("#photomodalBox").html(ap);					
+					$("#photomodalBox").append("<div id='photocloseBtn'><a>close</a></div>");
+
+				} //if-else
+	
+				document.getElementById("photocloseBtn").addEventListener("click", fnphotoModalClose);
+				
+				//---------------리뷰 모달창 생성-------------------//
+				
+				function fnphotoModalOpen(){
+					$('#photomodalBox').show();  
+					$('.black_bg').show();  
+				}; //fnModalOpen
+				
+				
+				function fnphotoModalClose(){
+					$('#photomodalBox').hide();  
+					$('.black_bg').hide();  
+				}; //fnModalOpen
 				     
 
 				//리뷰-----------------------------------//	

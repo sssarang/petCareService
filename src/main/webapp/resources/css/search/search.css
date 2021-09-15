@@ -80,11 +80,7 @@
     }
     .content {
       width: 47%;
-    } 
-    .profile{
-      width: 47%;
-    }
-	
+    } 	
 }	
 @media (max-width: 1440px) {
     .sidebar-search {
@@ -648,7 +644,6 @@ input[type=number]{
     z-index: 2;
 }
 
-
 /*====================================================*/
 /*===================== 펫시터프로필 ======================*/
 /*====================================================*/
@@ -664,34 +659,32 @@ input[type=number]{
 }
 @media (max-width: 1466px) {
     .profile{
-      width: 47%;
+      width: 75%;
     }
 }	
 @media (max-width: 1440px) {
     .profile{
-      width: 47%;
+      width: 75%;
     } 
 } /* 데스크탑 */
 @media (max-width: 1200px) {
     .profile{
-      width: 42%;
+      width: 72%;
     }
 } /* 데스크탑 */
 @media (max-width: 1024px) {
     .profile{
-      width: 70%;
+      width: 100%;
     }    
 } /* 데스크탑 */
 @media (max-width: 1000px) {
     .profile{
-      width: 40%;
+      width: 100%;
     }      
 } /* 데스크탑-태블릿 사이 */
 @media (max-width: 780px) {
     .profile {
-      width: 100%;
-      padding-top: 70px;
-      
+      width: 100%;      
     }
 } /* 태블릿 */
 @media (max-width: 576px) {
@@ -744,7 +737,7 @@ input[type=number]{
 #profile_head{
 	display: flex;
 	flex-direction: row;
-	flex-wrap: nowrap;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
 	
@@ -775,10 +768,10 @@ input[type=number]{
 
 #psInfo{
 	padding: 3%;
-	margin-left: 2%;	
+	margin: 0 auto;	
 	
-	width: 70%;
-	height: 100%;	
+	width: 650px;
+	height: auto;	
 }
 
 #star{
@@ -795,7 +788,7 @@ input[type=number]{
 	padding: 3%;
 	margin: 3% 0;
 	margin-top:5%;
-	
+	width: 590px;
 	font-size: 1.3rem;
 	background-color: #f6f6f6;
     box-shadow: 0px 1px 2px rgb(0 0 0 / 19%) inset;
@@ -824,18 +817,38 @@ input[type=number]{
 
 #profile_content{
 	display: flex;
-	flex-direction: row;		
+	flex-direction: row;
+	margin: 0 auto;
+    
+	width: 855px;
+	box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);		
 }
 
+@media (max-width: 1875px) {
+	#profile_content{
+		margin-top: 310px;
+	}		
+}
+@media (max-width: 1466px) {
+	#profile_content{
+		margin-top: 0;
+	}		
+}
+@media (max-width: 1400px) {
+	#profile_content{
+		margin-top: 310px;
+	}		
+}
 #profile_side{
 	overflow: hidden;
 	
 	padding: 3%;
-	width: 35%;
+	width: 320px;
 	height:auto;
 	
 	opacity: 0.8;
 	background-color: #ffd993;
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 #profile_body{
@@ -844,7 +857,7 @@ input[type=number]{
 	flex-wrap: nowrap;
 	
 	padding: 3% 3% 3% 0;
-	width: 65%;
+	width: 535px;
 	height:auto;
 	
 	opacity: 0.8;
@@ -873,6 +886,14 @@ input[type=number]{
 	display: none;	
 }
 
+.liImg{
+	width:auto;
+	list-style-position: inside;
+	list-style-image:url("/resources/assets/img/search/ul.png");
+	list-style-type:disc;
+}
+
+
 #calendar{
 	width: 100%;
     padding: 5% 1% 2% 1%;	
@@ -898,13 +919,95 @@ input[type=number]{
 }
 
 .active_photo{
-	padding: 3%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
 	margin-bottom:5%;
-	
+		
 	width: 100%;
 	height: 350px;
 
-	background-color: white;
+	/* background-color: white; */
+}
+
+#ap1{
+	width: 250px;
+	height: 100%;
+	margin-right: 0.5%;
+	border-radius: 10%;
+}
+
+#ap2,
+#ap3{
+	width: 120px;
+	height: 50%;
+	border-radius: 10%;
+}
+
+#ap4,
+#ap5{
+	width: 120px;
+	height: 50%;
+	border-radius: 10%;
+}
+
+#ap5{
+	position: relative;
+}
+
+#plusap{
+	position: absolute;
+	
+	width: 120px;
+	height: 100%;
+	border-radius: 10%;
+	
+	top: 0;
+	opacity: 0.4;
+	background-color: black;
+}
+
+
+.apImg{
+	width: 100%;
+	height: 100%;
+	
+	border-radius: 7%;
+	object-fit: cover;
+	box-shadow: 2px 2px 5px gray;
+}
+
+.apImg:hover{
+	transform: scale(1.1);
+}
+
+
+.noActivityPhoto{
+	width: 100%;
+	height: 100%;
+}
+
+.noActivityPhotoImg{
+	width: 100%;
+	height: 100%;
+	
+	opacity: 0.8;
+	object-fit: cover;
+}
+
+#photomodalBox{
+    display: none;
+    position: absolute;
+    overflow: auto;
+    
+    padding: 3%;
+    width: 54%;
+    height: 70%;
+    
+    top:15%;
+    left: 23%;
+    background-color: white;
+    z-index: 2;
 }
 
 #review-list{
@@ -1016,181 +1119,6 @@ input[type=number]{
 .noReviewImg{
 	width: 110px;
     margin: 90px 0 10px 0;
-}
-/*====================================================*/
-/*=============== 활동사진리스트(반응형적용) =================*/
-/*====================================================*/
-.active_photo .inWrap {
-	position: relative;
-	height: 300px;
-}
-
-.active_photo .fInner {
-	margin: 0 auto;	
-	width: 85%; 
-	overflow: hidden;
-	padding-bottom: 1%;
-}
-
-.active_photo li {
-	float: left; width: 188px; height: 282px; list-style: none
-}
-
-.active_photo li a {
-	position: relative;
-	display: block; 
-	background: #f0f0f0; 
-	height: 100%; 
-	margin: 0 3%;
-	box-shadow: 2px 2px 5px gray;
-	text-align: center;
-}
-.active_photo li span {
-	display: block;
-	position: absolute;
-	bottom: -3em;
-	width: 100%;
-    color:#333;
-	font-size: 1em;
-	font-weight: 400;
-}
-
-.active_photo li:nth-child(1) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(2) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(3) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(4) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(5) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(6) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(7) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(8) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(9) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(10) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-
-.active_photo .swiper-pagination {
-	position: relative;
-	top: 0;
-	left: 0;
-	margin: 25px auto 0 auto;
-}
-.active_photo .swiper-pagination-progress .swiper-pagination-progressbar{
-	background: #f4bc71;
-}
-
-.active_photo .button div {
-	position: absolute;
-	width: 60px;
-	height: 60px;
-	background: #f7cd95;
-	color: #fff;
-	border-radius: 50%;
-	text-align: center;
-	top: 50%;
-	box-shadow: 2px 2px 5px gray;
-	transition: all 0.2s
-}
-.active_photo .button div:active {
-	transform: translate(2px,2px);
-}
-.active_photo .button a {
-	display: block;
-	height: 100%;
-}
-
-.active_photo .back a {
-	background: url(/resources/assets/img/search/back.svg) center center no-repeat;
-	background-size: 20px 20px;
-    text-indent: -999px; overflow: hidden;
-}
-
-.active_photo .next a {
-	background: url(/resources/assets/img/search/next.svg) center center no-repeat;
-	background-size: 30px 30px;
-    text-indent: -999px; overflow: hidden;
-}
-
-.active_photo .back {
-	left: 1%;
-}
-.active_photo .next {
-	right: 1%;
-}
-
-/* 일반 pc */
-@media screen and (max-width:1280px) {
-
-}
-
-
-/* 테블릿 */
-@media screen and (max-width:1024px) {
-
-}
-
-/* 소형 테블릿 */
-@media screen and (max-width:768px) {
-	.active_photo .button div{
-		width: 40px;
-		height: 40px;
-	}
-	.active_photo .button div a {
-		background-size: 20px 20px;
-	}
-}
-
-/* 모바일 */
-@media screen and (max-width:640px) {
-
-}
-
-/* 소형 모바일 */
-@media screen and (max-width:480px) {
-	.active_photo .fInner {
-		width: 95%;
-	}
-	.active_photo li {
-		width: 140px; height: 210px;
-	}
-	.active_photo li span {
-		font-size: 1.1667em;
-	}
-	.active_photo .button {
-		display: none;
-	}
-}
-
-/* 최소 사이즈 처리 */
-@media screen and (max-width:480px) {
-	
 }
 
 

@@ -283,49 +283,30 @@ pageEncoding="UTF-8"%>
 						
 						<div id = service2>						
 							<h5>반려동물 유형</h5>
-		        			<ul id="psPetTypeCode"></ul>
+		        			<ul class="liImg" id="psPetTypeCode" style="padding: 7px 1px; margin: 0;"></ul>
 						</div>
 	        			
 						<div id = service3>						
 		        			<h5>서비스 유형 및 비용</h5>
-		        			<ul id="psServiceTypeCode"></ul>
+		        			<ul class="liImg" id="psServiceTypeCode" style="padding: 7px 1px; margin: 0;"></ul>
 						</div>
 	        			
 						<div id = service4>						
 		        			<h5>스킬</h5>
-		        			<ul id="psSkillTypeCode"></ul>
+		        			<ul class="liImg" id="psSkillTypeCode" style="padding: 7px 1px; margin: 0;"></ul>
 						</div>
 	        			
 	        		</div>
 				</aside>
 	        	
 	        	<section id="profile_body">
-	        		<div class="active_photo">
-        				<div class="inWrap">
-							<div class="fInner swiper-container">
-								<ul class="swiper-wrapper">
-									<li class="swiper-slide"><a href="#"></a></li>
-									<li class="swiper-slide"><a href="#"></a></li>
-									<li class="swiper-slide"><a href="#"></a></li>
-									<li class="swiper-slide"><a href="#"></a></li>
-									<li class="swiper-slide"><a href="#"></a></li>
-									<li class="swiper-slide"><a href="#"></a></li>
-									<li class="swiper-slide"><a href="#"></a></li>
-									<li class="swiper-slide"><a href="#"></a></li>
-									<li class="swiper-slide"><a href="#"></a></li>
-									<li class="swiper-slide"><a href="#"></a></li>
-								</ul>
-								<!-- Add Pagination -->
-								<div class="swiper-pagination"></div>
-							</div>
-			
-							<div class="button">
-								<div class="back"><a href="#"><span class="hidden">back</span></a></div>
-								<div class="next"><a href="#"><span class="hidden">next</span></a></div>
-							</div>
-						</div>
-	        		</div>
-	        		
+	        		<div class="active_photo"><!-- 활동사진 --> </div>
+
+		        	<div class="black_bg"></div>
+		        	<div id="photomodalBox">
+		        		<div class="photoModal" >  <!-- 모달창-활동사진 --> </div>
+		        	</div>
+		        		        		
 	        		<div id="review-list" class="flex_item"> <!-- 리뷰리스트 출력 --> </div>
 		        	
 		        	<div class="black_bg"></div>
@@ -343,4 +324,17 @@ pageEncoding="UTF-8"%>
  <!----------------- float 해제----------------->
  <div id="clear"></div>    
  
- 
+ <script>
+	 var infoTitle = document.querySelectorAll('.info-title');
+	 infoTitle.forEach(function(e) {
+	     var w = e.offsetWidth + 10;
+	     var ml = w/2;
+	     e.parentElement.style.top = "82px";
+	     e.parentElement.style.left = "50%";
+	     e.parentElement.style.marginLeft = -ml+"px";
+	     e.parentElement.style.width = w+"px";
+	     e.parentElement.previousSibling.style.display = "none";
+	     e.parentElement.parentElement.style.border = "0px";
+	     e.parentElement.parentElement.style.background = "unset";
+	 });
+ </script>
