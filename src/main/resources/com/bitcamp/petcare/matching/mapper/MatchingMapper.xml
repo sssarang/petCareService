@@ -57,4 +57,12 @@
 	</select>
 	
 	
+	<select id="getServiceMatching" resultType="com.bitcamp.petcare.matching.domain.ServiceMatchingVO">
+	
+		SELECT pet_user_no
+		FROM tbl_service_matching
+		
+	</select>
+	
+	
 </mapper>

@@ -38,7 +38,7 @@
 <body>
 
     <!-- header -->
-	<%@ include file="/WEB-INF/views/common/header1.jsp" %>
+	<%@ include file="/WEB-INF/views/common/header2.jsp" %>
 	
     <!-- mainpage -->
 	<%@ include file="/WEB-INF/views/search/matchingBody.jsp" %>
@@ -49,6 +49,9 @@
     
 	<!-- bookingForm js -->
 	<script type="text/javascript" src="/resources/js/matching/bookingForm.js"></script>
+	
+	<!-- alert js -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
 </body>
 </html>

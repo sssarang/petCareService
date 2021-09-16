@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.bitcamp.petcare.matching.domain.MatchingDTO;
 import com.bitcamp.petcare.matching.domain.MatchingVO;
 import com.bitcamp.petcare.matching.domain.ServiceCalendarVO;
+import com.bitcamp.petcare.matching.domain.ServiceMatchingVO;
 import com.bitcamp.petcare.matching.domain.ServiceTypeVO;
 import com.bitcamp.petcare.matching.mapper.MatchingMapper;
 
@@ -67,5 +68,15 @@ public class MatchingServiceImpl implements MatchingService{
 		
 		return mapper.getServiceCalendar(userNo);
 	} //getServiceCalendar
+
+
+	@Override
+	public List<ServiceMatchingVO> getServiceMatching() {
+		log.debug("getServiceMatching()");
+		
+		Objects.requireNonNull(this.mapper);
+		
+		return mapper.getServiceMatching();
+	} //getServiceMatching
 
 } //end class

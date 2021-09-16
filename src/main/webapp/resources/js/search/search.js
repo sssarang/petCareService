@@ -421,33 +421,88 @@
 				var resultSk = result.psSkill;			 
 				var sk ="";
 				
-				$.each(resultSk, function(i){
-					console.log(">>>>"+resultSk[i].skillTypeCode);
+				if(resultSk.length === 0){
+					$("#service4").hide();
 					
-					if(resultSk[i].skillTypeCode == 21){
-						sk += "<li>약 먹이기 가능 </li>";					
-					}					
-					if(resultSk[i].skillTypeCode == 22){
-						sk += "<li>노령견 경험 有 </li>";					
-					}					
-					if(resultSk[i].skillTypeCode == 23){
-						sk += "<li>환견/환묘 경험 有 </li>";					
-					}					
-					if(resultSk[i].skillTypeCode == 24){
-						sk += "<li>애견관련 업종 경험 有 </li>";					
-					}					
-				})
+				} else{
+					$("#service4").show();
+					
+					$.each(resultSk, function(i){
+						console.log(">>>>"+resultSk[i].skillTypeCode);
+						
+						if(resultSk[i].skillTypeCode == 21){
+							sk += "<li>약 먹이기 가능 </li>";					
+						}					
+						if(resultSk[i].skillTypeCode == 22){
+							sk += "<li>노령견 경험 有 </li>";					
+						}					
+						if(resultSk[i].skillTypeCode == 23){
+							sk += "<li>환견/환묘 경험 有 </li>";					
+						}					
+						if(resultSk[i].skillTypeCode == 24){
+							sk += "<li>애견관련 업종 경험 有 </li>";					
+						}					
+					}) //each
+				} //if-else
 
 				$("#psSkillTypeCode").html(sk);
 
 				//활동사진-------------------------------//	
 				var resultAp = result.activityPhoto;
-				var str ="";
+				var ap ="";
 
-				$.each(resultAp, function(i){
-					console.log(">>>>"+resultAp[i].phtoNo);
-					console.log(">>>>"+resultAp[i].actPhoto);
-				})
+				if(resultAp.length === 0){
+					var noActivityPhoto = '/resources/assets/img/search/act.png';
+					
+					ap += "<div class='noActivityPhoto'>";
+					ap += "<img class='noActivityPhotoImg' src='"+ noActivityPhoto +"'></div>";
+					
+					$(".active_photo").empty();
+					$(".active_photo").html(ap);
+
+				} else{
+					$.each(resultAp, function(i){
+						console.log(">>>>"+resultAp[i].photoNo);
+						console.log(">>>>"+resultAp[i].actPhoto);
+						
+						switch(resultAp[i].photoNo){
+							case 1 : ap += "<div id='ap1'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 2 : ap += "<div id='ap2'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 3 : ap += "<div id='ap3'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 4 : ap += "<div id='ap4'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 5 : ap += "<div id='ap5'><img class='apImg' src='"+ resultAp[i].actPhoto +"'>";
+  									 ap += "<div id='plusap'><p style='text-align: center; font-size: 100px; color: white;'>+</p></div></div>";
+										break;
+						} //switch
+												
+					}); //each
+					
+					$(".active_photo").empty();
+					$(".active_photo").html(ap);
+					
+					$("#photomodalBox").html(ap);					
+					$("#photomodalBox").append("<div id='photocloseBtn'><a>close</a></div>");
+
+				} //if-else
+	
+				document.getElementById("photocloseBtn").addEventListener("click", fnphotoModalClose);
+				
+				//---------------리뷰 모달창 생성-------------------//
+				
+				function fnphotoModalOpen(){
+					$('#photomodalBox').show();  
+					$('.black_bg').show();  
+				}; //fnModalOpen
+				
+				
+				function fnphotoModalClose(){
+					$('#photomodalBox').hide();  
+					$('.black_bg').hide();  
+				}; //fnModalOpen
 				     
 
 				//리뷰-----------------------------------//	
@@ -554,12 +609,11 @@
 				//매칭버튼			
 				//-------------로그인세션 회원유형 check-----------------//		
 				var classify = result.classifySession;
+				console.log('>>>>> 접근권한' + classify);
 				
-				document.getElementById("matchingBtn").addEventListener("click", function fnMatching(classify){
-					if(classify != 1){
-						console.log('>>>>> 접근권한' + classify);
-						
-						swal("", "반려인 회원만 사용가능한 서비스입니다.", "warning");
+				document.getElementById("matchingBtn").addEventListener("click", function (e){					
+					if(classify != 1){						
+						swal("", "반려인 회원만 이용가능한 서비스입니다.", "warning");
 						event.preventDefault();
 					} //if	
 					

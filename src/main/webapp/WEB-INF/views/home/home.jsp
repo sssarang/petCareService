@@ -53,12 +53,12 @@
 	<script type="text/javascript" src="/resources/js/home/review.js"></script>
 	<!-- faq js -->
 	<script type="text/javascript" src="/resources/js/home/faq.js"></script>
-	<!-- 버튼 js -->
-	<script type="text/javascript" src="/resources/js/home/button.js"></script>
 	<!-- searchForm js -->
 	<script type="text/javascript" src="/resources/js/home/searchForm.js"></script>
 	<!-- address.js-->
 	<script type="application/javascript" src="/resources/js/common/address.js"></script>
+	<!-- alert js -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
 </body>
 </html>

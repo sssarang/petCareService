@@ -39,12 +39,14 @@
     float: left;
     position: relative;
 
-    width: 20%;
-    height: 1300px;
+    width: 22%;
+    height: 1350px;
     padding: 1.5%;
-    padding-top: 70px;
+    padding-top: 0px; 
+    /* padding-top: 70px; */
 
     background-color: #fff9e8;
+    box-shadow: 0px 2px 6px rgb(0 0 0 / 40%);
 }
 
 .sidebar-list { /*사이드바 %로 단위변경*/
@@ -53,46 +55,95 @@
     position: relative;
     
     width: 22%;
-    height: 1300px;
+    height: 1350px;
     padding: 1.5% 0.5%;
-    padding-top: 70px;
+    /* padding-top: 0px; */
 
     background-color: white;
+    box-shadow: 0px -2px 6px rgb(0 0 0 / 40%) inset;
 }
 
 .content { /*본문 %로 단위변경*/
     float: left;
     position: relative;
     
-    width: 58%;
-    height: 1300px;
+    width: 56%;
+    height: 1350px;
     padding: 1.5%;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1466px) {
     .sidebar-search {
       width: 25%;
-      padding-top: 70px;
-      
     }
     .sidebar-list {
-      width: 25%;
-      padding-top: 100px;
-      
+      width: 28%;
     }
     .content {
-      width: 50%;
-    } 
-} /* 데스크탑 */
-@media (max-width: 768px) {
+      width: 47%;
+    } 	
+}	
+@media (max-width: 1440px) {
     .sidebar-search {
-      width: 50%;
-      padding-top: 70px;
-      
+      width: 25%;
     }
     .sidebar-list {
-      width: 50%;
-      padding-top: 100px;
-      
+      width: 28%;
+    }
+    .content {
+      width: 47%;
+    }
+    .profile{
+      width: 47%;
+    } 
+} /* 데스크탑 */
+@media (max-width: 1200px) {
+    .sidebar-search {
+      width: 28%;
+    }
+    .sidebar-list {
+      width: 30%;      
+    }
+    .content {
+      width: 42%;
+    } 
+    .profile{
+      width: 42%;
+    }
+} /* 데스크탑 */
+@media (max-width: 1024px) {
+    .sidebar-search {
+      width: 30%;      
+    }
+    .sidebar-list {
+      width: 33%;      
+    }
+    .content {
+      width: 37%;
+    } 
+    .profile{
+      width: 37%;
+    }    
+} /* 데스크탑 */
+@media (max-width: 1000px) {
+    .sidebar-search {
+      width: 30%;      
+    }
+    .sidebar-list {
+      width: 30%;      
+    }
+    .content {
+      width: 40%;
+    }
+    .profile{
+      width: 40%;
+    }      
+} /* 데스크탑-태블릿 사이 */
+@media (max-width: 780px) {
+    .sidebar-search {
+      width: 50%;      
+    }
+    .sidebar-list {
+      width: 50%;      
     }
     .content {
       width: 100%;
@@ -101,7 +152,6 @@
 @media (max-width: 576px) {
     .sidebar-search {
       width: 100%;
-      margin-top: 38px;      
     }
     .sidebar-list {
       width: 100%;
@@ -124,6 +174,10 @@
   box-shadow: inset 0px 0px 5px #f0f0f0;
 }
 
+#searchTitle{
+	font-size: 1.5rem;
+}
+
 /*====================================================*/
 /*================ 필터링조건(반응형적용) ===================*/
 /*====================================================*/
@@ -143,8 +197,8 @@
 	font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
-    /* border-radius: 10px; */
     background-color: rgb(255, 210, 127);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
 }
 @media (max-width: 768px) {
     .title {
@@ -199,6 +253,72 @@ hr {
     } 
 } /* 데스크탑 */
 
+
+/*input tag 통일(공통)*/
+#sido,
+#sigugun,
+#dong{
+    height: 25px;
+	margin: 0 0 7px 5px;
+	
+    border-radius: 3px;
+    border: 1px solid #c0c0c0;
+}
+
+input[type=checkbox]:click{
+    background-color: yellow;
+}
+
+input[type=text]{
+    height: 25px;
+	margin: 0 0 7px 5px;
+	
+	border-radius: 3px;
+    border: 1px solid #c0c0c0;
+}
+
+input[type=number]{
+    height: 25px;
+	width: 100px;	
+	
+	border-radius: 3px;
+    border: 1px solid #c0c0c0;
+}
+@media (max-width: 1440px) {
+    input[type=text]{
+      width: 120px;
+    } 
+    input[type=number]{
+      width: 95px;
+    } 
+} /* 데스크탑 */
+@media (max-width: 1060px) {
+    input[type=number]{
+      width: 90px;
+    } 
+} /* 데스크탑 */
+@media (max-width: 1024px){
+	input[type=number] {
+	    width: 68px;
+	}
+}/* 데스크탑 */
+@media (max-width: 768px) {
+    input[type=text] {
+	    width: 140px;
+	}
+	input[type=number] {
+	    width: 95px;
+	}
+} /* 태블릿 */
+@media (max-width: 576px) {
+        input[type=text] {
+	    width: 150px;
+	}
+	input[type=number] {
+	    width: 120px;
+	}
+}  /* 스마트폰 */
+
 /*필터링조건항목-반려동물종류(라디오버튼)*/
 .btn-toggle{	
 	display: none;
@@ -216,19 +336,26 @@ hr {
     width: 30%;
     height: 40px;
     line-height: 40px;
-    border: #d9dde2 solid 0.5px;
-    border-radius:15%;
+    border-radius:10%;
     background-color: #fdfdfc;
 
     text-align: center;
     font-weight:bold;
     font-size: 0.9rem;
     font-family: 'Noto Sans KR', sans-serif;
+    box-shadow: 0px 1px 3px rgb(0 0 0 / 26%);
 }
 
+.btn-toggle input[type=radio] +label:hover {
+    background-color: #fcebb8;
+}
+
+.btn-toggle input[type=radio]:checked +label:hover {
+    background-color: #fcebb8;
+}
 
 .btn-toggle input[type=radio]:checked +label {
-    background-color: #fdf7b9;
+    background-color: #fae29a;
     font-color: #fdfdfc;
 }
 
@@ -262,10 +389,20 @@ hr {
   color: white;
   background-color:#f9c802;
 }
-@media (max-width: 1024px) {
+
+#searchBtn:hover {
+  box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+}
+@media (max-width: 1440px) {
     #searchBtn {
  		 width: 130px;
  		 height: 50px;
+    } 
+} /* 데스크탑 */
+@media (max-width: 1024px) {
+    #searchBtn {
+ 		 width: 120px;
+ 		 height: 45px;
     }
 } /* 데스크탑 */
 @media (max-width: 768px) {
@@ -309,6 +446,27 @@ hr {
   	padding: 1rem 0;
 }
 
+#pslistphoto{
+	width: 110px;
+	height: 120px;
+	
+	border-radius: 10%;
+	overflow: hidden;	
+}
+
+#pslistphoto:hover{
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);	
+	transform: scale(1.1);
+}
+
+#listphoto{
+	width: 100%;
+	height: 100%;
+	padding: 2%;
+	
+	border-radius: 10%;
+}
+
 .line1,
 .line2,
 .line3{
@@ -325,24 +483,56 @@ hr {
 }
 
 .line2{
-	width: 15%;	
+	width: 20%;	
 }
 
 .line3{
-	width: 55%;	
+	width: 50%;	
 }
+@media (max-width: 1595px) {
+    .line1{
+	width: 30%; 
+	background-size: cover;
+	background-repeat:no-repeat;
+	}
+	
+	.line2{
+		width: 22%;	
+	}
+	
+	.line3{
+		width: 48%;	
+	}
+} /* 데스크탑 */
+@media (max-width: 1466px) {
+    .line1{
+	width: 30%; 
+	background-size: cover;
+	background-repeat:no-repeat;
+	}
+	
+	.line2{
+		width: 22%;	
+	}
+	
+	.line3{
+		width: 48%;	
+	}
+} /* 데스크탑 */
 
 .profileBtn{
 	float: right;
 	padding: 5px;	
+	display:inline-block;
 	
 	width: 80px;
     height: 30px;
     
-    opacity: 0.8;
+    opacity: 0.6;
 	border: 0;
 	border-radius: 50% 20% / 10% 40%;
-	background-color: lightblue;
+	background-color: #A9D18E;
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);	
 	font-size: 0.8rem;
 }
 
@@ -360,16 +550,36 @@ hr {
     z-index: 1;
     
     background-color:white;
-    width: 80%;
-    height: 1300px;
+    width: 77.7%;
+    height: 1350px;
     top: 70px;
     right: 0%;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1466px) {
+    #noSearch {
+      width: 75%;
+    }
+}	
+@media (max-width: 1440px) {
     #noSearch {
       width: 75%;
     }
 } /* 데스크탑 */
+@media (max-width: 1200px) {
+    #noSearch {
+      width: 72%;
+    }
+} /* 데스크탑 */
+@media (max-width: 1024px) {
+    #noSearch {
+      width: 70%;
+    }
+} /* 데스크탑 */
+@media (max-width: 1000px) {
+    #noSearch {
+      width: 70%;
+    }   
+} /* 데스크탑-태블릿 사이 */
 @media (max-width: 768px) {
     #noSearch {
       width: 100%;
@@ -434,7 +644,6 @@ hr {
     z-index: 2;
 }
 
-
 /*====================================================*/
 /*===================== 펫시터프로필 ======================*/
 /*====================================================*/
@@ -442,17 +651,40 @@ hr {
     display: none;
     position: absolute;
     
-    width: 58%;
-    height: 1300px;
+    width: 56%;
+    height: 1350px;
     top: 70px;
     right: 0%;
     z-index: 5;
 }
-@media (max-width: 768px) {
-    .profile {
+@media (max-width: 1466px) {
+    .profile{
+      width: 75%;
+    }
+}	
+@media (max-width: 1440px) {
+    .profile{
+      width: 75%;
+    } 
+} /* 데스크탑 */
+@media (max-width: 1200px) {
+    .profile{
+      width: 72%;
+    }
+} /* 데스크탑 */
+@media (max-width: 1024px) {
+    .profile{
       width: 100%;
-      padding-top: 70px;
-      
+    }    
+} /* 데스크탑 */
+@media (max-width: 1000px) {
+    .profile{
+      width: 100%;
+    }      
+} /* 데스크탑-태블릿 사이 */
+@media (max-width: 780px) {
+    .profile {
+      width: 100%;      
     }
 } /* 태블릿 */
 @media (max-width: 576px) {
@@ -467,8 +699,8 @@ hr {
 	
     width: 26px;
     height: 26px;
-    top: 10px;
-    right: 10px;
+    top: 25px;
+    right: 30px;
 }
 
 .profile_close> a{
@@ -485,9 +717,9 @@ hr {
 	margin: 0 auto;
 	padding: 5%;
 	width: 100%;
-	height:1301px;
+    height: 1350px;
 	
-	background-color: #fff7e8;
+	background-color: white;
 }
 #profile_wrap::-webkit-scrollbar {
     width: 10px;
@@ -505,11 +737,12 @@ hr {
 #profile_head{
 	display: flex;
 	flex-direction: row;
-	flex-wrap: nowrap;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
 	
 	margin: 0 auto;
+	margin-bottom: 10%;
 	padding: 2%;
 	
 	width: 100%;
@@ -535,10 +768,10 @@ hr {
 
 #psInfo{
 	padding: 3%;
-	margin-left: 2%;	
+	margin: 0 auto;	
 	
-	width: 70%;
-	height: 100%;	
+	width: 650px;
+	height: auto;	
 }
 
 #star{
@@ -547,11 +780,19 @@ hr {
 }
 
 #psNickname,
-#psAddress,
-#psIntroduce{
+#psAddress{
 	font-size: 1.4rem;
 }
 
+#psIntroduce{
+	padding: 3%;
+	margin: 3% 0;
+	margin-top:5%;
+	width: 590px;
+	font-size: 1.3rem;
+	background-color: #f6f6f6;
+    box-shadow: 0px 1px 2px rgb(0 0 0 / 19%) inset;
+}
 
 #matchingBtn{
 	float: right;
@@ -566,23 +807,48 @@ hr {
   	font-weight: bold;
 
   	color: white;
-  	background-color:#f9c802;
+  	background-color:#ff6060;
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
+#matchingBtn:hover{
+	transform: scale(1.1);
+}
 
 #profile_content{
 	display: flex;
-	flex-direction: row;		
+	flex-direction: row;
+	margin: 0 auto;
+    
+	width: 855px;
+	box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);		
 }
 
+@media (max-width: 1875px) {
+	#profile_content{
+		margin-top: 310px;
+	}		
+}
+@media (max-width: 1466px) {
+	#profile_content{
+		margin-top: 0;
+	}		
+}
+@media (max-width: 1400px) {
+	#profile_content{
+		margin-top: 310px;
+	}		
+}
 #profile_side{
 	overflow: hidden;
 	
 	padding: 3%;
-	width: 35%;
+	width: 320px;
 	height:auto;
 	
+	opacity: 0.8;
 	background-color: #ffd993;
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 #profile_body{
@@ -591,9 +857,11 @@ hr {
 	flex-wrap: nowrap;
 	
 	padding: 3% 3% 3% 0;
-	width: 65%;
+	width: 535px;
 	height:auto;
 	
+	opacity: 0.8;
+	/* background-color: #D0DFC5; */
 	background-color: #ffd993;
 }
 
@@ -613,6 +881,18 @@ hr {
 		
 	background-color: white;
 }
+
+#service4{
+	display: none;	
+}
+
+.liImg{
+	width:auto;
+	list-style-position: inside;
+	list-style-image:url("/resources/assets/img/search/ul.png");
+	list-style-type:disc;
+}
+
 
 #calendar{
 	width: 100%;
@@ -639,13 +919,95 @@ hr {
 }
 
 .active_photo{
-	padding: 3%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
 	margin-bottom:5%;
-	
+		
 	width: 100%;
 	height: 350px;
 
-	background-color: white;
+	/* background-color: white; */
+}
+
+#ap1{
+	width: 250px;
+	height: 100%;
+	margin-right: 0.5%;
+	border-radius: 10%;
+}
+
+#ap2,
+#ap3{
+	width: 120px;
+	height: 50%;
+	border-radius: 10%;
+}
+
+#ap4,
+#ap5{
+	width: 120px;
+	height: 50%;
+	border-radius: 10%;
+}
+
+#ap5{
+	position: relative;
+}
+
+#plusap{
+	position: absolute;
+	
+	width: 120px;
+	height: 100%;
+	border-radius: 10%;
+	
+	top: 0;
+	opacity: 0.4;
+	background-color: black;
+}
+
+
+.apImg{
+	width: 100%;
+	height: 100%;
+	
+	border-radius: 7%;
+	object-fit: cover;
+	box-shadow: 2px 2px 5px gray;
+}
+
+.apImg:hover{
+	transform: scale(1.1);
+}
+
+
+.noActivityPhoto{
+	width: 100%;
+	height: 100%;
+}
+
+.noActivityPhotoImg{
+	width: 100%;
+	height: 100%;
+	
+	opacity: 0.8;
+	object-fit: cover;
+}
+
+#photomodalBox{
+    display: none;
+    position: absolute;
+    overflow: auto;
+    
+    padding: 3%;
+    width: 54%;
+    height: 70%;
+    
+    top:15%;
+    left: 23%;
+    background-color: white;
+    z-index: 2;
 }
 
 #review-list{
@@ -757,181 +1119,6 @@ hr {
 .noReviewImg{
 	width: 110px;
     margin: 90px 0 10px 0;
-}
-/*====================================================*/
-/*=============== 활동사진리스트(반응형적용) =================*/
-/*====================================================*/
-.active_photo .inWrap {
-	position: relative;
-	height: 300px;
-}
-
-.active_photo .fInner {
-	margin: 0 auto;	
-	width: 85%; 
-	overflow: hidden;
-	padding-bottom: 1%;
-}
-
-.active_photo li {
-	float: left; width: 188px; height: 282px; list-style: none
-}
-
-.active_photo li a {
-	position: relative;
-	display: block; 
-	background: #f0f0f0; 
-	height: 100%; 
-	margin: 0 3%;
-	box-shadow: 2px 2px 5px gray;
-	text-align: center;
-}
-.active_photo li span {
-	display: block;
-	position: absolute;
-	bottom: -3em;
-	width: 100%;
-    color:#333;
-	font-size: 1em;
-	font-weight: 400;
-}
-
-.active_photo li:nth-child(1) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(2) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(3) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(4) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(5) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(6) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(7) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(8) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(9) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-.active_photo li:nth-child(10) a{
-	background: url() center center no-repeat;
-	background-size: cover;
-}
-
-.active_photo .swiper-pagination {
-	position: relative;
-	top: 0;
-	left: 0;
-	margin: 25px auto 0 auto;
-}
-.active_photo .swiper-pagination-progress .swiper-pagination-progressbar{
-	background: #f4bc71;
-}
-
-.active_photo .button div {
-	position: absolute;
-	width: 60px;
-	height: 60px;
-	background: #f7cd95;
-	color: #fff;
-	border-radius: 50%;
-	text-align: center;
-	top: 50%;
-	box-shadow: 2px 2px 5px gray;
-	transition: all 0.2s
-}
-.active_photo .button div:active {
-	transform: translate(2px,2px);
-}
-.active_photo .button a {
-	display: block;
-	height: 100%;
-}
-
-.active_photo .back a {
-	background: url(/resources/assets/img/search/back.svg) center center no-repeat;
-	background-size: 20px 20px;
-    text-indent: -999px; overflow: hidden;
-}
-
-.active_photo .next a {
-	background: url(/resources/assets/img/search/next.svg) center center no-repeat;
-	background-size: 30px 30px;
-    text-indent: -999px; overflow: hidden;
-}
-
-.active_photo .back {
-	left: 1%;
-}
-.active_photo .next {
-	right: 1%;
-}
-
-/* 일반 pc */
-@media screen and (max-width:1280px) {
-
-}
-
-
-/* 테블릿 */
-@media screen and (max-width:1024px) {
-
-}
-
-/* 소형 테블릿 */
-@media screen and (max-width:768px) {
-	.active_photo .button div{
-		width: 40px;
-		height: 40px;
-	}
-	.active_photo .button div a {
-		background-size: 20px 20px;
-	}
-}
-
-/* 모바일 */
-@media screen and (max-width:640px) {
-
-}
-
-/* 소형 모바일 */
-@media screen and (max-width:480px) {
-	.active_photo .fInner {
-		width: 95%;
-	}
-	.active_photo li {
-		width: 140px; height: 210px;
-	}
-	.active_photo li span {
-		font-size: 1.1667em;
-	}
-	.active_photo .button {
-		display: none;
-	}
-}
-
-/* 최소 사이즈 처리 */
-@media screen and (max-width:480px) {
-	
 }
 
 
