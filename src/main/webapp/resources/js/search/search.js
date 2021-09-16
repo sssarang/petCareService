@@ -75,7 +75,7 @@
 		
 	}; //fnCheck
 	
-	
+		
 	//-----------------------------------------------//
 	// 2. 펫시터프로필 Section
 	//-----------------------------------------------//
@@ -370,8 +370,6 @@
 				var pk ="";
 
 				$.each(resultPk, function(i){
-					console.log(">>>>"+resultPk[i].petTypeCode);
-					
 					if(resultPk[i].petTypeCode == 1){
 						pk += "<li>강아지(대형견)</li> ";						
 					}
@@ -394,9 +392,6 @@
 				var st ="";
 				
 				$.each(resultSt, function(i){
-					console.log(">>>>"+resultSt[i].serviceTypeCode);
-					console.log(">>>>"+resultSt[i].price);
-					
 					//금액 콤마(,)찍기
 					var price = String(resultSt[i].price).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					
@@ -452,19 +447,102 @@
 				var ap ="";
 
 				if(resultAp.length === 0){
+					console.log('뭐가 문제야');
+					
 					var noActivityPhoto = '/resources/assets/img/search/act.png';
 					
 					ap += "<div class='noActivityPhoto'>";
 					ap += "<img class='noActivityPhotoImg' src='"+ noActivityPhoto +"'></div>";
 					
+					console.log(ap);
+					
 					$(".active_photo").empty();
 					$(".active_photo").html(ap);
 
+				} else if(resultAp.length === 1){
+					$.each(resultAp, function(i){
+						switch(resultAp[i].photoNo){
+							case 1 : ap += "<div id='ap1'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+						} //switch
+						
+					}); //each
+	
+					ap += "<div id='ap2'><img class='apImg' src='/resources/assets/img/search/ap1.png'></div>";
+					ap += "<div id='ap3'><img class='apImg' src='/resources/assets/img/search/ap2.png'></div>";
+					ap += "<div id='ap4'><img class='apImg' src='/resources/assets/img/search/ap3.png'></div>";
+					ap += "<div id='ap5'><img class='apImg' src='/resources/assets/img/search/ap4.png'></div>";
+					
+					$(".active_photo").empty();
+					$(".active_photo").html(ap);
+					
+					$("#photomodalBox").html(ap);					
+					$("#photomodalBox").append("<div id='photocloseBtn'><a>close</a></div>");
+				} else if(resultAp.length === 2){
+					$.each(resultAp, function(i){
+						switch(resultAp[i].photoNo){
+							case 1 : ap += "<div id='ap1'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 2 : ap += "<div id='ap2'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+						} //switch
+						
+					}); //each
+	
+					ap += "<div id='ap3'><img class='apImg' src='/resources/assets/img/search/ap2.png'></div>";
+					ap += "<div id='ap4'><img class='apImg' src='/resources/assets/img/search/ap3.png'></div>";
+					ap += "<div id='ap5'><img class='apImg' src='/resources/assets/img/search/ap4.png'></div>";
+					
+					$(".active_photo").empty();
+					$(".active_photo").html(ap);
+					
+					$("#photomodalBox").html(ap);					
+					$("#photomodalBox").append("<div id='photocloseBtn'><a>close</a></div>");
+					
+				} else if(resultAp.length === 3){
+					$.each(resultAp, function(i){
+						switch(resultAp[i].photoNo){
+							case 1 : ap += "<div id='ap1'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 2 : ap += "<div id='ap2'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 3 : ap += "<div id='ap3'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+						} //switch
+						
+					}); //each
+	
+					ap += "<div id='ap4'><img class='apImg' src='/resources/assets/img/search/ap3.png'></div>";
+					ap += "<div id='ap5'><img class='apImg' src='/resources/assets/img/search/ap4.png'></div>";
+					
+					$(".active_photo").empty();
+					$(".active_photo").html(ap);
+					
+					$("#photomodalBox").html(ap);					
+					$("#photomodalBox").append("<div id='photocloseBtn'><a>close</a></div>");
+					
+				} else if(resultAp.length === 4){
+					$.each(resultAp, function(i){
+						switch(resultAp[i].photoNo){
+							case 1 : ap += "<div id='ap1'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 2 : ap += "<div id='ap2'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 3 : ap += "<div id='ap3'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+										break;
+							case 4 : ap += "<div id='ap4'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
+							
+						} //switch
+						
+					}); //each
+	
+					ap += "<div id='ap5'><img class='apImg' src='/resources/assets/img/search/ap4.png'></div>";
+					
+					$(".active_photo").empty();
+					$(".active_photo").html(ap);
+					
+					$("#photomodalBox").html(ap);					
+					$("#photomodalBox").append("<div id='photocloseBtn'><a>close</a></div>");
+					
 				} else{
 					$.each(resultAp, function(i){
-						console.log(">>>>"+resultAp[i].photoNo);
-						console.log(">>>>"+resultAp[i].actPhoto);
-						
 						switch(resultAp[i].photoNo){
 							case 1 : ap += "<div id='ap1'><img class='apImg' src='"+ resultAp[i].actPhoto +"'></div>";
 										break;
@@ -476,32 +554,51 @@
 										break;
 							case 5 : ap += "<div id='ap5'><img class='apImg' src='"+ resultAp[i].actPhoto +"'>";
   									 ap += "<div id='plusap'><p style='text-align: center; font-size: 100px; color: white;'>+</p></div></div>";
-										break;
 						} //switch
 												
 					}); //each
 					
+					
 					$(".active_photo").empty();
 					$(".active_photo").html(ap);
 					
-					$("#photomodalBox").html(ap);					
-					$("#photomodalBox").append("<div id='photocloseBtn'><a>close</a></div>");
-
 				} //if-else
+		
+		
+				var modal = "";
+				$.each(resultAp, function(i){
+					modal += "<div class='modalap'><img class='modalapImg' src='"+ resultAp[i].actPhoto +"'></div>";
+				}); //each
 	
-				document.getElementById("photocloseBtn").addEventListener("click", fnphotoModalClose);
+			
+				$("#photomodalBox").html(modal);					
+				$("#photomodalBox").append("<div id='photocloseBtn'><a>close</a></div>");
+
+				if(resultAp.length != 0){
+					document.getElementById("ap1").addEventListener("click", fnphotoModalOpen);
+					document.getElementById("ap2").addEventListener("click", fnphotoModalOpen);
+					document.getElementById("ap3").addEventListener("click", fnphotoModalOpen);
+					document.getElementById("ap4").addEventListener("click", fnphotoModalOpen);
+					document.getElementById("ap5").addEventListener("click", fnphotoModalOpen);
+					
+					document.getElementById("photocloseBtn").addEventListener("click", fnphotoModalClose);					
+				} //if	
 				
-				//---------------리뷰 모달창 생성-------------------//
+				
+				//---------------활동사진 모달창 생성-------------------//
 				
 				function fnphotoModalOpen(){
 					$('#photomodalBox').show();  
-					$('.black_bg').show();  
+					$('.black_bg').show();
+
+					document.getElementById("photomodalBox").scrollIntoView(); 
 				}; //fnModalOpen
 				
 				
 				function fnphotoModalClose(){
 					$('#photomodalBox').hide();  
-					$('.black_bg').hide();  
+					$('.black_bg').hide(); 
+ 
 				}; //fnModalOpen
 				     
 
@@ -580,12 +677,12 @@
 					}); //each
 					
 					$("#review-list").html(rev);
-					$("#review-list").append("<input type='button' id='moreBtn' value='more'>");
+					/*$("#review-list").append("<input type='button' id='moreBtn' value='more'>");*/
 					
 					$("#modalBox").html(rev);
 					$("#modalBox").append("<div id='closeBtn'><a>close</a></div>");
 					
-					document.getElementById("moreBtn").addEventListener("click", fnModalOpen);
+					/*document.getElementById("moreBtn").addEventListener("click", fnModalOpen);*/
 					document.getElementById("closeBtn").addEventListener("click", fnModalClose);
 
 					
@@ -596,7 +693,9 @@
 				
 				function fnModalOpen(){
 					$('#modalBox').show();  
-					$('.black_bg').show();  
+					$('.black_bg').show(); 
+					
+					document.getElementById("modalBox").scrollIntoView();  
 				}; //fnModalOpen
 				
 				
@@ -609,7 +708,6 @@
 				//매칭버튼			
 				//-------------로그인세션 회원유형 check-----------------//		
 				var classify = result.classifySession;
-				console.log('>>>>> 접근권한' + classify);
 				
 				document.getElementById("matchingBtn").addEventListener("click", function (e){					
 					if(classify != 1){						

@@ -34,7 +34,13 @@ public class SearchServiceImpl implements SearchService {
 		return this.mapper.getList(filterDTO);
 	} //getPsList
 
-
+	@Override
+	public int getTotal(FilterDTO cri) {
+		log.debug("getTotal({}) invoked.", cri);
+		
+		return this.mapper.getTotal(cri);
+	} //getTotal
+	
 	@Override
 	public PetSitterDTO getPs(Integer userNo) {
 		log.debug("getPs({}) invoked.", userNo);
