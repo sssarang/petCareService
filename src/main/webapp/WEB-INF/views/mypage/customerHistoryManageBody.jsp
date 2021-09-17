@@ -30,17 +30,7 @@
     </head>
     <body>
         <div class="d-flex" id="wrapper">
-            <!-- Sidebar-->
-            <div class="border-end" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom ">마이페이지</div>
-                <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action p-3" href="userInfoManage">회원정보관리</a>
-                    <a class="list-group-item list-group-item-action p-3" href="customerProfileManage">프로필관리</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="customerHistoryManage">이력/리뷰 관리</a>
-                    <a class="list-group-item list-group-item-action p-3" href="customerResvManage">예약관리</a>
-                    <a class="list-group-item list-group-item-action p-3" href="#!">회원탈퇴</a>
-                </div>
-            </div>
+            <%@ include file="/WEB-INF/views/common/mypageSidebar.jsp" %>
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
                 <!-- Page content-->

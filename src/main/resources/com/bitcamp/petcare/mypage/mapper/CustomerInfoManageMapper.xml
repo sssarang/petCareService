@@ -21,4 +21,24 @@
 
 </select>
 
+<select id="readPw" resultType="com.bitcamp.petcare.mypage.domain.userPasswordVO">
+	
+	SELECT user_pw
+	FROM tbl_user
+	WHERE user_no = ${userNo}
+
+</select>
+
+<update id="updateInfo">
+	UPDATE tbl_user u
+	SET (
+	     u.user_nickname = ${userNickname},
+	     u.user_pw = ${user_pw},
+	     u.user_contact = ${userContact},
+	     u.user_address = ${userAddress},
+	     u.user_latitude = ${userLatitude},
+	     u.user_longitude = ${userLongitude}
+	WHERE u.user_no = ${userNo}
+</update>
+
 </mapper>

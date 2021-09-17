@@ -11375,6 +11375,9 @@ body{
 
   color: #F9C7A1;
 }
+#modify_flex{
+  width: 500px;
+}
 
 
 #modify_flex .form-control{
@@ -11414,7 +11417,6 @@ body{
 }
 
 .btn_userInfo{
-  display: block;
   width:100px;
   background-color: #f8585b;
   border: solid rgb(201, 201, 243);
@@ -11433,4 +11435,38 @@ body{
 .btn_nickname:hover,
 .btn_userInfo:hover{
   background-color: #F9C7A1;
+
+  display: inline;
+}
+form label{
+  margin-bottom: 5px;
+}
+
+form .warning-label{
+  margin-left: 20px;
+  font-size: 80%;
+}
+
+form .check-button{
+  float: right;
+
+  margin-right: 20px;
+
+  font-size: 65%;
+}
+
+
+.btn-password{
+  display: inline;
+
+  margin-left: 200px;
+}
+
+.modal-password{
+  margin-top: 20px;
+  margin-left: 150px;
+}
+
+#btn-changePw{
+  float: right;
 }

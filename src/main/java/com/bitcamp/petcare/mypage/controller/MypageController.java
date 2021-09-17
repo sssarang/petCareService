@@ -9,15 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.petcare.mypage.domain.CustomerHistoryManageVO;
+import com.bitcamp.petcare.mypage.domain.CustomerInfoManageDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerInfoManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerPaymentManageDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerPaymentManageVO;
@@ -26,6 +29,7 @@ import com.bitcamp.petcare.mypage.domain.CustomerProfileManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerResvManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerReviewManageDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerReviewManageVO;
+import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 import com.bitcamp.petcare.mypage.service.MypageService;
 import com.bitcamp.petcare.user.domain.UserVO;
 
@@ -47,16 +51,25 @@ public class MypageController {
 
 	private String loginKey = "__LOGIN__";
 	
+	Double x;			//경도
+	Double y;			//위도
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;		//암호화관련 bean
 	
 
 	@GetMapping("main")							// 마이페이지 메인
-	public String  main(HttpSession session) {
+	public String  main(HttpSession session, Model model) {
 		log.debug("main() invoked.");
 		
 		log.info(session.getClass().getName());
 		log.info(session.getAttribute(loginKey));
 		UserVO vo = (UserVO) session.getAttribute(loginKey);
-		vo.getUserId();
+		log.debug(vo.getUserId());
+		
+		String classify = vo.getUserClassify();
+		model.addAttribute("classify", classify);
+		log.debug("classify : {} ", classify);
 		
 		log.info(vo.getUserNo());
 		return "mypage/myPageMain";
@@ -71,6 +84,9 @@ public class MypageController {
 		
 		UserVO vo = (UserVO) session.getAttribute(loginKey);
 		
+		String classify = vo.getUserClassify();
+		model.addAttribute("classify", classify);
+		
 		CustomerInfoManageVO info = this.service.readInfo(vo.getUserNo());
 		
 		Objects.requireNonNull(info);
@@ -81,20 +97,70 @@ public class MypageController {
 		model.addAttribute("info", info);		
 	}	//userInfoManage
 	
+
+	//좌표값 받아오는 메소드
+	@RequestMapping(value="coordinate", method=RequestMethod.POST)
+	@ResponseBody
+	public String coordinate(String x, String y) {
+		log.debug("coordinate({}, {}) invoked",x, y);
+		this.x = Double.parseDouble(x);
+		this.y = Double.parseDouble(y);
+		
+		return null;
+	}	//coordinate
+	
+	// 회원정보 수정
+	@PostMapping("userInfoModify")
+	public String userInfoModify(CustomerInfoManageDTO dto) {
+		log.debug("userInfoModify({}) invoked.", dto);
+		
+		dto.setUserLatitude(y);
+		dto.setUserLongitude(x);
+		
+		this.service.modifyInfo(dto);
+		
+		return "redirect:/mypage/main";
+	}	// userInfoModify
+	
+	// 기존 암호화 비밀번호 조회
+	@ResponseBody
+	@PostMapping("readPw")
+	public boolean readPw(@RequestParam(value = "oldPw")String inputOldPw, HttpSession session) throws Exception {
+
+
+		UserVO vo = (UserVO) session.getAttribute(loginKey);
+		
+		userPasswordVO oldPw = this.service.readPw(vo.getUserNo());
+		
+		log.debug("넣은 값 : {} ", inputOldPw);
+		
+		log.debug("기존 값 : {} ", oldPw.getUserPw());
+		
+		boolean match = encoder.matches(inputOldPw, oldPw.getUserPw());
+		
+		return match;
+		//String encrypedInputPw = this.service.encryption(inputOldPw);
+		
+				
+	}	// readPw
+	
 	
 	
 	
 	//  ========================프로필 페이지==========================
-	
+
 	@GetMapping("customerProfileManage")		// 반려인 프로필 페이지(조회)
 	public void getProfile( Model model, HttpSession session) {
 		log.debug("customerProfileManage() invoked.");
 		
 		UserVO vo = (UserVO) session.getAttribute(loginKey);
 		
-		CustomerProfileManageVO profile = this.service.readProfile(vo.getUserNo());
+		String classify = vo.getUserClassify();
+		model.addAttribute("classify", classify);
 		
-		assert profile != null;
+		
+		CustomerProfileManageVO profile = this.service.readProfile(vo.getUserNo());
+
 		
 		log.info("\t+ getProfile : {} ", profile);
 		
@@ -110,7 +176,7 @@ public class MypageController {
 		
 		String fileName = "proPhoto_"+vo.getUserNo()+".jpg";
 		//String path = req.getServletContext().getRealPath("/resources/assets/img/mypage");
-		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareService\\src\\main\\webapp\\resources\\assets\\img\\mypage";
+		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareServiceTest3\\src\\main\\webapp\\resources\\assets\\img\\mypage";
 		log.info("path : {}", path);
 		File file = new File(path, fileName);
 		modify.getProPhotoFile().transferTo(file);
@@ -134,6 +200,9 @@ public class MypageController {
 		log.debug("customerHistoryManage() invoked.");
 		
 		UserVO vo = (UserVO) session.getAttribute(loginKey);
+		
+		String classify = vo.getUserClassify();
+		model.addAttribute("classify", classify);
 		
 		List<CustomerHistoryManageVO> history = this.service.readHistory(vo.getUserNo());
 		//CustomerReviewManageVO review = this.service.readReview(serviceId);
@@ -186,7 +255,9 @@ public class MypageController {
 		
 		
 		UserVO vo = (UserVO) session.getAttribute(loginKey);
-		log.info(vo.getUserNo());
+		
+		String classify = vo.getUserClassify();
+		model.addAttribute("classify", classify);
 		
 		CustomerResvManageVO resv = this.service.readResv(vo.getUserNo());
 		

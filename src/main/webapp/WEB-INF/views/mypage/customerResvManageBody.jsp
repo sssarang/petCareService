@@ -5,7 +5,8 @@
 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-    
+   
+
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -27,18 +28,10 @@
     </head>
     <body>
         <div class="d-flex" id="wrapper">
-            <!-- Sidebar-->
-            <div class="border-end" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom ">마이페이지</div>
-                <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="userInfoManage">회원정보관리</a>
-                    <a class="list-group-item list-group-item-action p-3" href="customerProfileManage">프로필관리</a>
-                    <a class="list-group-item list-group-item-action p-3" href="customerHistoryManage">이력/리뷰 관리</a>
-                    <a class="list-group-item list-group-item-action p-3" href="customerResvManage">예약관리</a>
-                    <a class="list-group-item list-group-item-action p-3" href="#!">회원탈퇴</a>
-                </div>
-            </div>
-            <!-- Page content wrapper-->
+        
+	
+		<%@ include file="/WEB-INF/views/common/mypageSidebar.jsp" %> 
+ 	       <!-- Page content wrapper-->
             <div id="page-content-wrapper">
                 <!-- Page content-->
                 <div id="customerResv">
@@ -70,7 +63,9 @@
                             		<input type="text" name="price" class="form-control" value="${resv.totalAmount}원" readonly>
                             		<br>
                             		<label for="startDate">서비스 시작 일자</label>
-                            		<input type="text" name="startDate" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${resv.startDate}" />" readonly>
+                            		<input type="text" name="startDate" class="form-control" value="<fmt:formatDate pattern="yyyy년 MM월 dd일" value="${resv.startDate}" />" readonly>
+                            		<input type="hidden" name="forDDay" value="<fmt:formatDate pattern="yyyy,MM,dd" value="${resv.startDate}" />"/>
+                            	
                             		
                                 </ul>    
                                         
@@ -118,7 +113,7 @@
 						                        	<p>다가올 서비스 일자를 기대해주세요!</p> 
 						                        	<br>
 						                        	<br>
-						                        	<p class="diffDate"><p>일 남았습니다!</p>
+						                        	<p>서비스 시작까지 </p><p class="diffDate" value="" style="color : red;"><p>일 남았습니다!</p>
 						                        </div>
 						                    </div>
 						
@@ -158,11 +153,11 @@
 						                        <br>
 						                        <p>3일 전까지만 가능합니다.
 						                        <br>
-						                        <p class="cancelPossible">예약을 취소하시겠습니까 ?</p>
+						                        <p id="cancelPossible">예약을 취소하시겠습니까 ?</p>
 						                        <br>
-						                        <p class="cancelImpossible">예약 취소가 불가능합니다.</p>
+						                        <p id="cancelImpossible">예약 취소가 불가능합니다.</p>
 						                        </div>
-						                        <button type="button" class="btn-cancel" data-dismiss="modal">예약 취소</button>
+						                        <button type="button" class="btn_cancelYes" data-dismiss="modal">예약 취소</button>
 						                    </div>
 						
 						                    <!-- Modal footer -->
@@ -210,13 +205,24 @@
         
         	$(function() {
         		
+        		//==================== 서비스까지 남은 날짜 구하기====================
+        			
+        		var today = new Date();											// 현재날짜
+        		var dday = new Date($('input[name=forDDay]').val());			// 서비스시작날짜
+        		
+        		var gap = dday.getTime() - today.getTime();						// 남은 날짜(밀리초 단위)
+        		var result = Math.ceil(gap / (1000 * 60 * 60 * 24));			// 남은 날짜(날 단위)
+        		console.log('디데이 : ' + result);
+
+				$('.diffDate').html(result);
+        		
         		//==================== 승인 되었을때만 결제버튼 활성화 ================
         		var stepTypeCodeName = $('input[name=stepTypeCodeName]').val()
         		if(stepTypeCodeName != "예약승인"){
         			$('#btn_charge').hide();
         		}
         		
-        		//==================== 서비스 예약, 예약 승인일때만 취소 버튼 활성화 ================
+        		//==================== 서비스 예약, 예약 승인일때만 취소 버튼 활성화 =====
         		if(stepTypeCodeName == "예약거절"){
         			$('#btn_cancel').hide();
         		}
@@ -241,12 +247,17 @@
         		
         		//==================== 예약 취소시 진행단계코드 변경 ==================
         		
-        		$('.btn-cancel').click(function(){
+        		$('#btn_cancel').click(function(){
         			
         		var serviceId = $('input[name=serviceId]').val();
         		console.log(serviceId);	
+        		console.log('디데이 : ', result);
         		
-        			$.ajax({
+        		if(result > 3){
+        			$('#cancelImpossible').hide();
+        			
+        			$('.btn_cancelYes').click(function(){					
+        				$.ajax({
         				url: "/mypage/cancelResv",
         				method: "POST",
         				data: {
@@ -255,11 +266,17 @@
         				success: function(data){
         					console.log('success');
         					location.reload();
-        				}
-        			})	// ajax
+        				}	// success
+        				})	// ajax
+        			});	// click
+        		} else{
+        			$('#cancelPossible').hide();
+        		};	// if- else
+        		
         			
         			
-        		})	// click
+        			
+        		});	// click
         		
         		//==================== 예약 없을 시 알림창 + 메인 마이페이지로 이동 ======
         	        		
