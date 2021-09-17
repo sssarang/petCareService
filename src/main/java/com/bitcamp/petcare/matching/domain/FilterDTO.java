@@ -3,10 +3,14 @@ package com.bitcamp.petcare.matching.domain;
 
 import java.util.List;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
 import lombok.Data;
+import lombok.extern.log4j.Log4j2;
 
 
 @Data
+@Log4j2
 public class FilterDTO {
 
 	private String petType;				//반려동물종류(강아지, 고양이)
@@ -29,5 +33,27 @@ public class FilterDTO {
 	private Integer maxPrice;			//서비스비용 최대
 	
 	private List<String> skillType;		//펫시터스킬유형
+	
+	//--------------------------------------------------//
+	//                     페이징 처리                     //
+	//--------------------------------------------------//
+	private int currPage = 1;			//현재 보고자 하는 페이지 번호
+	private int amount = 5;				//한 페이지당 보여줄 레코드 건수
+	private int pagesPerPage = 2;		//각 페이지 아래에 보여줄 페이지 번호의 개수
+		
+	
+	public String getPagingUri() {
+		log.debug("getPagingUri() invoked");
+	      
+	    UriComponentsBuilder builder = UriComponentsBuilder.fromPath("");
+	    builder.queryParam("currPage", this.currPage);
+	    builder.queryParam("amount", this.amount);
+	    builder.queryParam("pagesPerPage", this.pagesPerPage);
+	      
+	    log.info("\t+ pagingUri:"+builder.toUriString());
+	    
+	    return builder.toUriString();
+	    
+	} //getPagingUri
 	
 } //end class

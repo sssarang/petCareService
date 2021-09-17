@@ -23,8 +23,12 @@ pageEncoding="UTF-8"%>
          
             <!-- <div class="title"><span>상세조건선택</span></div> -->
 			
-            <form id="searchForm" onsubmit="return fnCheck();">
-                <div class="form-group">
+            <form id="searchForm" name = "filterForm" onsubmit="return fnCheck();">
+            	<input type="hidden" id = "currPageNo" name="currPage" value="1">	
+	       		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+	       		<input type="hidden" name="pagesPerPage" value="${pageMaker.cri.pagesPerPage}">
+	       		
+	            <div class="form-group">
                     <p id="searchTitle">상세검색</p>
                     <hr>
                     <p></p>
@@ -172,17 +176,17 @@ pageEncoding="UTF-8"%>
 		                              </c:otherwise>
 		                          </c:choose>
 		                              
-		                              <td class="line2">&nbsp; 닉네임 :</td>
+		                              <td class="line2">닉네임</td>
 		                              <td class="line3">${ps.userNickname}
  		                              		<%-- <input type="button" class="profileBtn" onclick="fnProfileOn(${ps.userNo})" name="detail" value="프로필보기"> --%>		                              
 		                              </td>
 		                          </tr>
 		                          <tr>
-		                              <td class="line2">&nbsp; 지 역 :</td>
+		                              <td class="line2">지&nbsp;&nbsp;&nbsp;역</td>
 		                              <td class="line3">${ps.userAddress}</td>
 		                          </tr>
 		                          <tr>
-		                              <td class="line2">&nbsp; 평 점 :</td>
+		                              <td class="line2">평&nbsp;&nbsp;&nbsp;점</td>
 		                              <c:choose>
 		                              	<c:when test="${ps.avg > 0 && ps.avg < 1}">
 		                                	<td class="line3"><span class="star">☆</span>(${ps.avg})</td>
@@ -222,6 +226,34 @@ pageEncoding="UTF-8"%>
 	 	                    </c:forEach>
 	                    </tbody>
                     </table>
+                    
+          	 	<div id="pagination">
+        	
+	        		<ul>
+	        			<c:if test="${pageMaker.prev}">
+	        				<li class="prev"><a class="prev" href="javascript:fnPageMove('${pageMaker.startPage - 1}')">&lt;</a> </li>
+	        			</c:if> 
+	        			
+	        			<!-- begin ~ end 까지 반복하고, 현재의 번호값을 var속성에 넣어준다. -->
+	        			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+	        				
+	        				 <li class="${pageMaker.cri.currPage == pageNum? 'currPage' : ''}">
+			                     <a    
+			                        class="${pageMaker.cri.currPage == pageNum? 'currPage' : ''}"
+			                        href="javascript:fnPageMove('${pageNum}')">
+			                        ${pageNum}
+			                     </a>
+			                  </li>                     
+	        			</c:forEach>
+	        			
+	        			<c:if test="${pageMaker.next}">
+	        				<li class="next"><a class="next" href="javascript:fnPageMove('${pageMaker.endPage + 1}')">&gt;</a></li>
+	        			</c:if>
+	        			
+	        		</ul>
+        		
+        		</div>
+        		
           	 </div>
               	 
           </div>
@@ -324,17 +356,18 @@ pageEncoding="UTF-8"%>
  <!----------------- float 해제----------------->
  <div id="clear"></div>    
  
+ <!----------------- 페이징 처리----------------->
  <script>
-	 var infoTitle = document.querySelectorAll('.info-title');
-	 infoTitle.forEach(function(e) {
-	     var w = e.offsetWidth + 10;
-	     var ml = w/2;
-	     e.parentElement.style.top = "82px";
-	     e.parentElement.style.left = "50%";
-	     e.parentElement.style.marginLeft = -ml+"px";
-	     e.parentElement.style.width = w+"px";
-	     e.parentElement.previousSibling.style.display = "none";
-	     e.parentElement.parentElement.style.border = "0px";
-	     e.parentElement.parentElement.style.background = "unset";
-	 });
+	 
+	 function fnPageMove(page){
+		 var urlParams = new URLSearchParams(location.search);
+		 
+		 if(page != urlParams.get("currPage")){
+			 urlParams.set("currPage",page);
+			 location.href="/search/main?"+urlParams.toString();	 
+	
+		 } //if
+		 
+	 } //fnPageMove
+	 
  </script>

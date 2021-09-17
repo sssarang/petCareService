@@ -101,8 +101,97 @@
         and addrDongNm != null and !''.toString().equals(addrDongNm)">
         AND REPLACE(U.USER_ADDRESS,' ','') LIKE REPLACE(#{addrSidoNm}||#{addrSigugunNm}||#{addrDongNm},' ','')||'%'
         </if>
+        
+        OFFSET (#{currPage} -1) * #{amount} ROWS
+        			   FETCH NEXT #{amount} ROWS ONLY
+        			   
 	</select>
 	
+	<select id="getTotal" resultType="int">
+		
+		SELECT COUNT(U.USER_NO)
+        FROM TBL_USER U,
+             TBL_PETSITTER_PROFILE PS
+        WHERE 1=1
+        AND U.USER_NO = PS.USER_NO
+        AND U.USER_STATUS = 'N'
+        AND U.USER_LATITUDE IS NOT NULL		/*좌표필수*/
+        AND U.USER_LONGITUDE IS NOT NULL	/*좌표필수*/
+        <if test='petType != null'>
+        AND EXISTS(
+            SELECT 1 
+            FROM TBL_SERVICE_PETKINDS 
+            WHERE 1=1
+            AND U.USER_NO = USER_NO
+            AND USE_YN = 'Y'            
+            <choose>
+            	<when test='petType eq "dog"'>
+	            AND PET_TYPE_CODE = #{dogType}
+	            </when>
+	            <otherwise>
+	            AND PET_TYPE_CODE = #{petType}
+	            </otherwise>
+            </choose> 
+        )
+        </if>
+          
+        <if test="(serviceType != null and serviceType.size != 0) or (minPrice != null or maxPrice != null)">        
+        AND EXISTS(
+            SELECT 1 
+            FROM TBL_SERVICE_TYPE 
+            WHERE 1=1
+            AND U.USER_NO = USER_NO
+            AND USE_YN = 'Y'
+            <if test="serviceType != null and serviceType.size != 0">
+            AND SERVICE_TYPE_CODE IN
+            <foreach collection="serviceType" item="item" index="index" separator="," open="(" close=")"> 
+             #{item} 
+            </foreach>
+            </if>
+            <if test="minPrice != null and maxPrice != null">
+            AND PRICE BETWEEN #{minPrice} 
+            			  AND #{maxPrice}
+            </if>			  
+        )
+        </if>
+        
+        <if test="(startDate != null and !''.toString().equals(startDate)) 
+        	  or (endDate != null and !''.toString().equals(startDate))">                
+        AND EXISTS(
+            SELECT 1 
+            FROM TBL_SERVICE_CALENDAR 
+            WHERE 1=1
+            AND U.USER_NO = USER_NO
+            <if test= "startDate != null and !''.toString().equals(startDate)"> 
+            AND SERVICE_DATE <![CDATA[ >= ]]> TO_DATE(#{startDate},'YYYY-MM-DD') 
+            </if>
+            <if test= "endDate != null and !''.toString().equals(endDate)"> 
+            AND SERVICE_DATE <![CDATA[ <= ]]> TO_DATE(#{endDate},'YYYY-MM-DD') 
+            </if>
+            
+        )
+        </if>
+        
+        <if test="skillType != null and  skillType.size != 0">        
+        AND  EXISTS(
+            SELECT 1
+            FROM TBL_PETSITTER_SKILL
+            WHERE 1=1
+            AND U.USER_NO = USER_NO
+            AND USE_YN = 'Y'
+            AND SKILL_TYPE_CODE IN
+            <foreach collection="skillType" item="item" index="index" separator="," open="(" close=")">
+           	#{item}
+            </foreach>
+        )
+        </if>        
+        <if test="addrSidoNm != null and !''.toString().equals(addrSidoNm) 
+        and addrSigugunNm != null and !''.toString().equals(addrSigugunNm)
+        and addrDongNm != null and !''.toString().equals(addrDongNm)">
+        AND REPLACE(U.USER_ADDRESS,' ','') LIKE REPLACE(#{addrSidoNm}||#{addrSigugunNm}||#{addrDongNm},' ','')||'%'
+        </if>
+		
+	</select>
 	
 	<!-- ================================================================================ -->
 	
@@ -189,6 +278,7 @@
 		INNER JOIN tbl_activity_photo acp on ps.user_no 
                                            = acp.user_no
 		WHERE ps.user_no = #{userNo}
+		ORDER BY acp.photo_no
 	</select>	
 	
 	

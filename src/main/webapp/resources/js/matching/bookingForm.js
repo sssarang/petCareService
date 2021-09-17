@@ -228,17 +228,14 @@ function check(){
 		
 		return false;
 	} //if-else
-	
-	
-//	swal({
-//	    title: "예약이 완료되었습니다.",
-//	    text: "예약 내역으로 이동합니다.",
-//	    type: "success",
-//        timer: 4000
-//	})
 		
-	return true;
+	swal({
+    title: "예약이 완료되었습니다.",
+    text: "예약 내역으로 이동합니다.",
+    icon: "success",
+	});
 	
+	return true;	
 
 }; //check
 

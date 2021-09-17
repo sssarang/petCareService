@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.petcare.matching.domain.FilterDTO;
+import com.bitcamp.petcare.matching.domain.PageDTO;
 import com.bitcamp.petcare.matching.domain.PetSitterDTO;
 import com.bitcamp.petcare.matching.service.SearchService;
 import com.bitcamp.petcare.user.controller.UserController;
@@ -44,16 +44,20 @@ public class SearchController {
 	public String getList(
 				FilterDTO filterDto, 
 				Model model) {
-		log .debug("getList({}, {}) invoked...", model);
+		log .debug("getList({}, {}) invoked...", filterDto, model);
 
 		List<PetSitterDTO> ps = this.service.getList(filterDto);
+		PageDTO pageDTO = new PageDTO(filterDto, this.service.getTotal(filterDto));
+		
 		Objects.requireNonNull(ps);
 		
 		log.info("\t+ list: {}", ps);	
 		log.info("\t+ filterDto : {}", filterDto);
+		log.info("\t+ pageDTO : {}", pageDTO);
 	
 		model.addAttribute("list",ps);
 		model.addAttribute("filter", filterDto);	
+		model.addAttribute("pageMaker", pageDTO);
 
 		return "/search/search";
 	} //getList

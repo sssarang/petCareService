@@ -123,8 +123,7 @@ function removeMarker() {
 function displayInfowindow(marker, title) {
 
 	// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-	var content = '<div style="padding:5px;">' + title + '</div>',
-		iwRemoveable = true;
+	var content = '<div style="padding:5px;">' + title + '</div>';
 
     infowindow.setContent(content);
     infowindow.open(map, marker);

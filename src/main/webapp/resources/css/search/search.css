@@ -433,12 +433,11 @@ input[type=number]{
 	width: 95%;
 	margin: 0 auto;
 	
-	border-spacing: 0 0.5rem;
 	word-break:break-all;
 }
 
 #psTable tbody tr td{
-	line-height: 1rem;
+	line-height: 1.7rem;
 }
 
 #psTable > td{
@@ -473,7 +472,7 @@ input[type=number]{
 	padding : 0.2rem;
 	
 	font-size: 0.9rem;
-	border-bottom: 1px solid #bebebe;
+	border-bottom: 1px dashed #d2d2d2;
 }
 
 .line1{
@@ -484,6 +483,8 @@ input[type=number]{
 
 .line2{
 	width: 20%;	
+	font-weight: bold;
+	text-align: center;
 }
 
 .line3{
@@ -520,27 +521,52 @@ input[type=number]{
 	}
 } /* 데스크탑 */
 
-.profileBtn{
-	float: right;
-	padding: 5px;	
-	display:inline-block;
-	
-	width: 80px;
-    height: 30px;
-    
-    opacity: 0.6;
-	border: 0;
-	border-radius: 50% 20% / 10% 40%;
-	background-color: #A9D18E;
-	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);	
-	font-size: 0.8rem;
-}
-
 .star{
 	color: #efd803;
 	font-family: 'Jua', sans-serif;
 }
+
+#pagination {
+	display: flex;
 	
+	width: 95%;
+	height: 55px;
+	
+	padding: 3%;
+}
+
+#pagination ul{	
+	margin: 0 auto;
+	float: right;
+}
+
+#pagination li>a{
+	color: #565656;
+}
+
+#pagination li{
+	float : left;
+	
+	width : 30px;
+	height : 30px;
+	
+	text-align :center;
+	list-style: none;
+	line-height: 30px;
+	box-shadow: 0px 1px 3px rgb(0 0 0 / 25%);
+}
+
+.prev, .next {
+	width: 32px !important;
+	
+	color : white !important;
+	background-color:#feb654;
+}
+
+.currPage{
+	background-color:#fdd68c;
+	color; white;
+}	
 /*====================================================*/
 /*================ 검색결과없을때(반응형적용) ================*/
 /*====================================================*/
@@ -982,6 +1008,21 @@ input[type=number]{
 }
 
 
+.modalap{
+	width: 80%;
+    margin: 0 auto;
+
+    overflow: hidden;
+}
+
+.modalapImg{
+	width: 100%;
+	height: 100%;
+	margin: 3%;
+	
+	object-fit: cover;
+}
+
 .noActivityPhoto{
 	width: 100%;
 	height: 100%;
@@ -1001,13 +1042,18 @@ input[type=number]{
     overflow: auto;
     
     padding: 3%;
-    width: 54%;
-    height: 70%;
+    width: 70%;
+    height: 40%;
     
-    top:15%;
-    left: 23%;
+    top:17%;
+    left: 15%;
+	border-radius: 5%;
     background-color: white;
+
     z-index: 2;
+}
+#photomodalBox::-webkit-scrollbar { 
+	display: none; 
 }
 
 #review-list{
@@ -1064,7 +1110,7 @@ input[type=number]{
     
     padding: 3%;
     width: 54%;
-    height: 70%;
+    height: 40%;
     
     top:15%;
     left: 23%;
@@ -1086,6 +1132,16 @@ input[type=number]{
     z-index: 1;
 }
 
+#photocloseBtn{
+	position: absolute;
+
+    width: 26px;
+    height: 26px;
+
+    top: 4%;
+    right: 3%;
+}
+
 #closeBtn{
     position: absolute;
 
@@ -1096,6 +1152,7 @@ input[type=number]{
     right: 4%;
 }
 
+#photocloseBtn> a,
 #closeBtn> a{
     display: block;
     width: 100%;
