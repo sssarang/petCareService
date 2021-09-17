@@ -78,7 +78,7 @@
 
 		                            <label class=" control-label">주소</label>
 		                            <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
-		                            <input id="inputAddress" type="text" name="userAddress" class="form-control" placeholder="지번주소"/>
+		                            <input id="inputAddress" type="text" name="userAddress" class="form-control" placeholder="지번주소" readonly/>
 		                            
 		                            <label class=" control-label">성별</label>
 		                            여자<input type="radio" name="userGender" class="radio-control" value="F" checked="checked"/>
@@ -88,6 +88,7 @@
 	                        		
 	                        </div>
 	                        <span class="form-footer">이미 가입되어있는 회원인가요? <a href="loginPage">로그인 하기</a></span>
+	                        
 	                    </form>
 	                </div>
 	            </div>
