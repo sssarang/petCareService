@@ -6,5 +6,6 @@ import lombok.Data;
 public class UserWithdrawalDTO {
 	
 	private Integer userNo;	
+	private String userStatus;
 
 } // end class

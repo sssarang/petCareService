@@ -359,7 +359,7 @@ public class MypageController {
 			UserVO vo = (UserVO) session.getAttribute(loginKey);
 			
 			String fileName = "proPhoto_" + vo.getUserNo() +".jpg";
-			String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareService\\src\\main\\webapp\\resources\\assets\\img\\mypage";
+			String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareServiceTest\\src\\main\\webapp\\resources\\assets\\img\\mypage";
 			log.info("path : {}", path);
 			File file = new File(path, fileName);
 			log.info("file : {}", file);
@@ -499,9 +499,8 @@ public class MypageController {
 	      
 	   }   // userWithdrawal
 	   
-		@ResponseBody
 		@PostMapping("withdrawal")
-		public void withdrawal(@RequestParam(value = "userNo")Integer userNo) {
+		public void withdrawal(Integer userNo) {
 			log.debug("withdrawal() invoked.");
 			
 			this.service.withdrawal(userNo);
