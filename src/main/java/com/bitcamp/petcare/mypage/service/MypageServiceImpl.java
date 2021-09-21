@@ -33,6 +33,7 @@ import com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageDTO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterResvManageVO;
+import com.bitcamp.petcare.mypage.domain.UserWithdrawalDTO;
 import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 import com.bitcamp.petcare.mypage.mapper.CustomerHistoryManageMapper;
 import com.bitcamp.petcare.mypage.mapper.CustomerInfoManageMapper;
@@ -86,7 +87,7 @@ public class MypageServiceImpl implements MypageService {
 	private SitterReplyManageMapper sTreplyMapper;
 	
 	@Setter(onMethod_=@Autowired)
-	private UserWithdrawalMapper sTwithdrawalMapper;
+	private UserWithdrawalMapper withdrawalMapper;
 	
 	
 	//================================================================
@@ -514,7 +515,7 @@ public class MypageServiceImpl implements MypageService {
 	public int withdrawal(Integer userNo) {
 		log.debug("withdrawal() invoked.");
 		
-		return this.sTwithdrawalMapper.withdrawal(userNo);
+		return this.withdrawalMapper.withdrawal(userNo);
 	} // withdrawal
 
 

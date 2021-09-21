@@ -11417,3 +11417,7 @@ button {
     margin-left: 300px;
     cursor: pointer;
 }
+
+#withdrawal_btn {
+	border: solid 1px red;
+}

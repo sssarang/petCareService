@@ -41,6 +41,7 @@ import com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageDTO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterResvManageVO;
+import com.bitcamp.petcare.mypage.domain.UserWithdrawalDTO;
 import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 import com.bitcamp.petcare.mypage.service.MypageService;
 import com.bitcamp.petcare.user.domain.UserVO;
@@ -493,18 +494,26 @@ public class MypageController {
 	   //-----------------------------------------------------------------------------------------------------------------//
 	   
 	   @GetMapping("userWithdrawal")      // 회원탈퇴
-	   public void userWithdrawal(Integer userNo, Model model) {
-	      log.debug("userWithdrawal() invoked.");
-	      
-	      
+	   public void userWithdrawal( Model model, HttpSession session) {		   		 
+		    log.debug("userWithdrawal() invoked.");
+		   
+			UserVO vo = (UserVO) session.getAttribute(loginKey);
+			
+			String classify = vo.getUserClassify();
+			model.addAttribute("classify", classify);
+			model.addAttribute("userNo", vo.getUserNo());
+			
+			log.info(vo.getUserNo());
+			
 	   }   // userWithdrawal
 	   
 		@PostMapping("withdrawal")
-		public void withdrawal(Integer userNo) {
+		public String withdrawal(Integer userNo, HttpSession session) {
 			log.debug("withdrawal() invoked.");
 			
 			this.service.withdrawal(userNo);
 			
+			return "home/home";
 		}	// withdrawal
 	
 } //end class

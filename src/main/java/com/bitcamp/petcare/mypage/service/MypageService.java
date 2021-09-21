@@ -28,6 +28,7 @@ import com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageDTO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterResvManageVO;
+import com.bitcamp.petcare.mypage.domain.UserWithdrawalDTO;
 import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 
 public interface MypageService {
