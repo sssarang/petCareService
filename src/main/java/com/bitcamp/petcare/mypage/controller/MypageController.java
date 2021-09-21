@@ -111,11 +111,14 @@ public class MypageController {
 	
 	// 회원정보 수정
 	@PostMapping("userInfoModify")
-	public String userInfoModify(CustomerInfoManageDTO dto) {
+	public String userInfoModify(CustomerInfoManageDTO dto, HttpSession session) {
 		log.debug("userInfoModify({}) invoked.", dto);
 		
 		dto.setUserLatitude(y);
 		dto.setUserLongitude(x);
+		
+		UserVO vo = (UserVO) session.getAttribute(loginKey);
+		dto.setUserNo(vo.getUserNo());
 		
 		this.service.modifyInfo(dto);
 		
@@ -176,7 +179,7 @@ public class MypageController {
 		
 		String fileName = "proPhoto_"+vo.getUserNo()+".jpg";
 		//String path = req.getServletContext().getRealPath("/resources/assets/img/mypage");
-		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareServiceTest3\\src\\main\\webapp\\resources\\assets\\img\\mypage";
+		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareService\\src\\main\\webapp\\resources\\assets\\img\\mypage";
 		log.info("path : {}", path);
 		File file = new File(path, fileName);
 		modify.getProPhotoFile().transferTo(file);
