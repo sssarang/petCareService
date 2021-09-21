@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bitcamp.petcare.mypage.domain.ActivityPhotoVO;
 import com.bitcamp.petcare.mypage.domain.CustomerHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerInfoManageDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerInfoManageVO;
@@ -29,6 +30,17 @@ import com.bitcamp.petcare.mypage.domain.CustomerProfileManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerResvManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerReviewManageDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerReviewManageVO;
+import com.bitcamp.petcare.mypage.domain.PetsitterProfileDTO;
+import com.bitcamp.petcare.mypage.domain.PetsitterProfileVO;
+import com.bitcamp.petcare.mypage.domain.PetsitterSkillVO;
+import com.bitcamp.petcare.mypage.domain.ServiceCalendarVO;
+import com.bitcamp.petcare.mypage.domain.ServicePetkindsVO;
+import com.bitcamp.petcare.mypage.domain.ServiceTypeDTO;
+import com.bitcamp.petcare.mypage.domain.ServiceTypeVO;
+import com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO;
+import com.bitcamp.petcare.mypage.domain.SitterReplyManageDTO;
+import com.bitcamp.petcare.mypage.domain.SitterReplyManageVO;
+import com.bitcamp.petcare.mypage.domain.SitterResvManageVO;
 import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 import com.bitcamp.petcare.mypage.service.MypageService;
 import com.bitcamp.petcare.user.domain.UserVO;
@@ -176,7 +188,7 @@ public class MypageController {
 		
 		String fileName = "proPhoto_"+vo.getUserNo()+".jpg";
 		//String path = req.getServletContext().getRealPath("/resources/assets/img/mypage");
-		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareServiceTest3\\src\\main\\webapp\\resources\\assets\\img\\mypage";
+		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareServiceTest\\src\\main\\webapp\\resources\\assets\\img\\mypage";
 		log.info("path : {}", path);
 		File file = new File(path, fileName);
 		modify.getProPhotoFile().transferTo(file);
@@ -291,6 +303,209 @@ public class MypageController {
 	}	// cancelResv
 	
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	  @GetMapping("sitterProfileManage")      // 펫시터 프로필 페이지 조회
+	   public void getSitterProfile(Model model, HttpSession session) {
+		   	log.debug("sitterProfileManage() invoked.");
+		   	
+		   	UserVO vo = (UserVO) session.getAttribute(loginKey);
+		   	
+		   	String classify = vo.getUserClassify();
+		   	model.addAttribute("classify", classify);
+	      
+			PetsitterProfileVO sitterProfile = this.service.getPetsitterProfile(vo.getUserNo());
+			//Objects.requireNonNull(sitterProfile);
+			log.info("\t+ sitterProfile : {}", sitterProfile);
+			model.addAttribute("userNo", vo.getUserNo());
+			model.addAttribute("sitterProfile", sitterProfile);
+						
+			ServiceTypeVO serviceType = this.service.getServiceType(vo.getUserNo());
+			//Objects.requireNonNull(serviceTypeList);
+			log.info("\t+ serviceType : {}", serviceType);
+			model.addAttribute("userNo", vo.getUserNo());
+			model.addAttribute("serviceType", serviceType);
+			
+			List<PetsitterSkillVO> petsitterSkill = this.service.getPetsitterSkill(vo.getUserNo());
+			//Objects.requireNonNull(petsitterSkillList);
+			log.info("\t+ petsitterSkillList : {}", petsitterSkill);
+			model.addAttribute("userNo", vo.getUserNo());
+			model.addAttribute("petsitterSkillList", petsitterSkill);
+			
+			List<ServicePetkindsVO> servicePetkinds = this.service.getServicePetkinds(vo.getUserNo());
+			//Objects.requireNonNull(servicePetkindsList);
+			log.info("\t+ servicePetkindsList : {}", servicePetkinds);
+			model.addAttribute("userNo", vo.getUserNo());
+			model.addAttribute("servicePetkindsList", servicePetkinds);
+			
+			List<ServiceCalendarVO> serviceCalendar = this.service.getServiceCalendar(vo.getUserNo());
+			//Objects.requireNonNull(serviceCalendarList);
+			log.info("\t+ serviceCalendarList : {}", serviceCalendar);
+			model.addAttribute("userNo", vo.getUserNo());
+			model.addAttribute("serviceCalendarList", serviceCalendar);
+			
+			List<ActivityPhotoVO> activityPhoto = this.service.getActivityPhoto(vo.getUserNo());
+			//Objects.requireNonNull(activityPhotoList);
+			log.info("\t+ activityPhotoList : {}", activityPhoto);
+			model.addAttribute("userNo", vo.getUserNo());
+			model.addAttribute("activityPhotoList", activityPhoto);
+
+	   }   // getSitterProfile
+	   
+		@PostMapping("sitterProfileModify")		// 펫시터 프로필 사진 수정
+		public String updatePetsitterProfile(HttpServletRequest req, Integer userNo, PetsitterProfileDTO modify, HttpSession session) throws IOException {
+			log.debug("updatePetsitterProfile() invoked.");		
+			
+			UserVO vo = (UserVO) session.getAttribute(loginKey);
+			
+			String fileName = "proPhoto_" + vo.getUserNo() +".jpg";
+			String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareServiceTest\\src\\main\\webapp\\resources\\assets\\img\\mypage";
+			log.info("path : {}", path);
+			File file = new File(path, fileName);
+			log.info("file : {}", file);
+			modify.getProPhotoFile().transferTo(file);
+			
+			modify.setProPhoto("/resources/assets/img/mypage/"+fileName);
+
+			PetsitterProfileVO vo2 = this.service.getPetsitterProfile(vo.getUserNo());
+			if(vo2 == null) {
+				this.service.insertPetsitterProfile(modify);
+				log.info("insertPetsitterProfile() inovoked.");
+			}else {
+				this.service.updatePetsitterProfile(modify);
+				log.info("updatePetsitterProfile() inovoked.");
+			}
+			
+			return "redirect: /mypage/sitterProfileManage";
+			
+			
+		} // sitterProfileModify
+		
+		@PostMapping("serviceTypeModify")		// 서비스타입 수정
+		public String updateServiceType(
+			HttpServletRequest req, Integer userNo, ServiceTypeDTO modify, HttpSession session) {
+			log.debug("updateServiceType() invoked.");		
+			
+			UserVO vo = (UserVO) session.getAttribute(loginKey);
+
+			ServiceTypeVO vo2 = this.service.getServiceType(vo.getUserNo());
+			if(vo2 == null) {
+				this.service.insertServiceType(modify);
+				log.info("insertPetsitterProfile() inovoked.");
+			}else {
+				this.service.updateServiceType(modify);
+				log.info("updatePetsitterProfile() inovoked.");
+			}
+			
+			return "redirect: /mypage/sitterProfileManage";
+			
+			
+		} // sitterProfileModify		
+	     
+	   //-----------------------------------------------------------------------------------------------------------------//
+	   
+	   @GetMapping("sitterHistoryManage")      // 펫시터 이력/리뷰관리
+	   public void getSitterHistory(Integer petSitterNo, Model model, HttpSession session) {
+		   	log.debug("getHistory() invoked.");
+		   	
+		   	UserVO vo = (UserVO) session.getAttribute(loginKey);
+		   	
+		   	String classify = vo.getUserClassify();
+		   	model.addAttribute("classify", classify);
+		   	
+	        List<SitterHistoryManageVO> history = this.service.getHistory(vo.getUserNo());
+	      
+	        assert history != null;
+	        
+	        log.info("\t+ history : {}", history);
+			
+	        model.addAttribute("petSitterNo", petSitterNo);
+	        model.addAttribute("history", history);
+	   } // getSitterHistory
+	   
+	   @ResponseBody
+	   @GetMapping("sitterReplyManage")
+	   public SitterReplyManageVO sitterReplyManage(@RequestParam(value="serviceId")Integer serviceId) {
+		   log.debug("sitterReplyManage() invoked.");
+		   
+		   SitterReplyManageVO reply = this.service.getReply(serviceId);
+		   
+		   log.info(reply);
+		   return reply;
+	   } // sitterReplyManage
+	   
+	   @ResponseBody
+	   @PostMapping("sitterReplySend")
+	   public boolean insertReply(SitterReplyManageDTO reply) {
+		   log.debug("insertReply() invoked.");
+		   
+		   if(this.service.getReply(reply.getServiceId()) == null){
+			   this.service.insertReply(reply);
+		   }
+		   else {
+			   this.service.updateReply(reply);
+		   }
+		   
+		   return true;
+	   } // insertReply
+	   
+	          
+	   //-----------------------------------------------------------------------------------------------------------------//
+	   
+	   @GetMapping("sitterResvManage")      // 펫시터 예약관리
+	   public void getSitterResv(Integer petSitterNo, Model model, HttpSession session) {
+	      log.debug("getSitterResv() invoked.");
+	      
+		  UserVO vo = (UserVO) session.getAttribute(loginKey);
+		   	
+		  String classify = vo.getUserClassify();
+		  model.addAttribute("classify", classify);
+	      
+	      List<SitterResvManageVO> resv = this.service.getResv(vo.getUserNo());
+	      
+	      assert resv != null;
+	      log.info("\t+ resv : {}", resv);
+	      
+	      model.addAttribute("petSitterNo", petSitterNo);
+	      model.addAttribute("resv", resv);
+	      
+	   }   // getSitterResv
+	   
+		@ResponseBody
+		@PostMapping("resvApprove")
+		public void resvApprove(@RequestParam(value = "serviceId")Integer serviceId) {
+			log.debug("resvApprove() invoked.");
+			
+			this.service.resvApprove(serviceId);
+			
+		}	// resvApprove
+		
+		@ResponseBody
+		@PostMapping("resvRefusal")
+		public void resvRefusal(@RequestParam(value = "serviceId")Integer serviceId) {
+			log.debug("resvRefusal() invoked.");
+			
+			this.service.resvRefusal(serviceId);
+			
+		}	// resvRefusal
+
+	     
+	   //-----------------------------------------------------------------------------------------------------------------//
+	   
+	   @GetMapping("userWithdrawal")      // 회원탈퇴
+	   public void userWithdrawal(Integer userNo, Model model) {
+	      log.debug("userWithdrawal() invoked.");
+	      
+	      
+	   }   // userWithdrawal
+	   
+		@ResponseBody
+		@PostMapping("withdrawal")
+		public void withdrawal(@RequestParam(value = "userNo")Integer userNo) {
+			log.debug("withdrawal() invoked.");
+			
+			this.service.withdrawal(userNo);
+			
+		}	// withdrawal
 	
 } //end class

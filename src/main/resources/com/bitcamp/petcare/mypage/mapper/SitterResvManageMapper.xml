@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.petcare.mypage.mapper.SitterResvManageMapper">
+
+	<select id="getResv" resultType="com.bitcamp.petcare.mypage.domain.SitterResvManageVO">
+
+		SELECT
+	          m.reg_date "예약등록일",
+	          u.user_nickname "반려인닉네임",
+	          u.user_contact "반려인연락처",
+	          p.pro_photo "프로필사진",
+	          c.code_name "서비스유형",
+	          t.price "금액",
+	          m.start_date "서비스 시작일",
+	          m.end_date "서비스 종료일",
+	          cc.code_name "종류",
+	          p.pet_name "이름",
+	          p.pet_birthday "나이", 
+	          p.pet_gender "성별",
+	          p.neutralization "중성화",
+	          p.medicine "약복용",
+	          p.special_note "특이사항",
+	          m.service_id    
+		FROM tbl_service_matching m
+	    INNER JOIN tbl_user u ON (m.pet_user_no = u.user_no)
+	    INNER JOIN tbl_pet_profile p ON (u.user_no = p.user_no)
+	    INNER JOIN tbl_common_code c ON (m.service_type_code = c.code)
+	    INNER JOIN tbl_common_code cc ON (p.pet_type_code = cc.code)
+	    INNER JOIN tbl_service_type t ON (m.service_type_code = t.service_type_code AND m.pet_sitter_no = t.user_no)
+	    WHERE m.pet_sitter_no = #{petSitterNo}
+		AND m.step_type_code BETWEEN 31 AND 33
+	</select>
+
+	<update id="resvApprove">
+		UPDATE 
+			tbl_service_matching
+		SET 
+			step_type_code = 32
+		WHERE service_id = ${serviceId}
+	</update>
+
+	<update id="resvRefusal">
+		UPDATE 
+			tbl_service_matching
+		SET 
+			step_type_code = 33
+		WHERE service_id = ${serviceId}
+	</update>
+
+
+</mapper>
