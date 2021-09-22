@@ -11387,17 +11387,16 @@ body{
   font-family: 'Noto Sans KR', sans-serif;
   margin: 20px;
   padding: 0;
-  border: 1px solid;
   width: 90%;
 }
 
 #resv_list {
   margin: 25px auto;
   padding: 10px;
-  border: 1px solid;
-  width: 80%;
+  border: 2px solid rgb(255, 210, 127);
+  width: 700px;
   height: 350px;
-  border-radius: 30px;
+  border-radius: 20px;
 }
 
 #resvImage {
@@ -11434,19 +11433,56 @@ body{
 }
 
 #resvModalBtn {
- margin-top: 20px;
- margin-right: 10px;	
- float: right;	
+  float: right;
+  display: inline;
+  margin: 2%;
+  width: 100px;
+  height: 50px;
+  border: 0;
+  border-radius: 50% 20% / 10% 40%;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: white;
+  background-color:rgb(255, 210, 127);
 }
 
 #btn-approve {
- float: right;
- margin: 5px;
+  float: right;
+  display: inline;
+  margin: 2%;
+  width: 70px;
+  height: 40px;
+  border: 0;
+  border-radius: 50% 20% / 10% 40%;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: white;
+  background-color:rgb(255, 210, 127);
 }
 
 #btn-refusal {
- float: right;
- margin: 5px;
+  float: right;
+  display: inline;
+  margin: 2%;
+  width: 70px;
+  height: 40px;
+  border: 0;
+  border-radius: 50% 20% / 10% 40%;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: white;
+  background-color:rgb(255, 210, 127);
+}
+
+#sitterResv_head {
+	color: rgb(255, 210, 127);
+	text-align: center;
 }
 
 

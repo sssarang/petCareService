@@ -27,9 +27,7 @@
             <!-- Page content wrapper-->
             <div id="resv_wrapper">
                 <br>
-                <h1>&nbsp;&nbsp;- 서비스 요청 내역 -</h1>
-                <br>
-                <br>
+                <h1 id="sitterResv_head">서비스 요청 내역</h1>
                 <c:forEach items="${resv}" var="i">
                 	<br>		
                     <div id="resv_list">

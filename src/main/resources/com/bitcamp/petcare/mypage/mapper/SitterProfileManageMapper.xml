@@ -15,31 +15,27 @@
       WHERE p.user_no = #{userNo}
    </select>
 
-   <select id="getServiceType" resultType="com.bitcamp.petcare.mypage.domain.ServiceTypeVO">
-     <!--  SELECT p.user_no, t.service_type_code, t.use_yn, t.price
-      FROM tbl_petsitter_profile p
-      INNER JOIN tbl_service_type t ON p.user_no = t.user_no
-      WHERE p.user_no = #{userNo} -->
-      
+   <select id="getServiceType" resultType="com.bitcamp.petcare.mypage.domain.ServiceTypeVO">      
       SELECT p.user_no, t.service_type_code, c.code_name, t.use_yn, t.price
       FROM tbl_petsitter_profile p
       INNER JOIN tbl_service_type t ON p.user_no = t.user_no
       INNER JOIN tbl_common_code c ON t.service_type_code = c.code
-      WHERE p.user_no = #{userNo}
-       
+      WHERE p.user_no = #{userNo}       
    </select>
 
    <select id="getPetsitterSkill" resultType="com.bitcamp.petcare.mypage.domain.PetsitterSkillVO">
-      	SELECT p.user_no, s.skill_type_code, s.use_yn
+      	SELECT p.user_no, s.skill_type_code, c.code_name, s.use_yn
 		FROM tbl_petsitter_profile p
 		INNER JOIN tbl_petsitter_skill s ON p.user_no = s.user_no
+		INNER JOIN tbl_common_code c ON s.skill_type_code = c.code
 		WHERE p.user_no = #{userNo}
    </select>
    
    <select id="getServicePetKinds" resultType="com.bitcamp.petcare.mypage.domain.ServicePetkindsVO">
-      	SELECT p.user_no, k.pet_type_code, k.use_yn
+      	SELECT p.user_no, k.pet_type_code, c.code_name, k.use_yn
       	FROM tbl_petsitter_profile p
       	INNER JOIN tbl_service_petkinds k ON p.user_no = k.user_no
+      	INNER JOIN tbl_common_code c ON k.pet_type_code = c.code
       	WHERE p.user_no = #{userNo}
    </select>
 
@@ -66,57 +62,6 @@
       VALUES
             (#{userNo}, #{proPhoto}, #{introduce}, #{userNo}, current_date)      
    </insert>
-   
-<!--    <insert id="insertServiceType">
-      INSERT INTO tbl_service_type
-            (user_no, service_type_code, use_yn, price, reg_user_no, reg_date)
-      VALUES
-            (#{userNo}, #{serviceTypeCode}, #{useYn}, #{price}, #{userNo}, current_date)
-   </insert> -->
-
-   <insert id="insertServiceType">
-<!--        INSERT INTO tbl_service_type
-            (user_no, service_type_code, use_yn, price, reg_user_no, reg_date)
-      VALUES
-            (  
-            #{userNo}, 
-            #{serviceTypeCode}, 
-            #{useYn}, 
-            #{price}, 
-            #{userNo}, 
-            current_date
-         ) -->
-         INSERT INTO tbl_service_type
-         (user_no, service_type_code, use_yn, price, reg_user_no, reg_date)
-		 SELECT #{userNo}, 11, #{useYn}, #{price}, #{userNo}, current_date FROM dual
-		 UNION ALL
-		 SELECT #{userNo}, 12, #{useYn}, #{price}, #{userNo}, current_date FROM dual
-         
-<!--       INSERT INTO tbl_service_type
-            (user_no, use_yn, price, reg_user_no, reg_date)
-      VALUES
-            (  
-            #{userNo},
-            #{useYn}, 
-            #{price}, 
-            #{userNo}, 
-            current_date
-         )  -->          
-   </insert>
-      
-   <insert id="insertPetsitterSkill">
-      INSERT INTO tbl_petsitter_skill
-            (user_no, skill_type_code, use_yn, reg_user_no, reg_date)
-      VALUES
-            (#{userNo}, #{skillTypeCode}, #{useYn}, #{userNo}, current_date)
-   </insert>
-
-   <insert id="insertServicePetkinds">
-      INSERT INTO tbl_service_petkinds
-            (user_no, pet_type_code, use_yn, reg_user_no, reg_date)
-      VALUES
-            (#{userNo}, #{petTypeCode}, #{useYn}, #{userNo}, current_date)
-   </insert>
 
    <insert id="insertServiceCalendar">
       INSERT INTO tbl_service_calendar
@@ -133,6 +78,7 @@
    </insert>
 
 
+
    <!-- update -->
 
    <update id="updatePetsitterProfile">
@@ -147,41 +93,6 @@
          user_no = #{userNo}
    </update>
 
-   <update id="updateServiceType">
-      UPDATE 
-         tbl_service_type
-      SET         
-         use_yn = #{useYn},
-         price = #{price},
-         mod_user_no = #{userNo},
-         mod_date = current_date
-      WHERE
-         user_no = #{userNo}    
-   </update>
-  
-   <update id="updatePetsitterSkill">
-      UPDATE 
-         tbl_petsitter_skill
-      SET
-         skill_type_code = #{skillTypeCode},
-         use_yn = #{useYn},
-         mod_user_no = #{userNo},
-         mod_date = current_date
-      WHERE
-         user_no = #{userNo}      
-   </update>
-
-   <update id="updateServicePetkinds">
-      UPDATE 
-         tbl_service_petkinds
-      SET
-         pet_type_code = #{petTypeCode},
-         use_yn = #{useYn},
-         mod_user_no = #{userNo},
-         mod_date = current_date
-      WHERE
-         user_no = #{userNo}      
-   </update>
 
    <update id="updateServiceCalendar">
       UPDATE 
@@ -204,6 +115,54 @@
          mod_date = current_date
       WHERE
          user_no = #{userNo}      
+   </update>
+   
+   
+   <!-- merge문 -->
+   <update id="mergeServiceType">
+   	MERGE INTO tbl_service_type
+   		USING DUAL 
+   		ON (user_no = #{userNo} and service_type_code = #{serviceTypeCode})
+   	WHEN MATCHED THEN
+   	UPDATE SET
+   	 use_yn = #{useYn},
+   	 price = #{price}
+   	WHEN NOT MATCHED THEN
+   	INSERT
+	(user_no, service_type_code, use_yn, price, reg_user_no, reg_date)
+	VALUES(
+	 #{userNo},#{serviceTypeCode},#{useYn},#{price},#{userNo},current_date
+	)   		
+   </update>
+   
+   <update id="mergeSkillType">
+   	MERGE INTO tbl_petsitter_skill
+   		USING DUAL 
+   		ON (user_no = #{userNo} and skill_type_code = #{skillTypeCode})
+   	WHEN MATCHED THEN
+   	UPDATE SET
+   	 use_yn = #{useYn}
+   	WHEN NOT MATCHED THEN
+   	INSERT
+	(user_no, skill_type_code, use_yn, reg_user_no, reg_date)
+	VALUES(
+	 #{userNo},#{skillTypeCode},#{useYn},#{userNo},current_date
+	)   		
+   </update>
+   
+   <update id="mergePetType">
+   	MERGE INTO tbl_service_petkinds
+   		USING DUAL 
+   		ON (user_no = #{userNo} and pet_type_code = #{petTypeCode})
+   	WHEN MATCHED THEN
+   	UPDATE SET
+   	 use_yn = #{useYn}
+   	WHEN NOT MATCHED THEN
+   	INSERT
+	(user_no, pet_type_code, use_yn, reg_user_no, reg_date)
+	VALUES(
+	 #{userNo},#{petTypeCode},#{useYn},#{userNo},current_date
+	)   		
    </update>
 
 </mapper>

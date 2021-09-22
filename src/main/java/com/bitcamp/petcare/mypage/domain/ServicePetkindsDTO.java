@@ -11,9 +11,17 @@ public class ServicePetkindsDTO {
 	private String petTypeCode;
 	private Character useYn;
 	
-	private Integer regUserNo;							
+	private Integer regUserNo;	
+	private Date regDate;
 	
 	private Integer modUserNo;			
 	private Date modDate;
+	
+	private String[] arrPetTypeCode;
+	
+	private Character bigDog;
+	private Character middleDog;
+	private Character smallDog;
+	private Character cat;
 	
 } // end class

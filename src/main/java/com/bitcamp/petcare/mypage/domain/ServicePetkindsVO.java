@@ -9,6 +9,7 @@ public class ServicePetkindsVO {
 	
 	private Integer userNo;
 	private String petTypeCode;
+	private String codeName;
 	private Character useYn;
 	   
 } // end class

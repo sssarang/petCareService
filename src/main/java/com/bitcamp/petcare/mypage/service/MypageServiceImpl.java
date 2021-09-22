@@ -271,7 +271,7 @@ public class MypageServiceImpl implements MypageService {
 	} // getPetsitterProfile
 
 	@Override
-	public ServiceTypeVO getServiceType(Integer userNo) {
+	public List<ServiceTypeVO> getServiceType(Integer userNo) {
 		log.debug("getServiceType({}) invoked.", userNo);
 		
 		Objects.requireNonNull(this.sTprofileMapper);
@@ -518,9 +518,100 @@ public class MypageServiceImpl implements MypageService {
 		return this.withdrawalMapper.withdrawal(userNo);
 	} // withdrawal
 
+	
+	
+	
+	
+	//merge
+	
+	@Override
+	public int mergeServiceType(ServiceTypeDTO dto) {
+		int result = 0;
+		int arrLength = dto.getArrServiceTypeCode().length;
+		
+		for(int i =0; i < arrLength; i++) {
+			String serviceType = dto.getArrServiceTypeCode()[i];
+			Integer price = dto.getArrPrice()[i];
+			
+			
+			if("11".equals(serviceType)) {
+				dto.setUseYn(dto.getCareAllDay());
+			} // 돌봄 ALL DAY
+			else if("12".equals(serviceType)) {
+				dto.setUseYn(dto.getCareHalfDay());
+			} // 돌봄 HALF DAY
+			else if("13".equals(serviceType)) {
+				dto.setUseYn(dto.getVisitAllDay());
+			} // 방문 ALL DAY
+			else if("14".equals(serviceType)) {
+				dto.setUseYn(dto.getVisitHalfDay());
+			} // 방문 HALF DAY
+						
+			dto.setServiceTypeCode(serviceType);
+			dto.setPrice(price);
+			result += sTprofileMapper.mergeServiceType(dto);
+		}
+				
+		return result;
+	} // mergeServiceType
 
 
-
+	@Override
+	public int mergeSkillType(PetsitterSkillDTO dto) {
+		int result = 0;
+		int arrLength = dto.getArrSkillTypeCode().length;
+		
+		for(int i =0; i < arrLength; i++) {
+			String skillType = dto.getArrSkillTypeCode()[i];			
+			
+			if("21".equals(skillType)) {
+				dto.setUseYn(dto.getTakingMedicine());
+			} // 약먹이기 가능여부
+			else if("22".equals(skillType)) {
+				dto.setUseYn(dto.getOldPetExperience());
+			} // 노령펫 경험여부
+			else if("23".equals(skillType)) {
+				dto.setUseYn(dto.getSickPetExperience());
+			} // 환견/환묘 경험여부
+			else if("24".equals(skillType)) {
+				dto.setUseYn(dto.getPetJobExperience());
+			} // 애견관련 업종 경험여부
+						
+			dto.setSkillTypeCode(skillType);
+			result += sTprofileMapper.mergeSkillType(dto);
+		}
+				
+		return result;
+	} // mergeSkillType	
+	
+	
+	@Override
+	public int mergePetType(ServicePetkindsDTO dto) {
+		int result = 0;
+		int arrLength = dto.getArrPetTypeCode().length;
+		
+		for(int i =0; i < arrLength; i++) {
+			String petType = dto.getArrPetTypeCode()[i];			
+			
+			if("1".equals(petType)) {
+				dto.setUseYn(dto.getBigDog());
+			} // 대형견
+			else if("2".equals(petType)) {
+				dto.setUseYn(dto.getMiddleDog());
+			} // 중형견
+			else if("3".equals(petType)) {
+				dto.setUseYn(dto.getSmallDog());
+			} // 소형견
+			else if("4".equals(petType)) {
+				dto.setUseYn(dto.getCat());
+			} // 고양이
+						
+			dto.setPetTypeCode(petType);
+			result += sTprofileMapper.mergePetType(dto);
+		}
+				
+		return result;
+	} // mergePetType
 
 
 	

@@ -60,12 +60,14 @@ public interface MypageService {
 	public abstract int cancelResv(Integer serviceId);								// 예약 취소
 	
 	
+	
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// sitterProfile
 	// select
 	public abstract PetsitterProfileVO getPetsitterProfile(Integer userNo); 
-	public abstract ServiceTypeVO getServiceType(Integer userNo);		
+	public abstract List<ServiceTypeVO> getServiceType(Integer userNo);		
 	public abstract List<PetsitterSkillVO> getPetsitterSkill(Integer userNo);		 
 	public abstract List<ServicePetkindsVO> getServicePetkinds(Integer userNo);	 
 	public abstract List<ServiceCalendarVO> getServiceCalendar(Integer userNo);	 	
@@ -87,7 +89,6 @@ public interface MypageService {
 	public abstract int updateServiceCalendar(ServiceCalendarDTO dto);
 	public abstract int updateActivityPhoto(ActivityPhotoDTO dto);
 	
-	//-----------------------------------------------------------------------//
 	//-----------------------------------------------------------------------//
 	
 	// sitterHistory
@@ -113,5 +114,11 @@ public interface MypageService {
 	// userWithdrawal
 	public abstract int withdrawal(Integer userNo);
 	
+	
+	
+	//merge
+	public abstract int mergeServiceType(ServiceTypeDTO dto);
+	public abstract int mergeSkillType(PetsitterSkillDTO dto);
+	public abstract int mergePetType(ServicePetkindsDTO dto);
 	
 }	// end interface

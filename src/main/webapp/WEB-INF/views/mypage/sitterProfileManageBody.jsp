@@ -50,19 +50,35 @@
                     <div class="part345_2">	
 	                	<form action="/mypage/serviceTypeModify" method="POST">
 							<input type="hidden" name="userNo" value="${userNo}">
-	                    	<input type="hidden" name="serviceTypeCode" value="11">	                    	
+							
+	                    	<input type="hidden" name="arrServiceTypeCode" value="11">	                    	
 	                        <label for="useYn">돌봄-All day</label>
-	                        <input type="radio" name="useYn" value="Y">Y
-	                        <input type="radio" name="useYn" value="N">N
+	                        <input type="radio" name="careAllDay" value="Y">Y
+	                        <input type="radio" name="careAllDay" value="N">N 
 	                        <label for="price"></label>
-	                        <input type="text" name="price" value="${serviceType.price}" size=2>&nbsp;원
+	                        <input type="text" name="arrPrice" value="${serviceType[0].price}" size=2>&nbsp;원 
 	                        
-	                    	<input type="hidden" name="serviceTypeCode" value="12">	                    	
+	                    	<input type="hidden" name="arrServiceTypeCode" value="12">	                    	
 	                        <label for="useYn">돌봄-Half day</label>
-	                        <input type="radio" name="useYn" value="Y">Y
-	                        <input type="radio" name="useYn" value="N">N
+	                       	<input type="radio" name="careHalfDay" value="Y">Y
+	                        <input type="radio" name="careHalfDay" value="N">N
 	                        <label for="price"></label>
-	                        <input type="text" name="price" value="${serviceType.price}" size=2>&nbsp;원  
+	                        <input type="text" name="arrPrice" value="${serviceType[1].price}" size=2>&nbsp;원
+	                        
+	                        <input type="hidden" name="arrServiceTypeCode" value="13">	                    	
+	                        <label for="useYn">방문-All day</label>
+	                       	<input type="radio" name="visitAllDay" value="Y">Y
+	                        <input type="radio" name="visitAllDay" value="N">N
+	                        <label for="price"></label>
+	                        <input type="text" name="arrPrice" value="${serviceType[2].price}" size=2>&nbsp;원
+	                        
+	                        <input type="hidden" name="arrServiceTypeCode" value="14">	                    	
+	                        <label for="useYn">방문-Half day</label>
+	                       	<input type="radio" name="visitHalfDay" value="Y">Y
+	                        <input type="radio" name="visitHalfDay" value="N">N
+	                        <label for="price"></label>
+	                        <input type="text" name="arrPrice" value="${serviceType[3].price}" size=2>&nbsp;원  
+	                        
 	                        <button type="submit" id="btn_save3">저장</button> 
                     	</form>                    	        					                                              						                   
                     </div>	            	        
@@ -73,25 +89,63 @@
                 <div id="part4">
                     <p class="part_p">가능한 스킬</p>
                     <div class="part345_2">
-                        <br> 
-                        <c:forEach items="${petsitterSkillList}" var="i">
-                            <input type="text" value="${i.codeName}" style="border:none" readonly>
-                            <input type="checkbox" name="useYn2" value="${i.useYn}"><br><br>
-                            
-                        </c:forEach>
-                        <button type="button" class="btn btn-primary btn-save2" data-dismiss="modal">저장</button>
+                        <form action="/mypage/skillTypeModify" method="POST">
+                            <input type="hidden" name="userNo" value="${userNo}">
+
+	                    	<input type="hidden" name="arrSkillTypeCode" value="21">	                    	
+	                        <label for="useYn">약먹이기 가능여부</label>
+	                        <input type="radio" name="takingMedicine" value="Y">Y
+	                        <input type="radio" name="takingMedicine" value="N">N 
+	                        <br> 
+	                    	<input type="hidden" name="arrSkillTypeCode" value="22">	                    	
+	                        <label for="useYn">노령펫 경험여부</label>
+	                       	<input type="radio" name="oldPetExperience" value="Y">Y
+	                        <input type="radio" name="oldPetExperience" value="N">N
+	                        <br> 
+	                        <input type="hidden" name="arrSkillTypeCode" value="23">	                    	
+	                        <label for="useYn">환견/환묘 경험여부</label>
+	                       	<input type="radio" name="sickPetExperience" value="Y">Y
+	                        <input type="radio" name="sickPetExperience" value="N">N
+	                        <br> 
+	                        <input type="hidden" name="arrSkillTypeCode" value="24">	                    	
+	                        <label for="useYn">애견관련 업종 경험유무</label>
+	                       	<input type="radio" name="petJobExperience" value="Y">Y
+	                        <input type="radio" name="petJobExperience" value="N">N
+							<br>  
+	                        
+	                        <button type="submit" id="btn_save3">저장</button>                                 
+                        </form>
                     </div>
                 </div>
                 <div id="part5">
                     <p class="part_p">가능한 반려동물</p>
                     <div class="part345_2">
-                        <br> 
-                        <c:forEach items="${servicePetkindsList}" var="i">
-                            <input type="text" value="${i.codeName}" style="border:none" size=3 readonly>
-                            <input type="checkbox" name="useYn3" value="${i.useYn}"><br><br>
-                            
-                        </c:forEach>
-                        <button type="button" class="btn btn-primary btn-save3" data-dismiss="modal">저장</button>
+                        <form action="/mypage/petTypeModify" method="POST">
+                            <input type="hidden" name="userNo" value="${userNo}">
+
+	                    	<input type="hidden" name="arrPetTypeCode" value="1">	                    	
+	                        <label for="useYn">대형견</label>
+	                        <input type="radio" name="bigDog" value="Y">Y
+	                        <input type="radio" name="bigDog" value="N">N 
+	                        <br> 
+	                    	<input type="hidden" name="arrPetTypeCode" value="2">	                    	
+	                        <label for="useYn">중형견</label>
+	                       	<input type="radio" name="middleDog" value="Y">Y
+	                        <input type="radio" name="middleDog" value="N">N
+	                        <br> 
+	                        <input type="hidden" name="arrPetTypeCode" value="3">	                    	
+	                        <label for="useYn">소형견</label>
+	                       	<input type="radio" name="smallDog" value="Y">Y
+	                        <input type="radio" name="smallDog" value="N">N
+	                        <br> 
+	                        <input type="hidden" name="arrPetTypeCode" value="4">	                    	
+	                        <label for="useYn">고양이</label>
+	                       	<input type="radio" name="cat" value="Y">Y
+	                        <input type="radio" name="cat" value="N">N
+							<br>  
+	                        
+	                        <button type="submit" id="btn_save3">저장</button>                                 
+                        </form>
                     </div>
                 </div>
                 <div id="part6">
@@ -128,21 +182,21 @@
         <script>
         $(function(){
         	
-        	$('input:radio[name="useYn"][value="${serviceType.useYn}"]').prop('checked', true);
-    		//$("input[type='checkbox'][name='useYn1'][value='Y']").attr("checked", true);
-    		//$("input[type='checkbox'][name='useYn2'][value='Y']").attr("checked", true);
-    		//$("input[type='checkbox'][name='useYn3'][value='Y']").attr("checked", true);
-           
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
+        	$('input:radio[name="careAllDay"][value="${serviceType[0].useYn}"]').prop('checked', true);
+        	$('input:radio[name="careHalfDay"][value="${serviceType[1].useYn}"]').prop('checked', true);
+        	$('input:radio[name="visitAllDay"][value="${serviceType[2].useYn}"]').prop('checked', true);
+        	$('input:radio[name="visitHalfDay"][value="${serviceType[3].useYn}"]').prop('checked', true);
+        	
+			$('input:radio[name="takingMedicine"][value="${skillType[0].useYn}"]').prop('checked', true);
+        	$('input:radio[name="oldPetExperience"][value="${skillType[1].useYn}"]').prop('checked', true);
+        	$('input:radio[name="sickPetExperience"][value="${skillType[2].useYn}"]').prop('checked', true);
+        	$('input:radio[name="petJobExperience"][value="${skillType[3].useYn}"]').prop('checked', true);	
+            		
+			$('input:radio[name="bigDog"][value="${petType[0].useYn}"]').prop('checked', true);
+        	$('input:radio[name="middleDog"][value="${petType[1].useYn}"]').prop('checked', true);
+        	$('input:radio[name="smallDog"][value="${petType[2].useYn}"]').prop('checked', true);
+        	$('input:radio[name="cat"][value="${petType[3].useYn}"]').prop('checked', true);
+
         	
         	// 프로필 사진 미리보기
         	$(document).on("change", "input[name=proPhotoFile]", function(e){

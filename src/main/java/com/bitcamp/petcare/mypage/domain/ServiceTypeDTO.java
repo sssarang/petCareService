@@ -17,5 +17,13 @@ public class ServiceTypeDTO {
 	
 	private Integer modUserNo;			
 	private Date modDate;
+	
+	private String[] arrServiceTypeCode;
+	private Integer[] arrPrice;
+	
+	private Character careAllDay;
+	private Character careHalfDay;
+	private Character visitAllDay;
+	private Character visitHalfDay;
 
 } // end class

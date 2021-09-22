@@ -19,7 +19,7 @@ public interface SitterProfileManageMapper {
 	
 	// select
 	public abstract PetsitterProfileVO getPetsitterProfile(Integer userNo); 
-	public abstract ServiceTypeVO getServiceType(Integer userNo);			
+	public abstract List<ServiceTypeVO> getServiceType(Integer userNo);			
 	public abstract List<PetsitterSkillVO> getPetsitterSkill(Integer userNo);		 
 	public abstract List<ServicePetkindsVO> getServicePetKinds(Integer userNo);	 
 	public abstract List<ServiceCalendarVO> getServiceCalendar(Integer userNo);	 	
@@ -41,5 +41,8 @@ public interface SitterProfileManageMapper {
 	public abstract int updateServiceCalendar(ServiceCalendarDTO dto);
 	public abstract int updateActivityPhoto(ActivityPhotoDTO dto);
 	
-
+	public abstract int mergeServiceType(ServiceTypeDTO dto);
+	public abstract int mergeSkillType(PetsitterSkillDTO dto);
+	public abstract int mergePetType(ServicePetkindsDTO dto);
+	
 } // end interface	

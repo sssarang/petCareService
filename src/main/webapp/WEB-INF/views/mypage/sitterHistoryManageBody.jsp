@@ -23,7 +23,7 @@
             <!-- Page content wrapper-->
             <div id="history_wrapper">
                 <br>
-                <h1>&nbsp;&nbsp;- 서비스 제공 내역 -</h1>
+                <h1 id="sitterHistory_head">서비스 제공 내역</h1>
                 <br>
                 <br>
                 <c:forEach items="${history}" var="i">

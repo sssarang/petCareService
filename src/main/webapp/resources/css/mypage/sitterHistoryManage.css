@@ -11387,7 +11387,6 @@ body{
   font-family: 'Noto Sans KR', sans-serif;
   margin: 20px;
   padding: 0;
-  border: 1px solid;
   width: 90%;
 }
 
@@ -11433,7 +11432,10 @@ body{
   float: right;
 }
 
-
+#sitterHistory_head {
+	color: rgb(255, 210, 127);
+	text-align: center;
+}
 
 
 

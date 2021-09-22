@@ -22,27 +22,27 @@
             <!-- Page content wrapper-->
             <div id="uw_wrapper">
             	<br>
-		        <h2>탈퇴 사유 선택</h2>
+		        <h1 id="withdrawal_head">탈퇴 사유 선택</h1>
 		        <br><br>
 				<form action="/mypage/withdrawal" method="POST">
 				<input type="hidden" name="userNo" value="${userNo}">
 			        <div class="withdrawalCheckbox">			          		            	
 		                <input id="check1" type="checkbox" >
-		                <label for="check1">&nbsp;마음에 드는 펫시터가 없어요.&nbsp;</label><br><br>
+		                <label for="check1"><p class="withdrawal_reason">마음에 드는 펫시터가 없어요.</p></label><br><br>
 		                <input id="check2" type="checkbox" >
-		                <label for="check2">&nbsp;서비스가 마음에 들지 않아요.&nbsp;</label><br><br>
+		                <label for="check2"><p class="withdrawal_reason">서비스가 마음에 들지 않아요.</p></label><br><br>
 		                <input id="check3" type="checkbox" >
-		                <label for="check3">&nbsp;동네에 펫시터가 없어요.&nbsp;</label><br><br>
+		                <label for="check3"><p class="withdrawal_reason">동네에 펫시터가 없어요.</p></label><br><br>
 		                <input id="check4" type="checkbox" >
-		                <label for="check4">&nbsp;금액이 너무 비싸요.&nbsp;</label><br><br>
+		                <label for="check4"><p class="withdrawal_reason">금액이 너무 비싸요.</p></label><br><br>
 		                <input id="check5" type="checkbox" >
-		                <label for="check5">&nbsp;다른 종류 동물의 서비스를 원해요.&nbsp;</label><br><br>
+		                <label for="check5"><p class="withdrawal_reason">다른 종류 동물의 서비스를 원해요.</p></label><br><br>
 		                <input id="check6" type="checkbox" >
-		                <label for="check6">&nbsp;더이상 동물을 키우지 않아요.&nbsp;</label><br><br>
+		                <label for="check6"><p class="withdrawal_reason">더이상 동물을 키우지 않아요.</p></label><br><br>
 		                <input id="check7" type="checkbox" >
-		                <label for="check7">&nbsp;별다른 이유는 없어요.&nbsp;</label><br><br><br><br>
+		                <label for="check7"><p class="withdrawal_reason">별다른 이유는 없어요.</p></label><br>
 												
-		                <button type="submit" class="btn btn-withdrawal" id="withdrawal_btn" data-dismiss="modal">탈퇴</button>		            
+		                <button type="submit" class="btn-withdrawal" id="withdrawal_btn" data-dismiss="modal">탈퇴</button>		            
 		        	</div>
 		    	</form>    	
 		    </div>

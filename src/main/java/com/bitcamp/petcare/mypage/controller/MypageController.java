@@ -32,8 +32,10 @@ import com.bitcamp.petcare.mypage.domain.CustomerReviewManageDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerReviewManageVO;
 import com.bitcamp.petcare.mypage.domain.PetsitterProfileDTO;
 import com.bitcamp.petcare.mypage.domain.PetsitterProfileVO;
+import com.bitcamp.petcare.mypage.domain.PetsitterSkillDTO;
 import com.bitcamp.petcare.mypage.domain.PetsitterSkillVO;
 import com.bitcamp.petcare.mypage.domain.ServiceCalendarVO;
+import com.bitcamp.petcare.mypage.domain.ServicePetkindsDTO;
 import com.bitcamp.petcare.mypage.domain.ServicePetkindsVO;
 import com.bitcamp.petcare.mypage.domain.ServiceTypeDTO;
 import com.bitcamp.petcare.mypage.domain.ServiceTypeVO;
@@ -41,7 +43,6 @@ import com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageDTO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterResvManageVO;
-import com.bitcamp.petcare.mypage.domain.UserWithdrawalDTO;
 import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 import com.bitcamp.petcare.mypage.service.MypageService;
 import com.bitcamp.petcare.user.domain.UserVO;
@@ -124,14 +125,11 @@ public class MypageController {
 	
 	// 회원정보 수정
 	@PostMapping("userInfoModify")
-	public String userInfoModify(CustomerInfoManageDTO dto, HttpSession session) {
+	public String userInfoModify(CustomerInfoManageDTO dto) {
 		log.debug("userInfoModify({}) invoked.", dto);
 		
 		dto.setUserLatitude(y);
 		dto.setUserLongitude(x);
-		
-		UserVO vo = (UserVO) session.getAttribute(loginKey);
-		dto.setUserNo(vo.getUserNo());
 		
 		this.service.modifyInfo(dto);
 		
@@ -192,9 +190,7 @@ public class MypageController {
 		
 		String fileName = "proPhoto_"+vo.getUserNo()+".jpg";
 		//String path = req.getServletContext().getRealPath("/resources/assets/img/mypage");
-
-		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareService\\src\\main\\webapp\\resources\\assets\\img\\mypage";
-
+		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareServiceTest\\src\\main\\webapp\\resources\\assets\\img\\mypage";
 		log.info("path : {}", path);
 		File file = new File(path, fileName);
 		modify.getProPhotoFile().transferTo(file);
@@ -230,7 +226,6 @@ public class MypageController {
 		
 		log.info("\t+ history : {} ", history);
 		
-		model.addAttribute("userNo", vo.getUserNo());
 		model.addAttribute("history", history);
 		//model.addAttribute("review", review);
 	}	// customerHistoryManage
@@ -250,32 +245,18 @@ public class MypageController {
 	
 	@ResponseBody
 	@PostMapping("customerReviewSend")		// 반려인 리뷰 페이지(전송)
-	public boolean registerReview(
-			@RequestParam(value = "serviceId")Integer serviceId,
-			@RequestParam(value = "revContent")String revContent,
-			@RequestParam(value = "grade")Integer grade,
-			@RequestParam(value = "userNo")Integer userNo,
-			CustomerReviewManageDTO review,
-			HttpSession session) {
+	public boolean registerReview(CustomerReviewManageDTO review) {
 		log.debug("customerHistoryManage() invoked.");
 		
-		UserVO vo = (UserVO) session.getAttribute(loginKey);
 		
-		CustomerReviewManageVO vo2 = this.service.readReview(serviceId);
-		
-		review.setServiceId(serviceId);
-		review.setRevContent(revContent);
-		review.setGrade(grade);
-		review.setUserNo(userNo);
-		log.debug("값 넣기는 성공{}, {}, {}, {}", serviceId, revContent, grade, userNo);
-		
-		if(vo2 == null) {			// 값이 없다면 입력
+		if(this.service.readReview(review.getServiceId()) == null) {			// 값이 없다면 입력
 			this.service.registerReview(review);
 		}else {																	// 값이 있다면 수정
 			this.service.modifyReview(review);
 		}
 		
 		return true;
+		//return "mypage/customerHistoryManageBody";
 	}	// registerReview
 	
 
@@ -341,10 +322,10 @@ public class MypageController {
 			model.addAttribute("userNo", vo.getUserNo());
 			model.addAttribute("sitterProfile", sitterProfile);
 						
-			ServiceTypeVO serviceType = this.service.getServiceType(vo.getUserNo());
-			//Objects.requireNonNull(serviceTypeList);
-			log.info("\t+ serviceType : {}", serviceType);
-			model.addAttribute("userNo", vo.getUserNo());
+			List<ServiceTypeVO> serviceType = this.service.getServiceType(vo.getUserNo());
+//			//Objects.requireNonNull(serviceTypeList);
+//			log.info("\t+ serviceType : {}", serviceType);
+			//model.addAttribute("userNo", vo.getUserNo());
 			model.addAttribute("serviceType", serviceType);
 			
 			List<PetsitterSkillVO> petsitterSkill = this.service.getPetsitterSkill(vo.getUserNo());
@@ -400,28 +381,52 @@ public class MypageController {
 			return "redirect: /mypage/sitterProfileManage";
 			
 			
-		} // sitterProfileModify
+		} // updatePetsitterProfile
 		
 		@PostMapping("serviceTypeModify")		// 서비스타입 수정
 		public String updateServiceType(
 			HttpServletRequest req, Integer userNo, ServiceTypeDTO modify, HttpSession session) {
-			log.debug("updateServiceType() invoked.");		
+			log.debug("updateServiceType({}) invoked.",modify);		
 			
 			UserVO vo = (UserVO) session.getAttribute(loginKey);
-
-			ServiceTypeVO vo2 = this.service.getServiceType(vo.getUserNo());
-			if(vo2 == null) {
-				this.service.insertServiceType(modify);
-				log.info("insertPetsitterProfile() inovoked.");
-			}else {
-				this.service.updateServiceType(modify);
-				log.info("updatePetsitterProfile() inovoked.");
-			}
+			
+			this.service.mergeServiceType(modify);
 			
 			return "redirect: /mypage/sitterProfileManage";
 			
 			
-		} // sitterProfileModify		
+		} // updateServiceType	
+		
+		
+		@PostMapping("skillTypeModify")		// 스킬타입 수정
+		public String updateSkillType(
+			HttpServletRequest req, Integer userNo, PetsitterSkillDTO modify, HttpSession session) {
+			log.debug("updateSkillType({}) invoked.",modify);		
+			
+			UserVO vo = (UserVO) session.getAttribute(loginKey);
+			
+			this.service.mergeSkillType(modify);
+			
+			return "redirect: /mypage/sitterProfileManage";
+			
+			
+		} // updateSkillType
+		
+		
+		@PostMapping("petTypeModify")		// 스킬타입 수정
+		public String updatePetType(
+			HttpServletRequest req, Integer userNo, ServicePetkindsDTO modify, HttpSession session) {
+			log.debug("updatePetType({}) invoked.",modify);		
+			
+			UserVO vo = (UserVO) session.getAttribute(loginKey);
+			
+			this.service.mergePetType(modify);
+			
+			return "redirect: /mypage/sitterProfileManage";
+			
+			
+		} // updatePetType		
+		
 	     
 	   //-----------------------------------------------------------------------------------------------------------------//
 	   
