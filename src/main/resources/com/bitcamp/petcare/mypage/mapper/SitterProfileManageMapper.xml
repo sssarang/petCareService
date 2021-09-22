@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.petcare.mypage.mapper.SitterProfileManageMapper">
+		
+   <!-- select -->
+
+   <select id="getPetsitterProfile" resultType="com.bitcamp.petcare.mypage.domain.PetsitterProfileVO">
+      SELECT p.user_no, p.pro_photo, p.introduce
+      FROM tbl_petsitter_profile p
+      WHERE p.user_no = #{userNo}
+   </select>
+
+   <select id="getServiceType" resultType="com.bitcamp.petcare.mypage.domain.ServiceTypeVO">
+     <!--  SELECT p.user_no, t.service_type_code, t.use_yn, t.price
+      FROM tbl_petsitter_profile p
+      INNER JOIN tbl_service_type t ON p.user_no = t.user_no
+      WHERE p.user_no = #{userNo} -->
+      
+      SELECT p.user_no, t.service_type_code, c.code_name, t.use_yn, t.price
+      FROM tbl_petsitter_profile p
+      INNER JOIN tbl_service_type t ON p.user_no = t.user_no
+      INNER JOIN tbl_common_code c ON t.service_type_code = c.code
+      WHERE p.user_no = #{userNo}
+       
+   </select>
+
+   <select id="getPetsitterSkill" resultType="com.bitcamp.petcare.mypage.domain.PetsitterSkillVO">
+      	SELECT p.user_no, s.skill_type_code, s.use_yn
+		FROM tbl_petsitter_profile p
+		INNER JOIN tbl_petsitter_skill s ON p.user_no = s.user_no
+		WHERE p.user_no = #{userNo}
+   </select>
+   
+   <select id="getServicePetKinds" resultType="com.bitcamp.petcare.mypage.domain.ServicePetkindsVO">
+      	SELECT p.user_no, k.pet_type_code, k.use_yn
+      	FROM tbl_petsitter_profile p
+      	INNER JOIN tbl_service_petkinds k ON p.user_no = k.user_no
+      	WHERE p.user_no = #{userNo}
+   </select>
+
+   <select id="getServiceCalendar" resultType="com.bitcamp.petcare.mypage.domain.ServiceCalendarVO">
+      SELECT p.user_no, c.service_date
+      FROM tbl_petsitter_profile p
+      INNER JOIN tbl_service_calendar c ON p.user_no = c.user_no
+      WHERE p.user_no = #{userNo}
+   </select>
+
+   <select id="getActivityPhoto" resultType="com.bitcamp.petcare.mypage.domain.ActivityPhotoVO">
+      SELECT p.user_no, a.photo_no, a.act_photo
+      FROM tbl_petsitter_profile p
+      INNER JOIN tbl_activity_photo a ON p.user_no = a.user_no
+      WHERE p.user_no = #{userNo}
+   </select>
+
+   
+   <!-- insert -->
+
+   <insert id="insertPetsitterProfile">
+      INSERT INTO tbl_petsitter_profile
+            (user_no, pro_photo, introduce, reg_user_no, reg_date)
+      VALUES
+            (#{userNo}, #{proPhoto}, #{introduce}, #{userNo}, current_date)      
+   </insert>
+   
+<!--    <insert id="insertServiceType">
+      INSERT INTO tbl_service_type
+            (user_no, service_type_code, use_yn, price, reg_user_no, reg_date)
+      VALUES
+            (#{userNo}, #{serviceTypeCode}, #{useYn}, #{price}, #{userNo}, current_date)
+   </insert> -->
+
+   <insert id="insertServiceType">
+<!--        INSERT INTO tbl_service_type
+            (user_no, service_type_code, use_yn, price, reg_user_no, reg_date)
+      VALUES
+            (  
+            #{userNo}, 
+            #{serviceTypeCode}, 
+            #{useYn}, 
+            #{price}, 
+            #{userNo}, 
+            current_date
+         ) -->
+         INSERT INTO tbl_service_type
+         (user_no, service_type_code, use_yn, price, reg_user_no, reg_date)
+		 SELECT #{userNo}, 11, #{useYn}, #{price}, #{userNo}, current_date FROM dual
+		 UNION ALL
+		 SELECT #{userNo}, 12, #{useYn}, #{price}, #{userNo}, current_date FROM dual
+         
+<!--       INSERT INTO tbl_service_type
+            (user_no, use_yn, price, reg_user_no, reg_date)
+      VALUES
+            (  
+            #{userNo},
+            #{useYn}, 
+            #{price}, 
+            #{userNo}, 
+            current_date
+         )  -->          
+   </insert>
+      
+   <insert id="insertPetsitterSkill">
+      INSERT INTO tbl_petsitter_skill
+            (user_no, skill_type_code, use_yn, reg_user_no, reg_date)
+      VALUES
+            (#{userNo}, #{skillTypeCode}, #{useYn}, #{userNo}, current_date)
+   </insert>
+
+   <insert id="insertServicePetkinds">
+      INSERT INTO tbl_service_petkinds
+            (user_no, pet_type_code, use_yn, reg_user_no, reg_date)
+      VALUES
+            (#{userNo}, #{petTypeCode}, #{useYn}, #{userNo}, current_date)
+   </insert>
+
+   <insert id="insertServiceCalendar">
+      INSERT INTO tbl_service_calendar
+            (user_no, service_date, reg_user_no, reg_date)
+      VALUES
+            (#{userNo}, #{serviceDate}, #{userNo}, current_date)    
+   </insert>
+
+   <insert id="insertActivityPhoto">
+      INSERT INTO tbl_activity_photo
+            (user_no, photo_no, act_photo, reg_user_no, reg_date)
+      VALUES
+            (#{userNo}, #{photoNo}, #{actPhoto}, #{userNo}, current_date)      
+   </insert>
+
+
+   <!-- update -->
+
+   <update id="updatePetsitterProfile">
+      UPDATE 
+         tbl_petsitter_profile
+      SET
+         pro_photo = #{proPhoto},
+         introduce = #{introduce},
+         mod_user_no = #{userNo},
+         mod_date = current_date
+      WHERE
+         user_no = #{userNo}
+   </update>
+
+   <update id="updateServiceType">
+      UPDATE 
+         tbl_service_type
+      SET         
+         use_yn = #{useYn},
+         price = #{price},
+         mod_user_no = #{userNo},
+         mod_date = current_date
+      WHERE
+         user_no = #{userNo}    
+   </update>
+  
+   <update id="updatePetsitterSkill">
+      UPDATE 
+         tbl_petsitter_skill
+      SET
+         skill_type_code = #{skillTypeCode},
+         use_yn = #{useYn},
+         mod_user_no = #{userNo},
+         mod_date = current_date
+      WHERE
+         user_no = #{userNo}      
+   </update>
+
+   <update id="updateServicePetkinds">
+      UPDATE 
+         tbl_service_petkinds
+      SET
+         pet_type_code = #{petTypeCode},
+         use_yn = #{useYn},
+         mod_user_no = #{userNo},
+         mod_date = current_date
+      WHERE
+         user_no = #{userNo}      
+   </update>
+
+   <update id="updateServiceCalendar">
+      UPDATE 
+         tbl_service_calendar
+      SET
+         service_date = #{serviceDate},
+         mod_user_no = #{userNo},
+         mod_date = current_date
+      WHERE
+         user_no = #{userNo}      
+   </update>
+
+   <update id="updateActivityPhoto">
+      UPDATE 
+         tbl_activity_photo
+      SET
+         photo_no = #{photoNo},
+         act_photo = #{actPhoto},
+         mod_user_no = #{userNo},
+         mod_date = current_date
+      WHERE
+         user_no = #{userNo}      
+   </update>
+
+</mapper>

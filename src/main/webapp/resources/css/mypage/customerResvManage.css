@@ -5089,10 +5089,17 @@ textarea.form-control-lg {
   display: block;
   padding: 0.5rem 1rem;
   color: #212529;
+  text-align: center;
   text-decoration: none;
-  background-color: #fff;
+  background-color: #fff9e8 !important;
   border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 2px 0px 6px 0px rgba(0, 0, 0, 0.4);
 }
+
+.list-group-item:hover{
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
 .list-group-item:first-child {
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
@@ -11285,12 +11292,17 @@ textarea.form-control-lg {
   margin-left: -15rem;
   transition: margin 0.25s ease-out;
 
-  background-color: #F9C7A1;
+  background-color: #fff;
 }
 
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
   font-size: 1.2rem;
+}
+
+.sidebar-heading {
+	background-color: rgb(255, 210, 127);
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 #sidebar-wrapper .list-group {
@@ -11373,12 +11385,12 @@ body{
   padding-left: 100px;
   margin: 30px auto;
 
-  color: #F9C7A1;
+  color: rgb(255, 210, 127);
 }
 
 #reservation{
     width: 600px;
-    height: 580px;
+    height: 620px;
   
     border: 2px solid;
     border-radius: 20px;
@@ -11398,7 +11410,6 @@ body{
 #reservation #stepTypeCodeName{
     display: inline;
     width:100px;
-    border: solid rgb(201, 201, 243);
     margin-top: 1px;
     margin-bottom: 10px;
     margin-left: 200px;
@@ -11406,10 +11417,19 @@ body{
     text-align: center;
     text-decoration: none;
     font-size: 15px;
-    cursor: pointer;
+    cursor: default;
   
-    border-radius: 30px;
     left: 50px;
+    
+	  height: 60px;
+	  border: 0;
+	  border-radius: 50% 20% / 10% 40%;
+	
+	  font-size: 1rem;
+	  font-weight: bold;
+	
+	  color: white;
+	  background-color:rgb(255, 210, 127);
 
 }
 
@@ -11487,13 +11507,14 @@ body{
     padding-left: 30px;
   
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #head2{
     padding-top: 10px;
     padding-left: 20px;
   
-    color: #F9C7A1;
+    color: rgb(255, 210, 127);
 }
 
 #resvExplain p{
@@ -11513,15 +11534,19 @@ body{
 #resvExplain #btn_refuse{
     width:100px;
     height: 50px;
-    border: solid rgb(201, 201, 243);
+    
+    border: 0;
+    border-radius: 50% 20% / 10% 40%;
+    
     margin-top: 15px;
     padding: 10px 0;
     text-align: center;
     text-decoration: none;
-    font-size: 15px;
-    cursor: pointer;
+    font-size: 1rem;
+    cursor: default;
 
-    border-radius: 30px;
+    color: white;
+	background-color:rgb(255, 210, 127);
     left: 50px;
 }
 
@@ -11566,7 +11591,7 @@ body{
 
 /* 결제창 관련 */
 
-.btn-payment{
+/* .btn-payment{
   margin-top: 30px;
   margin-right: 200px;
   
@@ -11589,7 +11614,7 @@ body{
 
 .btn-payment:hover{
   background-color: #f9c7a1;
-}
+} */
 
 
 .dataExist {
@@ -11599,7 +11624,7 @@ body{
   border: 2px solid;
   border-radius: 20px;
 
-  border-color: #f9c7a1;
+  border-color: rgb(255, 210, 127);
 
   padding-top: 20px;
   padding-bottom: 20px;
@@ -11610,7 +11635,6 @@ body{
 
   text-align: center;
   text-decoration: none;
-  color: #f9c7a1;
 }
 
  .nonDataForm{
@@ -11642,7 +11666,7 @@ body{
   border: 2px solid;
   border-radius: 20px;
 
-  border-color: #f9c7a1;
+  border-color: rgb(255, 210, 127);
 
   padding-top: 30px;
   padding-bottom: 20px;
@@ -11653,5 +11677,51 @@ body{
 
   text-align: center;
   text-decoration: none;
-  color: #f9c7a1;
  }
+
+ 
+ .btn-modal{
+  display: inline;
+  margin: 2%;
+  width: 150px;
+  height: 60px;
+  border: 0 !important;
+  border-radius: 50% 20% / 10% 40% !important;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: white;
+  background-color:rgb(255, 210, 127) !important; 
+
+ }
+ 
+ .btn-modal:hover{
+  box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+ }
+ 
+.btn_cancelYes, .btn-payment{
+	float: right;
+  display: inline;
+  margin: 2%;
+  width: 150px;
+  height: 60px;
+  border: 0;
+  border-radius: 50% 20% / 10% 40%;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: white;
+  background-color:rgb(255, 210, 127);
+	
+}
+
+.btn-payment{
+	margin: 50px 140px 0px 0px !important;
+}
+
+.btn_cancelYes:hover,
+.btn-payment:hover{
+  box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+}

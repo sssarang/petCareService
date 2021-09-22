@@ -5092,8 +5092,13 @@ textarea.form-control-lg {
   color: #212529;
   text-align: center;
   text-decoration: none;
-  background-color: #fff;
+  background-color: #fff9e8 !important;
   border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 2px 0px 6px 0px rgba(0, 0, 0, 0.4);
+}
+
+.list-group-item:hover{
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
 }
 .list-group-item:first-child {
   border-top-left-radius: inherit;
@@ -11287,12 +11292,17 @@ textarea.form-control-lg {
   margin-left: -15rem;
   transition: margin 0.25s ease-out;
 
-  background-color: #F9C7A1;
+  background-color: #fff;
 }
 
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
   font-size: 1.2rem;
+}
+
+.sidebar-heading {
+	background-color: rgb(255, 210, 127);
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 #sidebar-wrapper .list-group {
@@ -11366,14 +11376,14 @@ body{
 }
 
 .userInfoModify{
-  margin-left: 250px;
+  margin-left: 200px;
 }
 
 .userInfoModify #head{
   padding-left: 100px;
   margin: 30px auto;
 
-  color: #F9C7A1;
+  color: rgb(255, 210, 127);
 }
 #modify_flex{
   width: 500px;
@@ -11397,47 +11407,7 @@ body{
   margin-right: 17px;
 }
 
-.btn_nickname{
-  float: right;
 
-  width: 50px;
-  
-  border: solid rgb(201, 201, 243);
-
-  background-color:#fff;
-
-  margin-right: 200px;
-  padding: 15px 0;
-  text-align: center;
-  text-decoration: none;
-  font-size: 15px;
-  cursor: pointer;
-
-  border-radius: 10px;
-}
-
-.btn_userInfo{
-  width:100px;
-  background-color: #f8585b;
-  border: solid rgb(201, 201, 243);
-  background-color:#fff;
-  margin: 30px 0 0  3rem;
-  padding: 15px 0;
-  text-align: center;
-  text-decoration: none;
-  font-size: 15px;
-  cursor: pointer;
-
-  border-radius: 30px;
-  left: 50px;
-}
-
-.btn_nickname:hover,
-.btn_userInfo:hover{
-  background-color: #F9C7A1;
-
-  display: inline;
-}
 form label{
   margin-bottom: 5px;
 }
@@ -11462,11 +11432,30 @@ form .check-button{
   margin-left: 200px;
 }
 
+.btn-password, .btn_userInfo, #btn-changePw{
+  float: right;
+  display: inline;
+  margin: 2%;
+  width: 150px;
+  height: 60px;
+  border: 0;
+  border-radius: 50% 20% / 10% 40%;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: white;
+  background-color:rgb(255, 210, 127);
+}
+
+.btn-password:hover,
+.btn_userInfo:hover,
+#btn-changePw:hover {
+  box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+}
+
+
 .modal-password{
   margin-top: 20px;
   margin-left: 150px;
-}
-
-#btn-changePw{
-  float: right;
 }

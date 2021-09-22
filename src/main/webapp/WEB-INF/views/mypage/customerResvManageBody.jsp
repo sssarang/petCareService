@@ -153,6 +153,7 @@
 						                        <br>
 						                        <p>3일 전까지만 가능합니다.
 						                        <br>
+						                        <br>
 						                        <p id="cancelPossible">예약을 취소하시겠습니까 ?</p>
 						                        <br>
 						                        <p id="cancelImpossible">예약 취소가 불가능합니다.</p>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.petcare.mypage.mapper.SitterHistoryManageMapper">
+
+	<select id="getHistory" resultType="com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO">
+	
+        SELECT 
+            m.start_date,
+            c.code_name,
+            u.user_nickname,
+            p.pet_name,
+            p.pro_photo,
+            m.service_id,
+            r.grade,
+            r.rev_content
+        FROM tbl_service_matching m
+        INNER JOIN tbl_user u ON (m.pet_user_no = u.user_no)
+        INNER JOIN tbl_common_code c ON (m.service_type_code = c.code)
+        INNER JOIN tbl_pet_profile p ON (u.user_no = p.user_no)
+        INNER JOIN tbl_review r ON (m.service_id = r.service_id)
+        WHERE m.pet_sitter_no = #{petSitterNo}
+        ORDER BY m.service_id DESC
+
+	</select>
+
+</mapper>

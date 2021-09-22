@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.bitcamp.petcare.mypage.domain.ActivityPhotoDTO;
+import com.bitcamp.petcare.mypage.domain.ActivityPhotoVO;
 import com.bitcamp.petcare.mypage.domain.CustomerHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerInfoManageDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerInfoManageVO;
@@ -17,12 +19,32 @@ import com.bitcamp.petcare.mypage.domain.CustomerProfileManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerResvManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerReviewManageDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerReviewManageVO;
+import com.bitcamp.petcare.mypage.domain.PetsitterProfileDTO;
+import com.bitcamp.petcare.mypage.domain.PetsitterProfileVO;
+import com.bitcamp.petcare.mypage.domain.PetsitterSkillDTO;
+import com.bitcamp.petcare.mypage.domain.PetsitterSkillVO;
+import com.bitcamp.petcare.mypage.domain.ServiceCalendarDTO;
+import com.bitcamp.petcare.mypage.domain.ServiceCalendarVO;
+import com.bitcamp.petcare.mypage.domain.ServicePetkindsDTO;
+import com.bitcamp.petcare.mypage.domain.ServicePetkindsVO;
+import com.bitcamp.petcare.mypage.domain.ServiceTypeDTO;
+import com.bitcamp.petcare.mypage.domain.ServiceTypeVO;
+import com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO;
+import com.bitcamp.petcare.mypage.domain.SitterReplyManageDTO;
+import com.bitcamp.petcare.mypage.domain.SitterReplyManageVO;
+import com.bitcamp.petcare.mypage.domain.SitterResvManageVO;
+import com.bitcamp.petcare.mypage.domain.UserWithdrawalDTO;
 import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 import com.bitcamp.petcare.mypage.mapper.CustomerHistoryManageMapper;
 import com.bitcamp.petcare.mypage.mapper.CustomerInfoManageMapper;
 import com.bitcamp.petcare.mypage.mapper.CustomerProfileManageMapper;
 import com.bitcamp.petcare.mypage.mapper.CustomerResvManageMapper;
 import com.bitcamp.petcare.mypage.mapper.CustomerReviewManageMapper;
+import com.bitcamp.petcare.mypage.mapper.SitterHistoryManageMapper;
+import com.bitcamp.petcare.mypage.mapper.SitterProfileManageMapper;
+import com.bitcamp.petcare.mypage.mapper.SitterReplyManageMapper;
+import com.bitcamp.petcare.mypage.mapper.SitterResvManageMapper;
+import com.bitcamp.petcare.mypage.mapper.UserWithdrawalMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -51,6 +73,21 @@ public class MypageServiceImpl implements MypageService {
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;		//암호화관련 bean
+	
+	@Setter(onMethod_=@Autowired)
+	private SitterProfileManageMapper sTprofileMapper;
+	
+	@Setter(onMethod_=@Autowired)
+	private SitterHistoryManageMapper sThistoryMapper;
+	
+	@Setter(onMethod_=@Autowired)
+	private SitterResvManageMapper sTresvMapper;
+	
+	@Setter(onMethod_=@Autowired)
+	private SitterReplyManageMapper sTreplyMapper;
+	
+	@Setter(onMethod_=@Autowired)
+	private UserWithdrawalMapper withdrawalMapper;
 	
 	
 	//================================================================
@@ -218,7 +255,268 @@ public class MypageServiceImpl implements MypageService {
 	}	// cancelResv
 
 
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//--------------------------------------------------------------------//
+	// select
 
+	@Override
+	public PetsitterProfileVO getPetsitterProfile(Integer userNo) {
+		log.debug("getPetsitterProfile({}) invoked.", userNo);
+		
+		Objects.requireNonNull(this.sTprofileMapper);
+		
+		return this.sTprofileMapper.getPetsitterProfile(userNo);
+		
+	} // getPetsitterProfile
+
+	@Override
+	public ServiceTypeVO getServiceType(Integer userNo) {
+		log.debug("getServiceType({}) invoked.", userNo);
+		
+		Objects.requireNonNull(this.sTprofileMapper);
+		
+		return this.sTprofileMapper.getServiceType(userNo);
+		
+	} // getServiceType
+
+
+	@Override
+	public List<PetsitterSkillVO> getPetsitterSkill(Integer userNo) {
+		log.debug("getPetsitterSkill({}) invoked.", userNo);
+		
+		Objects.requireNonNull(this.sTprofileMapper);
+		
+		return this.sTprofileMapper.getPetsitterSkill(userNo);
+		
+	} // getPetsitterSkill
+
+	@Override
+	public List<ServicePetkindsVO> getServicePetkinds(Integer userNo) {
+		log.debug("getServicePetKinds({}) invoked.", userNo);
+		
+		Objects.requireNonNull(this.sTprofileMapper);
+		
+		return this.sTprofileMapper.getServicePetKinds(userNo);
+		
+	} // getServicePetKinds
+
+	@Override
+	public List<ServiceCalendarVO> getServiceCalendar(Integer userNo) {
+		log.debug("getServiceCalendar({}) invoked.", userNo);
+		
+		Objects.requireNonNull(this.sTprofileMapper);
+		
+		return this.sTprofileMapper.getServiceCalendar(userNo);
+		
+	} // getServiceCalendar
+
+	@Override
+	public List<ActivityPhotoVO> getActivityPhoto(Integer userNo) {
+		log.debug("getActivityPhoto({}) invoked.", userNo);
+		
+		Objects.requireNonNull(this.sTprofileMapper);
+		
+		return this.sTprofileMapper.getActivityPhoto(userNo);
+		
+	} // getActivityPhoto
+	
+	//--------------------------------------------------------------------//
+	// insert
+
+	@Override
+	public int insertPetsitterProfile(PetsitterProfileDTO dto) {
+		log.debug("insertPetsitterProfile({}) invoked.", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		return this.sTprofileMapper.insertPetsitterProfile(dto);
+	} // insertPetsitterProfile
+
+	@Override
+	public int insertServiceType(ServiceTypeDTO dto) {
+		log.debug("insertServiceType({}) invoked.", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		return this.sTprofileMapper.insertServiceType(dto);
+	} // insertServiceType
+
+	
+	@Override
+	public int insertPetsitterSkill(PetsitterSkillDTO dto) {
+		log.debug("insertPetsitterSkill({}) invoked.", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		return this.sTprofileMapper.insertPetsitterSkill(dto);
+	} // insertPetsitterSkill
+
+	@Override
+	public int insertServicePetkinds(ServicePetkindsDTO dto) {
+		log.debug("insertServicePetkinds({}) invoked.", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		return this.sTprofileMapper.insertServicePetkinds(dto);
+	} // insertServicePetkinds
+
+	@Override
+	public int insertServiceCalendar(ServiceCalendarDTO dto) {
+		log.debug("insertServiceCalendar({}) invoked.", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		return this.sTprofileMapper.insertServiceCalendar(dto);
+	} // insertServiceCalendar
+
+	@Override
+	public int insertActivityPhoto(ActivityPhotoDTO dto) {
+		log.debug("insertActivityPhoto({}) invoked.", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		return this.sTprofileMapper.insertActivityPhoto(dto);
+	} // insertActivityPhoto
+
+	
+	//--------------------------------------------------------------------//
+	// update 
+	
+	@Override
+	public int updatePetsitterProfile(PetsitterProfileDTO dto) {
+		log.debug("updatePetsitterProfile({}) invoked.", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		return this.sTprofileMapper.updatePetsitterProfile(dto);
+	} // updatePetsitterProfile
+
+	@Override
+	public int updateServiceType(ServiceTypeDTO dto) {
+		log.debug("updateServiceType({}) invoked.", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		return this.sTprofileMapper.updateServiceType(dto);
+	} // updateServiceType
+
+	
+	@Override
+	public int updatePetsitterSkill(PetsitterSkillDTO dto) {
+		log.debug("updatePetsitterSkill({}) invoked.", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		return this.sTprofileMapper.updatePetsitterSkill(dto);
+	} // updatePetsitterSkill
+
+	@Override
+	public int updateServicePetkinds(ServicePetkindsDTO dto) {
+		log.debug("updateServicePetkinds({}) invoked.", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		return this.sTprofileMapper.updateServicePetkinds(dto);
+	} // updateServicePetkinds
+
+	@Override
+	public int updateServiceCalendar(ServiceCalendarDTO dto) {
+		log.debug("updateServiceCalendar({}) invoked.", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		return this.sTprofileMapper.updateServiceCalendar(dto);
+	} // updateServiceCalendar
+
+	@Override
+	public int updateActivityPhoto(ActivityPhotoDTO dto) {
+		log.debug("updateActivityPhoto({}) invoked.", dto);
+		
+		Objects.requireNonNull(dto);
+		
+		return this.sTprofileMapper.updateActivityPhoto(dto);
+	} // updateActivityPhoto
+	
+	
+	//--------------------------------------------------------------------//
+	// sitterHistory
+
+	@Override
+	public List<SitterHistoryManageVO> getHistory(Integer petSitterNo) {
+		log.debug("getHistory({}) invoked.", petSitterNo);
+		
+		Objects.requireNonNull(this.sThistoryMapper);
+		
+		return this.sThistoryMapper.getHistory(petSitterNo);
+		
+	} // getHistory
+
+	
+	//--------------------------------------------------------------------//
+	// sitterResv
+	
+	@Override
+	public List<SitterResvManageVO> getResv(Integer petSitterNo) {
+		log.debug("getResv({}) invoked.", petSitterNo);
+		
+		Objects.requireNonNull(this.sTresvMapper);
+		
+		return this.sTresvMapper.getResv(petSitterNo);
+		
+	} // getResv
+	
+	@Override
+	public int resvApprove(Integer serviceId) {
+		log.debug("resvApprove() invoked.");
+		
+		return this.sTresvMapper.resvApprove(serviceId);
+	} // resvApprove
+
+	@Override
+	public int resvRefusal(Integer serviceId) {
+		log.debug("resvRefusal() invoked.");
+		
+		return this.sTresvMapper.resvRefusal(serviceId);
+	} // resvRefusal
+
+	//--------------------------------------------------------------------//
+
+	@Override
+	public SitterReplyManageVO getReply(Integer serviceId) {
+		log.debug("getReply({}) invoked.", serviceId);
+		
+		return this.sTreplyMapper.getReply(serviceId);
+	} // readReply
+	
+	@Override
+	public int insertReply(SitterReplyManageDTO dto) {
+		log.debug("insertReply() invoked.");
+		
+		Objects.requireNonNull(this.sTreplyMapper);
+		
+		return this.sTreplyMapper.insertReply(dto);
+	} // insertReply
+
+
+	@Override
+	public int updateReply(SitterReplyManageDTO dto) {
+		log.debug("modifyReview() invoked.");
+		
+		Objects.requireNonNull(this.sTreplyMapper);
+		
+		return this.sTreplyMapper.updateReply(dto);
+		
+	} // updateReply
+	
+	//--------------------------------------------------------------------//
+
+	@Override
+	public int withdrawal(Integer userNo) {
+		log.debug("withdrawal() invoked.");
+		
+		return this.withdrawalMapper.withdrawal(userNo);
+	} // withdrawal
 
 
 

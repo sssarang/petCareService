@@ -10,13 +10,14 @@
 
 <select id="readInfo" resultType="com.bitcamp.petcare.mypage.domain.CustomerInfoManageVO">
 
-	SELECT user_nickname,
-		   user_id,
-		   user_pw,
-		   user_contact,
-		   user_address,
-		   user_gender
-	FROM tbl_user
+	SELECT user_nickname "닉네임",
+		   user_id "아이디",
+		   user_contact "연락처",
+		   user_address "주소",
+		   user_latitude "위도",
+		   user_longitude "경도",
+		   user_gender "성별"
+	FROM tbl_user	
 	WHERE user_no = ${userNo}
 
 </select>
@@ -31,13 +32,13 @@
 
 <update id="updateInfo">
 	UPDATE tbl_user u
-	SET (
+	SET 
 	     u.user_nickname = ${userNickname},
-	     u.user_pw = ${user_pw},
 	     u.user_contact = ${userContact},
 	     u.user_address = ${userAddress},
 	     u.user_latitude = ${userLatitude},
 	     u.user_longitude = ${userLongitude}
+	     
 	WHERE u.user_no = ${userNo}
 </update>
 

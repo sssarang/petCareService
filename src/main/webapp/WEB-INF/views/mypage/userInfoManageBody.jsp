@@ -54,6 +54,9 @@
                                     <input type="button" onclick="sample4_execDaumPostcode()" class="check-button" value="우편번호 찾기">
                                     <input type="text" id="inputAddress" name="userAddress" class="form-control" placeholder="주소" value="${info.userAddress}" readonly>
                                     
+                                    <input type="hidden" name="userLatitude" value="${info.userLatitude}">
+                                    <input type="hidden" name="userLongitude" value="${info.userLongitude}">
+                                    
                                     <label>성별</label>
                                     <input type="radio" name="gender" class="gender" value="female" checked>여성
                                     <input type="radio" name="gender" class="gender" value="male">남성
@@ -102,7 +105,7 @@
 							                    <!-- Modal footer -->
 							                    <div class="modal-footer">
 							                        <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
-							                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+							                        <button type="button" class="btn btn-secondary btn_modalClose" data-dismiss="modal">닫기</button>
 							                    </div>
 							
 							                </div>
@@ -122,6 +125,9 @@
         <!-- jquery -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
+	    
+	    <!-- 카카오 지도 api -->
+	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36768b2f76471ae95e3d92b023d2b626"></script>
 	    
 	    <script>
 	    		$(function(){
@@ -265,11 +271,14 @@
 				            //document.getElementById("sample4_roadAddress").value = roadAddr;
 				            document.getElementById("inputAddress").value = data.jibunAddress;
 				            
+				            
+				            
 							if(data.autoJibunAddress) {
 				                var expJibunAddr = data.autoJibunAddress;
 				                document.getElementById("inputAddress").value = expJibunAddr;
+				                
+				                
 				            }
-
 				        }
 				    }).open();
 				}

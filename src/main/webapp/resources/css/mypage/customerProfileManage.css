@@ -5089,10 +5089,17 @@ textarea.form-control-lg {
   display: block;
   padding: 0.5rem 1rem;
   color: #212529;
+  text-align: center;
   text-decoration: none;
-  background-color: #fff;
+  background-color: #fff9e8 !important;
   border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 2px 0px 6px 0px rgba(0, 0, 0, 0.4);
 }
+
+.list-group-item:hover{
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
 .list-group-item:first-child {
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
@@ -11285,12 +11292,17 @@ textarea.form-control-lg {
   margin-left: -15rem;
   transition: margin 0.25s ease-out;
 
-  background-color: #F9C7A1;
+  background-color: #fff;
 }
 
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
   font-size: 1.2rem;
+}
+
+.sidebar-heading {
+	background-color: rgb(255, 210, 127);
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 #sidebar-wrapper .list-group {
@@ -11371,7 +11383,7 @@ body{
   padding-left: 100px;
   margin: 30px auto;
 
-  color: #F9C7A1;
+  color: rgb(255, 210, 127);
 }
 
 /*-----------content area---------------*/
@@ -11382,26 +11394,8 @@ body{
   border-radius: 40px;
 }
 
-#proImg #btn_proPhotoModify{
-  width: 50px;
-  
-  border: solid rgb(201, 201, 243);
 
-  background-color:#fff;
 
-  margin-right: 200px;
-  padding: 15px 0;
-  text-align: center;
-  text-decoration: none;
-  font-size: 15px;
-  cursor: pointer;
-
-  border-radius: 10px;
-}
-
-#proImg #btn_proPhotoModify:hover{
-  background-color: #F9C7A1;
-}
 
 #petInfo .form-control{
   width: 20rem;
@@ -11423,17 +11417,20 @@ body{
 
 }
 
+.petGender, .neutralization, .medicine{
+  margin-left: 50px;
+  margin-right: 17px;
+}
 
 
 #btn_cusPro{
-  margin-left: 360px;
+  margin-left: 230px;
   margin-bottom: 100px;
 }
 
-#btn_cusPro .btn_cusPro{
+#btn_cusPro .btn_cusPro {
   width: 80px;
   
-  border: solid rgb(201, 201, 243);
 
   background-color:#fff;
 
@@ -11443,16 +11440,28 @@ body{
   text-decoration: none;
   font-size: 15px;
   cursor: pointer;
+  
+  display: inline;
+  margin: 2%;
+  height: 60px;
+  border: 0;
+  border-radius: 50% 20% / 10% 40%;
 
-  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: white;
+  background-color:rgb(255, 210, 127);
 }
 
 #btn_cusPro .btn_cusPro:hover{
-  background-color: #F9C7A1;
+  box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
 }
 
+
+
 #proImg label{
-  width: 80px;
+  /* width: 80px;
   
   border: solid rgb(201, 201, 243);
 
@@ -11467,11 +11476,34 @@ body{
   border-radius: 10px;
 
   color: black;
+ */
+ width: 80px;
+  
 
+  background-color:#fff;
+
+  
+  padding: 15px 0;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  cursor: pointer;
+  
+  display: inline;
+  margin: 2%;
+  height: 60px;
+  border: 0;
+  border-radius: 50% 20% / 10% 40%;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: white;
+  background-color:rgb(255, 210, 127);
 }
 
 #proImg label:hover{
-  background-color: #F9C7A1;
+  box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
 }
 
 #proImg input[type="file"]{

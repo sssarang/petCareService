@@ -25,27 +25,4 @@
 	ORDER BY m.service_id DESC
 </select>
 
-<insert id="insertReview">						
-		INSERT INTO tbl_review (service_id, 
-						   rev_content, 
-						   grade, 
-						   writer, 
-						   writer_date)
-		VALUES (#{serviceId},
-	        	#{revContent},
-	        	#{grade},
-	        	#{userNickname},
-	        	current_date)
-</insert>
-
-<update id="updateReview">						
-	UPDATE
-		tbl_review
-	SET
-		grade = #{grade},
-		rev_content = #{revContent}
-	WHERE service_id = #{serviceId}
-
-</update>
-
 </mapper>

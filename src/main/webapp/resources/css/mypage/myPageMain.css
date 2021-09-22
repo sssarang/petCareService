@@ -5089,10 +5089,17 @@ textarea.form-control-lg {
   display: block;
   padding: 0.5rem 1rem;
   color: #212529;
+  text-align: center;
   text-decoration: none;
-  background-color: #fff;
+  background-color: #fff9e8 !important;
   border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 2px 0px 6px 0px rgba(0, 0, 0, 0.4);
 }
+
+.list-group-item:hover{
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
 .list-group-item:first-child {
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
@@ -11285,12 +11292,17 @@ textarea.form-control-lg {
   margin-left: -15rem;
   transition: margin 0.25s ease-out;
 
-  background-color: #F9C7A1;
+  background-color: #fff;
 }
 
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
   font-size: 1.2rem;
+}
+
+.sidebar-heading {
+	background-color: rgb(255, 210, 127);
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 #sidebar-wrapper .list-group {
@@ -11312,7 +11324,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 
   #page-content-wrapper {
     min-width: 0;
-    width: 100%;
+    width: 60%;
   }
 
   body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
@@ -11363,8 +11375,66 @@ body{
     margin-right: 0;
 }
 
+<!-- 마이페이지 메인 이미지 -->
+/* 초기화 */ 
+*{
+	margin: 0; padding: 0; box-sizing: border-box; 
+	} 
 
-#mypageMainImg{
-  max-width: 100%;
-  height: auto;
-}
+li{
+	list-style-type: none; 
+	margin-left: 60px;
+	} 
+/* 보여줄 구간의 높이와 넓이 설정 */ 
+
+#slideShow{
+	width: 500px; height: 500px; position: relative; margin: 50px auto; overflow: hidden; 
+/*리스트 형식으로 이미지를 일렬로 정렬할 것이기 때문에, 500px 밖으로 튀어 나간 이미지들은 hidden으로 숨겨줘야됨*/ 
+	} 
+
+.slides{
+	position: absolute; left: 0; top: 0; width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */ 
+	transition: left 0.5s ease-out; /*ease-out: 처음에는 느렸다가 점점 빨라짐*/ 
+	} 
+/* 첫 번째 슬라이드 가운데에 정렬하기위해 첫번째 슬라이드만 margin-left조정 */ 
+
+.slides li:first-child{
+	margin-left: 100px; 
+	} 
+/* 슬라이드들 옆으로 정렬 */ 
+
+.slides li:not(:last-child){
+	float: left; margin-right: 100px; 
+	} 
+
+.slides li{
+	float: left; 
+	} 
+
+.controller span{
+	position:absolute; background-color: transparent; color: black; text-align: center; border-radius: 50%; padding: 10px 20px; top: 50%; font-size: 1.3em; cursor: pointer; 
+	} 
+/* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */ 
+
+.controller span:hover{
+	background-color: rgba(128, 128, 128, 0.11); 
+	} 
+
+.prev{
+	left: 10px; 
+	} 
+/* 이전 화살표에 마우스 커서가 올라가 있을때 이전 화살표가 살짝 왼쪽으로 이동하는 효과*/ 
+
+.prev:hover{
+	transform: translateX(-10px); 
+	} 
+	
+.next{ 
+	right: 10px; 
+	} 
+/* 다음 화살표에 마우스 커서가 올라가 있을때 이전 화살표가 살짝 오른쪽으로 이동하는 효과*/ 
+
+.next:hover{
+	transform: translateX(10px); 
+	}
+

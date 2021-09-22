@@ -48,14 +48,19 @@
                             <span id="psInfo">
                                 <ul id="psInfoUl">
                                 	<input type="hidden" name="serviceId" value="${i.serviceId}">
-                                	<li>펫시터 닉네임 : ${i.userNickname}</li>
-                                    <li>펫시터 연락처 : ${i.userContact}</li>
-                                    <li>서비스 유형 : ${i.codeName}</li>
+                                	<li>펫시터 닉네임 </li>
+                                	<li>${i.userNickname}</li>
+                                	<hr>
+                                    <li>펫시터 연락처 </li>
+                                    <li>${i.userContact}</li>
+                                    <hr>
+                                    <li>서비스 유형 </li>
+                                    <li>${i.codeName}</li>
                                     <br>
                                  	  <!-- Button to Open the Modal -->
 							        <!-- NOTE 1: if ( data-toggle="modal" ) not exists, modal window not appeared. -->
 							        <!-- NOTE 2: if ( data-target="#myModal" ) not exists or incorrect, modal window not appeared. -->
-							        <button type="button" class="btn btn-primary btn-modal" data-toggle="modal" data-target="#myModal">
+							        <button type="button" class="btn-modal" id="btn_reviewModal" data-toggle="modal" data-target="#myModal">
 							            리뷰 남기기❤❤
 							        </button>
 							
@@ -81,7 +86,7 @@
 							                    <!-- 별점주기 -->
 												<div class="star-rating">
 													<input type="hidden" name="serviceId" value="${i.serviceId}">
-                                                    <input type="hidden" name="userNickname" value="${i.userNickname})">
+                                                    <input type="hidden" name="userNo" value="${userNo}">
                                                     
                                                     
 												    <input type="radio" id="5-stars" name="grade" value="5" />
@@ -100,6 +105,8 @@
 							                    <!-- Modal body -->
 							                    <div class="modal-body">
 							                        <textarea name="revContent" id="revContent" cols="80" rows="15" maxlength="300" placeholder="따뜻한 서비스 후기를 입력 해주세요❤" value=""></textarea>
+							                        
+							                        <button type="button" class="btn btn-save" id="btn_save" data-dismiss="modal">저장</button>
 							                    </div>
 
                                                 
@@ -107,7 +114,6 @@
 							                    <!-- Modal footer -->
 							                    <div class="modal-footer">
 							                        <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
-							                        <button type="button" class="btn btn-save" data-dismiss="modal">저장</button>
 							                        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 							                    </div>
 												</form>
@@ -163,7 +169,7 @@
         		})	// click
         		
         		<!-- 리뷰 저장 버튼 클릭시 페이지 전환 없이 데이터 전송 -->
-				$(".btn-save").click(function() {
+				$("#btn_save").click(function() {
 					
 									var $parent = $(this).parent().parent();
 									
@@ -174,8 +180,8 @@
 					        		console.log(revContent);
 					        		var grade = $parent.find('input:radio[name="grade"]:checked').val();
 					        		console.log(grade);
-					        		//var userNickname = $('input[name="userNickname"]').val();
-					        		//console.log(userNickname);
+					        		var userNo = $parent.find('input[name="userNo"]').val();
+					        		console.log(userNo);
 					        		
 				        			$.ajax({
 				        				url: "/mypage/customerReviewSend",
@@ -183,9 +189,11 @@
 				        				data: {
 				        					serviceId : serviceId,
 				        					revContent : revContent,
-				        					grade : grade
+				        					grade : grade,
+				        					userNo : userNo
 				        				},
 				        				success: function(data){
+											location.reload();
 				        				}	// success	
 				        			});	// ajax
 				        		

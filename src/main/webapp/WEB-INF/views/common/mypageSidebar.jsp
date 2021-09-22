@@ -19,7 +19,7 @@
 	                   <a class="list-group-item list-group-item-action p-3" href="customerProfileManage">프로필관리</a>
 	                   <a class="list-group-item list-group-item-action p-3" href="customerHistoryManage">이력/리뷰 관리</a>
 	                   <a class="list-group-item list-group-item-action p-3" href="customerResvManage">예약관리</a>
-	                   <a class="list-group-item list-group-item-action p-3" href="">회원탈퇴</a>
+	                   <a class="list-group-item list-group-item-action p-3" href="userWithdrawal">회원탈퇴</a>
 	              	 </div>
 	          	 </div>
 	         </c:when>
@@ -30,10 +30,10 @@
 		            <div class="sidebar-heading border-bottom ">마이페이지</div>
 		               <div class="list-group list-group-flush">
 		                   <a class="list-group-item list-group-item-action p-3" href="userInfoManage">회원정보관리</a>
-		                   <a class="list-group-item list-group-item-action p-3" href="">프로필관리</a>
-		                   <a class="list-group-item list-group-item-action p-3" href="">이력/리뷰 관리</a>
-		                   <a class="list-group-item list-group-item-action p-3" href="">예약관리</a>
-		                   <a class="list-group-item list-group-item-action p-3" href="">회원탈퇴</a>
+		                   <a class="list-group-item list-group-item-action p-3" href="sitterProfileManage">프로필관리</a>
+		                   <a class="list-group-item list-group-item-action p-3" href="sitterHistoryManage">이력/리뷰 관리</a>
+		                   <a class="list-group-item list-group-item-action p-3" href="sitterResvManage">예약관리</a>
+		                   <a class="list-group-item list-group-item-action p-3" href="userWithdrawal">회원탈퇴</a>
 		               </div>
 		         </div>
        		</c:when>

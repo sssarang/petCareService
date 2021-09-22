@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.bitcamp.petcare.mypage.mapper.SitterReplyManageMapper">    
+	
+    <select id="getReply" resultType="com.bitcamp.petcare.mypage.domain.SitterReplyManageVO">
+        SELECT
+            r.service_id,
+            r.rep_content,
+            u.user_nickname
+        FROM tbl_reply r
+        INNER JOIN tbl_service_matching m ON (r.service_id = m.service_id)
+        INNER JOIN tbl_user u ON (m.pet_sitter_no = u.user_no)
+        WHERE r.service_id = #{serviceId}
+    </select>
+
+    <insert id="insertReply">
+        INSERT INTO tbl_reply(
+            service_id,rep_content,writer,writer_date)
+        VALUES(#{serviceId}, #{repContent}, #{userNickname}, current_date)    
+    </insert>
+
+    <update id="updateReply">
+        UPDATE
+            tbl_reply
+        SET 
+            rep_content = #{repContent},
+            writer_date = current_date
+        WHERE 
+            service_id = #{serviceId}
+    </update>
+
+</mapper>

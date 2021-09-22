@@ -11,7 +11,7 @@
 		SELECT r.service_id,
 		       r.rev_content,
 		       r.grade,
-		       u.user_nickname
+		       u.user_no
 		FROM tbl_review r
 		INNER JOIN tbl_service_matching m ON (r.service_id = m.service_id)
 		INNER JOIN tbl_user u ON (m.pet_user_no = u.user_no)
@@ -24,12 +24,12 @@
 		INSERT INTO tbl_review (service_id, 
 						   rev_content, 
 						   grade, 
-						   writer, 
+						   writer_no, 
 						   writer_date)
 		VALUES (#{serviceId},
 	        	#{revContent},
 	        	#{grade},
-	        	#{userNickname},
+	        	#{userNo},
 	        	current_date)
 	
 	

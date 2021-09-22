@@ -31,8 +31,8 @@
                         <div id="proImg">
                             <!-- <img src="C:\Users\HeeChan\Desktop\러블리빌런즈\스토리보드\cat-04.png" id="proPhoto"> -->
                             <!-- <img src="/resources/assets/img/mypage/proPhoto_${userNo}.jpg" id="proPhoto" style="width: 300px; height: 300px; object-fit: fill; box-shadow: 0px 5px 10px #F9C7A1; border-radius: 5px;"> -->
-                            <img src="${profile.proPhoto}" id="proPhoto" style="width: 300px; height: 300px; object-fit: fill; box-shadow: 0px 5px 10px #F9C7A1; border-radius: 5px;" onerror="this.src='/resources/assets/img/mypage/petsitter.jpg'">
-                            <label for="proPhotoUpload">사진 변경</label>
+                            <img src="${profile.proPhoto}" id="proPhoto" style="width: 300px; height: 300px; object-fit: fill; box-shadow: 3px 5px 10px #F9C7A1; border-radius: 5px;" onerror="this.src='/resources/assets/img/mypage/basicImg.jpg'">
+                            <label for="proPhotoUpload" class="btn_proPhoto">사진 변경</label>
                             <input type="file" name="proPhotoFile" id="proPhotoUpload">
                             <!-- <button type="" id="btn_proPhotoModify">변경</button> -->
                         </div>
@@ -56,16 +56,16 @@
                             <input type="date" name="petBirthday" value="${profile.petBirthday}">
 
                             <label for="petGender">성별</label>
-                            <input type="radio" name="petGender" value="F" checked>암컷
-                            <input type="radio" name="petGender" value="M">수컷
+                            <input type="radio" name="petGender" class="petGender" value="F" checked>암컷
+                            <input type="radio" name="petGender" class="petGender" value="M">수컷
 
                             <label for="neutralization">중성화</label>
-                            <input type="radio" name="neutralization" value="Y" checked>유
-                            <input type="radio" name="neutralization" value="N">무
+                            <input type="radio" name="neutralization" class="neutralization" value="Y" checked>유
+                            <input type="radio" name="neutralization" class="neutralization" value="N">무
 
                             <label for="medicine">약복용</label>
-                            <input type="radio" name="medicine" value="Y" checked>유
-                            <input type="radio" name="medicine" value="N">무
+                            <input type="radio" name="medicine" class="medicine" value="Y" checked>유
+                            <input type="radio" name="medicine" class="medicine" value="N">무
                         
                         </div>
 
