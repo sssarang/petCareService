@@ -48,6 +48,7 @@
                             <span id="psInfo">
                                 <ul id="psInfoUl">
                                 	<input type="hidden" name="serviceId" value="${i.serviceId}">
+                                	<input type="hidden" name="userNo" value="${userNo}">
                                 	<li>펫시터 닉네임 </li>
                                 	<li>${i.userNickname}</li>
                                 	<hr>
@@ -86,7 +87,6 @@
 							                    <!-- 별점주기 -->
 												<div class="star-rating">
 													<input type="hidden" name="serviceId" value="${i.serviceId}">
-                                                    <input type="hidden" name="userNo" value="${userNo}">
                                                     
                                                     
 												    <input type="radio" id="5-stars" name="grade" value="5" />
@@ -157,7 +157,9 @@
         			
         			var serviceId = $(this).parent().find('input[name="serviceId"]').val();
 	        		console.log(serviceId);
-					
+	        		
+	        		
+	        		
         			$.ajax({
         				url: "/mypage/customerReviewManage",
         				method: "GET",
@@ -187,7 +189,7 @@
 				$("#btn_save").click(function() {
 					
 									var $parent = $(this).parent().parent();
-									
+									var $parents = $(this).parents();
 									
 									var serviceId = $parent.find('input[name="serviceId"]').val();
 					        		console.log(serviceId);
@@ -195,8 +197,9 @@
 					        		console.log(revContent);
 					        		var grade = $parent.find('input:radio[name="grade"]:checked').val();
 					        		console.log(grade);
-					        		var userNo = $parent.find('input[name="userNo"]').val();
-					        		console.log(userNo);
+					        		var userNo = $parents.find('input[name="userNo"]').val();
+					        		console.log("userNo" + userNo);
+					        		
 					        		
 				        			$.ajax({
 				        				url: "/mypage/customerReviewSend",

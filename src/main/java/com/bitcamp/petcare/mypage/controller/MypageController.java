@@ -293,6 +293,7 @@ public class MypageController {
 		
 		log.info("\t+ history : {} ", history);
 		
+		model.addAttribute("userNo", vo.getUserNo());
 		model.addAttribute("history", history);
 		//model.addAttribute("review", review);
 	}	// customerHistoryManage
@@ -305,18 +306,23 @@ public class MypageController {
 		
 		CustomerReviewManageVO review = this.service.readReview(serviceId);
 		
-		
+		log.info("userNO ::::: {} ", review.getUserNo());
 		
 		return review;
 	}	// customerReviewManage
 	
 	@ResponseBody
 	@PostMapping("customerReviewSend")		// 반려인 리뷰 페이지(전송)
-	public boolean registerReview(CustomerReviewManageDTO review) {
+	public boolean registerReview(@RequestParam(value = "serviceId")Integer serviceId,
+								  @RequestParam(value = "revContent")String revContent,
+								  @RequestParam(value = "grade")Integer grade,
+								  @RequestParam(value = "userNo")Integer userNo,
+								  CustomerReviewManageDTO review
+		) {
 		log.debug("customerHistoryManage() invoked.");
 		
 		
-		if(this.service.readReview(review.getServiceId()) == null) {			// 값이 없다면 입력
+		if(this.service.readReview(serviceId) == null) {						// 값이 없다면 입력
 			this.service.registerReview(review);
 		}else {																	// 값이 있다면 수정
 			this.service.modifyReview(review);
