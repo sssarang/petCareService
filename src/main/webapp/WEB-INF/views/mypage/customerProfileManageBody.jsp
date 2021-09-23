@@ -3,7 +3,13 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    
+<%
+ response.setHeader("Cache-Control","no-cache");
+ response.setHeader("Pragma","no-cache");
+ response.setDateHeader("Expires",0);
+%>
+
+  
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -29,12 +35,10 @@
                                         
                         <h1 id="head">프로필관리</h1>
                         <div id="proImg">
-                            <!-- <img src="C:\Users\HeeChan\Desktop\러블리빌런즈\스토리보드\cat-04.png" id="proPhoto"> -->
-                            <!-- <img src="/resources/assets/img/mypage/proPhoto_${userNo}.jpg" id="proPhoto" style="width: 300px; height: 300px; object-fit: fill; box-shadow: 0px 5px 10px #F9C7A1; border-radius: 5px;"> -->
-                            <img src="${profile.proPhoto}" id="proPhoto" style="width: 300px; height: 300px; object-fit: fill; box-shadow: 3px 5px 10px #F9C7A1; border-radius: 5px;" onerror="this.src='/resources/assets/img/mypage/basicImg.jpg'">
+                            <!-- <img src="${profile.proPhoto}" id="proPhoto" style="width: 300px; height: 300px; object-fit: fill; box-shadow: 3px 5px 10px #F9C7A1; border-radius: 5px;" onerror="this.src='/resources/assets/img/mypage/basicImg.jpg'">-->
+                            <img src="/mypage/link/${userNo}" id="proPhoto" style="width: 300px; height: 300px; object-fit: fill; box-shadow: 3px 5px 10px #F9C7A1; border-radius: 5px;" onerror="this.src='/resources/assets/img/mypage/basicImg.jpg'">
                             <label for="proPhotoUpload" class="btn_proPhoto">사진 변경</label>
                             <input type="file" name="proPhotoFile" id="proPhotoUpload">
-                            <!-- <button type="" id="btn_proPhotoModify">변경</button> -->
                         </div>
 
                         <div id="petInfo">

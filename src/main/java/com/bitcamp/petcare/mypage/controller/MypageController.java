@@ -2,6 +2,8 @@ package com.bitcamp.petcare.mypage.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,12 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -207,7 +216,6 @@ public class MypageController {
 		UserVO vo = (UserVO) session.getAttribute(loginKey);
 		
 		String fileName = "proPhoto_"+vo.getUserNo()+".jpg";
-		//String path = req.getServletContext().getRealPath("/resources/assets/img/mypage");
 		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareService\\src\\main\\webapp\\resources\\assets\\img\\mypage";
 		log.info("path : {}", path);
 		File file = new File(path, fileName);
@@ -223,6 +231,47 @@ public class MypageController {
 		}
 		return "redirect: /mypage/main";
 	}	// modifyProfile
+	
+	
+	   @RequestMapping(value = "/link/{userNo}", method = RequestMethod.GET)
+	   public ResponseEntity<Resource> link(HttpServletRequest request
+	         , @PathVariable Integer userNo) throws IOException {
+	      log.info("userNo: {}", userNo);
+	      
+	      
+	      String fileName = "proPhoto_"+userNo+".jpg";
+	     
+	      
+	      
+	      final Path path = Paths.get("/opt").toAbsolutePath().normalize().resolve("eclipse").resolve("workspace").resolve("JEE").resolve("petCareService")
+	                                       .resolve("src").resolve("main").resolve("webapp").resolve("resources").resolve("assets").resolve("img").resolve("mypage").resolve(fileName);
+	      Resource resource = new UrlResource(path.toUri());
+	      
+	      log.info("toUri : {}", path.toUri());
+	      
+	      String contentType = null;
+	        try {
+	            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+	        } catch (IOException ex) {
+	            log.info("Could not determine file type.");
+	        }
+	       
+	        if(contentType == null) {
+	            contentType = "application/octet-stream";
+	        }
+	        
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+	        headers.add("Pragma", "no-cache");
+	        headers.add("Expires", "0");
+	        headers.add("Content-Length", String.valueOf(path.toFile().length()));
+	        headers.add("Accept-Ranges", "bytes");
+	        
+	        return ResponseEntity.ok()
+	                .contentType(MediaType.parseMediaType(contentType))
+	                .headers(headers)
+	                .body(resource);
+	   }
 	
 	
 	//  ========================이력관리 페이지==========================
