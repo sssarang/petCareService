@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,6 +64,43 @@ public class AdminController {
 		
 		return this.service.selectFAQ(dto);
 	}//showFAQ
+	
+	//FAQ 수정
+	@PostMapping(value="/modifyFaq")
+	@ResponseBody
+	public void updateFAQ(FaqDTO dto) {
+		log.debug("updateFAQ({}) invoked");
+		
+		//임시 - 세션으로 관리자 회원번호 가져올것
+		dto.setModUserNo(1);
+		
+		
+		int result = this.service.updateFAQ(dto);
+		log.info("\t + result : {}", result);
+	}//updateFAQ
+	
+	//FAQ 삭제
+	@PostMapping(value="/deleteFaq")
+	@ResponseBody
+	public void deleteFAQ(FaqDTO dto) {
+		log.debug("deleteFAQ({}) invoked", dto);
+		
+		int result = this.service.deleteFAQ(dto);
+		log.info("\t + result : {}", result);
+		
+	}//deleteFAQ
+	
+	//FAQ 추가
+	@PostMapping(value="/createFaq")
+	public void insertFAQ(FaqDTO dto) {
+		log.debug("createFaq({}) invoked", dto);
+		
+		//임시 - 세션으로 관리자 회원 번호 가져올것
+		dto.setRegUserNo(1);
+		
+		int result = this.service.insertFAQ(dto);
+		log.info("\t + result : {}", result);
+	}//createFaq
 	
 	
 	//=================================회원 관련====================================

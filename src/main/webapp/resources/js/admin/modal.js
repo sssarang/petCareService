@@ -1,7 +1,7 @@
 var action = '';
 var url = '';
 var type = '';
-var bno = 0;
+var sequence = 0;
 
 $(document).ready(function(){
 
@@ -17,30 +17,37 @@ $(document).ready(function(){
 	$("button[name='modify']").click(function(){
 		action='modify';
 		type = 'PUT';
-		bno = this.value;
+		sequence = this.value;
 
 		// content 담기
 		var row = $(this).parent().parent().parent();
 		var tr = row.children();
 		
-		var userName = tr.eq(2).text();
-		var contents = tr.eq(1).text();
+		var faqQuestion = tr.eq(0).text();
+		var faqAnswer = tr.eq(5).text();
 
 		$("#modal-title").text("수정하기");
 
-		$("#userName").val(userName);
-		$("#contents").val(contents);
+		$("#title").val(faqQuestion);
+		$("#contents").val(faqAnswer);
 		
 		$("#myModal").modal();
 	});
 	
 	// 삭제하기 버튼 클릭
 	$("button[name='delete']").click(function(){
-		bno = this.value;
+		sequence = this.value;
+		
+		var data = {
+			"faqSequence" : sequence
+		}
+		
 		$.ajax({
-			url : '/board/' + bno,
-			type : 'DELETE',
+			url : '/admin/deleteFaq',
+			type : 'POST',
+			data : data
 		});
+		
 		location.reload();
 	})
 	
@@ -48,16 +55,18 @@ $(document).ready(function(){
 	$("#modalSubmit").click(function(){
 		
 		if(action == 'create'){
-			bno = 0;
-			url = '/board';
+			sequence = 0;
+			url = '/admin/createFaq';
+			type='POST';
 		}else if(action == 'modify'){
-			url = '/board';
+			url = '/admin/modifyFaq';
+			type='POST';
 		}
 
 		var data = {
-			"bno" : bno,
-			"userName" : $("#userName").val(),
-			"contents" : $("#contents").val()
+			"faqSequence" : sequence,
+			"faqQuestion" : $("#title").val(),
+			"faqAnswer" : $("#contents").val()
 		};
 		
 		$.ajax({

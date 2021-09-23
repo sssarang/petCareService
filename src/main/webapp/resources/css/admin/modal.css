@@ -4,6 +4,6 @@ textarea{
     resize: none;
 }
 
-.modal.contents{
+.modal-dialog{
 	background-color: white;
 }

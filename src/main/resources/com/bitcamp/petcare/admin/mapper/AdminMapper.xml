@@ -7,6 +7,9 @@
 
 <mapper namespace="com.bitcamp.petcare.admin.mapper.AdminMapper">
 	
+	
+	<!-- FAQ관련 sql -->
+	
 	<select id="selectFAQ" resultType="com.bitcamp.petcare.admin.domain.FaqVO">
 		SELECT 
 			faq_sequence AS faqSequence,
@@ -25,12 +28,12 @@
 	<insert id="insertFAQ">
 		INSERT INTO 
 			tbl_faq 
-				(faq_question AS faqQuestion, 
-				 faq_answer AS faqAnswer, 
-				 reg_user_no AS regUserNo, 
-				 reg_date AS regDate)
+				(faq_question, 
+				 faq_answer, 
+				 reg_user_no, 
+				 reg_date)
 		VALUES 
-			(#{faqQeustion}, 
+			(#{faqQuestion}, 
 			 #{faqAnswer},
 			 #{regUserNo},
 			 sysdate)
@@ -89,6 +92,9 @@
 		SELECT count(*)
 		FROM tbl_faq
 	</select>
+	
+	
+	<!-- 유저 정보 관련 sql -->
 
 	<select id="selectUser" resultType="com.bitcamp.petcare.admin.domain.UserVO">
 		<![CDATA[
