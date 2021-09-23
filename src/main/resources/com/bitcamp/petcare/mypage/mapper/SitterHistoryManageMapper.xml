@@ -24,6 +24,7 @@
         INNER JOIN tbl_pet_profile p ON (u.user_no = p.user_no)
         INNER JOIN tbl_review r ON (m.service_id = r.service_id)
         WHERE m.pet_sitter_no = #{petSitterNo}
+        		AND m.step_type_code = 34
         ORDER BY m.service_id DESC
 
 	</select>
