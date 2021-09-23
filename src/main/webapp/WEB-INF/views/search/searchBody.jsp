@@ -35,17 +35,17 @@ pageEncoding="UTF-8"%>
                     <p>Pet Type</p>
                     <input type="radio" id="dog" name="petType" value="dog"
                     	    <c:if test='${filter.petType eq "dog"}'>checked</c:if>>
-                    <label for="dog">&nbsp;강아지</label>
+                    <label for="dog">&nbsp;강아지(Dog)</label>
                     <input type="radio" id="cat" name="petType" value="4"
                     		<c:if test='${filter.petType eq "4"}'>checked</c:if>>
-                    <label for="cat">&nbsp;고양이</label>
+                    <label for="cat">&nbsp;고양이(Cat)</label>
                 </div>
                  
                  <div class="form-group">
                      <div class="btn-toggle">
-                         <input type="radio" id="small" name="dogType" value="3" checked><label for="small">소형견</label>
-                         <input type="radio" id="middle" name="dogType" value="2"><label for="middle">중형견</label>
-                         <input type="radio" id="large" name="dogType" value="1" ><label for="large">대형견</label>
+                         <input type="radio" id="small" name="dogType" value="3" checked><label for="small">소형견<p style="font-size: 0.7rem; line-height: 1px;">(7kg 미만)</p></label>
+                         <input type="radio" id="middle" name="dogType" value="2"><label for="middle">중형견<p style="font-size: 0.7rem; line-height: 1px;">(7 - 14.9kg)</p></label>
+                         <input type="radio" id="large" name="dogType" value="1" ><label for="large">대형견<p style="font-size: 0.7rem; line-height: 1px;">(15kg 이상)</p></label>
                      </div>
                  </div>     
                  
@@ -89,8 +89,8 @@ pageEncoding="UTF-8"%>
 				 <div class="form-group">
                      <p>Service Date</p>
                      <span>
-                         시작일 | <input type="text" class="flatpickr" data-id="rangePlugin" name="startDate" placeholder="Start" value="${filter.startDate}" readonly="readonly"/><br>
-                         종료일 | <input type="text" class="flatpickr" id="secondRangeInput" name="endDate" placeholder="End" value="${filter.endDate}" readonly="readonly"/> 
+                         시작일 | <input type="text" class="flatpickr" data-id="rangePlugin" name="startDate" placeholder="Start date" value="${filter.startDate}" readonly="readonly"/><br>
+                         종료일 | <input type="text" class="flatpickr" id="secondRangeInput" name="endDate" placeholder="End date" value="${filter.endDate}" readonly="readonly"/> 
                      </span>
                  </div>
 

@@ -38,8 +38,8 @@ public class FilterDTO {
 	//                     페이징 처리                     //
 	//--------------------------------------------------//
 	private int currPage = 1;			//현재 보고자 하는 페이지 번호
-	private int amount = 5;				//한 페이지당 보여줄 레코드 건수
-	private int pagesPerPage = 2;		//각 페이지 아래에 보여줄 페이지 번호의 개수
+	private int amount = 9;				//한 페이지당 보여줄 레코드 건수
+	private int pagesPerPage = 3;		//각 페이지 아래에 보여줄 페이지 번호의 개수
 		
 	
 	public String getPagingUri() {
