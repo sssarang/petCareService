@@ -114,7 +114,7 @@ public class MatchingTests {
 	public void testGetServiceMatching() {
 		log.debug("testGetServiceMatching() invoked.");
 		
-		List<ServiceMatchingVO> list = this.mapper.getServiceMatching();
+		List<ServiceMatchingVO> list = this.mapper.getServiceMatching(5);
 		
 		assert list != null;
 		

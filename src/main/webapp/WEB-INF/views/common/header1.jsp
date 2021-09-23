@@ -16,7 +16,7 @@
             <img class="img-fluid" src="/resources/assets/img/common/2.png" alt="Logo" width="165px">
         </a>
         <div class="btn-group">
-            <a class="btn orange" href="mypage/myPageMain">
+            <a class="btn orange" href="/mypage/myPageMain">
                 <span class="btn-sm">
                     마이페이지
                 </span>
