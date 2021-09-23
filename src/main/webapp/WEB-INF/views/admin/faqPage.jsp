@@ -32,6 +32,7 @@
     <!-- Custom styles for this template-->
     <link href="/resources/css/admin/sb-admin-2.min.css" rel="stylesheet">
 	<link href="/resources/css/admin/faq.css" rel="stylesheet">
+	<link href="/resources/css/admin/paging.css" rel="stylesheet">
 	
 	<!-- Custom styles for this page -->
     <link href="/resources/css/admin/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -143,7 +144,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><c:out value="${session}"/></span>
                                 <img class="img-profile rounded-circle"
                                     src="/resources/assets/img/admin/undraw_profile.svg">
                             </a>
@@ -205,15 +206,15 @@
 										<c:forEach items="${pagingList}" var="i">
 											<tr id="tr${i.faqSequence}">
 												<th><c:out value="${i.faqQuestion}"/></th>
-												<th><c:out value="${i.regUserNo}"/></th>								
+												<th>관리자</th>								
 												<th><fmt:formatDate pattern="yyyy-MM-dd"
 												value="${i.regDate}"/></th>				
 												<th>
 													<div class="MD-Btn">
 														<button name="modify" value="${i.faqSequence}"
-															class="">수정</button>
+															class="btn btn-primary btn-sm">수정</button>
 														<button name="delete" value="${i.faqSequence}"
-															class="">삭제</button>
+															class="btn btn-danger btn-sm">삭제</button>
 													</div>
 												</th>
 												<th><fmt:formatDate pattern="yyyy-MM-dd"
@@ -236,7 +237,7 @@
 	                                		
 	                                		<c:if test="${pageMaker.prev}">
 	                                			<li class="paginate_button previous">
-	                                				<a href="${pageMaker.startPage -1}">Pre</a>
+	                                				<a href="${pageMaker.startPage -1}" class="pre">Previous</a>
 	                                			</li>
 	                                		</c:if>
 	                                		
@@ -250,7 +251,7 @@
 	
 	                                		<c:if test="${pageMaker.next}">
 	                                			<li class="paginate_button next">
-	                                				<a href="${pageMaker.endPage + 1}">Next</a>
+	                                				<a href="${pageMaker.endPage + 1}" class="next">Next</a>
 	                                			</li>
 	                                		</c:if>
 	                                	</ul>

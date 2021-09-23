@@ -1,5 +1,7 @@
 package com.bitcamp.petcare.admin.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,8 @@ import com.bitcamp.petcare.admin.domain.FaqDTO;
 import com.bitcamp.petcare.admin.domain.FaqVO;
 import com.bitcamp.petcare.admin.domain.PageDTO;
 import com.bitcamp.petcare.admin.service.AdminService;
+import com.bitcamp.petcare.user.domain.UserVO;
+import com.bitcamp.petcare.user.interceptor.LoginInterceptor;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,27 +33,30 @@ public class AdminController {
 	@Setter(onMethod_=@Autowired)
 	private AdminService service;
 	
-	@GetMapping("temp")
-	public String temp() {
-		return null;
-	}
-	
-	
-	
 	@GetMapping("/")
-	public String showMain() {
-		return "admin/adminPage";
-	}
-	
+	public String showMain(HttpSession session, Model model) {
+		
+		UserVO vo = (UserVO) session.getAttribute(LoginInterceptor.loginKey);
+		if(vo.getUserClassify().equals("0")) {
+			model.addAttribute("session", vo.getUserNickname());
+			return "admin/adminPage";
+		} else {
+			return "home/home";
+		}
+	}//showMain
 	
 	//=================================FAQ 관련====================================
 	//FAQ 리스트 페이징
 	@GetMapping("/faq")
-	public String showFAQList(Criteria cri, Model model) {
+	public String showFAQList(Criteria cri, Model model, HttpSession session) {
 		log.debug("showFAQ() invoked");
 		
+		UserVO vo = (UserVO) session.getAttribute(LoginInterceptor.loginKey);
+		
+		model.addAttribute("session", vo.getUserNickname());
 		model.addAttribute("pagingList", this.service.getListWithPaging(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, this.service.countFaq()));
+		
 		return "admin/faqPage";
 	}//end showFAQ
 	
@@ -105,9 +112,12 @@ public class AdminController {
 	
 	//=================================회원 관련====================================
 	@GetMapping("/petSitter")
-	public String showPetSitter(Criteria cri, Model model) {
+	public String showPetSitter(Criteria cri, Model model, HttpSession session) {
 		log.debug("showPetSitter({}) invoked", cri);
 		
+		UserVO vo = (UserVO) session.getAttribute(LoginInterceptor.loginKey);
+		model.addAttribute("session", vo.getUserNickname());
+
 		cri.setUserClassify("2");
 		
 		model.addAttribute("userList", this.service.selectUser(cri));
@@ -117,8 +127,11 @@ public class AdminController {
 	}
 	
 	@GetMapping("/normalUser")
-	public String sohwNormalUser(Criteria cri, Model model) {
+	public String sohwNormalUser(Criteria cri, Model model, HttpSession session) {
 		log.debug("sohwNormalUser() invoked");
+		
+		UserVO vo = (UserVO) session.getAttribute(LoginInterceptor.loginKey);
+		model.addAttribute("session", vo.getUserNickname());
 		
 		cri.setUserClassify("1");
 	

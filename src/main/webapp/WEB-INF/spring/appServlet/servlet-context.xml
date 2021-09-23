@@ -50,7 +50,7 @@
 		</interceptor> 
 
 		<interceptor>
-			<mapping path="/user/temp" />
+			<mapping path="/admin/*" />
 			<mapping path="/search/matching" />
 
 			<beans:ref bean="authInterceptor"/>
