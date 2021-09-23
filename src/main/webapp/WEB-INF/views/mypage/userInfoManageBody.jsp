@@ -58,8 +58,8 @@
                                     <input type="hidden" name="userLongitude" id="userLongitude" value="${info.userLongitude}">
                                     
                                     <label>성별</label>
-                                    <input type="radio" name="gender" class="gender" value="female" checked>여성
-                                    <input type="radio" name="gender" class="gender" value="male">남성
+                                    <input type="radio" name="gender" class="gender" value="F" checked>여성
+                                    <input type="radio" name="gender" class="gender" value="M">남성
                                     
                                     
                                     <br>
@@ -132,6 +132,9 @@
 	    
 	    <script>
 	    		$(function(){
+	    			$('input:radio[name="gender"][value="${info.userGender}"]').prop('checked', true);
+	    			
+	    			
 				 	 //닉네임 중복검사
 					$('#nickNameBtn').click(function (){
 						console.log('버튼눌림');
