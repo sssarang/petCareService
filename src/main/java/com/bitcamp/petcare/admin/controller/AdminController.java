@@ -5,8 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.petcare.admin.domain.Criteria;
+import com.bitcamp.petcare.admin.domain.FaqDTO;
+import com.bitcamp.petcare.admin.domain.FaqVO;
 import com.bitcamp.petcare.admin.domain.PageDTO;
 import com.bitcamp.petcare.admin.service.AdminService;
 
@@ -40,13 +44,25 @@ public class AdminController {
 	//=================================FAQ 관련====================================
 	//FAQ 리스트 페이징
 	@GetMapping("/faq")
-	public String showFAQ(Criteria cri, Model model) {
+	public String showFAQList(Criteria cri, Model model) {
 		log.debug("showFAQ() invoked");
 		
 		model.addAttribute("pagingList", this.service.getListWithPaging(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, this.service.countFaq()));
 		return "admin/faqPage";
 	}//end showFAQ
+	
+	//FAQ 리스트 가져오기
+	@GetMapping(value="/showFAQ")
+	@ResponseBody
+	public FaqVO showFAQ(@RequestParam(value = "buttonId")String buttonId) {
+		log.debug("showFAQ({}) invoked", buttonId);
+		
+		FaqDTO dto = new FaqDTO();
+		dto.setFaqSequence(Integer.parseInt(buttonId));
+		
+		return this.service.selectFAQ(dto);
+	}//showFAQ
 	
 	
 	//=================================회원 관련====================================

@@ -45,6 +45,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/resources/js/admin/sb-admin-2.min.js"></script>
+    
+    <script src="/resources/js/admin/faq.js"></script>
 </head>
 
 <body id="page-top">
@@ -141,10 +143,10 @@
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+<!--                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
-                            </a>
+                            </a> -->
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
@@ -354,7 +356,7 @@
                                 <div class="card-body">
                                 <!-- 추가한 내용 -->
 	                                <c:forEach var="FaqVO" items="${pagingList}">
-	                                  <div class="faqList">
+	                                  <div class="faqList" id="${FaqVO.faqSequence}">
 	                                  	<label class="faqListLabel"><c:out value="${FaqVO.faqQuestion}"/></label>
 	                                  </div>
 	                                </c:forEach>
@@ -418,11 +420,11 @@
                                 <div class="card-body">
                                     <div class="faqChange">
                                     	<div class="faqChangeName">
-                                    		FAQ 제목
+                                    		<input type="text" class="faqListInput" id="FaqTitle" value="FAQ 제목">
                                     	</div>
                                     	
                                     	<div class="faqChangeText">
-                                    		FAQ 내용
+                                    		<input type="text" class="faqListInput" id="FaqContents" value="FAQ 내용">
                                     	</div>
                                 		
                                     </div>
@@ -477,6 +479,8 @@
     
     <script type="text/javascript">
     	$(document).ready(function() {
+    		
+    		$("#")
     		
     		var actionForm = $("#actionForm");
     		

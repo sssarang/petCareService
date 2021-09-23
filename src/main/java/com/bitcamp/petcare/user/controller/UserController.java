@@ -54,7 +54,7 @@ public class UserController {
 		
 		dto.setUserLatitude(y);		//회원가입시 주소의 위도
 		dto.setUserLongitude(x);	//회원가입시 주소의 경도
-		dto.setUserStatus("F");		//회원가입시 회원탈퇴 항목 'F'설정
+		dto.setUserStatus("N");		//회원가입시 회원탈퇴 항목 'N'설정
 		dto.setUserClassify(classify);
 		
 		if(this.service.joinUser(dto) == 1 ) {

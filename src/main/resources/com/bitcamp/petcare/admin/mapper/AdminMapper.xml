@@ -7,7 +7,7 @@
 
 <mapper namespace="com.bitcamp.petcare.admin.mapper.AdminMapper">
 	
-	<select id="selectFAQ">
+	<select id="selectFAQ" resultType="com.bitcamp.petcare.admin.domain.FaqVO">
 		SELECT 
 			faq_sequence AS faqSequence,
 			faq_question AS faqQuestion,
