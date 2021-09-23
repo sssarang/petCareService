@@ -1,9 +1,9 @@
 $(function() {
 	
 	$(".faqList").click(function() {
-		var buttonId = $(this).attr('id');
-		alert(buttonId);
 		
+		var buttonId = $(this).attr('id');
+
 		//ajax를 이용하여 제목, 내용 가져오기
 		var sendData = "buttonId="+buttonId;
 		$.ajax({
@@ -16,5 +16,12 @@ $(function() {
 				$('#FaqContents').val(resp.faqAnswer);					
 			}
 		})//.ajax
+	});
+	
+	$("#addFAQ").click(function() {
+		
+		$('#FaqTitle').val('');
+		$('#FaqContents').val('');
+		
 	});
 })

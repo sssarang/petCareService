@@ -33,6 +33,9 @@
     <link href="/resources/css/admin/sb-admin-2.min.css" rel="stylesheet">
 	<link href="/resources/css/admin/faq.css" rel="stylesheet">
 	
+	<!-- Custom styles for this page -->
+    <link href="/resources/css/admin/dataTables.bootstrap4.min.css" rel="stylesheet">
+	
 	<!-- jquery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
@@ -47,6 +50,9 @@
     <script src="/resources/js/admin/sb-admin-2.min.js"></script>
     
     <script src="/resources/js/admin/faq.js"></script>
+    
+    <script type="text/javascript" src="/resources/js/admin/modal.js"></script>
+	<link rel="stylesheet" type="text/css" href="/resources/css/admin/modal.css">
 </head>
 
 <body id="page-top">
@@ -324,114 +330,90 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">FAQ 관리</h1>
-                    </div>
-
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Area Chart -->
-                        <div class="col-xl-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">FAQ 리스트</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">FAQ 관리</div>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">추가하기</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                <!-- 추가한 내용 -->
-	                                <c:forEach var="FaqVO" items="${pagingList}">
-	                                  <div class="faqList" id="${FaqVO.faqSequence}">
-	                                  	<label class="faqListLabel"><c:out value="${FaqVO.faqQuestion}"/></label>
-	                                  </div>
-	                                </c:forEach>
-	                                
-	                                <div class='pull-right'>
-	                                	<form id='actionForm' action="/admin/faq" method='GET'>
-	                                		<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
-		                                	<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
-		                                	<ul class="pagination">
-		                                		
-		                                		<c:if test="${pageMaker.prev}">
-		                                			<li class="paginate_button previous">
-		                                				<a href="${pageMaker.startPage -1}">previous</a>
-		                                			</li>
-		                                		</c:if>
-		                                		
-		                                		<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-		                                			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active' : ''} ">
-		                                				<a class="${pageMaker.cri.pageNum == num? 'active' : '' }"
-		                                					href="${num}">
-		                                					${num}</a>
-		                                			</li>
-		                                		</c:forEach>
-		
-		                                		<c:if test="${pageMaker.next}">
-		                                			<li class="paginate_button next">
-		                                				<a href="${pageMaker.endPage + 1}">Next</a>
-		                                			</li>
-		                                		</c:if>
-		                                	</ul>
+                    <h1 class="h3 mb-2 text-gray-800">FAQ</h1>
+					<br>
+					
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>제목</th>
+                                            <th>작성자</th>
+                                            <th>등록일</th>
+                                            <th>수정/삭제</th>
+                                            <th>수정일</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+										<c:forEach items="${pagingList}" var="i">
+											<tr id="tr${i.faqSequence}">
+												<th><c:out value="${i.faqQuestion}"/></th>
+												<th><c:out value="${i.regUserNo}"/></th>								
+												<th><fmt:formatDate pattern="yyyy-MM-dd"
+												value="${i.regDate}"/></th>				
+												<th>
+													<div class="MD-Btn">
+														<button name="modify" value="${i.faqSequence}"
+															class="">수정</button>
+														<button name="delete" value="${i.faqSequence}"
+															class="">삭제</button>
+													</div>
+												</th>
+												<th><fmt:formatDate pattern="yyyy-MM-dd"
+												value="${i.modDate}"/></th>								
+											</tr>
+										</c:forEach>
+                                    </tbody>
+                                </table>
+                                
+                                <jsp:include page="/WEB-INF/views/admin/modal.jsp"/>
+                                <button id="create" type="button" class=""
+                                	data-toggle="modal">새 글 쓰기</button>
+                                
+                                <div class='pull-right'>
+                                	<form id='actionForm' action="/admin/faq" method='GET'>
+                                		<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+	                                	<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+	                                	<ul class="pagination">
+	                                		
+	                                		<c:if test="${pageMaker.prev}">
+	                                			<li class="paginate_button previous">
+	                                				<a href="${pageMaker.startPage -1}">previous</a>
+	                                			</li>
+	                                		</c:if>
+	                                		
+	                                		<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+	                                			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active' : ''} ">
+	                                				<a class="${pageMaker.cri.pageNum == num? 'active' : '' }"
+	                                					href="${num}">
+	                                					${num}</a>
+	                                			</li>
+	                                		</c:forEach>
 	
-	                                	</form>
-                                 	</div>
-                                <!-- end Pagination -->
-                                </div>
-                            </div>
-                        </div>
+	                                		<c:if test="${pageMaker.next}">
+	                                			<li class="paginate_button next">
+	                                				<a href="${pageMaker.endPage + 1}">Next</a>
+	                                			</li>
+	                                		</c:if>
+	                                	</ul>
 
-                        <!-- Pie Chart -->
-                        <div class="col-xl-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">FAQ 상세보기</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">FAQ 관리</div>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">수정하기</a>
-                                            <a class="dropdown-item" href="#">삭제하기</a>
-                                        </div>
-                                    </div>
+                                	</form>
+
                                 </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="faqChange">
-                                    	<div class="faqChangeName">
-                                    		<input type="text" class="faqListInput" id="FaqTitle" value="FAQ 제목">
-                                    	</div>
-                                    	
-                                    	<div class="faqChangeText">
-                                    		<input type="text" class="faqListInput" id="FaqContents" value="FAQ 내용">
-                                    	</div>
-                                		
-                                    </div>
-                                </div>
+                                <!-- end Pagination -->
+
                             </div>
                         </div>
                     </div>
+
+                </div>
+                <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
