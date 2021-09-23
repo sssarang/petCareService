@@ -31,7 +31,7 @@
                 <!-- Page content-->
                 <div class="userInfoModify">
                     <div id="modify_flex">
-                        <form action="/mypage/userInfoModify" method="POST">
+                        <form name="joinForm" action="/mypage/userInfoModify" method="POST">
                             <h1 id="head">회원정보관리</h1>
                             <div id="form-group">
                                 <div>
@@ -54,12 +54,13 @@
                                     <input type="button" onclick="sample4_execDaumPostcode()" class="check-button" value="우편번호 찾기">
                                     <input type="text" id="inputAddress" name="userAddress" class="form-control" placeholder="주소" value="${info.userAddress}" readonly>
                                     
-                                    <input type="hidden" name="userLatitude" value="${info.userLatitude}">
-                                    <input type="hidden" name="userLongitude" value="${info.userLongitude}">
+                                    <input type="hidden" name="userLatitude" id="userLatitude" value="${info.userLatitude}">
+                                    <input type="hidden" name="userLongitude" id="userLongitude" value="${info.userLongitude}">
                                     
                                     <label>성별</label>
                                     <input type="radio" name="gender" class="gender" value="female" checked>여성
                                     <input type="radio" name="gender" class="gender" value="male">남성
+                                    
                                     
                                     <br>
 
@@ -127,7 +128,7 @@
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
 	    
 	    <!-- 카카오 지도 api -->
-	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36768b2f76471ae95e3d92b023d2b626"></script>
+	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36768b2f76471ae95e3d92b023d2b626&libraries=services"></script>
 	    
 	    <script>
 	    		$(function(){
@@ -167,10 +168,9 @@
 						})//.ajax
 					});//end function
 					
-					
+				
 					var isPwCheck = false;
-					
-					//새비밀번호 체크
+					 //새비밀번호 체크
 					$('#inputNewPw').on("propertychange change keyup paste input", function (){
 						var pwReg = /^[A-Za-z0-9]{6,12}$/;
 						var pw = $('#inputNewPw').val();
@@ -192,13 +192,17 @@
 								isPwCheck = true;
 							}
 						}//if-else
-					});//end function
+					});//end function 
 					
 					// 비밀번호 변경시 기존 비밀번호 동일 체크
 					$('#btn-changePw').click(function(){
 						var inputOldPw = $('#inputOldPw').val();
 						console.log(inputOldPw);
+						var inputNewPw = $('#inputNewPw').val();
 						
+						var oldResult = false;
+						
+						// 기존 비밀번호 동일확인
 						$.ajax({
 							url: "/mypage/readPw",
 							method: "POST",
@@ -207,17 +211,45 @@
 							},
 							dataType : 'json',
 							success: function(data){
-								console.log(data);
+								console.log("3번? " + data);
 								
 								if(data == false){
 									$('#oldPwLabel').text("*비밀번호가 맞지 않습니다.");
 									$('#oldPwLabel').css("color", "red");
-								}
+									oldResult = false;
+									return;
+								}else{
+									$('#oldPwLabel').text("");
+									oldResult = true;
+									
+
+									console.log(oldResult);
+									console.log(isPwCheck);
+									
+									if(oldResult == true && isPwCheck == true){
+										console.log('여기');
+										
+										$.ajax({
+											url: "/mypage/updatePw",
+											method: "POST",
+											data: {
+												newPw : inputNewPw
+											},
+											dataType : 'json',
+											success: function(data){
+												console.log(data);
+												
+												location.reload();
+											}
+										})
+									}
+									
+								};
 							}
 						})
-						
-						
 					})	// click
+					
+					
 					
 					//전화번호 유효성 체크
 					$('#inputPhone').on("propertychange change keyup paste input", function (){
@@ -279,12 +311,14 @@
 				                
 				                
 				            }
+							kakaoMap();
 				        }
 				    }).open();
 				}
 				
 				//위치 좌표로 변경
 				function kakaoMap(){
+					console.log('done');
 				    var geocoder = new kakao.maps.services.Geocoder();
 
 				    geocoder.addressSearch($('#inputAddress').val(), function(result, status) {
@@ -296,14 +330,10 @@
 						   var x = result[0].x;
 						   var y = result[0].y;
 						   console.log(x, y);
-									
-						   var sendData = "x="+x+'&y='+y;
-						   $.ajax({
-						        url:'coordinate',
-						        type : 'POST',
-						        data: sendData,
-								success: function(resp){}
-					   	   })//.ajax
+						
+						   $('#userLatitude').val(y);
+						   $('#userLongitude').val(x);
+						   
 					    }//if
 					});
 				}
@@ -312,20 +342,8 @@
 				//비밀번호, 전화번호, 주소, 성별
 				$('#submitBtn').click(function (){
 					var joinForm = document.joinForm;
-					kakaoMap();
 					
 					
-					
-					if(checkExistData($('#inputPw').val(), "비밀번호를") == false){
-						$('#pwLabel').text("");
-						$('#inputPw').val('');
-						return false;
-					} else if(passwordCheck != $('#inputPw').val()) {
-						alert('비밀번호를 다시 설정해주세요.')
-						$('#pwLabel').text("");
-						$('#inputPw').val('');
-						return false;
-					}//if-else
 					
 					if(checkExistData($('#nickName').val(), "닉네임을") == false){
 						$('#nickNameLabel').text("");
@@ -346,16 +364,7 @@
 						$('#phoneLabel').text("* ex)010-1234-5678");
 						return false;
 					}
-					
-					if(checkExistData($('#inputAddress').val(), "주소를") == false){
-						$('#inputAddress').text("");
-						$('#inputAddress').val('');
-						return false;
-					} else {
-						//최종 확인
-						$(this).attr("type","submit");
-						window.location.href="http://localhost:8090/user/loginPage";
-					}//if-else
+
 				});//beforeSubmit
 				
 

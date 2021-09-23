@@ -33,7 +33,7 @@ import com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageDTO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterResvManageVO;
-import com.bitcamp.petcare.mypage.domain.UserWithdrawalDTO;
+import com.bitcamp.petcare.mypage.domain.UserPasswordDTO;
 import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 import com.bitcamp.petcare.mypage.mapper.CustomerHistoryManageMapper;
 import com.bitcamp.petcare.mypage.mapper.CustomerInfoManageMapper;
@@ -126,9 +126,9 @@ public class MypageServiceImpl implements MypageService {
 		return this.infoMapper.readPw(userNo);
 	}	// readPw
 	
-	//비밀번호 암호화
+	//기존 비밀번호 암호화
 	@Override
-	public String encryption(String oldPw) throws Exception {
+	public String encryptionOld(String oldPw) throws Exception {
 	  log.debug("encryption({}) invoked", oldPw);
 	  
 	  String encPassword = encoder.encode(oldPw);
@@ -138,7 +138,30 @@ public class MypageServiceImpl implements MypageService {
 		
 	  return encPassword;
 	}//encryption
+	
+	
+	//새 비밀번호 암호화
+	@Override
+	public String encryptionNew(String newPw) throws Exception {
+	  log.debug("encryption({}) invoked", newPw);
+	  
+	  String encPassword = encoder.encode(newPw);
+	  
+	  
+	  log.info("암호화된 비밀번호 : "+ encPassword);
 		
+	  return encPassword;
+	}//encryption	
+	
+	
+	// 비밀번호 변경
+	@Override
+	public int updatePw(UserPasswordDTO dto) {
+		
+		Objects.requireNonNull(dto);
+		
+		return this.infoMapper.updatePw(dto);
+	}	//updatePw
 		
 	//================================================================
 	// 프로필 페이지

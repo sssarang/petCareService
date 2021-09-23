@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -43,6 +42,7 @@ import com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageDTO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterResvManageVO;
+import com.bitcamp.petcare.mypage.domain.UserPasswordDTO;
 import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 import com.bitcamp.petcare.mypage.service.MypageService;
 import com.bitcamp.petcare.user.domain.UserVO;
@@ -111,25 +111,26 @@ public class MypageController {
 		model.addAttribute("info", info);		
 	}	//userInfoManage
 	
-
-	//좌표값 받아오는 메소드
-	@RequestMapping(value="coordinate", method=RequestMethod.POST)
-	@ResponseBody
-	public String coordinate(String x, String y) {
-		log.debug("coordinate({}, {}) invoked",x, y);
-		this.x = Double.parseDouble(x);
-		this.y = Double.parseDouble(y);
-		
-		return null;
-	}	//coordinate
+//
+//	//좌표값 받아오는 메소드
+//	@RequestMapping(value="coordinate", method=RequestMethod.POST)
+//	@ResponseBody
+//	public String coordinate(String x, String y) {
+//		log.debug("coordinate({}, {}) invoked",x, y);
+//		this.x = Double.parseDouble(x);
+//		this.y = Double.parseDouble(y);
+//		
+//		return null;
+//	}	//coordinate
 	
 	// 회원정보 수정
 	@PostMapping("userInfoModify")
-	public String userInfoModify(CustomerInfoManageDTO dto) {
+	public String userInfoModify(CustomerInfoManageDTO dto, HttpSession session) {
 		log.debug("userInfoModify({}) invoked.", dto);
 		
-		dto.setUserLatitude(y);
-		dto.setUserLongitude(x);
+		UserVO vo = (UserVO) session.getAttribute(loginKey);
+		
+		dto.setUserNo(vo.getUserNo());
 		
 		this.service.modifyInfo(dto);
 		
@@ -155,8 +156,25 @@ public class MypageController {
 		return match;
 		//String encrypedInputPw = this.service.encryption(inputOldPw);
 		
-				
 	}	// readPw
+	
+	// to 암호화 비밀번호 조회
+		@ResponseBody
+		@PostMapping("updatePw")
+		public boolean updatePw(@RequestParam(value = "newPw")String inputNewPw,UserPasswordDTO dto, HttpSession session) throws Exception {
+			log.debug("updatePw() invoked.");
+
+			UserVO vo = (UserVO) session.getAttribute(loginKey);
+			
+			String encodedPw = this.service.encryptionNew(inputNewPw);
+			
+			dto.setUserNo(vo.getUserNo());
+			dto.setUserPw(encodedPw);
+			
+			this.service.updatePw(dto);
+			
+			return true;
+		}	// readPw
 	
 	
 	
@@ -190,7 +208,7 @@ public class MypageController {
 		
 		String fileName = "proPhoto_"+vo.getUserNo()+".jpg";
 		//String path = req.getServletContext().getRealPath("/resources/assets/img/mypage");
-		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareServiceTest\\src\\main\\webapp\\resources\\assets\\img\\mypage";
+		String path = "C:\\opt\\eclipse\\workspace\\JEE\\petCareService\\src\\main\\webapp\\resources\\assets\\img\\mypage";
 		log.info("path : {}", path);
 		File file = new File(path, fileName);
 		modify.getProPhotoFile().transferTo(file);
