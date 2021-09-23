@@ -11405,15 +11405,15 @@ input[type=checkbox] + label{
 
 input[type=checkbox] + label:before {
     content: "";
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     margin-right: 10px;
-    margin-top: 1px;
+    margin-top: 5px;
     position: absolute;
     left: 0;
     border-radius: 20px;
     background-color: rgb(247, 204, 125);
-    margin-left: 400px;
+    margin-left: 550px;
 }
 
 input[type=checkbox]:checked + label:before{
@@ -11432,16 +11432,15 @@ button {
 }
 
 #withdrawal_btn {
-  float: right;
   display: inline;
-  margin: 50px;
-  margin-right: 80px;
+  margin: 100px;
   width: 150px;
   height: 60px;
   border: 0;
   border-radius: 50% 20% / 10% 40%;
+  text-align: center;
 
-  font-size: 1rem;
+  font-size: 25px;
   font-weight: bold;
 
   color: white;
@@ -11457,5 +11456,6 @@ button {
 }
 
 .withdrawal_reason {
-	font-size: 20px;
+	font-size: 22px;
+	font-weight: bold;
 }

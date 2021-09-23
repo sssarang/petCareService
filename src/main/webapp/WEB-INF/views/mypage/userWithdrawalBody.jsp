@@ -42,7 +42,7 @@
 		                <input id="check7" type="checkbox" >
 		                <label for="check7"><p class="withdrawal_reason">별다른 이유는 없어요.</p></label><br>
 												
-		                <button type="submit" class="btn-withdrawal" id="withdrawal_btn" data-dismiss="modal">탈퇴</button>		            
+		                <button type="submit" class="btn-withdrawal" id="withdrawal_btn">탈퇴하기</button>		            
 		        	</div>
 		    	</form>    	
 		    </div>

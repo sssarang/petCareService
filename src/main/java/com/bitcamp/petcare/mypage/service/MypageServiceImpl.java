@@ -578,6 +578,9 @@ public class MypageServiceImpl implements MypageService {
 			} // 방문 HALF DAY
 						
 			dto.setServiceTypeCode(serviceType);
+			if(price == null) {
+				price = 0;
+			}
 			dto.setPrice(price);
 			result += sTprofileMapper.mergeServiceType(dto);
 		}

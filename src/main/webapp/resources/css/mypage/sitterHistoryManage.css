@@ -11395,8 +11395,8 @@ body{
   margin: 25px auto;
   padding: 10px;
   border: 2px solid rgb(255, 210, 127);
-  width: 700px;
-  height: 350px;
+  width: 800px;
+  height: 370px;
   border-radius: 20px;
 }
 
@@ -11430,7 +11430,8 @@ body{
 #reviewBtn {
   float: right;
   display: inline;
-  margin: 30px;
+  margin-top: 70px;
+  margin-right: 30px;
   width: 100px;
   height: 50px;
   border: 0;
@@ -11446,6 +11447,10 @@ body{
 #sitterHistory_head {
 	color: rgb(255, 210, 127);
 	text-align: center;
+}
+
+#sitterHistory {
+	font-size: 18px;
 }
 
 #reply_btn1,
@@ -11504,3 +11509,6 @@ body{
 	opacity: 0.8;
 }
 
+#repContent {
+	resize:none;
+}

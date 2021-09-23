@@ -11396,8 +11396,8 @@ body{
   margin: 25px auto;
   padding: 10px;
   border: 2px solid rgb(255, 210, 127);
-  width: 700px;
-  height: 350px;
+  width: 800px;
+  height: 370px;
   border-radius: 20px;
 }
 
@@ -11501,6 +11501,11 @@ body{
 	box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
 }	
 
+
+#sitterResv {
+	font-size: 18px;
+}
+
 #sitterResv_head {
 	color: rgb(255, 210, 127);
 	text-align: center;
@@ -11515,6 +11520,7 @@ body{
 #medicine,
 #specialNote {
 	text-align: center;
+	resize: none;
 }
 
 input[type="text"] {
@@ -11523,6 +11529,7 @@ input[type="text"] {
 
 #special_note {
 	color: rgba(243, 62, 7, 0.938);
+	
 }
 
 #specialNote {

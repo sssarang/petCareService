@@ -89,7 +89,7 @@
                                                 <input type="text" id="medicine" style="border:none" size=3 readonly><br><br> 
                                                 <input type="text" value="&ast;&nbsp;특이사항&nbsp;&ast;" style="border:none" id="special_note" size=6><br>
                                                 <!-- <input type="text" id="specialNote" style="border:none" size=40 readonly><br>   -->  
-                                                <textarea id="specialNote" cols="40" rows="3" style="border:none" readonly></textarea>                                	
+                                                <textarea id="specialNote" cols="45" rows="2" readonly></textarea>                                	
                                                 
                                                 <br>
                                                 <button type="button" class="btn-approve" id="btn-approve" >승인</button>

@@ -505,7 +505,7 @@ public class MypageController {
 	   
 	   @GetMapping("sitterHistoryManage")      // 펫시터 이력/리뷰관리
 	   public void getSitterHistory(Integer petSitterNo, Model model, HttpSession session) {
-		   	log.debug("getHistory() invoked.");
+		   	log.debug("getSitterHistory() invoked.");
 		   	
 		   	UserVO vo = (UserVO) session.getAttribute(loginKey);
 		   	
@@ -518,7 +518,7 @@ public class MypageController {
 	        
 	        log.info("\t+ history : {}", history);
 			
-	        model.addAttribute("petSitterNo", petSitterNo);
+	        model.addAttribute("userNo", vo.getUserNo());
 	        model.addAttribute("history", history);
 	   } // getSitterHistory
 	   
@@ -529,16 +529,21 @@ public class MypageController {
 		   
 		   SitterReplyManageVO reply = this.service.getReply(serviceId);
 		   
-		   log.info(reply);
+		   log.info("userNo : {}", reply.getUserNo());
+		   
 		   return reply;
 	   } // sitterReplyManage
 	   
 	   @ResponseBody
 	   @PostMapping("sitterReplySend")
-	   public boolean insertReply(SitterReplyManageDTO reply) {
+	   public boolean insertReply(@RequestParam(value="serviceId")Integer serviceId,
+			   					  @RequestParam(value="repContent")String repContent,
+			   					  @RequestParam(value="userNo")Integer userNo,
+			   					  SitterReplyManageDTO reply
+		   ) {
 		   log.debug("insertReply() invoked.");
 		   
-		   if(this.service.getReply(reply.getServiceId()) == null){
+		   if(this.service.getReply(serviceId) == null){
 			   this.service.insertReply(reply);
 		   }
 		   else {
