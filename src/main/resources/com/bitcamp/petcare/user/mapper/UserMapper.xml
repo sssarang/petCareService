@@ -31,6 +31,8 @@
 			tbl_user
 		WHERE 
 			user_id = #{userId}
+			AND
+			user_status = 'F'
 	</select>
 	
 	<!-- 아이디 중복확인 -->

@@ -7,6 +7,21 @@
 
 <mapper namespace="com.bitcamp.petcare.admin.mapper.AdminMapper">
 	
+	<select id="selectFAQ">
+		SELECT 
+			faq_sequence AS faqSequence,
+			faq_question AS faqQuestion,
+			faq_answer AS faqAnswer, 
+			reg_user_no AS regUserNo, 
+			reg_date AS regDate, 
+			mod_user_no AS modUserNo, 
+			mod_date AS modDate 
+		FROM
+			tbl_faq
+		WHERE
+			faq_sequence = #{faqSequence}
+	</select>
+	
 	<insert id="insertFAQ">
 		INSERT INTO 
 			tbl_faq 
@@ -26,7 +41,7 @@
 		FROM
 			 tbl_faq
 		WHERE 
-			faq_sequence = #{faqSequence};
+			faq_sequence = #{faqSequence}
 	</delete>
 	
 	<update id="updateFAQ">
@@ -41,8 +56,91 @@
 		    faq_sequence = #{faqSequence}
 	</update>
 	
-	<select id="selectFAQ" resultType="com.bitcamp.petcare.admin.domain.AdminVO">
-		
+	<select id="getListWithPaging" resultType="com.bitcamp.petcare.admin.domain.FaqVO">
+		<![CDATA[
+   			SELECT
+   				faq_sequence AS faqSequence,
+   				faq_question AS faqQuestion,
+   				faq_answer AS faqAnswer, 
+   				reg_user_no AS regUserNo, 
+   				reg_date AS regDate, 
+   				mod_user_no AS modUserNo, 
+   				mod_date AS modDate  				
+   			FROM
+   				(select /*+INDEX_DESC(tbl_faq SYS_C0024791) */
+   					rownum rn, 
+   					faq_sequence, 
+   					faq_question, 
+   					faq_answer, 
+   					reg_user_no, 
+   					reg_date, 
+   					mod_user_no,
+   					mod_date
+   				from
+   					tbl_faq
+   				where rownum <= #{pageNum} * #{amount}
+   				)
+   			WHERE
+   				rn > (#{pageNum} -1) * #{amount}
+   		]]>
+	</select>
+	
+	<select id="countFaq" resultType="int">
+		SELECT count(*)
+		FROM tbl_faq
 	</select>
 
+	<select id="selectUser" resultType="com.bitcamp.petcare.admin.domain.UserVO">
+		<![CDATA[
+			SELECT
+				user_no AS userNo,
+				user_id AS userId,
+				user_nickname AS userNickname,
+				user_contact AS userContact,
+				user_address AS userAddress,
+				user_gender AS userGender,
+				user_classify AS userClassify,
+				user_status AS userStatus,
+				reg_date AS regDate
+			FROM
+				(select /*+INDEX_DESC(tbl_faq SYS_C0024781) */
+					rownum rn, 
+					user_no,
+					user_id, 
+					user_nickname, 
+					user_contact, 
+					user_address, 
+					user_gender, 
+					user_classify,
+					user_status,
+					reg_date
+				from
+					(select 
+						user_no,
+						user_id, 
+						user_nickname, 
+						user_contact, 
+						user_address, 
+						user_gender, 
+						user_classify,
+						user_status,
+						reg_date
+					 from 
+					 	tbl_user
+					 where
+					 	user_classify = #{userClassify}
+					)
+				where
+					rownum <= #{pageNum} * #{amount}
+				)
+			WHERE
+				rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
+	<select id="countUser" resultType="int">
+		SELECT count(*)
+		FROM tbl_user
+		WHERE user_classify = #{userClassify}
+	</select>
 </mapper>

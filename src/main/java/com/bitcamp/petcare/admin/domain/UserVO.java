@@ -1,4 +1,4 @@
-package com.bitcamp.petcare.user.domain;
+package com.bitcamp.petcare.admin.domain;
 
 import java.util.Date;
 
@@ -18,6 +18,8 @@ public class UserVO {
 	private String userGender;
 	private String userClassify;
 	private String userStatus;
+	private String userRemeber;
+	private Date userRememberage;
 	private Integer regUserNo;
 	private Date regDate;
 	private Integer modUserNo;

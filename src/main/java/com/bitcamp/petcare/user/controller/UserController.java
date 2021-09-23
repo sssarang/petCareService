@@ -1,9 +1,7 @@
 package com.bitcamp.petcare.user.controller;
 
 
-import java.io.IOException;
 import java.util.Date;
-import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bitcamp.petcare.user.domain.UserDTO;
 import com.bitcamp.petcare.user.domain.UserVO;
 import com.bitcamp.petcare.user.service.UserService;
-import com.bitcamp.petcare.user.utils.ScriptUtils;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;

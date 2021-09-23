@@ -31,7 +31,20 @@
 
     <!-- Custom styles for this template-->
     <link href="/resources/css/admin/sb-admin-2.min.css" rel="stylesheet">
+	<link href="/resources/css/admin/faq.css" rel="stylesheet">
+	
+	<!-- jquery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+    
+    <!-- Bootstrap core JavaScript-->
+    <script src="/resources/js/admin/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="/resources/js/admin/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/resources/js/admin/sb-admin-2.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -49,16 +62,6 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">쓰담쓰담<sup>Admin</sup></div>
             </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/admin/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -103,7 +106,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">회원관리</h6>
                         <a class="collapse-item" href="/admin/petSitter">펫시터</a>
-                        <a class="collapse-item" href="/admin/normalUser">일반회원</a>
+                        <a class="collapse-item" href="/admin/normalUser">반려인</a>
                     </div>
                 </div>
             </li>
@@ -341,17 +344,51 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                             aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-header">FAQ 관리</div>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <a class="dropdown-item" href="#">추가하기</a>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                  
+                                <!-- 추가한 내용 -->
+	                                <c:forEach var="FaqVO" items="${pagingList}">
+	                                  <div class="faqList">
+	                                  	<label class="faqListLabel"><c:out value="${FaqVO.faqQuestion}"/></label>
+	                                  </div>
+	                                </c:forEach>
+	                                
+	                                <div class='pull-right'>
+	                                	<form id='actionForm' action="/admin/faq" method='GET'>
+	                                		<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+		                                	<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+		                                	<ul class="pagination">
+		                                		
+		                                		<c:if test="${pageMaker.prev}">
+		                                			<li class="paginate_button previous">
+		                                				<a href="${pageMaker.startPage -1}">previous</a>
+		                                			</li>
+		                                		</c:if>
+		                                		
+		                                		<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+		                                			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active' : ''} ">
+		                                				<a class="${pageMaker.cri.pageNum == num? 'active' : '' }"
+		                                					href="${num}">
+		                                					${num}</a>
+		                                			</li>
+		                                		</c:forEach>
+		
+		                                		<c:if test="${pageMaker.next}">
+		                                			<li class="paginate_button next">
+		                                				<a href="${pageMaker.endPage + 1}">Next</a>
+		                                			</li>
+		                                		</c:if>
+		                                	</ul>
+	
+	                                	</form>
+                                 	</div>
+                                <!-- end Pagination -->
                                 </div>
                             </div>
                         </div>
@@ -362,7 +399,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">FAQ 변경</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">FAQ 상세보기</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -370,17 +407,25 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                             aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-header">FAQ 관리</div>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <a class="dropdown-item" href="#">수정하기</a>
+                                            <a class="dropdown-item" href="#">삭제하기</a>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    
+                                    <div class="faqChange">
+                                    	<div class="faqChangeName">
+                                    		FAQ 제목
+                                    	</div>
+                                    	
+                                    	<div class="faqChangeText">
+                                    		FAQ 내용
+                                    	</div>
+                                		
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -393,7 +438,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; 쓰담쓰담</span>
                     </div>
                 </div>
             </footer>
@@ -430,18 +475,28 @@
         </div>
     </div>
     
-	<!-- jquery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-    
-    <!-- Bootstrap core JavaScript-->
-    <script src="/resources/js/admin/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		
+    		var actionForm = $("#actionForm");
+    		
+    		$(".paginate_button a").on("click", function(e){
+    			e.preventDefault();
+    			console.log('click');
+    			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+    		});
+    		
+    		$(".paginate_button a").on("click", function(e){
+    			e.preventDefault();
+    			
+    			console.log('click');
+    			
+    			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+    			actionForm.submit();
+    		});
+    	});
+    </script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/resources/js/admin/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/resources/js/admin/sb-admin-2.min.js"></script>
 </body>
 
 </html>

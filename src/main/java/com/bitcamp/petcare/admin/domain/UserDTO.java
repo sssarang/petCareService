@@ -1,13 +1,10 @@
-package com.bitcamp.petcare.user.domain;
-
-import java.util.Date;
+package com.bitcamp.petcare.admin.domain;
 
 import lombok.Data;
 
 @Data
-public class UserVO {
+public class UserDTO {
 	
-	private int userNo;
 	private String userId;
 	private String userPw;
 	private String userNickname;
@@ -18,9 +15,5 @@ public class UserVO {
 	private String userGender;
 	private String userClassify;
 	private String userStatus;
-	private Integer regUserNo;
-	private Date regDate;
-	private Integer modUserNo;
-	private Date modDate;
-	
+
 }//end class

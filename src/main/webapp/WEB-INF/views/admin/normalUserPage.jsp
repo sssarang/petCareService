@@ -31,7 +31,22 @@
 
     <!-- Custom styles for this template-->
     <link href="/resources/css/admin/sb-admin-2.min.css" rel="stylesheet">
+    
+    <!-- Custom styles for this page -->
+    <link href="/resources/css/admin/dataTables.bootstrap4.min.css" rel="stylesheet">
+    
+    <!-- jquery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+    
+    <!-- Bootstrap core JavaScript-->
+    <script src="/resources/js/admin/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="/resources/js/admin/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/resources/js/admin/sb-admin-2.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -49,16 +64,6 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">쓰담쓰담<sup>Admin</sup></div>
             </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/admin/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -103,7 +108,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">회원관리</h6>
                         <a class="collapse-item" href="/admin/petSitter">펫시터</a>
-                        <a class="collapse-item" href="/admin/normalUser">일반회원</a>
+                        <a class="collapse-item" href="/admin/normalUser">반려인</a>
                     </div>
                 </div>
             </li>
@@ -319,72 +324,86 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">일반회원</h1>
-                    </div>
+                    <h1 class="h3 mb-2 text-gray-800">펫시터</h1>
+					<br>
+					
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>회원 번호</th>
+                                            <th>아이디</th>
+                                            <th>닉네임</th>
+                                            <th>연락처</th>
+                                            <th>주소</th>
+                                            <th>성별</th>
+                                            <th>회원 구분</th>
+                                            <th>회원 상태</th>
+                                            <th>가입 날짜</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+										<c:forEach items="${userList}" var="i">
+											<tr>
+												<th><c:out value="${i.userNo}"/></th>
+												<th><c:out value="${i.userId}"/></th>
+												<th><c:out value="${i.userNickname}"/></th>
+												<th><c:out value="${i.userContact}"/></th>
+												<th><c:out value="${i.userAddress}"/></th>
+												<th><c:out value="${i.userGender}"/></th>
+												<th><c:out value="${i.userClassify}"/></th>
+												<th><c:out value="${i.userStatus}"/></th>												
+												<th><fmt:formatDate pattern="yyyy-MM-dd"
+												value="${i.regDate}"/></th>												
+											</tr>
+										</c:forEach>
+                                    </tbody>
+                                </table>
+                                
+                                <div class='pull-right'>
+                                	<form id='actionForm' action="/admin/normalUser" method='GET'>
+                                		<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+	                                	<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+	                                	<ul class="pagination">
+	                                		
+	                                		<c:if test="${pageMaker.prev}">
+	                                			<li class="paginate_button previous">
+	                                				<a href="${pageMaker.startPage -1}">previous</a>
+	                                			</li>
+	                                		</c:if>
+	                                		
+	                                		<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+	                                			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active' : ''} ">
+	                                				<a class="${pageMaker.cri.pageNum == num? 'active' : '' }"
+	                                					href="${num}">
+	                                					${num}</a>
+	                                			</li>
+	                                		</c:forEach>
+	
+	                                		<c:if test="${pageMaker.next}">
+	                                			<li class="paginate_button next">
+	                                				<a href="${pageMaker.endPage + 1}">Next</a>
+	                                			</li>
+	                                		</c:if>
+	                                	</ul>
 
+                                	</form>
 
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Area Chart -->
-                        <div class="col-xl-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">일반회원 리스트</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
                                 </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                  
-                                </div>
+                                <!-- end Pagination -->
+
                             </div>
                         </div>
-
-                        <!-- Pie Chart -->
-                        <div class="col-xl-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">일반회원 정보</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    
-                                </div>
-                            </div>
-                        </div>
                     </div>
+
+                </div>
+                <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
@@ -393,7 +412,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; 쓰담쓰담</span>
                     </div>
                 </div>
             </footer>
@@ -429,19 +448,28 @@
             </div>
         </div>
     </div>
-
-	<!-- jquery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     
-    <!-- Bootstrap core JavaScript-->
-    <script src="/resources/js/admin/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/resources/js/admin/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/resources/js/admin/sb-admin-2.min.js"></script>
-</body>
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		
+    		var actionForm = $("#actionForm");
+    		
+    		$(".paginate_button a").on("click", function(e){
+    			e.preventDefault();
+    			console.log('click');
+    			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+    		});
+    		
+    		$(".paginate_button a").on("click", function(e){
+    			e.preventDefault();
+    			
+    			console.log('click');
+    			
+    			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+    			actionForm.submit();
+    		});
+    	});
+    </script>
+   </body>
 
 </html>
