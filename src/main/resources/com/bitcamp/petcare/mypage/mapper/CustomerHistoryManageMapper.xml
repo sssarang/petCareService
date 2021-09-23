@@ -21,7 +21,7 @@
 	INNER JOIN tbl_petsitter_profile p ON ( u.user_no = p.user_no )
 	INNER JOIN tbl_common_code c ON ( m.service_type_code = c.code )
 	WHERE m.pet_user_no = #{petUserNo}
-		AND m.step_type_code = 34
+	AND m.step_type_code = 34  
 	ORDER BY m.service_id DESC
 </select>
 
