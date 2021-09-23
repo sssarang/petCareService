@@ -22,6 +22,7 @@
 			<%@ include file="/WEB-INF/views/common/mypageSidebar.jsp" %>
             <!-- Page content wrapper-->
             <div id="history_wrapper">
+              <div id="sitterHistory">
                 <br>
                 <h1 id="sitterHistory_head">서비스 제공 내역</h1>
                 <br>
@@ -118,8 +119,17 @@
                         </div>    
                     </div>    
                 </c:forEach>
+              </div>  
+         	  <div id="noHistory">
+	        	  <img src="/resources/assets/img/mypage/NoHistory1.png" class="noHistoryImg">
+	        	  <div class="noHistoryText">
+	        		<h1>서비스 이용 내역이 없습니다.</h1>
+	        	  </div>
+              </div>               
             </div> 
-        </div>              
+        </div>
+        
+            
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
@@ -127,7 +137,18 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
         <script>        
-      	  $(function() {      		      
+      	  $(function() {
+      		  
+    		  	// 이력 내역이 없을때
+				 if($('input[name=serviceId]').val() == null){
+					$('#sitterHistory').hide(); 
+					console.log('폼 사라짐!');
+				 }else{
+					 $('#noHistory').hide();
+					 console.log('사진 사라짐!');
+				 }
+      		  
+      		  
         		<!-- 리부확인 버튼 클릭시 리뷰 DB 불러오기 -->
         		$(".btn-modal").click(function() {
         			
