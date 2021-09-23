@@ -18,7 +18,7 @@ public interface MatchingService {
 
 	public abstract List<ServiceCalendarVO> getServiceCalendar(Integer userNo);  // serviceType 정보 가져오기
 	
-	public abstract List<ServiceMatchingVO> getServiceMatching();  // 예약테이블 가져오기
+	public abstract List<ServiceMatchingVO> getServiceMatching(Integer petUserNo);  // 예약테이블 가져오기
 
 	
 } //end interface

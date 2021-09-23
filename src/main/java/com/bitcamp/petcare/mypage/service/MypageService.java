@@ -28,7 +28,7 @@ import com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageDTO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterResvManageVO;
-import com.bitcamp.petcare.mypage.domain.UserWithdrawalDTO;
+import com.bitcamp.petcare.mypage.domain.UserPasswordDTO;
 import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 
 public interface MypageService {
@@ -37,7 +37,9 @@ public interface MypageService {
 	public abstract CustomerInfoManageVO readInfo(Integer userNo);					// 회원정보 조회
 	public abstract int modifyInfo(CustomerInfoManageDTO dto);						// 회원정보 수정
 	public abstract userPasswordVO readPw(Integer userNo);							// 암호화 비밀번호 조회
-	public abstract String encryption(String oldPw) throws Exception;					//비밀번호 암호화
+	public abstract String encryptionOld(String oldPw) throws Exception;				// 기존 비밀번호 암호화
+	public abstract String encryptionNew(String newPw) throws Exception;
+	public abstract int updatePw(UserPasswordDTO dto);
 	
 	// 프로필 페이지
 	public abstract CustomerProfileManageVO readProfile(Integer userNo);			// 프로필 정보 조회

@@ -71,12 +71,12 @@ public class MatchingServiceImpl implements MatchingService{
 
 
 	@Override
-	public List<ServiceMatchingVO> getServiceMatching() {
+	public List<ServiceMatchingVO> getServiceMatching(Integer petUserNo) {
 		log.debug("getServiceMatching()");
 		
 		Objects.requireNonNull(this.mapper);
 		
-		return mapper.getServiceMatching();
+		return mapper.getServiceMatching(petUserNo);
 	} //getServiceMatching
 
 } //end class

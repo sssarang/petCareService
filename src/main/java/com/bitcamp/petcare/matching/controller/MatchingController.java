@@ -109,9 +109,17 @@ public class MatchingController {
 	// 비동기식 ajax를 사용할 때 db에서 불러올 데이터 리스트
 		@ResponseBody
 		@PostMapping("bookingList")
-		public List<ServiceMatchingVO> showBookingList() {
+		public List<ServiceMatchingVO> showBookingList(HttpSession session) {
 			
-			List<ServiceMatchingVO> bookingList = this.service.getServiceMatching();
+			// 세션객체를 가져온다
+			UserVO loginInfo = (UserVO) session.getAttribute(UserController.loginKey);
+			log.info("loginInfo: {}", loginInfo );
+			
+			// 로그인 세션의 userNo정보를 가져온다
+			int petUserNo = loginInfo.getUserNo();
+			log.info("petUserNo: {}", petUserNo );
+			
+			List<ServiceMatchingVO> bookingList = this.service.getServiceMatching(petUserNo);
 			
 			assert bookingList != null;
 			log.info("\t+bookingList: {}", bookingList);

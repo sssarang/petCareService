@@ -109,7 +109,7 @@ public class MatchingServiceTests {
 	public void testGetServiceMatching() {
 		log.debug("testGetServiceMatching() invoked.");
 		
-		List<ServiceMatchingVO> reserve = this.service.getServiceMatching();
+		List<ServiceMatchingVO> reserve = this.service.getServiceMatching(5);
 		
 		assertNotNull(reserve);
 

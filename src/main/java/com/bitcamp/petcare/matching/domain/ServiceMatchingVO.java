@@ -8,5 +8,6 @@ public class ServiceMatchingVO {
 
 	//tbl_service_matching
 	private Integer petUserNo;
+	private String stepTypeCode;
 	
 } //end class

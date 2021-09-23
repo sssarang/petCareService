@@ -19,7 +19,7 @@ public interface MatchingMapper {
 
 	public abstract List<ServiceCalendarVO> getServiceCalendar(Integer userNo);   // 펫시터별 가능한 서비스 날짜 가져오기
 
-	public abstract List<ServiceMatchingVO> getServiceMatching();   // 예약테이블 가져오기
+	public abstract List<ServiceMatchingVO> getServiceMatching(Integer petUserNo);   // 예약테이블 가져오기
 
 	
 } //end interface

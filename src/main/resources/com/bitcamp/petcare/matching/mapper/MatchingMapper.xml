@@ -59,8 +59,9 @@
 	
 	<select id="getServiceMatching" resultType="com.bitcamp.petcare.matching.domain.ServiceMatchingVO">
 	
-		SELECT pet_user_no
+		SELECT pet_user_no, step_type_code
 		FROM tbl_service_matching
+		WHERE pet_user_no = #{petUserNo}
 		
 	</select>
 	

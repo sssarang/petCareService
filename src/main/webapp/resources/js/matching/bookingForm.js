@@ -185,7 +185,7 @@ $(function() {
 				console.log('>>>>>list:' , list);
 				
 				for(var i=0; i<list.length; i++){
-					if(list[i].petUserNo == userNo){
+					if(list[i].stepTypeCode == "31" || list[i].stepTypeCode == "32"){
 						isUserNo = true;
 					} //if
 				} //for
@@ -204,7 +204,7 @@ function check(){
 	var startDate = document.booking.startDate.value;
 	var endDate = document.booking.endDate.value;
 	
-	console.log('isUserNo: ', isUserNo);
+	console.log('>>>>>>>>>>isUserNo: ', isUserNo);
 	
 	if(serviceType == "서비스 선택"){
 		swal("", "서비스를 선택해주세요.", "warning")
