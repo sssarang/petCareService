@@ -667,7 +667,7 @@
 						if(resultRv[i].repContent != null){
 							rev += "<div class='reply'>"; 
 							rev += "<div>";
-							rev += "<span>" + resultRv[i].writer + " ("+resultRv[i].repDate + ")</span></div>";
+							rev += "<span style='font-weight: bold;'>" + resultRv[i].writer + " ("+resultRv[i].repDate + ")</span></div>";
 							rev += "<div class='repContent'>" + resultRv[i].repContent + "</div>";
 							rev += "</div>";
 							
