@@ -59,28 +59,40 @@
                             <input type="hidden" name="medicine" value="${i.medicine}">
                             <input type="hidden" name="specialNote" value="${i.specialNote}">  
                             <!-- Button to Open the Modal -->
-                            <button type="button" class="btn btn-primary btn-modal" id="resvModalBtn" data-toggle="modal" data-target="#modal">더보기</button>
+                            <button type="button" class="btn-primary btn-modal" id="resvModalBtn" data-toggle="modal" data-target="#modal">더보기</button>
                             <!-- The Modal -->
                             <div class="modal" id="modal">
         
-                                <div class="modal-dialog">
+                                <div class="modal-dialog ">
                                     <div class="modal-content">
         
                                         <!-- Modal Header -->
-        								상세정보!
+        								<div class="modal-header">
+                                    		<h4 class="modal-title">상세정보</h4>
+                                  		</div>
                                         <!-- Modal body -->
                                         <div class="modal-body"> 
-                                        	<input type="text" value="서비스번호" style="border:none" size=3><input type="text" id="serviceId" name="serviceIdNo" readonly><br>  
-                                        	<input type="text" value="종류" style="border:none" size=3><input type="text" id="codeName2" readonly><br>  
-                                        	<input type="text" value="펫이름" style="border:none" size=3><input type="text" id="petName" readonly><br> 
-                                        	<input type="text" value="나이" style="border:none" size=3><input type="text" id="petBirthday" readonly><br> 
-                                        	<input type="text" value="성별" style="border:none" size=3><input type="text" id="petGender" readonly><br> 
-                                        	<input type="text" value="중성화" style="border:none" size=3><input type="text" id="neutralization" readonly><br> 
-                                        	<input type="text" value="약복용" style="border:none" size=3><input type="text" id="medicine" readonly><br> 
-                                        	<input type="text" value="특이사항" style="border:none" size=3><input type="text" id="specialNote" readonly><br>                                    	
-                                
-                                            <button type="button" class="btn btn-primary btn-approve" id="btn-approve" data-dismiss="modal">승인</button>
-                                            <button type="button" class="btn btn-primary btn-refusal" id="btn-refusal" data-dismiss="modal">거절</button>                                                                                            
+                                        	<input type="text" value="&rtrif;&nbsp;&nbsp;서비스번호" style="border:none" size=6>
+                                        	<input type="text" id="serviceId" name="serviceIdNo" style="border:none" size=3 readonly><br>  
+                                        	<input type="text" value="&rtrif;&nbsp;&nbsp;종류" style="border:none" size=6>
+                                        	<input type="text" id="codeName2" style="border:none" size=3 readonly><br>  
+                                        	<input type="text" value="&rtrif;&nbsp;&nbsp;펫이름" style="border:none" size=6>
+                                        	<input type="text" id="petName" style="border:none" size=3 readonly><br> 
+                                        	<input type="text" value="&rtrif;&nbsp;&nbsp;나이" style="border:none" size=6>
+                                        	<input type="text" id="petBirthday" style="border:none" size=3 readonly><br> 
+                                        	<input type="text" value="&rtrif;&nbsp;&nbsp;성별" style="border:none" size=6>
+                                        	<input type="text" id="petGender" style="border:none" size=3 readonly><br> 
+                                        	<input type="text" value="&rtrif;&nbsp;&nbsp;중성화" style="border:none" size=6>
+                                        	<input type="text" id="neutralization" style="border:none" size=3 readonly><br> 
+                                        	<input type="text" value="&rtrif;&nbsp;&nbsp;약복용" style="border:none" size=6>
+                                        	<input type="text" id="medicine" style="border:none" size=3 readonly><br><br> 
+                                        	<input type="text" value="&ast;&nbsp;특이사항&nbsp;&ast;" style="border:none" id="special_note" size=6><br>
+                                        	<!-- <input type="text" id="specialNote" style="border:none" size=40 readonly><br>   -->  
+                                        	<textarea id="specialNote" cols="40" rows="3" style="border:none" readonly></textarea>                                	
+                                			
+                                			<br>
+                                            <button type="button" class="btn-primary btn-approve" id="btn-approve" data-dismiss="modal">승인</button>
+                                            <button type="button" class="btn-primary btn-refusal" id="btn-refusal" data-dismiss="modal">거절</button>                                                                                            
                                         </div>
         								
                                         <!-- Modal footer -->

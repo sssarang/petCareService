@@ -5576,12 +5576,14 @@ textarea.form-control-lg {
 .modal-title {
   margin-bottom: 0;
   line-height: 1.5;
+  color:#f9c7a1;
 }
 
 .modal-body {
   position: relative;
   flex: 1 1 auto;
   padding: 1rem;
+  text-align: center;
 }
 
 .modal-footer {
@@ -11426,11 +11428,6 @@ body{
   text-align: center;
 }
 
-#reviewBtn {
-  margin-top: 30px;
-  margin-right: 20px;
-  float: right;
-}
 
 #resvModalBtn {
   float: right;
@@ -11480,9 +11477,39 @@ body{
   background-color:rgb(255, 210, 127);
 }
 
+#resvModalBtn:hover,
+#btn-approve:hover,
+#btn-refusal:hover
+ {
+	box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+}	
+
 #sitterResv_head {
 	color: rgb(255, 210, 127);
 	text-align: center;
+}
+
+#serviceId,
+#codeName2,
+#petName,
+#petBirthday,
+#petGender,
+#neutralization,
+#medicine,
+#specialNote {
+	text-align: center;
+}
+
+input[type="text"] {
+	font-size: 20px;
+}
+
+#special_note {
+	color: rgba(243, 62, 7, 0.938);
+}
+
+#specialNote {
+	font-size: 20px;
 }
 
 

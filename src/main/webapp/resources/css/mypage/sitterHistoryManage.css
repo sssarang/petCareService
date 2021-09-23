@@ -5576,6 +5576,7 @@ textarea.form-control-lg {
 .modal-title {
   margin-bottom: 0;
   line-height: 1.5;
+  color:#f9c7a1;
 }
 
 .modal-body {
@@ -11391,12 +11392,12 @@ body{
 }
 
 #history_list {
-  margin: 10px auto;
+  margin: 25px auto;
   padding: 10px;
-  border: 1px solid; 
-  width: 80%;
+  border: 2px solid rgb(255, 210, 127);
+  width: 700px;
   height: 350px;
-  border-radius: 30px;
+  border-radius: 20px;
 }
 
 #historyImage {
@@ -11427,9 +11428,19 @@ body{
 }
 
 #reviewBtn {
-  margin-top: 100px;
-  margin-right: 20px;
   float: right;
+  display: inline;
+  margin: 30px;
+  width: 100px;
+  height: 50px;
+  border: 0;
+  border-radius: 50% 20% / 10% 40%;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: white;
+  background-color:rgb(255, 210, 127);
 }
 
 #sitterHistory_head {
@@ -11437,5 +11448,32 @@ body{
 	text-align: center;
 }
 
+#reply_btn1,
+#reply_btn2
+ {
+  float: right;
+  display: inline;
+  margin: 2%;
+  width: 70px;
+  height: 40px;
+  border: 0;
+  border-radius: 50% 20% / 10% 40%;
 
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: white;
+  background-color:rgb(255, 210, 127);
+}
+
+#reviewBtn:hover,
+#reply_btn1:hover,
+#reply_btn2:hover
+ {
+	box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+}
+
+.revrep_head {
+	color:#f9c7a1;
+}
 

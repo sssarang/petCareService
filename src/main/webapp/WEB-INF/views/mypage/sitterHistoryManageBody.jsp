@@ -40,7 +40,7 @@
                               <li>제공 서비스 유형 : ${i.codeName}</li>                                                  
                             </ul>
                             <!-- Button to Open the Modal -->
-                            <button type="button" class="btn btn-primary btn-modal" id="reviewBtn" data-toggle="modal" data-target="#modal">리뷰 확인</button>
+                            <button type="button" class="btn-primary btn-modal" id="reviewBtn" data-toggle="modal" data-target="#modal">리뷰 확인</button>
                             <!-- The Modal -->
                             <div class="modal" id="modal">        
                               <div class="modal-dialog modal-lg">
@@ -58,8 +58,8 @@
                                   <!-- Modal body -->
                                   <div class="modal-body">
                                     <div class="review"> 
-                                    <h5>달린 리뷰</h5>
-			                              <c:choose>
+                                    <h5 class="revrep_head">달린 리뷰</h5>
+			                        <c:choose>
                                     <c:when test="${i.grade > 0 && i.grade < 1}">
                                     <span>☆</span>(${i.grade})
                                     </c:when>
@@ -94,20 +94,22 @@
                                     <span style='color:red;'>☆☆☆☆☆</span>(0.0)	                              	
                                     </c:otherwise>
                                     </c:choose>
+                                    
                                     <label for="revContent"></label>
                                     <input type="text" id="revContent" name="revContent" style="width:740px; height:150px;" value="${i.revContent}" readonly><br>
                                     </div>                                                                                                                
                                       <div class="reply">
-                                      <h5>답글 남기기</h5>
+                                      <br>
+                                      <h5 class="revrep_head">답글 남기기</h5>
                                       
-                                      <textarea name="repContent" id="repContent" cols="100" rows="5" maxlength="300"></textarea>
+                                      <textarea name="repContent" id="repContent" cols="100" rows="6" maxlength="300"></textarea>
                                       </div>
                                   </div>
             
                                   <!-- Modal footer -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary btn-save" data-dismiss="modal">저장</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+                                        <button type="button" class="btn-primary btn-save" id="reply_btn1" data-dismiss="modal">저장</button>
+                                        <button type="button" class="btn-primary" id="reply_btn2" data-dismiss="modal">닫기</button>
                                     </div>
                                   </form>      
                                 </div>
