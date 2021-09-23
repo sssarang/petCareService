@@ -6,10 +6,12 @@
  <!-- jstl -->
  <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
  
+ <%@ page import="com.bitcamp.petcare.matching.domain.MatchingVO" %>
+ 
 
 <section class="layout bg-body">
     <div class="container">
-        <div class="content">
+        <div class="content bg-white">
             <h2 class="text-center">Contact Sitter</h2>
             
             <form action="/search/booking" method="POST" name="booking" onsubmit="return check();">
@@ -40,27 +42,22 @@
                     </div>
                 </div>  
                 
-                <div class="form-item d-inline-block">
-                    <select id="serviceType" name="serviceTypeCode" class="form-select" aria-label="Default select example">
-                        <option selected>서비스 선택</option>
-                    </select>
-                </div> 
-                
-                <div class="pt-3 d-inline-block">
-                    <div class="d-inline">
-                        <input class="flatpickr selector" id = "firstRangeInput" data-id="rangePlugin" type="text" placeholder="Start date" name="startDate" readonly="readonly">
-                    </div>
-                    &nbsp;~&nbsp;
-                    <div class="d-inline">
-                        <input class="flatpickr selector" id="secondRangeInput" type="text" placeholder="End date" name="endDate" readonly="readonly">
-                    </div>
-                </div>
-
-                <div class="wrap pt-5">
-                    <h4 class="ms-4">Pet</h4>
-                    <div class="form-item pb-3 text-center" style="display: inline-block;">
-                        <img class="img-fluid rounded-circle img-thumbnail" src="/resources/assets/img/matching/profile.jpg"/>
-                        <div class="pt-2">${matching.petName}</div>
+                <div class="wrap pt-3">
+                    <p class="hr-sect pb-3">반려동물 정보</p>
+                    
+                    <div class="form-item pb-3 text-center d-inline-block">
+                    	<!-- 프로필 이미지 유무에 따라 이미지 출력 -->
+                    	<c:choose>
+                    		<c:when test='${(matching.proPhoto == null)}'>
+                    			<img class="img-fluid rounded-circle img-thumbnail" src="/resources/assets/img/search/petsitter.jpg"/>
+                    		</c:when>
+                    		
+                    		<c:when test='${(matching.proPhoto != null)}'>
+                    			<img class="img-fluid rounded-circle img-thumbnail" src="${matching.proPhoto}"/>
+                    		</c:when>
+                    	</c:choose>
+				        
+                        <div class="pt-2 pb-2">${matching.petName}</div>
                     </div>
                     <div class="form-item pb-3">
                         <label for="petType">반려동물 유형</label>
@@ -99,8 +96,31 @@
                     
                     <div class="form-item pb-3">
                         <label for="specialNote">특이사항</label>
-                        <textarea id="specialNote" rows="10" cols="60" placeholder="${matching.specialNote}" readonly ></textarea>
+                        <textarea id="specialNote" rows="10" cols="63" placeholder="${matching.specialNote}" readonly ></textarea>
                     </div>
+                </div>  
+                
+                <div class="wrap pt-3">
+                    <p class="hr-sect pb-3">상세 조건을 선택해 주세요.</p>
+                    
+                    <div class="form-item pb-3">
+	                    <label for="address">Service Type</label>&nbsp;&nbsp;
+	                    <select id="serviceType" name="serviceTypeCode" class="form-select" aria-label="Default select example">
+	                        <option selected>서비스 선택</option>
+	                    </select>
+	                </div>
+	                
+	                <div class="form-item pb-3">
+	                    <label for="address">Service Date</label>&nbsp;&nbsp;
+	                    <div class="d-inline">
+	                        <input class="flatpickr selector" id = "firstRangeInput" data-id="rangePlugin" type="text" placeholder="Start date" name="startDate" readonly="readonly">
+	                    </div>
+	                    &nbsp;~&nbsp;
+	                    <div class="d-inline">
+	                        <input class="flatpickr selector" id="secondRangeInput" type="text" placeholder="End date" name="endDate" readonly="readonly">
+	                    </div>
+	                </div>
+                
                     
                     <div class="pt-3">
                         <!-- Button to Open the Modal -->

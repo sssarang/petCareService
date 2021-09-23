@@ -92,6 +92,16 @@
                                 <div class="pt-3">Service Type</div>
                                 
                                 <div class="input-group pb-3">
+                                	<div class="select">
+                                        <input type="checkbox" id="leave-All-day" name="serviceType" value="11" />
+                                        <label for="leave-All-day">돌봄<br>All day</label>
+                                    </div>
+
+                                    <div class="select">
+                                        <input type="checkbox" id="leave-Half-day" name="serviceType" value="12" />
+                                        <label for="leave-Half-day">돌봄<br>Half day</label>
+                                    </div>
+                                    
                                     <div class="select">
                                         <input type="checkbox" id="visit-All-day" name="serviceType" value="13" />
                                         <label for="visit-All-day">방문<br>All day</label>
@@ -100,16 +110,6 @@
                                     <div class="select">
                                         <input type="checkbox" id="visit-Half-day" name="serviceType" value="14" />
                                         <label for="visit-Half-day">방문<br>Half day</label>
-                                    </div>
-
-                                    <div class="select">
-                                        <input type="checkbox" id="leave-All-day" name="serviceType" value="11" />
-                                        <label for="leave-All-day">돌봄<br>All day</label>
-                                    </div>
-
-                                    <div class="select">
-                                        <input type="checkbox" id="leave-Half-day" name="serviceType" value="12" />
-                                        <label for="leave-Half-day">돌봄<br>Half day</label>
                                     </div>
                                 </div>
                             </fieldset>

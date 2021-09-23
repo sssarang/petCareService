@@ -17,6 +17,7 @@ public class MatchingVO {
 	
 	// tbl_pet_profile
 	private String petName;
+	private String proPhoto;
 	private String petBirthday;
 	private Character petGender;
 	private Character neutralization;

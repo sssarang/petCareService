@@ -10,7 +10,7 @@
 	<select id="getUserPet" resultType="com.bitcamp.petcare.matching.domain.MatchingVO">
 		<![CDATA[ 
 			SELECT u.user_no, u.user_nickname, u.user_contact, u.user_address, 
-				   p.pet_name, c.code_name, 
+				   p.pet_name, c.code_name, p.pro_photo,
 					(SELECT TRUNC(MONTHS_BETWEEN(SYSDATE, PET_BIRTHDAY)/12)
 						   || '살 '
 						   || MOD(TRUNC(MONTHS_BETWEEN(SYSDATE, PET_BIRTHDAY)), 12)

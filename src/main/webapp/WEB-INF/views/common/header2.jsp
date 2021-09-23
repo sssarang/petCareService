@@ -41,7 +41,7 @@
         	}else {
         %>
          <div class="btn-group">
-            <a class="btn orange" href="mypage/main">
+            <a class="btn orange" href="/mypage/main">
                 <span class="btn-sm">
                     마이페이지
                 </span>

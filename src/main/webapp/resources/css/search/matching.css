@@ -566,7 +566,8 @@ progress {
 
 .img-thumbnail {
   padding: 0.25rem;
-  border: 3px dashed rosybrown !important;
+  /*box-shadow: 2px 2px 10px 2px rgb(0 0 0 / 5%);*/
+  border: 3px solid rgb(0 0 0 / 5%);
   border-radius: 50%;
   max-width: 30% !important;
   height: auto;
@@ -2337,8 +2338,8 @@ textarea.form-control-lg {
 
 .form-select {
   display: block;
-  /* padding: 0.75rem 3rem 0.75rem 1rem; */
-  padding: 0.55rem 2rem 0.55rem 1rem !important;
+  width: 230px;
+  padding: 0.4rem 1.5rem 0.4rem 0.5rem !important;
   -moz-padding-start: calc(1rem - 3px);
   font-size: 1rem;
   font-weight: 400;
@@ -2349,7 +2350,7 @@ textarea.form-control-lg {
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 16px 12px;
-  border: 1px solid #ced4da;
+  border: 1px solid #c0c0c0;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   -webkit-appearance: none;
@@ -10868,8 +10869,10 @@ textarea.form-control-lg {
   flex-wrap: wrap;
   margin: 0 auto;
   padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0px 3px 16px 0px rgb(0 0 0 / 10%);
   /* border: rgb(252, 227, 227) double 7px; */
-  border: rgba(220, 53, 69, 0.5) double 7px;
+  /*border: rgba(220, 53, 69, 0.5) double 7px;*/
   /* background: url("../assets/img/background2.jpg") no-repeat center center;
   background-size: cover; */
  
@@ -10898,10 +10901,19 @@ textarea.form-control-lg {
 }
 .form-item > input {
   flex-grow: 1;
+  
+  border-radius: 3px;
+  border: 1px solid #c0c0c0;
 }
 .form-item > p {
   font-size: 13px;
   color: #fd7e14;
+}
+
+.flatpickr,
+#specialNote {
+    border-radius: 3px;
+    border: 1px solid #c0c0c0;
 }
 
 .sum {
@@ -10911,7 +10923,7 @@ textarea.form-control-lg {
 
   font-size: 13px;
   font-weight: bold;
-  color: orangered;
+  color: rgba(255, 68, 0, 0.76);
 }
 
 #regBtn {
@@ -10926,10 +10938,29 @@ textarea.form-control-lg {
   font-weight: bold;
 
   color: white;
-  /* background-color:steelblue; */
-  background-color:rosybrown;
+  background-color: #036e45b6;
 }
 
 .selector {
-	width: 160px
+	width: 160px;
+}
+
+.hr-sect {
+     display: flex;
+     flex-basis: 100%;
+     align-items: center;
+     color: rgba(0, 0, 0, 0.55);
+     font-size: 16px;
+     font-weight: 900;
+     margin: 8px 0px;
+}
+.hr-sect::before,
+.hr-sect::after {
+    content: "";
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.15);
+    height: 1px;
+    font-size: 0px;
+    line-height: 0px;
+    margin: 0px 20px;
 }
