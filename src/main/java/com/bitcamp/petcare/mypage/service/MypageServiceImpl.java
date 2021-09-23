@@ -502,6 +502,13 @@ public class MypageServiceImpl implements MypageService {
 		
 		return this.sTresvMapper.resvRefusal(serviceId);
 	} // resvRefusal
+	
+	@Override
+	public int resvCompletion(Integer serviceId) {
+		log.debug("resvCompletion() invoked.");
+		
+		return this.sTresvMapper.resvCompletion(serviceId);
+	} // resvCompletion
 
 	//--------------------------------------------------------------------//
 

@@ -51,6 +51,14 @@
 			step_type_code = 33
 		WHERE service_id = ${serviceId}
 	</update>
+	
+	<update id="resvCompletion">
+		UPDATE 
+			tbl_service_matching
+		SET 
+			step_type_code = 34
+		WHERE service_id = ${serviceId}
+	</update>
 
 
 </mapper>

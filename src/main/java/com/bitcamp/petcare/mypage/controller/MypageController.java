@@ -532,6 +532,15 @@ public class MypageController {
 			this.service.resvRefusal(serviceId);
 			
 		}	// resvRefusal
+		
+		@ResponseBody
+		@PostMapping("resvCompletion")
+		public void resvCompletion(@RequestParam(value = "serviceId")Integer serviceId) {
+			log.debug("resvCompletion() invoked.");
+			
+			this.service.resvCompletion(serviceId);
+			
+		}	// resvCompletion
 
 	     
 	   //-----------------------------------------------------------------------------------------------------------------//

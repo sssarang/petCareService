@@ -9,5 +9,6 @@ public interface SitterResvManageMapper {
 	public abstract List<SitterResvManageVO> getResv(Integer petSitterNo);
 	public abstract int resvApprove(Integer serviceId);
 	public abstract int resvRefusal(Integer serviceId);
+	public abstract int resvCompletion(Integer serviceId);
 
 } // end interface

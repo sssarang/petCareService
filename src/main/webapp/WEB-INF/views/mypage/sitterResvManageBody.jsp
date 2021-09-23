@@ -92,8 +92,9 @@
                                                 <textarea id="specialNote" cols="40" rows="3" style="border:none" readonly></textarea>                                	
                                                 
                                                 <br>
-                                                <button type="button" class="btn-primary btn-approve" id="btn-approve" data-dismiss="modal">승인</button>
-                                                <button type="button" class="btn-primary btn-refusal" id="btn-refusal" data-dismiss="modal">거절</button>                                                                                            
+                                                <button type="button" class="btn-approve" id="btn-approve" >승인</button>
+                                                <button type="button" class="btn-refusal" id="btn-refusal" >거절</button> 
+                                                <button type="button" class="btn-completion" id="btn-completion" >서비스완료</button>                                                                                          
                                             </div>
                                             
                                             <!-- Modal footer -->
@@ -108,11 +109,11 @@
 
                 </div>
                 <div id="noResv">
-                    <img src="/resources/assets/img/mypage/NoHistory1.png" class="noResvImg">
-                    <div class="noResvText">
-                      <h1>예약 내역이 없습니다.</h1>
-                    </div>
-                </div>
+                	<img src="/resources/assets/img/mypage/NoHistory1.png" class="noResvImg">
+                	<div class="noResvText">
+                		<h1>예약 내역이 없습니다.</h1>
+                	</div>
+                </div>                
             </div>    
 		</div>   
         <!-- Bootstrap core JS-->
@@ -123,6 +124,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
         <script>
   	    $(function() {    
+  	    	
+
+  		  	// 예약 내역이 없을때
+			 if($('input[name=serviceId]').val() == null){
+				$('#sitterResv').hide(); 
+				console.log('폼 사라짐!');
+			 }else{
+				 $('#noResv').hide();
+				 console.log('사진 사라짐!');
+			 }  	    	
              		
     		$(".btn-modal").click(function() {
     			var serviceId = $(this).parent().find('input[name="serviceId"]').val();
@@ -187,17 +198,28 @@
                 	})	// ajax
             	})	// click 
             	
+                $('.btn-completion').click(function(){
+                    
+    	            var serviceId = $(this).parent().find('input[name="serviceIdNo"]').val();
+    	            console.log(serviceId);	
+    	            
+    	                $.ajax({
+    	                    url: "/mypage/resvCompletion",
+    	                    method: "POST",
+    	                    data: {
+    	                        serviceId : serviceId
+    	                    },
+    	                    success: function(data){
+    	                        console.log('success');
+    	                        location.reload();
+    	                    }
+                    	})	// ajax
+                	})	// click            	
+            	
   	    	}) // function
+  	    	
 
-            
-            // 이력 내역이 없을때
-            if($('input[name=serviceId]').val() == null){
-            $('#sitterResv').hide(); 
-            console.log('폼 사라짐!');
-            }else{
-                $('#noResv').hide();
-                console.log('사진 사라짐!');
-            }              
+           
         </script>
 
     </body>
