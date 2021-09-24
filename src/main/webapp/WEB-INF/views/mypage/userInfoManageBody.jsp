@@ -103,17 +103,11 @@
 				                                    <button type="button" id="btn-changePw">비밀번호 변경</button>
 							                    </div>
 							
-							                    <!-- Modal footer -->
-							                    <div class="modal-footer">
-							                        <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
-							                        <button type="button" class="btn btn-secondary btn_modalClose" data-dismiss="modal">닫기</button>
-							                    </div>
-							
 							                </div>
 							
 							            </div>
 							        </div>
-                                    <button type="submit" class="btn_userInfo" id="submitBtn">저장</button>
+                                    <button type="button" class="btn_userInfo" id="submitBtn">저장</button>
                             </div>
                         </form>
                     </div>
@@ -130,8 +124,24 @@
 	    <!-- 카카오 지도 api -->
 	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36768b2f76471ae95e3d92b023d2b626&libraries=services"></script>
 	    
+	    <!-- sweet alert -->
+	    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	    
 	    <script>
+	    
+	  
+
+
 	    		$(function(){
+	    			var yetNickname = $('#nickName').val();			// 기존 닉네임
+	    			var yetContact = $('#inputPhone').val();
+	    			
+	    			var nickNameCheck = "";		// 페이지 제출시 최종확인용 변수(닉네임)
+	    			var passwordCheck = "";		//페이지 제출시 최종확인용 변수(비밀번호)
+				    var phoneNumberCheck = true;	//페이지 제출시 최종확인용 변수(전화번호)
+				    var addressCheck = "";		//페이지 제출시 최종확인용 변수(주소)
+	    			
+	    			
 	    			$('input:radio[name="gender"][value="${info.userGender}"]').prop('checked', true);
 	    			
 	    			
@@ -267,15 +277,65 @@
 							if(phone.match(phoneReg) == null){
 								//전화번호 형식에 맞지 않는 경우
 								$('#phoneLabel').text("* 전화번호 형식이 일치하지 않습니다.");
-								return;
+								phoneNumberCheck = false;
 							} else {
 								$('#phoneLabel').css("color", "blue");
 								$('#phoneLabel').text("* 전화번호 형식이 일치합니다.");
-								phoneNumberCheck = phone;
+								phoneNumberCheck = true;
 							}
 						}//if-else
-					});//end function
-	    		});
+					});
+					
+					//전체 확인 (submit)버튼시 검사하는 항목들
+					//비밀번호, 전화번호, 주소, 성별
+					$('#submitBtn').click(function (){
+						var joinForm = document.joinForm;
+						var nowNickname = $('#nickName').val();					// 저장시 닉네임
+						
+						if(nowNickname != yetNickname){
+							
+						 	if(checkExistData($('#nickName').val(), "닉네임을") == false){
+								$('#nickNameLabel').text("");
+								$('#nickName').val('');
+								return false;
+							} else if(nickNameCheck != $('#nickName').val()) {
+								/*alert('닉네임 중복확인 버튼을 클릭하세요.')*/
+								swal({
+					        	  title: "오류!",
+					        	  text: "닉네임 중복확인 버튼을 클릭하세요!",
+					        	  icon: "error",
+					        	  button: "닫기",
+					        	});
+								$('#nickNameLabel').text("");
+								return false;
+							} 	// if-else
+						}	// if
+						
+						console.log("성공1");
+						if(checkExistData($('#inputPhone').val(), "전화번호를") == false){
+							$('#phoneLabel').text("");
+							$('#inputPhone').val('');
+							return false;
+						} else if(phoneNumberCheck != true) {
+							/*alert('전화번호를 정확히 입력해주세요.');*/
+							swal({
+					        	  title: "오류!",
+					        	  text: "전화번호를 정확히 입력해주세요!",
+					        	  icon: "error",
+					        	  button: "닫기",
+					        	});
+							$('#phoneLabel').text("* ex)010-1234-5678");
+							return false;
+						} else{
+							console.log("성공2");
+							$(this).attr("type","submit");
+							window.location.href="http://localhost:8090/mypage/main";
+						}
+
+						
+						
+					});//beforeSubmit
+	    		});//end function
 	    		
 				function sample4_execDaumPostcode() {
 				    new daum.Postcode({
@@ -341,34 +401,22 @@
 					});
 				}
 				
-				//전체 확인 (submit)버튼시 검사하는 항목들
-				//비밀번호, 전화번호, 주소, 성별
-				$('#submitBtn').click(function (){
-					var joinForm = document.joinForm;
-					
-					
-					
-					if(checkExistData($('#nickName').val(), "닉네임을") == false){
-						$('#nickNameLabel').text("");
-						$('#nickName').val('');
-						return false;
-					} else if(nickNameCheck != $('#nickName').val()) {
-						alert('닉네임 중복확인 버튼을 클릭하세요.')
-						$('#nickNameLabel').text("");
-						return false;
-					}
-					
-					if(checkExistData($('#inputPhone').val(), "전화번호를") == false){
-						$('#phoneLabel').text("");
-						$('#inputPhone').val('');
-						return false;
-					} else if(phoneNumberCheck != $('#inputPhone').val()) {
-						alert('전화번호를 정확히 입력해주세요.');
-						$('#phoneLabel').text("* ex)010-1234-5678");
-						return false;
-					}
+				// 공백확인 함수
+				function checkExistData(value, dataName) {
+				    if (value == "") {
+				        /*alert(dataName + " 입력해주세요!");*/
+				        swal({
+				        	  title: "오류!",
+				        	  text: dataName + " 입력해주세요!",
+				        	  icon: "error",
+				        	  button: "닫기",
+				        	});
+				        return false;
+				    }
+				    return true;
+				}
+				
 
-				});//beforeSubmit
 				
 
 	    </script>
