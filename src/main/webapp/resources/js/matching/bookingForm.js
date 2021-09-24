@@ -185,7 +185,7 @@ $(function() {
 				console.log('>>>>>list:' , list);
 				
 				for(var i=0; i<list.length; i++){
-					if(list[i].stepTypeCode == "31" || list[i].stepTypeCode == "32"){
+					if(list[i].stepTypeCode == "31" || list[i].stepTypeCode == "32" || list[i].stepTypeCode == "33"){
 						isUserNo = true;
 					} //if
 				} //for

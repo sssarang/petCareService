@@ -9,11 +9,11 @@ body {
 }
 .demo
 {
-   padding: 100px 0;
+   padding: 50px 0 100px 0;
 }
 .heading-title
 {
-   margin-bottom: 100px;
+   margin-bottom: 70px;
 }
 .form-bg:before{
     content: "";
@@ -33,16 +33,16 @@ form{
 }
 
 form .heading{
-    font-size: 35px;
+    font-size: 30px;
     font-weight: bold;
-    color: black;
+    color: #636363;
     letter-spacing: 1px;
     text-transform: uppercase;
-    margin-left: -20px;
+    margin-bottom: 30px;
 }
 
 form .form-group{
-    padding: 30px;
+    padding: 25px 30px 60px 30px;
     border-radius: 5px;
     background: #fff;
     box-shadow: 0 0 3px #bcb4b4;
@@ -50,13 +50,12 @@ form .form-group{
 }
 
 form .control-label{
-    font-size: 18px;
-    color: #6e6179;
-    letter-spacing: 1px;
+    font-size: 14px;
+    color: #636363;
 }
 
 form .form-control{
-    height: 50px;
+    height: 45px;
     font-size: 16px;
     letter-spacing: 1px;
     margin-bottom: 30px;
@@ -69,7 +68,7 @@ form .btn{
     font-size: 17px;
     font-weight: bold;
     color: #fff;
-    background: #00d3bf;
+    background: #fcb37be7;
     text-transform: uppercase;
     box-shadow: 0 0 8px 0 #a2a2a2;
     border: none;
@@ -83,7 +82,7 @@ form .btn{
 
 form .btn:hover{
     background: #fff;
-    color: #00d3bf;
+    color: #fcb37bd3;
 }
 
 form .btn .fa{
@@ -95,19 +94,21 @@ form .btn .fa{
 
 form .form-footer{
     font-size: 14px;
-    color: black;
+    color: #464545;
     text-transform: capitalize;
-    margin-top: 20px;
+    margin-top: 10px;
+    padding-left: 15px;
     display: inline-block;
 }
 
 form .form-footer a{
     font-size: 14px;
-    color: black;
+    font-weight: bold;
+    color: #464545;
 }
 
 form .form-footer a:hover{
-    text-decoration: underline;
+    text-decoration-line: none;
     
 }
 
