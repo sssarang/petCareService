@@ -56,7 +56,7 @@
 	<!-- searchForm js -->
 	<script type="text/javascript" src="/resources/js/home/searchForm.js"></script>
 	<!-- address.js-->
-	<script type="application/javascript" src="/resources/js/common/address.js"></script>
+	<script type="application/javascript" src="/resources/js/common/address2.js"></script>
 	<!-- alert js -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
