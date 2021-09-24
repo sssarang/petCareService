@@ -64,7 +64,7 @@
 		<script src="/resources/js/search/flatpickr.js"></script>						     
 
 		<!-- address.js-->
-		<script src="/resources/js/common/address.js" type="application/javascript"></script>
+		<script src="/resources/js/common/address2.js" type="application/javascript"></script>
 
 	    <!-- map(App-key 포함) js -->
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services&libraries=clusterer"></script>

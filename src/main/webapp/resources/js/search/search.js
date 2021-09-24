@@ -119,9 +119,7 @@
 
 
     function fnServiceDateMarkup(targetDate, targetMonth){
-		$.each(targetDate, function(i){
-			console.log(">>>>"+targetDate[i].serviceDate);
-			
+		$.each(targetDate, function(i){			
 			var serviceDate = targetDate[i].serviceDate;
 			var monthDo =  serviceDate.substr(5, 2);
 			var dayDo = serviceDate.substr(8, 2);
@@ -161,9 +159,7 @@
 	      , data : {				
 	    	  userNo : userNo
 	      } 		
-	      , success :  function(result){
-		
-				console.log(result);
+	      , success :  function(result){		
 				//================================//
 				//           1.프로필 세팅
 				//================================//
@@ -227,15 +223,12 @@
 
 			    //닉네임-------------------------------//		 
 				var userNickname = resultPs.userNickname;
-				console.log(userNickname);
 				
 				//주소---------------------------------//	
 				var userAddress = resultPs.userAddress;
-				console.log(userAddress);
 
 				//자기소개-------------------------------//	
 				var introduce = resultPs.introduce;
-				console.log(introduce);
 				
 				//PS 기본정보입력						
 				$("#psNickname").text(userNickname);
@@ -262,15 +255,12 @@
 		        
 		        //첫날
 		        first_date = new Date(year, month, 1).getDate();
-		        console.log(first_date);
 		
 		        //마지막날
 		        last_date = new Date(year, month+1, 0).getDate();
-		        console.log(last_date);
 		
 		        //첫날 요일
 		        first_day = new Date(year, month, 1).getDay();
-		        console.log(first_day);
 		        // 원하는 요일부터 1일이 출력되게 하기 위함
 
 				var scTable = "";
@@ -422,9 +412,7 @@
 				} else{
 					$("#service4").show();
 					
-					$.each(resultSk, function(i){
-						console.log(">>>>"+resultSk[i].skillTypeCode);
-						
+					$.each(resultSk, function(i){						
 						if(resultSk[i].skillTypeCode == 21){
 							sk += "<li>약 먹이기 가능 </li>";					
 						}					
@@ -446,16 +434,12 @@
 				var resultAp = result.activityPhoto;
 				var ap ="";
 
-				if(resultAp.length === 0){
-					console.log('뭐가 문제야');
-					
+				if(resultAp.length === 0){					
 					var noActivityPhoto = '/resources/assets/img/search/act.png';
 					
 					ap += "<div class='noActivityPhoto'>";
 					ap += "<img class='noActivityPhotoImg' src='"+ noActivityPhoto +"'></div>";
-					
-					console.log(ap);
-					
+										
 					$(".active_photo").empty();
 					$(".active_photo").html(ap);
 
@@ -618,15 +602,6 @@
 
 				} else{
 					$.each(resultRv, function(i){
-						console.log(">>>>"+resultRv[i].petPhoto);
-						console.log(">>>>"+resultRv[i].grade);
-						console.log(">>>>"+resultRv[i].revContent);
-						console.log(">>>>"+resultRv[i].revWriter);
-						console.log(">>>>"+resultRv[i].revDate);
-						
-						console.log(">>>>"+resultRv[i].repContent);
-						console.log(">>>>"+resultRv[i].writer);
-						console.log(">>>>"+resultRv[i].repDate);
 						
 						//평점(별표시)
 						var grade = parseFloat(resultRv[i].grade).toFixed(1);
