@@ -17,39 +17,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!--  bootstrap -->
+
+    <title>Modal Size #2</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+	<!--  bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     
-    <!-- jquery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-    
     <!-- 비밀번호 찾기 팝업창 -->
 	<script src="/resources/js/user/findpassword.js"></script>
-	
-    <!--  bootstrap -->
+
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	<link rel="stylesheet" href="/resources/css/user/userstyle.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     
-    <title>Document</title>
 </head>
 <body>
-	 <div class="demo form-bg">
-        <div class="container-fluid">
-            <div class="row text-center">
-                <div class="col-lg-12">
-               	 	<img src="/resources/assets/img/common/2.png">
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-offset-3 col-md-6">
-                    <form action="/user/chagePw" method="POST" id="findForm" onsubmit="return check();">
+        <!-- The Modal -->
+        <!-- NOTE 3: if (  class="modal" ) not exists, the below <div> box appeared without button click. -->
+        <div class="modal fade" id="myModal">
+            <!-- NOTE 4: if ( class="modal-dialog" ) not exists, modal window appeared by full width on viewport. -->
+            <div class="modal-dialog modal-lg">
+
+                <!-- NOTE 5: if ( class="modal-content" ) not exists, the background of modal window not appeared. -->
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+
+                        <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="/user/chagePw" method="POST" id="findForm" onsubmit="return check();">
                         <h1 class="heading">비밀번호 찾기</h1>
                         <div class="form-group">
                        		<label class="control-label">아이디 (사용중인 이메일)</label>
@@ -70,9 +82,12 @@
                             <button type="button" class="btn btn-default" id="submitBtn">변경하기<i class="fa fa-arrow-circle-right fa-2x"></i></button>
                         </div>
                     </form>
+                    </div>
+
                 </div>
+
             </div>
         </div>
-    </div>
+    
 </body>
 </html>

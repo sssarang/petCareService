@@ -33,7 +33,7 @@
 	
 	
 	<!-- 뷰 컨트롤러 추가 -->
-	<view-controller path="/user/Ppopup" view-name="user/Ppopup" status-code="200"/>
+	<view-controller path="/user/findPassword" view-name="user/findPassword" status-code="200"/>
 	<view-controller path="/user/joinPage" view-name="user/joinPage" status-code="200"/>
 	<view-controller path="/user/loginPage" view-name="user/loginPage" status-code="200"/>
 	<view-controller path="/user/articleCheckPage" view-name="user/articleCheckPage" status-code="200"/>

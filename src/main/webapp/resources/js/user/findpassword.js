@@ -4,7 +4,7 @@ var passwordCheck = "";		//페이지 제출시 최종확인용 변수(비밀번�
 var submitCheck = "";
 
 $(document).ready(function() {
-
+	
 	//가입되어있는 이메일이 있는지 확인
 	$('#emailBtn').click(function (){
 		var email = $('#emailId').val();
@@ -112,8 +112,9 @@ $(document).ready(function() {
 		}//if-else
 	});//end function
 	
-/*	$('#submitBtn').click(function (){
+	$('#submitBtn').click(function (){
 		var findForm = document.findForm;
+		var isCheck = false;
 		
 		if(checkExistData($('#emailId').val(), "이메일을") == false){
 			$('#emailLabel').text("");
@@ -148,26 +149,31 @@ $(document).ready(function() {
 			//alter("비밀번호가 변경되었습니다.");
 			//$(this).attr("type","submit");
 			
-			var queryString = $("#findForm").serialize() ;
- 
+			var data = {
+				"userId" : $('#emailId').val(),
+				"userPw" : $('#inputPw').val()
+			}
+			
       		$.ajax({
 	            type : 'post',
 	            url : 'chagePw',
-	            data : queryString,
-				dataType : 'json',
-	            success : function(json){
-					alter("비밀번호가 변경되었습니다.");
-					closePopup();
-	            }
+	            data : data,
+/*	            success : function(json){
+		            isCheck = true;
+				}*/
 	        });
+
+			//if(isCheck == ture){
+				location.reload();				
+			//}
 		//return true;
 		}//if
 
-	});//beforeSubmit*/
+	});//beforeSubmit
 });//jq    
 
 //최종 제출
-function check() {
+/*function check() {
 	
 	var findForm = document.findForm;
 	
@@ -214,12 +220,7 @@ function check() {
         });
 		//return true;
 	}
-}
-
-//popup창 종료
-function closePopup(){
-	window.open("about:blank", "_self").close();
-}//closePopup
+}*/
 
 // 공백확인 함수
 function checkExistData(value, dataName) {

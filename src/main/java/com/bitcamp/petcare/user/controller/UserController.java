@@ -234,12 +234,8 @@ public class UserController {
 	//비밀번호 찾기 - 비밀번호 변경
 	@PostMapping(value="chagePw")
 	@ResponseBody
-	public String changePw(HttpServletRequest req) {
-		log.debug("changePw({}) invoked", req);
-		
-		UserDTO dto = new UserDTO();
-		dto.setUserId(req.getParameter("userId"));
-		dto.setUserPw(req.getParameter("userPw"));
+	public String changePw(UserDTO dto) {
+		log.debug("changePw({}) invoked", dto);
 		
 		int result = this.service.changePw(dto);
 		

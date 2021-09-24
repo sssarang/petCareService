@@ -67,7 +67,7 @@ $(document).ready(function(){
 			"faqSequence" : sequence,
 			"faqQuestion" : $("#title").val(),
 			"faqAnswer" : $("#contents").val()
-		};
+		}
 		
 		$.ajax({
 			url : url,

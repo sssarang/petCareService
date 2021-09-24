@@ -69,9 +69,10 @@
 	                           
 	                            <button type="submit" class="btn btn-default">Login<i class="fa fa-arrow-circle-right fa-2x"></i></button>
 	                        </div>
-	                        <span class="form-footer">비밀번호를 잊어버리셨나요? &nbsp;<a onclick="showPopup()">비밀번호 찾기</a></span>
+	                        <span class="form-footer">비밀번호를 잊어버리셨나요? &nbsp;<a data-toggle="modal" data-target="#myModal">비밀번호 찾기</a></span>
 	                        <br>
 	                        <span class="form-footer">아직 회원이 아니신가요? &nbsp;<a href="articleCheckPage">회원가입하기</a></span>
+	                        <jsp:include page="/WEB-INF/views/user/findPassword.jsp"/>
 	                    </form>
 	                </div>
 	            </div>
