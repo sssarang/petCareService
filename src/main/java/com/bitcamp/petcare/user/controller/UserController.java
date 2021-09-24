@@ -56,6 +56,7 @@ public class UserController {
 		dto.setUserLongitude(x);	//회원가입시 주소의 경도
 		dto.setUserStatus("N");		//회원가입시 회원탈퇴 항목 'N'설정
 		dto.setUserClassify(classify);
+		log.info("\t + 위도 : {}, 경도 {}", x, y);
 		
 		if(this.service.joinUser(dto) == 1 ) {
 			rttr.addFlashAttribute("result", "success");
@@ -180,12 +181,12 @@ public class UserController {
 	//좌표값 받아오는 메소드
 	@RequestMapping(value="coordinate", method=RequestMethod.POST)
 	@ResponseBody
-	public String coordinate(String x, String y) {
+	public boolean coordinate(String x, String y) {
 		log.debug("coordinate({}, {}) invoked",x, y);
 		this.x = Double.parseDouble(x);
 		this.y = Double.parseDouble(y);
 		
-		return null;
+		return true;
 	}//coordinate
 	
 	//회원 구분
