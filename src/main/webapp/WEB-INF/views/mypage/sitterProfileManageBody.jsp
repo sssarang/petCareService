@@ -190,6 +190,7 @@
         <script src="/resources/js/mypage/sideBarScripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
         $(function(){
         	
@@ -226,6 +227,31 @@
         		   
         		   reader.readAsDataURL($file[0].files[0]);
         		});
+        	
+        	
+        	
+        	// 버튼	
+            $('#btn_save3').click(function(e) {
+            	
+            	if( $('[value="${serviceType[0].price}"]').val() == '0' ||
+            		$('[value="${serviceType[1].price}"]').val() == '0' ||
+            		$('[value="${serviceType[2].price}"]').val() == '0' || 
+            		$('[value="${serviceType[3].price}"]').val() == '0' 
+            	){
+	        		e.preventDefault();
+	                swal({
+	                	title : '비용을 적어주세요!',
+	                	icon : 'warning'
+	                	})					                	
+	                	                	
+	        			$('.swal-button').click(function() {
+	        				location.href="/mypage/sitterProfileManage";
+	        				})	
+            		}
+            		
+                }) // click
+    		
+            
         	
         	
         })	// jq
