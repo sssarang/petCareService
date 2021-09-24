@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.ui.ModelMap;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -135,8 +134,15 @@ public class LoginInterceptor
 					log.info("\t + rememberMeCookie : " + rememberMeKey);
 					log.info("\t + 응답문서의 헤더에 rememberMeCookie 쿠키설정 완료");					
 				}//if
-				response.sendRedirect("/");
 				
+				UserVO temp = (UserVO) user;
+				
+				if(temp.getUserClassify().equals("0")) {
+					response.sendRedirect("/admin/");
+				} else {
+					response.sendRedirect("/");					
+				}
+				//response.sendRedirect("/");		
 			}//if-else
 			
 		} else {	//로그인에 실패했다면
