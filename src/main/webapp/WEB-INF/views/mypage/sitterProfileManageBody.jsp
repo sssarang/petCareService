@@ -169,8 +169,9 @@
 							<script type="text/javascript">
 							$(".selector").flatpickr({ 
 							dateFormat: "Y-m-d",
+							mode: "multiple",
 							minDate:"today",
-							maxDate: new Date().fp_incr(30)
+							maxDate: new Date().fp_incr(60)
 							});
 							</script>
 							<input type="submit" value="저장" id="part6_Btn">

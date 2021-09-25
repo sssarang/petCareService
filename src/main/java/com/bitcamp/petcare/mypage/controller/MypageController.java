@@ -518,8 +518,7 @@ public class MypageController {
 	        
 	        log.info("\t+ history : {}", history);
 			
-	        model.addAttribute("petSitterNo", petSitterNo);
-	        //model.addAttribute("userNo", vo.getUserNo());
+	        model.addAttribute("userNo", vo.getUserNo());
 	        model.addAttribute("history", history);
 	   } // getSitterHistory
 	   
@@ -529,8 +528,6 @@ public class MypageController {
 		   log.debug("sitterReplyManage() invoked.");
 		   
 		   SitterReplyManageVO reply = this.service.getReply(serviceId);
-		   
-		   //log.info("userNo : {}", reply.getUserNo());
 		   
 		   return reply;
 	   } // sitterReplyManage
