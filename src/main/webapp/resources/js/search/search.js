@@ -119,10 +119,32 @@
 
 
     function fnServiceDateMarkup(targetDate, targetMonth){
+		let today = new Date();   
+
+		let month = today.getMonth() + 1;   // 월
+		let date = today.getDate();         // 날짜
+		let day = today.getDay();           // 요일
+		
+		console.log(targetMonth);
+		console.log(month);
+		console.log(targetDate);
+		console.log(date);
+		
+		if(targetMonth+1 == month){
+			for(i=1; i<=last_date; i++){
+	                set_id = document.getElementById([i]);
+
+	                if(parseInt(date) == parseInt(set_id.getAttribute('id'))){
+		                set_id.bgColor = "#e6e6e6";
+	                } //if 
+	    		} //for
+		} //오늘날짜표시
+
 		$.each(targetDate, function(i){			
 			var serviceDate = targetDate[i].serviceDate;
 			var monthDo =  serviceDate.substr(5, 2);
 			var dayDo = serviceDate.substr(8, 2);
+			
 			
 			if(parseInt(targetMonth+1) == parseInt(monthDo)){
 				for(i=1; i<=last_date; i++){
@@ -135,7 +157,7 @@
 			} //if
 		}) //each		
 	}//fnServiceDateMarkup(targetDate: DB에서 가지고온 serviceDate
-	 ///				   targetMonth: 달력 월(MarkupDate와 비교))
+	 // 				   targetMonth: 달력 월(MarkupDate와 비교))
     
 
 	function fnZeros(n, digits) {

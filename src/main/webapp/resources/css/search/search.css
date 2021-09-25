@@ -270,7 +270,9 @@ input[type=checkbox]:click{
 }
 
 input[type=text]{
-    height: 25px;
+    cursor: pointer;
+	
+	height: 25px;
 	margin: 0 0 7px 5px;
 	
 	border-radius: 3px;
@@ -872,7 +874,7 @@ input[type=number]{
 	width: 320px;
 	height:auto;
 	
-	opacity: 0.8;
+	opacity: 0.9;
 	background-color: #ffd993;
 	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
 }
@@ -886,7 +888,7 @@ input[type=number]{
 	width: 535px;
 	height:auto;
 	
-	opacity: 0.8;
+	opacity: 0.9;
 	/* background-color: #D0DFC5; */
 	background-color: #ffd993;
 }
@@ -1005,8 +1007,13 @@ input[type=number]{
 
 .apImg:hover{
 	transform: scale(1.1);
+    cursor: pointer;	
 }
 
+#plusap:hover{
+	transform: scale(1);
+    cursor: pointer;
+}
 
 .modalap{
 	width: 80%;
