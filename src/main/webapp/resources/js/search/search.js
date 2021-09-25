@@ -289,7 +289,7 @@
 				scTable += "<thead><tr>";
 				scTable += "<td></td>";
 				scTable += "<td> <input id='calPre' type = 'button' value = '◀'/> </td>";
-				scTable += "<td id='YM' colspan='3'>year-month</td>";
+		        scTable += "<td id='YM' colspan='3' style='padding: 0; width: 43%;''>year-month</td>";
 				scTable += "<td> <input id='calNext' type = 'button' value = '▶'/> </td>";
 				scTable += "<td></td>";
 				scTable += "</tr></thead>";

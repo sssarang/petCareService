@@ -936,6 +936,8 @@ input[type=number]{
 
 #calPre,
 #calNext{
+	padding: 0;
+	
 	border: 0px;
     font-size: 1rem;
 	background-color: white;
