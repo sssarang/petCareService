@@ -11,8 +11,6 @@ pageEncoding="UTF-8"%>
 <!-- Font-family-->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<!-- 프로필 : 활동사진 -->
-<link rel="stylesheet" href="/resources/css/search/swiper.css" > 
  
  <!----------------- 전체 div ----------------->
  <div id="wrapper">
