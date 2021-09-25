@@ -518,7 +518,8 @@ public class MypageController {
 	        
 	        log.info("\t+ history : {}", history);
 			
-	        model.addAttribute("userNo", vo.getUserNo());
+	        model.addAttribute("petSitterNo", petSitterNo);
+	        //model.addAttribute("userNo", vo.getUserNo());
 	        model.addAttribute("history", history);
 	   } // getSitterHistory
 	   
@@ -529,28 +530,30 @@ public class MypageController {
 		   
 		   SitterReplyManageVO reply = this.service.getReply(serviceId);
 		   
-		   log.info("userNo : {}", reply.getUserNo());
+		   //log.info("userNo : {}", reply.getUserNo());
 		   
 		   return reply;
 	   } // sitterReplyManage
 	   
 	   @ResponseBody
 	   @PostMapping("sitterReplySend")
-	   public boolean insertReply(@RequestParam(value="serviceId")Integer serviceId,
-			   					  @RequestParam(value="repContent")String repContent,
-			   					  @RequestParam(value="userNo")Integer userNo,
-			   					  SitterReplyManageDTO reply
-		   ) {
-		   log.debug("insertReply() invoked.");
-		   
-		   if(this.service.getReply(serviceId) == null){
+	   public boolean insertReply(SitterReplyManageDTO reply, HttpSession session) {
+		   	log.debug("insertReply() invoked.");
+			   
+		   	UserVO vo = (UserVO) session.getAttribute(loginKey);
+		   	log.info("\t + vo : {}", vo);
+		   	String userNickname = vo.getUserNickname();
+		    
+		   	reply.setUserNickname(userNickname);
+		   	log.info("\t + reply : {}", reply);
+		   	if(this.service.getReply(reply.getServiceId()) == null){
 			   this.service.insertReply(reply);
-		   }
-		   else {
+		   	}
+		   	else {
 			   this.service.updateReply(reply);
-		   }
+		   	}
 		   
-		   return true;
+		   	return true;
 	   } // insertReply
 	   
 	          

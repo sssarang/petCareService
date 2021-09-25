@@ -233,10 +233,10 @@
         	// 버튼	
             $('#btn_save3').click(function(e) {
             	
-            	if( $('[value="${serviceType[0].price}"]').val() == '0' ||
-            		$('[value="${serviceType[1].price}"]').val() == '0' ||
-            		$('[value="${serviceType[2].price}"]').val() == '0' || 
-            		$('[value="${serviceType[3].price}"]').val() == '0' 
+            	if( $('[value="${serviceType[3].price}"]').val() == '0' ||
+            		$('[value="${serviceType[2].price}"]').val() == '0' ||
+            		$('[value="${serviceType[1].price}"]').val() == '0' || 
+            		$('[value="${serviceType[0].price}"]').val() == '0' 
             	){
 	        		e.preventDefault();
 	                swal({

@@ -7,6 +7,6 @@ public class SitterReplyManageDTO {
 
 	private Integer serviceId;
 	private String repContent;
-	private Integer userNo;
+	private String userNickname;
 	
 } // end class
