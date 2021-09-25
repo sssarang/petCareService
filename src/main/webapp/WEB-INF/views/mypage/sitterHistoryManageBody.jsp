@@ -37,7 +37,8 @@
 								<div id="historyInformation">
 									<ul id="historyInformationUl">
 										<input type="hidden" name="serviceId" value="${i.serviceId}">
-										<input type="hidden" name="userNo" value="${userNo}">
+										<input type="hidden" name="grade" value="${i.grade}">
+										<input type="hidden" name="revContent" value="${i.revContent}">
 										<li>반려인 닉네임 : ${i.userNickname}</li>
 										<li>반려동물 이름 : ${i.petName}</li>
 										<li>제공 서비스 유형 : ${i.codeName}</li>  
@@ -98,11 +99,11 @@
 																</c:otherwise>
 															</c:choose>
 															<label for="revContent"></label>
-															<input type="text" id="revContent" name="revContent" style="width:740px; height:150px;" value="${i.revContent}" readonly><br>
+															<input type="text" id="revContent" name="revContent" style="width:740px; height:150px;" readonly><br>
 														</div>
 														<div class="reply">
 															<h5>답글 남기기</h5>
-                                      
+                                      						<label for="repContent"></label>	
 															<textarea name="repContent" id="repContent" cols="100" rows="5" maxlength="300"></textarea>	
 														</div>	
 													</div>
@@ -152,7 +153,14 @@
         		$(".btn-modal").click(function() {
         			
         			var serviceId = $(this).parent().find('input[name="serviceId"]').val();
-	        		console.log(serviceId);
+	        		console.log(serviceId);	        		
+        			var grade = $(this).parent().find('input[name="grade"]').val();
+	        		console.log(grade);	        		
+        			var revContent = $(this).parent().find('input[name="revContent"]').val();
+	        		console.log(revContent);
+	        		$('#serviceId').val(serviceId);
+	        		$('#grade').val(grade);
+	        		$('#revContent').val(revContent);
 					
         			$.ajax({
         				url: "/mypage/sitterReplyManage",
