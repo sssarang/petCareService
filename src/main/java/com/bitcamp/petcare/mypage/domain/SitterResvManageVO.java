@@ -17,6 +17,7 @@ public class SitterResvManageVO {
 	private Date endDate;
 	
 	private String codeName2;
+	private String codeName3;
 	
 	private String petName;
 	private Date petBirthday;

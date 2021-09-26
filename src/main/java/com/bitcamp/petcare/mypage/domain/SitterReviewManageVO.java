@@ -1,8 +1,8 @@
 package com.bitcamp.petcare.mypage.domain;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class SitterReviewManageVO {
 	
 	private Integer serviceId;	

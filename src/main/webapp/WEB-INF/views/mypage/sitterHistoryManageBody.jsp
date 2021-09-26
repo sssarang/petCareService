@@ -31,15 +31,18 @@
 					<div id="sitterHistoryManage">
 						<c:forEach items="${history}" var="i">
 							<div id="history_list">
-								<p>서비스 제공 날짜 : <fmt:formatDate pattern="yyyy-MM-dd" value="${i.startDate}" /></p>
-
+								<table>
+									<tr>
+										<td id="historyTable_td">서비스 제공 날짜 : <fmt:formatDate pattern="yyyy-MM-dd" value="${i.startDate}" /></td>
+									</tr>
+								</table>
 								<div id="historyImage">
 									<img src="${i.proPhoto}" id="proPhoto">
 								</div>
 								<div id="historyInformation">
 									<ul id="historyInformationUl">
 										<input type="hidden" name="serviceId" value="${i.serviceId}">
-										<table>
+										<table id="historyTable">
 											<tr>
 												<td class="tdText">닉네임</td>
 												<td class="tdData">${i.userNickname}</td>
@@ -55,7 +58,9 @@
 										</table>
 									
 										<!-- Button to Open the Modal -->
-										<button type="button" class="btn-primary btn-modal" id="reviewBtn" data-toggle="modal" data-target="#modal1" data-backdrop="static">리뷰 확인</button>
+										<button type="button" class="btn-primary btn-modal" id="reviewBtn" data-toggle="modal" data-target="#modal1" data-backdrop="static">
+										리뷰 확인&nbsp;<img src="/resources/assets/img/mypage/pencil.png" width="25px">
+										</button>
 										<!-- The Modal -->	
 										<div class="modal" id="modal1">
 											<div class="modal-dialog modal-lg">
@@ -63,8 +68,9 @@
 													<form action="/mypage/sitterHistoryManage" method="POST"> 
 													<input type="hidden" name="serviceId" value="${i.serviceId}">
 													<input type="hidden" name="userNickname" value="${userNickname}">
+													
 													<!-- Modal Header -->
-
+													<input type="hidden" name="serviceIdIn" value="">
 													<div class="modal-header">
 														<h4 class="modal-title">리뷰 확인</h4>
         
@@ -74,26 +80,27 @@
 													<!-- Modal body -->	
 													<div class="modal-body">
 														<div class="review">
-															<h5>달린 리뷰</h5>
-															<input type="text" id="grade5" value="★★★★★"/>
-															<input type="text" id="grade4" value="★★★★"/>
-															<input type="text" id="grade3" value="★★★"/>
-															<input type="text" id="grade2" value="★★"/>
-															<input type="text" id="grade1" value="★"/>
+															<h6 class="revrep">&nbsp;&nbsp;달린 리뷰&nbsp;</h6>
+															
+															<input type="text" id="grade5" class="star" size="8" readonly value="★★★★★"/>
+															<input type="text" id="grade4" class="star" size="8" readonly value="★★★★☆"/>
+															<input type="text" id="grade3" class="star" size="8" readonly value="★★★☆☆"/>
+															<input type="text" id="grade2" class="star" size="8" readonly value="★★☆☆☆"/>
+															<input type="text" id="grade1" class="star" size="8" readonly value="★☆☆☆☆"/>
+																	
 																													
 															<label for="revContent"></label>
-															<textarea name="revContent" id="revContent" cols="100" rows="5" maxlength="300" placeholder="리뷰없어" value="" readonly></textarea><br>
+															<textarea name="revContent" id="revContent" cols="90" rows="3" maxlength="300" style="resize: none;" placeholder="아직 리뷰가 달리지 않았습니다." value="" readonly></textarea><br>
 														</div>
 														<div class="reply">
-															<h5>답글 남기기</h5>
+															<h6 class="revrep">&nbsp;&nbsp;답글 남기기</h6>
+															
                                       						<label for="repContent"></label>	
-															<textarea name="repContent" id="repContent" cols="100" rows="5" maxlength="300"></textarea>	
+															<textarea name="repContent" id="repContent" cols="90" rows="3" maxlength="300"></textarea>	
 														</div>	
+														<button type="button" class="btn-primary btn-save" id="saveBtn" data-dismiss="modal">저장</button>
 													</div>
 													<!-- Modal footer -->
-													<div class="modal-footer">
-														<button type="button" class="btn-primary btn-save" data-dismiss="modal">저장</button>
-													</div>
 													</form>
 												</div>
 											</div>
@@ -141,7 +148,9 @@
         			
         			var serviceId = $(this).parent().find('input[name="serviceId"]').val();
 	        		console.log(serviceId);
-						
+	        		
+	        		$('input[name=serviceIdIn]').val(serviceId);
+        		
 	        			$.ajax({
 	        				url: "/mypage/sitterReviewManage",
 	        				method: "GET",
@@ -222,10 +231,11 @@
     		
         		<!-- 리뷰 저장 버튼 클릭시 페이지 전환 없이 데이터 전송 -->
 				$(".btn-save").click(function() {
+	        		
 					
 					var $parent = $(this).parent().parent();
 																		
-					var serviceId = $parent.find('input[name="serviceId"]').val();
+					var serviceId = $parent.find('input[name="serviceIdIn"]').val();
 					console.log(serviceId);
 					var repContent = $('textarea[name="repContent"]').val();
 					console.log(repContent);

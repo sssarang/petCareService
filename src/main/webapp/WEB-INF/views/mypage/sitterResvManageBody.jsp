@@ -35,20 +35,43 @@
                     <c:forEach items="${resv}" var="i">
                         <br>		
                         <div id="resv_list">
-                            <p>예약등록일 : <fmt:formatDate pattern="yyyy-MM-dd" value="${i.regDate}" /></p>
+                            <table id="resvTable">
+                            	<tr>
+                            		<td id="resvTable_td1">예약등록일 : <fmt:formatDate pattern="yyyy-MM-dd" value="${i.regDate}" /></td>
+                            		<td id="resvTable_td2">예약현황 : <input type="text" id="codeName3" size=3 value="${i.codeName3}"/></td>
+                            	</tr>
+                            </table>
 
                             <div id="resvImage">
                                 <img src="${i.proPhoto}" id="proPhoto">
                             </div>
                             <div id="resvInformation">
-                                <ul id="resvInformationUl">
-                                    <li>반려인 닉네임 : ${i.userNickname}</li>
-                                    <li>반려인 연락처 : ${i.userContact}</li>
-                                    <li>제공 서비스 유형 : ${i.codeName}</li> 
-                                    <li>금액 : ${i.price}원</li>
-                                    <li>서비스 시작일 : <fmt:formatDate pattern="yyyy-MM-dd" value="${i.startDate}" /></li>
-                                    <li>서비스 종료일 : <fmt:formatDate pattern="yyyy-MM-dd" value="${i.endDate}" /></li>                                                                                            
-                                </ul>
+                                <table id="resvTable2">
+                                	<tr>
+                                		<td class="textBold">닉네임</td>
+                                		<td class="textData">${i.userNickname}</td>
+                                	</tr>
+                                	<tr>
+                                		<td class="textBold">연락처</td>
+                                		<td class="textData">${i.userContact}</td>
+                                	</tr>
+                                	<tr>
+                                		<td class="textBold">서비스 유형</td>
+                                		<td class="textData">${i.codeName}</td>
+                                	</tr>
+                                	<tr>
+                                		<td class="textBold">금액</td>
+                                		<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${i.price}" />원</td>
+                                	</tr>
+                                	<tr>
+                                		<td class="textBold">서비스 시작일</td>
+                                		<td class="textData"><fmt:formatDate pattern="yyyy-MM-dd" value="${i.startDate}" /></td>
+                                	</tr>
+                                	<tr>
+                                		<td class="textBold">서비스 종료일</td>
+                                		<td class="textData"><fmt:formatDate pattern="yyyy-MM-dd" value="${i.endDate}" /></td>
+                                	</tr>                                	
+                                </table>
                                 <input type="hidden" name="serviceId" value="${i.serviceId}">
                                 <input type="hidden" name="codeName2" value="${i.codeName2}">
                                 <input type="hidden" name="petName" value="${i.petName}">
@@ -78,28 +101,28 @@
                                             </div>
                                             <!-- Modal body -->
                                             <div class="modal-body"> 
-                                                <input type="text" value="&rtrif;&nbsp;&nbsp;서비스번호" style="border:none" size=6>
+                                                <input type="text" class="resvModalText" value="&rtrif;&nbsp;&nbsp;서비스번호" style="border:none" size=6 readonly>
                                                 <input type="text" id="serviceId" name="serviceIdNo" style="border:none" size=3 readonly><br>  
-                                                <input type="text" value="&rtrif;&nbsp;&nbsp;종류" style="border:none" size=6>
+                                                <input type="text" class="resvModalText" value="&rtrif;&nbsp;&nbsp;종류" style="border:none" size=6 readonly>
                                                 <input type="text" id="codeName2" style="border:none" size=3 readonly><br>  
-                                                <input type="text" value="&rtrif;&nbsp;&nbsp;펫이름" style="border:none" size=6>
+                                                <input type="text" class="resvModalText" value="&rtrif;&nbsp;&nbsp;펫이름" style="border:none" size=6 readonly>
                                                 <input type="text" id="petName" style="border:none" size=3 readonly><br> 
-                                                <input type="text" value="&rtrif;&nbsp;&nbsp;나이" style="border:none" size=6>
+                                                <input type="text" class="resvModalText" value="&rtrif;&nbsp;&nbsp;나이" style="border:none" size=6 readonly>
                                                 <input type="text" id="petBirthday" style="border:none" size=3 readonly><br> 
-                                                <input type="text" value="&rtrif;&nbsp;&nbsp;성별" style="border:none" size=6>
+                                                <input type="text" class="resvModalText" value="&rtrif;&nbsp;&nbsp;성별" style="border:none" size=6 readonly>
                                                 <input type="text" id="petGender" style="border:none" size=3 readonly><br> 
-                                                <input type="text" value="&rtrif;&nbsp;&nbsp;중성화" style="border:none" size=6>
+                                                <input type="text" class="resvModalText" value="&rtrif;&nbsp;&nbsp;중성화" style="border:none" size=6 readonly>
                                                 <input type="text" id="neutralization" style="border:none" size=3 readonly><br> 
-                                                <input type="text" value="&rtrif;&nbsp;&nbsp;약복용" style="border:none" size=6>
+                                                <input type="text" class="resvModalText" value="&rtrif;&nbsp;&nbsp;약복용" style="border:none" size=6 readonly>
                                                 <input type="text" id="medicine" style="border:none" size=3 readonly><br><br> 
-                                                <input type="text" value="&ast;&nbsp;특이사항&nbsp;&ast;" style="border:none" id="special_note" size=6><br>
+                                                <input type="text" class="resvModalText" value="&ast;&nbsp;특이사항&nbsp;&ast;" style="border:none" id="special_note" size=6 readonly><br>
                                                 <!-- <input type="text" id="specialNote" style="border:none" size=40 readonly><br>   -->  
                                                 <textarea id="specialNote" cols="45" rows="2" readonly></textarea>                                	
                                                 
                                                 <br>
                                                 <button type="button" class="btn-approve" id="btn-approve" >승인</button>
                                                 <button type="button" class="btn-refusal" id="btn-refusal" >거절</button> 
-                                                <button type="button" class="btn-completion" id="btn-completion" >서비스완료</button>                                                                                          
+                                                <button type="button" class="btn-completion" id="btn-completion" >서비스완료</button>                                                                                           
                                             </div>
                                             
                                             <!-- Modal footer -->
@@ -172,6 +195,8 @@
                 var serviceId = $(this).parent().find('input[name="serviceIdNo"]').val();
                 console.log(serviceId);	
                 
+                $('#codeName3').css("color", "blue");
+                
                     $.ajax({
                         url: "/mypage/resvApprove",
                         method: "POST",
@@ -180,7 +205,8 @@
                         },
                         success: function(data){
                             console.log('success');
-                            location.reload();
+                            
+                            location.reload();                                                        
                         }
                     })	// ajax
                 })	// click

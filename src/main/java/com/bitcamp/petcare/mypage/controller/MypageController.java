@@ -542,6 +542,12 @@ public class MypageController {
 		   
 		   SitterReviewManageVO review = this.service.getReview(serviceId);
 		   
+		   if(review == null) {
+			   SitterReviewManageVO temp = new SitterReviewManageVO();
+			   temp.setGrade(0);
+			   return temp;
+		   }
+		   
 		   return review;
 	   } // sitterReviewManage
 	   
