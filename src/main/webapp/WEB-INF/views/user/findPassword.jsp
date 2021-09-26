@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Modal Size #2</title>
-
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -50,7 +50,7 @@
         <!-- NOTE 3: if (  class="modal" ) not exists, the below <div> box appeared without button click. -->
         <div class="modal fade" id="myModal">
             <!-- NOTE 4: if ( class="modal-dialog" ) not exists, modal window appeared by full width on viewport. -->
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-dialog-centered">
 
                 <!-- NOTE 5: if ( class="modal-content" ) not exists, the background of modal window not appeared. -->
                 <div class="modal-content">
@@ -65,9 +65,9 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form action="/user/chagePw" method="POST" id="findForm" onsubmit="return check();">
-                        <h1 class="heading">비밀번호 찾기</h1>
                         <div class="form-group">
-                       		<label class="control-label">아이디 (사용중인 이메일)</label>
+                        	<h1 class="modal-heading">비밀번호 찾기</h1>
+                       		<label class="control-label">아이디</label>
                        		<label id="emailLabel"class="warning-label"></label>
                        		<button id="emailBtn" type="button" class="check-button">확인하기</button>
                             <input id="emailId" type="email" name="userId" class="form-control" placeholder="example@naver.com"/>
@@ -82,7 +82,7 @@
                             <input type="password" id="inputPw" name="userPw" class="form-control" />
 
                            
-                            <button type="button" class="btn btn-default" id="submitBtn">변경하기<i class="fa fa-arrow-circle-right fa-2x"></i></button>
+                            <button type="button" class="btn findPasswordBtn" id="submitBtn">변경하기<i class="fa fa-arrow-circle-right fa-2x"></i></button>
                         </div>
                     </form>
                     </div>

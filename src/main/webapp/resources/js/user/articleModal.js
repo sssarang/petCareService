@@ -19,9 +19,9 @@ function pJoin(){
 	
 	if( (isCheck1 == false) || (isCheck2 == false) || (isCheck3 == false)) {
 		swal({
-			title : '필수!',
+			title : '',
 			text : '필수항목을 체크해주세요',
-			icon : 'info',
+			icon : 'warning',
 		});
 	} else {
 		//펫시터 가입
@@ -64,9 +64,9 @@ function nJoin(){
 		window.location.href="http://localhost:8090/user/joinPage";
 	} else {
 		swal({
-			title : '필수!',
+			title : '',
 			text : '필수항목을 체크해주세요',
-			icon : 'info',
+			icon : 'warning',
 		});
 	}//if-else
 }//nJoin
