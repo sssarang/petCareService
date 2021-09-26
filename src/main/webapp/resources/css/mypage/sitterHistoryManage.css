@@ -11397,8 +11397,8 @@ body{
   margin: 25px auto;
   padding: 10px;
   border: 2px solid rgb(255, 210, 127);
-  width: 800px;
-  height: 370px;
+  width: 600px;
+  height: 280px;
   border-radius: 20px;
 }
 
@@ -11413,7 +11413,7 @@ body{
   margin-top : 20px;	
   width: 240px;
   height: 220px;
-  border-radius: 50%;
+  border-radius: 20%;
   border: 1px solid;
 }
 
@@ -11534,4 +11534,12 @@ body{
    width: 75%;
    
    margin-top:56px;
+}
+
+.tdText {
+	font-weight: bold;	
+}
+
+.tdData {
+	margin-left: 10px;	
 }
