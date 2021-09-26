@@ -44,7 +44,7 @@
 	<!-- alert js -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
-	<title>쓰담쓰담 | 펫시터 예약 서비스</title>
+	<title>쓰담쓰담 | 로그인</title>
 </head>
 
 <body style="padding-right: 0 !important">
@@ -61,7 +61,7 @@
 	                <div class="col-md-offset-3 col-md-6">
 	                    <form action="/user/login" method="POST">
 	                        <div class="form-group">
-	                        	<h1 class="heading">Login</h1>
+	                        	<h1 class="heading">로그인</h1>
 	                            <input type="text" name="userId" class="form-control" placeholder="Email"/>
 	
 	                            <input type="password" name="userPw" class="form-control" placeholder="Password"/>

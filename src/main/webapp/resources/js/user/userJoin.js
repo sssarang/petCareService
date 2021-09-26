@@ -14,7 +14,7 @@ $(function() {
 		
 		if(email.trim() == ''){
 			//이메일을 입력하지 않은 경우
-	        $('#emailLabel').text("* 이메일을 입력하세요.");
+	        $('#emailLabel').text("*이메일을 입력하세요.");
 	        return;
 		} else {
 			//이메일 정규식
@@ -22,7 +22,7 @@ $(function() {
 			
 			if(email.match(regExp) == null){
 				//이메일 형식에 맞지 않는 경우
-				$('#emailLabel').text("* 이메일 형식에 맞지 않습니다.");
+				$('#emailLabel').text("*이메일 형식에 맞지 않습니다.");
 				return;
 			}//if
 		}//if-else
@@ -36,10 +36,10 @@ $(function() {
 				if(resp == 'success'){
 					//인증 성공
 					$('#emailLabel').css("color", "blue");
-					$('#emailLabel').text("* 사용 가능한 이메일입니다.");
+					$('#emailLabel').text("*사용 가능한 이메일입니다.");
 					emailCheck = email;
 				} else{
-					$('#emailLabel').text("* 이미 사용중인 이메일입니다.");
+					$('#emailLabel').text("*이미 사용중인 이메일입니다.");
 				}//if-else
 			}
 		})//.ajax
@@ -52,11 +52,11 @@ $(function() {
 		
 		if(nickName.trim() == ''){
 			//닉네임을 입력하지 않은 경우
-			$('#nickNameLabel').text("* 닉네임을 입력하세요");
+			$('#nickNameLabel').text("*닉네임을 입력하세요");
 			return;
 		} else {
 			 if(nickName.length < 1 || nickName.length > 8){
-				$('#nickNameLabel').text("* 닉네임은 1~8자 이내로 가능합니다.");
+				$('#nickNameLabel').text("*닉네임은 1~8자 이내로 가능합니다.");
 				return;
 			 }
 		}//if-else
@@ -71,10 +71,10 @@ $(function() {
 				if(resp == 'success'){
 					//인증성공
 					$('#nickNameLabel').css("color", "blue");
-					$('#nickNameLabel').text("* 사용 가능한 닉네임입니다.");
+					$('#nickNameLabel').text("*사용 가능한 닉네임입니다.");
 					nickNameCheck = nickName;
 				} else{
-					$('#nickNameLabel').text("* 이미 사용중인 닉네임입니다.");
+					$('#nickNameLabel').text("*이미 사용중인 닉네임입니다.");
 				}//if-else
 			}
 		})//.ajax
@@ -88,7 +88,7 @@ $(function() {
 	    
 		if(email.trim() == ''){
 			//이메일을 입력하지 않은 경우
-	        $('#keyLabel').text("* 이메일을 입력하세요");
+	        $('#keyLabel').text("*이메일을 입력하세요");
 	        return;
 		}//if
 	  
@@ -99,7 +99,7 @@ $(function() {
 	        method : 'POST',
 	        data: sendData,
 	        success :function(resp){
-				$('#keyLabel').text("* 인증번호가 발급되었습니다.");
+				$('#keyLabel').text("*인증번호가 발급되었습니다.");
 				authKey = resp;
 			}
 	    })//.ajax	
@@ -111,15 +111,15 @@ $(function() {
 		$('#keyLabel').css("color", "red");
 		
 		if(inputKey.trim() == ''){
-			$('#keyLabel').text("* 인증번호를 입력하세요");
+			$('#keyLabel').text("*인증번호를 입력하세요");
 			return;
 		} else {
 			if(inputKey == authKey){
 				$('#keyLabel').css("color", "blue");
-				$('#keyLabel').text("* 인증번호가 일치합니다.");
+				$('#keyLabel').text("*인증번호가 일치합니다.");
 				return;
 			} else{
-				$('#keyLabel').text("* 인증번호가 일치하지 않습니다.");
+				$('#keyLabel').text("*인증번호가 일치하지 않습니다.");
 				return;
 			}//if-else
 		}//if-else
@@ -132,16 +132,16 @@ $(function() {
 		$('#pwLabel').css("color", "red");
 		
 		if(pw.trim() == ''){
-			$('#pwLabel').text("* 비밀번호를 입력하세요");
+			$('#pwLabel').text("*비밀번호를 입력하세요");
 			return;
 		} else {
 			if(pw.match(pwReg) == null){
 				//비밀번호 형식에 맞지 않는 경우
-				$('#pwLabel').text("* 숫자와 문자포함 6~12자리 이내");
+				$('#pwLabel').text("*숫자와 문자포함 6~12자리 이내");
 				return;
 			} else {
 				$('#pwLabel').css("color", "blue");
-				$('#pwLabel').text("* 사용할 수 있는 비밀번호 입니다");
+				$('#pwLabel').text("*사용할 수 있는 비밀번호 입니다");
 				passwordCheck = pw;
 			}
 		}//if-else
@@ -154,16 +154,16 @@ $(function() {
 		$('#phoneLabel').css("color", "red");
 		
 		if(phone.trim() == ''){
-			$('#phoneLabel').text("* ex)010-1234-5678");
+			$('#phoneLabel').text("*ex)010-1234-5678");
 			return;
 		} else {
 			if(phone.match(phoneReg) == null){
 				//전화번호 형식에 맞지 않는 경우
-				$('#phoneLabel').text("* 전화번호 형식이 일치하지 않습니다.");
+				$('#phoneLabel').text("*전화번호 형식이 일치하지 않습니다.");
 				return;
 			} else {
 				$('#phoneLabel').css("color", "blue");
-				$('#phoneLabel').text("* 전화번호 형식이 일치합니다.");
+				$('#phoneLabel').text("*전화번호 형식이 일치합니다.");
 				phoneNumberCheck = phone;
 			}
 		}//if-else
