@@ -11392,6 +11392,8 @@ body{
   width: 90%;
 }
 
+
+
 #resv_list {
   margin: 25px auto;
   padding: 10px;
@@ -11562,4 +11564,25 @@ input[type="text"] {
 	height: 700px;
 	
 	opacity: 0.8;
+}
+
+.navTitle {
+   margin-top: 10px;
+   margin-bottom: 10px;
+   
+}
+
+.navTitleIn {
+   font-size: 10px;
+   
+   float: right;
+   
+   margin-top: 10px;
+   margin-right:25%;
+}
+
+.hhr {
+   width: 75%;
+   
+   margin-top:56px;
 }

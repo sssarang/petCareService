@@ -36,20 +36,22 @@
             <%@ include file="/WEB-INF/views/common/mypageSidebar.jsp" %>
             <!-- Page content wrapper-->
 			<div id="profile_wrapper">
-			<div id="part0">
-			<h1 id="sitterProfile_head">프로필 관리</h1>
-			</div>
+				<div class="navTitle">
+                 	<p class="navTitleIn">마이페이지 > 프로필관리</p>
+               	</div>
+            	<hr class="hhr">
+			<!-- page content -->
 			<form action="/mypage/sitterProfileModify" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="userNo" value="${userNo}">
                 <div id="part1">  
-                	<p id="profile_p">프로필 사진&nbsp;&sung;</p>              	               		
+                	<p id="profile_p">프로필 사진</p>              	               		
                     <img src="/mypage/link/${userNo}" id="profilePhoto" width="350x" height="300px" onerror="this.src='/resources/assets/img/mypage/basicImg.jpg'">    
 					<label for="proPhotoUpload" class="btn_proPhoto">사진 변경</label>
 					<input type="file" name="proPhotoFile" id="proPhotoUpload">
 					<button type="submit" id="btn_save1">저장</button>                                                       	            	            
                 </div>
                 <div id="part2">
-					<label for="introduce">About me&nbsp;&sung;</label><br>
+					<label for="introduce">About me</label><br>
                     <textarea name="introduce" cols="70" rows="8" maxlength="50" placeholder="&nbsp;자기소개를 적어주세요." id="introduce">${sitterProfile.introduce}</textarea>
                     <button type="submit" id="btn_save2">저장</button>  
                 </div>
@@ -57,7 +59,7 @@
             </form>
 			
                 <div id="part3">                	
-                    <p class="part_p">가능한 서비스 & 금액&nbsp;&sung;</p>
+                    <p class="part_p">가능한 서비스 & 금액</p>
                     <div id="part345_2_1">	
 	                	<form action="/mypage/serviceTypeModify" method="POST">
 							<input type="hidden" name="userNo" value="${userNo}">
@@ -98,7 +100,7 @@
             
             
                 <div id="part4">
-                    <p class="part_p">가능한 스킬&nbsp;&sung;</p>
+                    <p class="part_p">가능한 스킬</p>
                     <div id="part345_2_2">
                         <form action="/mypage/skillTypeModify" method="POST">
                             <input type="hidden" name="userNo" value="${userNo}">
@@ -129,7 +131,7 @@
                     </div>
                 </div>
                 <div id="part5">
-                    <p class="part_p">가능한 반려동물&nbsp;&sung;</p>
+                    <p class="part_p">가능한 반려동물</p>
                     <div id="part345_2_3">
                         <form action="/mypage/petTypeModify" method="POST">
                             <input type="hidden" name="userNo" value="${userNo}">
@@ -160,7 +162,7 @@
                     </div>
                 </div>
                 <div id="part6">
-                    <p class="part_p">가능한 날짜&nbsp;&sung;</p>
+                    <p class="part_p">가능한 날짜</p>
                     <div id="part6_2">
                     	<form action="/mypage/serviceDateModify" method="POST">						
 							<table id="calendar"></table>

@@ -22,11 +22,13 @@
 			<%@ include file="/WEB-INF/views/common/mypageSidebar.jsp" %>
 			<!-- Page content wrapper-->
 			<div id="history_wrapper">
+				<div class="navTitle">
+                	<p class="navTitleIn">마이페이지 > 이력/리뷰 관리</p>
+               	</div>
+            	<hr class="hhr">
 				<!-- Page content-->
 				<div id="sitterHistory">
 					<div id="sitterHistoryManage">
-						<h1 id="sitterHistory_head">서비스 제공 내역</h1>
-						<br>
 						<c:forEach items="${history}" var="i">
 							<div id="history_list">
 								<p>서비스 제공 날짜 : <fmt:formatDate pattern="yyyy-MM-dd" value="${i.startDate}" /></p>
