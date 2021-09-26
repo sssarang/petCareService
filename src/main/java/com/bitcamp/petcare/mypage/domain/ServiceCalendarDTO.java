@@ -1,18 +1,14 @@
 package com.bitcamp.petcare.mypage.domain;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
 public class ServiceCalendarDTO {
 	
 	private Integer userNo;
-	private Date serviceDate;
+	private String serviceDate;
+	private String[] serviceDateList;
 	
-	private Integer regUserNo;							
-	
-	private Integer modUserNo;			
-	private Date modDate;
+	private String serviceYM;
 
 } // end class

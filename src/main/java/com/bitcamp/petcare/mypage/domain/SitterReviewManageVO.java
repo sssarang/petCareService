@@ -3,10 +3,11 @@ package com.bitcamp.petcare.mypage.domain;
 import lombok.Value;
 
 @Value
-public class SitterReplyManageVO {
+public class SitterReviewManageVO {
 	
 	private Integer serviceId;	
-	private String repContent;		
+	private Integer grade;
+	private String revContent;		
 	private String userNickname;
 
 } // end class

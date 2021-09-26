@@ -14,8 +14,5 @@ public class SitterHistoryManageVO {
 	private String proPhoto;
 	
 	private Integer serviceId;
-	
-	private Integer grade;
-	private String revContent;
 
 } // end class

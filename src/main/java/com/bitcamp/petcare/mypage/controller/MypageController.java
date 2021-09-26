@@ -42,7 +42,7 @@ import com.bitcamp.petcare.mypage.domain.PetsitterProfileDTO;
 import com.bitcamp.petcare.mypage.domain.PetsitterProfileVO;
 import com.bitcamp.petcare.mypage.domain.PetsitterSkillDTO;
 import com.bitcamp.petcare.mypage.domain.PetsitterSkillVO;
-import com.bitcamp.petcare.mypage.domain.ServiceCalendarVO;
+import com.bitcamp.petcare.mypage.domain.ServiceCalendarDTO;
 import com.bitcamp.petcare.mypage.domain.ServicePetkindsDTO;
 import com.bitcamp.petcare.mypage.domain.ServicePetkindsVO;
 import com.bitcamp.petcare.mypage.domain.ServiceTypeDTO;
@@ -51,6 +51,7 @@ import com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageDTO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterResvManageVO;
+import com.bitcamp.petcare.mypage.domain.SitterReviewManageVO;
 import com.bitcamp.petcare.mypage.domain.UserPasswordDTO;
 import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 import com.bitcamp.petcare.mypage.service.MypageService;
@@ -388,43 +389,38 @@ public class MypageController {
 		   	
 		   	String classify = vo.getUserClassify();
 		   	model.addAttribute("classify", classify);
+			model.addAttribute("userNo", vo.getUserNo());
 	      
 			PetsitterProfileVO sitterProfile = this.service.getPetsitterProfile(vo.getUserNo());
 			//Objects.requireNonNull(sitterProfile);
 			log.info("\t+ sitterProfile : {}", sitterProfile);
-			model.addAttribute("userNo", vo.getUserNo());
 			model.addAttribute("sitterProfile", sitterProfile);
 						
 			List<ServiceTypeVO> serviceType = this.service.getServiceType(vo.getUserNo());
 //			//Objects.requireNonNull(serviceTypeList);
 //			log.info("\t+ serviceType : {}", serviceType);
-			//model.addAttribute("userNo", vo.getUserNo());
 			model.addAttribute("serviceType", serviceType);
 			
 			List<PetsitterSkillVO> petsitterSkill = this.service.getPetsitterSkill(vo.getUserNo());
 			//Objects.requireNonNull(petsitterSkillList);
 			log.info("\t+ petsitterSkillList : {}", petsitterSkill);
-			model.addAttribute("userNo", vo.getUserNo());
 			model.addAttribute("petsitterSkillList", petsitterSkill);
 			
 			List<ServicePetkindsVO> servicePetkinds = this.service.getServicePetkinds(vo.getUserNo());
 			//Objects.requireNonNull(servicePetkindsList);
 			log.info("\t+ servicePetkindsList : {}", servicePetkinds);
-			model.addAttribute("userNo", vo.getUserNo());
 			model.addAttribute("servicePetkindsList", servicePetkinds);
 			
-			List<ServiceCalendarVO> serviceCalendar = this.service.getServiceCalendar(vo.getUserNo());
+			List<ServiceCalendarDTO> serviceCalendar = this.service.getServiceCalendar(vo.getUserNo());
 			//Objects.requireNonNull(serviceCalendarList);
 			log.info("\t+ serviceCalendarList : {}", serviceCalendar);
-			model.addAttribute("userNo", vo.getUserNo());
-			model.addAttribute("serviceCalendarList", serviceCalendar);
+			model.addAttribute("serviceCalendar", serviceCalendar);
 			
 			List<ActivityPhotoVO> activityPhoto = this.service.getActivityPhoto(vo.getUserNo());
 			//Objects.requireNonNull(activityPhotoList);
 			log.info("\t+ activityPhotoList : {}", activityPhoto);
-			model.addAttribute("userNo", vo.getUserNo());
 			model.addAttribute("activityPhotoList", activityPhoto);
-
+			
 	   }   // getSitterProfile
 	   
 		@PostMapping("sitterProfileModify")		// 펫시터 프로필 사진 수정
@@ -486,7 +482,7 @@ public class MypageController {
 		} // updateSkillType
 		
 		
-		@PostMapping("petTypeModify")		// 스킬타입 수정
+		@PostMapping("petTypeModify")		// 펫타입 수정
 		public String updatePetType(
 			HttpServletRequest req, Integer userNo, ServicePetkindsDTO modify, HttpSession session) {
 			log.debug("updatePetType({}) invoked.",modify);		
@@ -498,6 +494,21 @@ public class MypageController {
 			return "redirect: /mypage/sitterProfileManage";
 			
 			
+		} // updatePetType		
+		
+		@PostMapping("serviceDateModify")		// 서비스일정 추가 및 삭제
+		public String updateServiceDate(
+			HttpServletRequest req, ServiceCalendarDTO modify, HttpSession session) {
+			log.debug("updatePetType({}) invoked.",modify);		
+			
+			UserVO vo = (UserVO) session.getAttribute(loginKey);
+			int userNo = vo.getUserNo();
+			
+			modify.setUserNo(userNo);
+			this.service.updateServiceCalendar(modify);
+			
+			return "redirect: /mypage/sitterProfileManage";
+						
 		} // updatePetType		
 		
 	     
@@ -522,6 +533,18 @@ public class MypageController {
 	        model.addAttribute("history", history);
 	   } // getSitterHistory
 	   
+	   
+	   @ResponseBody
+	   @GetMapping("sitterReviewManage")
+	   public SitterReviewManageVO sitterReviewManage(@RequestParam(value="serviceId")Integer serviceId) {
+		   log.debug("sitterReviewManage() invoked.");
+		   
+		   SitterReviewManageVO review = this.service.getReview(serviceId);
+		   
+		   return review;
+	   } // sitterReviewManage
+	   
+	   
 	   @ResponseBody
 	   @GetMapping("sitterReplyManage")
 	   public SitterReplyManageVO sitterReplyManage(@RequestParam(value="serviceId")Integer serviceId) {
@@ -534,14 +557,20 @@ public class MypageController {
 	   
 	   @ResponseBody
 	   @PostMapping("sitterReplySend")
-	   public boolean insertReply(SitterReplyManageDTO reply, HttpSession session) {
+	   public boolean insertReply(
+			   @RequestParam(value = "serviceId")Integer serviceId,
+			   @RequestParam(value = "repContent")String repContent,
+			   @RequestParam(value = "userNickname")String userNickname,
+			   SitterReplyManageDTO reply, 
+			   HttpSession session			   
+			) {
 		   	log.debug("insertReply() invoked.");
 			   
 		   	UserVO vo = (UserVO) session.getAttribute(loginKey);
 		   	log.info("\t + vo : {}", vo);
-		   	String userNickname = vo.getUserNickname();
+		   	String userNickname1 = vo.getUserNickname();
 		    
-		   	reply.setUserNickname(userNickname);
+		   	reply.setUserNickname(userNickname1);
 		   	log.info("\t + reply : {}", reply);
 		   	if(this.service.getReply(reply.getServiceId()) == null){
 			   this.service.insertReply(reply);

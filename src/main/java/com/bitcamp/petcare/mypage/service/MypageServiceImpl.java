@@ -24,7 +24,6 @@ import com.bitcamp.petcare.mypage.domain.PetsitterProfileVO;
 import com.bitcamp.petcare.mypage.domain.PetsitterSkillDTO;
 import com.bitcamp.petcare.mypage.domain.PetsitterSkillVO;
 import com.bitcamp.petcare.mypage.domain.ServiceCalendarDTO;
-import com.bitcamp.petcare.mypage.domain.ServiceCalendarVO;
 import com.bitcamp.petcare.mypage.domain.ServicePetkindsDTO;
 import com.bitcamp.petcare.mypage.domain.ServicePetkindsVO;
 import com.bitcamp.petcare.mypage.domain.ServiceTypeDTO;
@@ -33,6 +32,7 @@ import com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageDTO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterResvManageVO;
+import com.bitcamp.petcare.mypage.domain.SitterReviewManageVO;
 import com.bitcamp.petcare.mypage.domain.UserPasswordDTO;
 import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 import com.bitcamp.petcare.mypage.mapper.CustomerHistoryManageMapper;
@@ -323,9 +323,9 @@ public class MypageServiceImpl implements MypageService {
 		return this.sTprofileMapper.getServicePetKinds(userNo);
 		
 	} // getServicePetKinds
-
+	
 	@Override
-	public List<ServiceCalendarVO> getServiceCalendar(Integer userNo) {
+	public List<ServiceCalendarDTO> getServiceCalendar(Integer userNo) {
 		log.debug("getServiceCalendar({}) invoked.", userNo);
 		
 		Objects.requireNonNull(this.sTprofileMapper);
@@ -446,10 +446,18 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public int updateServiceCalendar(ServiceCalendarDTO dto) {
 		log.debug("updateServiceCalendar({}) invoked.", dto);
-		
+		int result = 0;
 		Objects.requireNonNull(dto);
+		// 해당월 전체 삭제 후 다시 등록
+		this.sTprofileMapper.deleteServiceCalendar(dto);
 		
-		return this.sTprofileMapper.updateServiceCalendar(dto);
+		// 등록
+		for(String serviceDT : dto.getServiceDateList()) {
+			dto.setServiceDate(serviceDT);
+			result += this.sTprofileMapper.insertServiceCalendar(dto);
+		}
+		
+		return result;
 	} // updateServiceCalendar
 
 	@Override
@@ -474,6 +482,42 @@ public class MypageServiceImpl implements MypageService {
 		return this.sThistoryMapper.getHistory(petSitterNo);
 		
 	} // getHistory
+	
+	//--------------------------------------------------------------------//
+	
+	@Override
+	public SitterReviewManageVO getReview(Integer serviceId) {
+		log.debug("getReview({}) invoked.", serviceId);
+		
+		return this.sTreplyMapper.getReview(serviceId);
+	} // readReply
+
+	@Override
+	public SitterReplyManageVO getReply(Integer serviceId) {
+		log.debug("getReply({}) invoked.", serviceId);
+		
+		return this.sTreplyMapper.getReply(serviceId);
+	} // readReply
+	
+	@Override
+	public int insertReply(SitterReplyManageDTO dto) {
+		log.debug("insertReply() invoked.");
+		
+		Objects.requireNonNull(this.sTreplyMapper);
+		
+		return this.sTreplyMapper.insertReply(dto);
+	} // insertReply
+
+
+	@Override
+	public int updateReply(SitterReplyManageDTO dto) {
+		log.debug("modifyReview() invoked.");
+		
+		Objects.requireNonNull(this.sTreplyMapper);
+		
+		return this.sTreplyMapper.updateReply(dto);
+		
+	} // updateReply
 
 	
 	//--------------------------------------------------------------------//
@@ -510,34 +554,7 @@ public class MypageServiceImpl implements MypageService {
 		return this.sTresvMapper.resvCompletion(serviceId);
 	} // resvCompletion
 
-	//--------------------------------------------------------------------//
 
-	@Override
-	public SitterReplyManageVO getReply(Integer serviceId) {
-		log.debug("getReply({}) invoked.", serviceId);
-		
-		return this.sTreplyMapper.getReply(serviceId);
-	} // readReply
-	
-	@Override
-	public int insertReply(SitterReplyManageDTO dto) {
-		log.debug("insertReply() invoked.");
-		
-		Objects.requireNonNull(this.sTreplyMapper);
-		
-		return this.sTreplyMapper.insertReply(dto);
-	} // insertReply
-
-
-	@Override
-	public int updateReply(SitterReplyManageDTO dto) {
-		log.debug("modifyReview() invoked.");
-		
-		Objects.requireNonNull(this.sTreplyMapper);
-		
-		return this.sTreplyMapper.updateReply(dto);
-		
-	} // updateReply
 	
 	//--------------------------------------------------------------------//
 

@@ -9,7 +9,6 @@ import com.bitcamp.petcare.mypage.domain.PetsitterProfileVO;
 import com.bitcamp.petcare.mypage.domain.PetsitterSkillDTO;
 import com.bitcamp.petcare.mypage.domain.PetsitterSkillVO;
 import com.bitcamp.petcare.mypage.domain.ServiceCalendarDTO;
-import com.bitcamp.petcare.mypage.domain.ServiceCalendarVO;
 import com.bitcamp.petcare.mypage.domain.ServicePetkindsDTO;
 import com.bitcamp.petcare.mypage.domain.ServicePetkindsVO;
 import com.bitcamp.petcare.mypage.domain.ServiceTypeDTO;
@@ -22,7 +21,7 @@ public interface SitterProfileManageMapper {
 	public abstract List<ServiceTypeVO> getServiceType(Integer userNo);			
 	public abstract List<PetsitterSkillVO> getPetsitterSkill(Integer userNo);		 
 	public abstract List<ServicePetkindsVO> getServicePetKinds(Integer userNo);	 
-	public abstract List<ServiceCalendarVO> getServiceCalendar(Integer userNo);	 	
+	public abstract List<ServiceCalendarDTO> getServiceCalendar(Integer userNo);	 	
 	public abstract List<ActivityPhotoVO> getActivityPhoto(Integer userNo);
 	
 	// insert
@@ -38,8 +37,8 @@ public interface SitterProfileManageMapper {
 	public abstract int updateServiceType(ServiceTypeDTO dto);	
 	public abstract int updatePetsitterSkill(PetsitterSkillDTO dto);
 	public abstract int updateServicePetkinds(ServicePetkindsDTO dto);
-	public abstract int updateServiceCalendar(ServiceCalendarDTO dto);
 	public abstract int updateActivityPhoto(ActivityPhotoDTO dto);
+	public abstract int deleteServiceCalendar(ServiceCalendarDTO dto);
 	
 	public abstract int mergeServiceType(ServiceTypeDTO dto);
 	public abstract int mergeSkillType(PetsitterSkillDTO dto);

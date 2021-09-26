@@ -60,7 +60,7 @@
                                 <input type="hidden" name="medicine" value="${i.medicine}">
                                 <input type="hidden" name="specialNote" value="${i.specialNote}">  
                                 <!-- Button to Open the Modal -->
-                                <button type="button" class="btn-primary btn-modal" id="resvModalBtn" data-toggle="modal" data-target="#modal">더보기</button>
+                                <button type="button" class="btn-primary btn-modal" id="resvModalBtn" data-toggle="modal" data-target="#modal" data-backdrop="static">더보기</button>
                                 <!-- The Modal -->
                                 <div class="modal" id="modal">
             
@@ -70,6 +70,8 @@
                                             <!-- Modal Header -->
                                             <div class="modal-header">
                                                 <h4 class="modal-title">상세정보</h4>
+                                                
+                                                <button type="button" class="close" data-dismiss="modal" id="close" >&times;</button>
                                             </div>
                                             <!-- Modal body -->
                                             <div class="modal-body"> 

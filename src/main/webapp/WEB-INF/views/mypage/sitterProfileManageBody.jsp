@@ -162,28 +162,19 @@
                 <div id="part6">
                     <p class="part_p">가능한 날짜&nbsp;&sung;</p>
                     <div id="part6_2">
-                    	<form action="/mypage/sitterProfileManage" method="POST">
-							&nbsp;<input type="text" class="selector" placeholder="날짜를 선택하세요." name="serviceCalendar"/>
-							<a class="input-button" title="toggle" data-toggle><i class="icon-calendar"></i></a>
-							
-							<script type="text/javascript">
-							$(".selector").flatpickr({ 
-							dateFormat: "Y-m-d",
-							mode: "multiple",
-							minDate:"today",
-							maxDate: new Date().fp_incr(60)
-							});
-							</script>
-							<input type="submit" value="저장" id="part6_Btn">
+                    	<form action="/mypage/serviceDateModify" method="POST">						
+							<table id="calendar"></table>
+							<input type="hidden" id="serviceMonYear" name ="serviceYM">
+							<button type="submit" id="btn_save6">저장</button>
 						</form>
                     </div>
                 </div>
                 <div id="part7">
-   					활동사진
+   					활동사진 
                     
                 </div>
 			</div>
-            
+           
         </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -193,6 +184,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
+	
         $(function(){
         	
         	$('input:radio[name="careAllDay"][value="${serviceType[0].useYn}"]').prop('checked', true);
@@ -209,7 +201,14 @@
         	$('input:radio[name="middleDog"][value="${servicePetkindsList[1].useYn}"]').prop('checked', true);
         	$('input:radio[name="smallDog"][value="${servicePetkindsList[2].useYn}"]').prop('checked', true);
         	$('input:radio[name="cat"][value="${servicePetkindsList[3].useYn}"]').prop('checked', true);
-
+			
+        	
+        	//서비스 가능한 날짜 체크(DB 바탕으로)
+        	<c:forEach items="${serviceCalendar}" var="item">
+				console.log(${item.serviceDate});
+				$("input[type='checkbox'][name='serviceDateList'][value='${item.serviceDate}']").attr("checked", true);        
+			</c:forEach>
+            
         	
         	// 프로필 사진 미리보기
         	$(document).on("change", "input[name=proPhotoFile]", function(e){
@@ -250,13 +249,189 @@
 	        				})	
             		}
             		
-                }) // click
-    		
-            
-        	
-        	
-        })	// jq
+             }) // click
+         
+
+       	})	// jq
 		
+       	//////////////////////////////////////////////////////////////////////////////////
+
+		function fnZeros(n, digits) {
+		  var zero = '';
+		  n = n.toString();
+		
+		  if (n.length < digits) {
+		    for (var i = 0; i < digits - n.length; i++)
+		      zero += '0';
+		  }
+		  return zero + n;
+		} //fnZeros(n: 타겟/ digits: 자리수)       	
+		
+       	//----------------서비스일정달력준비-------------------//
+
+        const today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth(); 
+
+        let maxDate = new Date();
+        maxDate.setMonth(month+3);
+
+        YM = year + ". " + fnZeros((month+1), 2);   // JS는 0~11월로 표시해서 +1
+
+        //첫날
+        first_date = new Date(year, month, 1).getDate();
+
+        //마지막날
+        last_date = new Date(year, month+1, 0).getDate();
+
+        //첫날 요일
+        first_day = new Date(year, month, 1).getDay();
+        // 원하는 요일부터 1일이 출력되게 하기 위함       	
+
+        var scTable = "";
+        scTable += "<thead><tr>";
+        scTable += "<td> </td>";
+        scTable += "<td> <input id='calPre' type = 'button' value = '◀'/> </td>";
+        scTable += "<td id='YM' colspan='3' style='padding: 0; width: 43%;''>year-month</td>";
+        scTable += "<td> <input id='calNext' type = 'button' value = '▶'/> </td>";
+        scTable += "<td> </td>";
+        scTable += "</tr></thead>";
+        scTable += "<tbody><tr id='day7'>";
+        scTable += "<td>일</td> <td>월</td> <td>화</td> <td>수</td> <td>목</td> <td>금</td> <td>토</td>";
+        scTable += "</tr></tbody>";
+
+        $("#calendar").html(scTable);
+
+        document.getElementById("YM").innerHTML = YM;
+        document.getElementById("calPre").addEventListener("click", function before_month() {
+        	console.log('before_month invoked.');
+        	
+			if(month == new Date().getMonth()){
+        								
+        		return false;
+        	} else{
+        		month = month-1;
+        		
+        		if(month === -1){
+                    //0월이 되었을 때 이전연도 12월로 가도록 작업
+                    //js에서 0월 = 실제 1월 이므로 -1로 맞춰야한다.
+                    year = year - 1;
+                    month = month + 12;
+            	}
+            
+        		while (calendar.rows.length > 2) {
+                //2줄이 남을 때 까지 줄을 지워줌
+                //버튼과 요일이 남아야 하기 때문에 2줄만 남기고 지운다.
+                calendar.deleteRow(calendar.rows.length-1);
+                } //while
+
+        		
+                YM = year + ". " + fnZeros((month+1), 2); 
+                document.getElementById("YM").innerHTML = YM;
+
+                first_date = new Date(year,month,1).getDate();
+                last_date = new Date(year,month+1,0).getDate();
+                first_day = new Date(year,month,1).getDay();
+        		
+                fnMakecalender();	        			
+        	} //if-else
+        	
+        }); //before_month
+
+        document.getElementById("calNext").addEventListener("click", function next_month() {
+        	console.log('next_month invoked.');
+        	
+            if(month === maxDate.getMonth()){
+        		swal("", "날짜지정은 3개월 내에서 가능합니다", "warning");
+        		
+        		return false;
+        	} else{
+        		
+        		while (calendar.rows.length > 2) {
+                calendar.deleteRow(calendar.rows.length-1);
+                } //while
+
+                month = month+1;
+
+        		if(month === 12){
+                    //13월이 되었을 때 다음연도 1월로 가도록 작업
+                    //js에서 11월 = 실제 12월 이므로 12로 맞춰야한다.
+                    year = year + 1;
+                    month = month -12;
+                } //if
+                
+        		YM = year + ". " + fnZeros((month+1), 2); 
+                document.getElementById("YM").innerHTML = YM;
+
+                first_date = new Date(year,month,1).getDate();
+                last_date = new Date(year,month+1,0).getDate();
+                first_day = new Date(year,month,1).getDay();
+
+                fnMakecalender();	        				
+        	} //if-else	
+        	
+        }); //next_month		
+
+        fnMakecalender();
+        
+       	
+       	function fnMakecalender(){
+			console.debug('fnMakecalender invoked.');
+	    	
+			calendar = document.getElementById("calendar");
+	        row = calendar.insertRow();
+	      	
+	        //년-월
+        	var frontDate = year+"-"+fnZeros((month+1), 2);	        
+	        //document.getElementById("serviceYearMonth");
+	        $("#serviceMonYear").val(frontDate);
+	        
+	        
+	        for(i = 0; i < first_day; i++){
+	            cell = row.insertCell();
+	        } //for
+	
+	        for(i = 1; i <= last_date; i++){
+
+	        	//저장할 날짜
+	        	var dateVal = year+"-"+fnZeros((month+1), 2)+"-"+fnZeros(i, 2);
+	        	
+	        	
+	            if(first_day < 7){
+	                //셀추가
+	                cell = row.insertCell();
+	                
+	                //모든 셀에 id를 부여함
+	                cell.setAttribute('id', [i]);
+	                
+	                //추가된 셀에 i값 입력
+	             
+	                var addTag ='<div class="btn-date"><input class="btn-date" id="cal'+i+'" type="checkbox" name="serviceDateList" value="'+dateVal+'"><label for="cal'+i+'">'+i+'</label></div>';
+	                cell.innerHTML = addTag;
+	                
+	                first_day += 1;
+	            } else{
+	                //행추가
+	                row = calendar.insertRow();
+	
+	                cell = row.insertCell();
+	                cell.setAttribute('id', [i]); 
+					
+	                var addTag ='<div class="btn-date"><input class="btn-date" id="cal'+i+'" type="checkbox" name="serviceDateList" value="'+dateVal+'"><label for="cal'+i+'">'+i+'</label></div>';
+	                cell.innerHTML = addTag;
+	
+	                first_day = first_day - 6;
+	                //6을 빼는 이유는 매번 7에서 else문으로 넘어오고, if문이 6번만 하면 되기때문이다.
+	                //7을 빼버리면 0부터 시작해서 if문이 7번 실행되고 else로 넘어오므로 -6을한다.
+	            } //if-else
+	        } //for
+	        
+        	<c:forEach items="${serviceCalendar}" var="item">
+				console.log(${item.serviceDate});
+				$("input[type='checkbox'][name='serviceDateList'][value='${item.serviceDate}']").attr("checked", true);        
+			</c:forEach>
+	        
+	    } //fnMakecalender
 		
 		</script>
     </body>

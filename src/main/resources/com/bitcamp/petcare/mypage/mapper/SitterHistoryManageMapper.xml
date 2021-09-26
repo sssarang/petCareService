@@ -15,14 +15,11 @@
             u.user_nickname,
             p.pet_name,
             p.pro_photo,
-            m.service_id,
-            r.grade,
-            r.rev_content
+            m.service_id
         FROM tbl_service_matching m
         INNER JOIN tbl_user u ON (m.pet_user_no = u.user_no)
         INNER JOIN tbl_common_code c ON (m.service_type_code = c.code)
         INNER JOIN tbl_pet_profile p ON (u.user_no = p.user_no)
-        INNER JOIN tbl_review r ON (m.service_id = r.service_id)
         WHERE m.pet_sitter_no = #{petSitterNo}
         		AND m.step_type_code = 34
         ORDER BY m.service_id DESC

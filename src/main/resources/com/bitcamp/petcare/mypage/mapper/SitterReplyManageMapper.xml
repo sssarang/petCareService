@@ -5,7 +5,19 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="com.bitcamp.petcare.mypage.mapper.SitterReplyManageMapper">    
+<mapper namespace="com.bitcamp.petcare.mypage.mapper.SitterReplyManageMapper">
+
+    <select id="getReview" resultType="com.bitcamp.petcare.mypage.domain.SitterReviewManageVO">
+        SELECT
+            r.service_id,
+            r.grade,
+            r.rev_content,
+            u.user_nickname as writer
+        FROM tbl_review r
+        INNER JOIN tbl_service_matching m ON (r.service_id = m.service_id)
+        INNER JOIN tbl_user u ON (m.pet_user_no = u.user_no)
+        WHERE r.service_id = #{serviceId}
+    </select>    
 	
     <select id="getReply" resultType="com.bitcamp.petcare.mypage.domain.SitterReplyManageVO">
         SELECT

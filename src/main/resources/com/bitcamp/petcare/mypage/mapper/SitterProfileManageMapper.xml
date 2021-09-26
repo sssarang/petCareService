@@ -39,13 +39,16 @@
       	WHERE p.user_no = #{userNo}
    </select>
 
-   <select id="getServiceCalendar" resultType="com.bitcamp.petcare.mypage.domain.ServiceCalendarVO">
-      SELECT p.user_no, c.service_date
-      FROM tbl_petsitter_profile p
-      INNER JOIN tbl_service_calendar c ON p.user_no = c.user_no
-      WHERE p.user_no = #{userNo}
+   <select id="getServiceCalendar" resultType="com.bitcamp.petcare.mypage.domain.ServiceCalendarDTO">
+      SELECT /*+ index_desc(tbl_petsitter_profile) */ 
+		     ps.user_no,
+		     TO_CHAR(sc.service_date,'yyyy-MM-dd') as service_date
+		FROM tbl_petsitter_profile ps
+		INNER JOIN tbl_service_calendar sc on ps.user_no 
+                                            = sc.user_no
+		WHERE ps.user_no = #{userNo} 
    </select>
-
+   
    <select id="getActivityPhoto" resultType="com.bitcamp.petcare.mypage.domain.ActivityPhotoVO">
       SELECT p.user_no, a.photo_no, a.act_photo
       FROM tbl_petsitter_profile p
@@ -93,7 +96,6 @@
          user_no = #{userNo}
    </update>
 
-
    <update id="updateServiceCalendar">
       UPDATE 
          tbl_service_calendar
@@ -118,6 +120,15 @@
    </update>
    
    
+   <!-- delete -->
+ 
+	<delete id = "deleteServiceCalendar">
+		DELETE FROM tbl_service_calendar
+		WHERE user_no = #{userNo}
+		AND TO_CHAR(service_date,'YYYY-MM') = #{serviceYM}
+	</delete>
+	 
+	  
    <!-- merge문 -->
    <update id="mergeServiceType">
    	MERGE INTO tbl_service_type
