@@ -39,9 +39,21 @@
 								<div id="historyInformation">
 									<ul id="historyInformationUl">
 										<input type="hidden" name="serviceId" value="${i.serviceId}">
-										<li>반려인 닉네임 : ${i.userNickname}</li>
-										<li>반려동물 이름 : ${i.petName}</li>
-										<li>제공 서비스 유형 : ${i.codeName}</li>  
+										<table>
+											<tr>
+												<td class="tdText">닉네임</td>
+												<td class="tdData">${i.userNickname}</td>
+											</tr>
+											<tr>
+												<td class="tdText">펫이름</td>
+												<td class="tdData">${i.petName}</td>
+											</tr>
+											<tr>
+												<td class="tdText">서비스 유형</td>
+												<td class="tdData">${i.codeName}</td>
+											</tr>																						
+										</table>
+									
 										<!-- Button to Open the Modal -->
 										<button type="button" class="btn-primary btn-modal" id="reviewBtn" data-toggle="modal" data-target="#modal1" data-backdrop="static">리뷰 확인</button>
 										<!-- The Modal -->	
