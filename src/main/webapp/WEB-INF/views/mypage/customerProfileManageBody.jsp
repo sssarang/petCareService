@@ -28,14 +28,16 @@
             <%@ include file="/WEB-INF/views/common/mypageSidebar.jsp" %>
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
+            	<div class="navTitle">
+            		<p class="navTitleIn">마이페이지 > 회원정보관리</p>
+            	</div>
+            	<hr class="hhr">
                 <!-- Page content-->
                 <div class="customerProfileModify">
                     <form action="/mypage/customerProfileModify" method="POST" enctype="multipart/form-data">
                       <input type="hidden" name="userNo" value="${userNo}">
                                         
-                        <h1 id="head">프로필관리</h1>
                         <div id="proImg">
-                            <!-- <img src="${profile.proPhoto}" id="proPhoto" style="width: 300px; height: 300px; object-fit: fill; box-shadow: 3px 5px 10px #F9C7A1; border-radius: 5px;" onerror="this.src='/resources/assets/img/mypage/basicImg.jpg'">-->
                             <img src="/mypage/link/${userNo}" id="proPhoto" style="width: 300px; height: 300px; object-fit: fill; box-shadow: 3px 5px 10px #F9C7A1; border-radius: 5px;" onerror="this.src='/resources/assets/img/mypage/basicImg.jpg'">
                             <label for="proPhotoUpload" class="btn_proPhoto">사진 변경</label>
                             <input type="file" name="proPhotoFile" id="proPhotoUpload">

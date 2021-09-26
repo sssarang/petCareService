@@ -26,9 +26,12 @@
             <%@ include file="/WEB-INF/views/common/mypageSidebar.jsp" %>
             <!-- Page content wrapper-->
             <div id="resv_wrapper">
+                <div class="navTitle">
+                	<p class="navTitleIn">마이페이지 > 예약관리</p>
+               	</div>
+            	<hr class="hhr">
                 <div id="sitterResv">
-                    <br>
-                    <h1 id="sitterResv_head">서비스 요청 내역</h1>
+            		<!-- Page content-->
                     <c:forEach items="${resv}" var="i">
                         <br>		
                         <div id="resv_list">

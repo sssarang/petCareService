@@ -33,10 +33,13 @@
             <%@ include file="/WEB-INF/views/common/mypageSidebar.jsp" %>
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
+            	<div class="navTitle">
+            		<p class="navTitleIn">마이페이지 > 이력/리뷰 관리</p>
+            	</div>
+            	<hr class="hhr">
                 <!-- Page content-->
                 <div id="customerHistory">
                     <div id="customerHistoryManage">
-                        <h1 id="head">서비스 이용 내역</h1>
 						
 						<c:forEach items="${history}" var="i">
 						<div class="history">
@@ -49,20 +52,41 @@
                                 <ul id="psInfoUl">
                                 	<input type="hidden" name="serviceId" value="${i.serviceId}">
                                 	<input type="hidden" name="userNo" value="${userNo}">
-                                	<li>펫시터 닉네임 </li>
+                                	<input type="hidden" name="totalAmount" value="${i.totalAmount}">
+                                	
+                                	<table>
+                                		<tr>
+                                			<td class="boldText">닉네임</td>
+                                			<td class="dataIn">${i.userNickname}</td>
+                                		</tr>
+                                		<tr>
+                                			<td class="boldText">연락처</td>
+                                			<td class="dataIn">${i.userContact}</td>
+                                		</tr>
+                                		<tr>
+                                			<td class="boldText">서비스 유형</td>
+                                			<td class="dataIn">${i.codeName}</td>
+                                		</tr>
+                                		<tr>
+                                			<td class="boldText">금액</td>
+                                			<td class="dataIn amount" value="${i.totalAmount}"></td>
+                                		</tr>
+                                		                                	
+                                	</table>
+                                	<!-- <li>펫시터 닉네임 </li>
                                 	<li>${i.userNickname}</li>
                                 	<hr>
                                     <li>펫시터 연락처 </li>
                                     <li>${i.userContact}</li>
                                     <hr>
                                     <li>서비스 유형 </li>
-                                    <li>${i.codeName}</li>
+                                    <li>${i.codeName}</li>-->
                                     <br>
                                  	  <!-- Button to Open the Modal -->
 							        <!-- NOTE 1: if ( data-toggle="modal" ) not exists, modal window not appeared. -->
 							        <!-- NOTE 2: if ( data-target="#myModal" ) not exists or incorrect, modal window not appeared. -->
-							        <button type="button" class="btn-modal" id="btn_reviewModal" data-toggle="modal" data-target="#myModal">
-							            리뷰 남기기❤❤
+							        <button type="button" class="btn-modal" id="btn_reviewModal" data-toggle="modal" data-target="#myModal" data-backdrop="static">
+							            리뷰 남기기&nbsp;<img src="/resources/assets/img/mypage/pencil.png" width="25px">
 							        </button>
 							
 							        <!-- The Modal -->
@@ -86,8 +110,7 @@
                                                 <form action="/mypage/customerHistoryManage" method="POST">
 							                    <!-- 별점주기 -->
 												<div class="star-rating">
-													<input type="hidden" name="serviceId" value="${i.serviceId}">
-                                                    
+													<input type="hidden" name="serviceIdIn" value="">
                                                     
 												    <input type="radio" id="5-stars" name="grade" value="5" />
 												    <label for="5-stars" class="star">&#9733;</label>
@@ -110,12 +133,6 @@
 							                    </div>
 
                                                 
-                                                
-							                    <!-- Modal footer -->
-							                    <div class="modal-footer">
-							                        <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
-							                        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-							                    </div>
 												</form>
 							                </div>
 							                
@@ -143,6 +160,15 @@
         <script>
         
       	  $(function() {
+      		  	// 금액 정규식
+      		  //	var amountt = $('.amount').val();
+      		  //	console.log(amountt);
+      		//  var price = String(amountt).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      		//  var amount = price+"원";
+      		//	console.log('price'+price);
+      		//  console.log('amount'+amount);
+      		//	$('.amount').html(amount);
+      		  
       		  	// 이력 내역이 없을때
 				 if($('input[name=serviceId]').val() == null){
 					$('#customerHistory').hide(); 
@@ -158,6 +184,7 @@
         			var serviceId = $(this).parent().find('input[name="serviceId"]').val();
 	        		console.log(serviceId);
 	        		
+	        		$('input[name=serviceIdIn]').val(serviceId);
 	        		
 	        		
         			$.ajax({
@@ -188,37 +215,39 @@
         		<!-- 리뷰 저장 버튼 클릭시 페이지 전환 없이 데이터 전송 -->
 				$("#btn_save").click(function() {
 					
-									var $parent = $(this).parent().parent();
-									var $parents = $(this).parents();
-									
-									var serviceId = $parent.find('input[name="serviceId"]').val();
-					        		console.log(serviceId);
-					        		var revContent = $parent.find('textarea[name="revContent"]').val();
-					        		console.log(revContent);
-					        		var grade = $parent.find('input:radio[name="grade"]:checked').val();
-					        		console.log(grade);
-					        		var userNo = $parents.find('input[name="userNo"]').val();
-					        		console.log("userNo" + userNo);
-					        		
-					        		
-				        			$.ajax({
-				        				url: "/mypage/customerReviewSend",
-				        				method: "POST",
-				        				data: {
-				        					serviceId : serviceId,
-				        					revContent : revContent,
-				        					grade : grade,
-				        					userNo : userNo
-				        				},
-				        				success: function(data){
-											location.reload();
-				        				}	// success	
-				        			});	// ajax
+					var $parent = $(this).parent().parent();
+					var $parents = $(this).parents();
+					
+					var serviceId = $parent.find('input[name="serviceIdIn"]').val();
+	        		console.log('서비스아디 : '+serviceId);
+	        		var revContent = $parent.find('textarea[name="revContent"]').val();
+	        		console.log(revContent);
+	        		var grade = $parent.find('input:radio[name="grade"]:checked').val();
+	        		console.log(grade);
+	        		var userNo = $parents.find('input[name="userNo"]').val();
+	        		console.log("userNo" + userNo);
+	        		
+	        		
+        			$.ajax({
+        				url: "/mypage/customerReviewSend",
+        				method: "POST",
+        				data: {
+        					serviceId : serviceId,
+        					revContent : revContent,
+        					grade : grade,
+        					userNo : userNo
+        				},
+        				success: function(data){
+							location.reload();
+        				}	// success	
+        			});	// ajax
+        		
+        		})	// click
 				        		
-				        		})	// click
-				        		
-				 
-					 
+				 $(".close").click(function(){
+					 location.reload();
+				 })
+						 
         	})	// jq
         	
         </script>

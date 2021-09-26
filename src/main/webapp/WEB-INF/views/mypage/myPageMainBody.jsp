@@ -30,12 +30,13 @@
                      <!-- <img src="/resources/assets/img/mypage/main/pet1.jpg" id="mypageMainImg"/>-->
                      <div id="slideShow"> 
                      	<ul class="slides"> 
-                     		<li><img src="/resources/assets/img/mypage/main/pet1.jpg"></li> 
-                     		<li><img src="/resources/assets/img/mypage/main/pet2.jpg"></li> 
-                     		<li><img src="/resources/assets/img/mypage/main/pet3.jpg"></li> 
-                     		<li><img src="/resources/assets/img/mypage/main/pet4.jpg"></li> 
-                     		<li><img src="/resources/assets/img/mypage/main/pet5.jpg"></li> 
-                     		<li><img src="/resources/assets/img/mypage/main/pet6.jpg"></li> 
+                     		<li><img src="/resources/assets/img/mypage/main/pet.jpg" width="400px"></li>
+                     		<li><img src="/resources/assets/img/mypage/main/pet1.jpg" width="400px"></li> 
+                     		<li><img src="/resources/assets/img/mypage/main/pet3.jpg" width="400px"></li> 
+                     		<li><img src="/resources/assets/img/mypage/main/pet4.jpg" width="400px"></li> 
+                     		<li><img src="/resources/assets/img/mypage/main/pet5.jpg" width="400px"></li> 
+                     		<li><img src="/resources/assets/img/mypage/main/pet6.jpg" width="400px"></li>
+                     		<!-- <li><img src="/resources/assets/img/mypage/main/pet7.jpg" width="400px"></li>-->  
                      	</ul> 
                      	<p class="controller"> 
                      	<!-- &lang: 왼쪽 방향 화살표 &rang: 오른쪽 방향 화살표 --> 
@@ -62,12 +63,12 @@
         	let slideImg = document.querySelectorAll(".slides li"); 
         	currentIdx = 0; slideCount = slideImg.length; prev = document.querySelector(".prev"); 
         	next = document.querySelector(".next"); 
-        	slideWidth = 300; slideMargin = 100; 
+        	slideWidth = 400; slideMargin = 100; 
         	slides.style.width = (slideWidth + slideMargin)*slideCount + "px"; 
         	
         	function moveSlide(num){ 
         		// 왼쪽으로 400px씩 이동 
-        		slides.style.left = -num * 400 + "px"; currentIdx = num; } prev.addEventListener('click', function(){ 
+        		slides.style.left = -num * 575 + "px"; currentIdx = num; } prev.addEventListener('click', function(){ 
         		// 첫 번째 슬라이드로 표시 됐을때는 이전 버튼 눌러도 아무런 반응 없게 하기 위해 
         		// currentIdx !==0일때만 moveSlide 함수 불러옴 
         		if(currentIdx !== 0) moveSlide(currentIdx - 1); }); 

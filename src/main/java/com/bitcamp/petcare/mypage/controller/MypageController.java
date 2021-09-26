@@ -307,8 +307,9 @@ public class MypageController {
 		
 		CustomerReviewManageVO review = this.service.readReview(serviceId);
 		
+		if(review != null) {
 		log.info("userNO ::::: {} ", review.getUserNo());
-		
+		};
 		return review;
 	}	// customerReviewManage
 	

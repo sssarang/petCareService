@@ -13,7 +13,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>쓰담쓰담 | 반려인 프로필 관리</title>
+    <title>쓰담쓰담 | 마이페이지</title>
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/resources/assets/favicon2.ico" />

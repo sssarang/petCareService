@@ -11019,6 +11019,8 @@ textarea.form-control-lg {
 
 #page-content-wrapper {
   min-width: 100vw;
+  
+  margin-bottom: 20px;
 }
 
 body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
@@ -11083,9 +11085,9 @@ body{
     margin-right: 0;
 }
 
-#customerHistory{
-  margin-bottom : 50px;
-  margin-left: 200px;
+#customerHistory{ 
+	margin-top: 5%;
+  margin-left: 25%;
   
 }
 
@@ -11098,7 +11100,7 @@ body{
 
 .history{
   width: 600px;
-  height: 350px;
+  height: 280px;
 
   border: 2px solid;
   border-radius: 20px;
@@ -11124,11 +11126,11 @@ body{
 }
 
 #psInfoUl{
-  float: left;
+  float: right;
 
-  margin-left: 80px;
+  margin-left: 50px;
 
-  width: 200px;
+  width: 300px;
   text-align: center;
   display: inline;
 }
@@ -11274,3 +11276,34 @@ hr{
 	opacity: 0.8;
 }
 
+
+.navTitle{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	
+}
+
+.navTitleIn{
+	font-size: 10px;
+	
+	float: right;
+	
+	margin-top: 10px;
+	margin-right:25%;
+}
+
+.hhr{
+	width: 75%;
+	
+	margin-top:56px !important;
+}
+
+.boldText{
+	font-weight: bold;
+	
+	width: 100px;
+}
+
+.dataIn{
+	width: 100px;
+}

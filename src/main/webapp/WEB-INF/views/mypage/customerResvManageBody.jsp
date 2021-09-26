@@ -33,10 +33,13 @@
 		<%@ include file="/WEB-INF/views/common/mypageSidebar.jsp" %> 
  	       <!-- Page content wrapper-->
             <div id="page-content-wrapper">
+            	<div class="navTitle">
+            		<p class="navTitleIn">마이페이지 > 서비스 이용 내역</p>
+            	</div>
+            	<hr class="hhr">
                 <!-- Page content-->
                 <div id="customerResv">
                     <div id="customerResvManage">
-                        <h1 id="head">서비스 예약 내역</h1>
 
                         <div id="reservation">
                             <div>

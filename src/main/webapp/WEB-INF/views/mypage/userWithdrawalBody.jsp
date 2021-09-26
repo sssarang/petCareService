@@ -21,6 +21,10 @@
             <%@ include file="/WEB-INF/views/common/mypageSidebar.jsp" %>
             <!-- Page content wrapper-->
             <div id="uw_wrapper">
+                 <div class="navTitle">
+                	<p class="navTitleIn">마이페이지 > 회원탈퇴</p>
+               	</div>
+            	<hr class="hhr">
             	<br>
 		        <h1 id="withdrawal_head">탈퇴 사유 선택</h1>
 		        <br><br>

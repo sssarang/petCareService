@@ -1,6 +1,8 @@
-body {
+body{
 	padding-top: 0px !important;
+	height: 100% !important;
 	font-family: 'Noto Sans KR', sans-serif;
+	flex: 1 1 auto;
 }
 .form-bg{
     background-color: rgb(252, 250, 246);
@@ -9,11 +11,14 @@ body {
 }
 .demo
 {
-   padding: 50px 0 100px 0;
+    /*padding: 50px 0 100px 0; */
+    padding-top: 50px;
+    padding-bottom: 14.5%;
 }
+
 .heading-title
 {
-   margin-bottom: 70px;
+    margin-bottom: 70px;
 }
 .form-bg:before{
     content: "";
@@ -38,7 +43,7 @@ form .heading{
     color: #636363;
     letter-spacing: 1px;
     text-transform: uppercase;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 form .form-group{
@@ -92,6 +97,34 @@ form .btn .fa{
     right: 7px;
 }
 
+form .signUpBtn{
+    font-size: 17px;
+    font-weight: bold;
+    color: #fff;
+    background: #fcb37be7;
+    text-transform: uppercase;
+    box-shadow: 0 0 8px 0 #a2a2a2;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 60px 12px 15px;
+    position: absolute;
+    bottom: -3%;
+    right: -4%;
+    transition: all 0.2s ease 0s;
+}
+
+form .signUpBtn:hover{
+    background: #fff;
+    color: #fcb37bd3;
+}
+
+form .signUpBtn .fa{
+    font-size: 38px;
+    position: absolute;
+    top: 5px;
+    right: 7px;
+}
+
 form .form-footer{
     font-size: 14px;
     color: #464545;
@@ -114,14 +147,23 @@ form .form-footer a:hover{
 }
 
 /* 부트스트랩 설정 외 추가한 옵션 */
-form .radio-control{
+.radio-control{
 	font-size: 14px;
-	
+	padding-left: 15px;
 }
 
 /* 부트스트랩 설정 외 추가한 옵션 */
 form .check-button{
 	float: right;
+	margin: 0 5px 3px 0;  
+    width: 15%;
+    height: 23px;
+    border: 0;
+    border-radius: 3px;
+
+    font-size: 11px;
+    color: white;
+    background-color: #8f8e8dba;
 }
 
 /* 부트스트랩 설정 외 추가한 옵션 */
