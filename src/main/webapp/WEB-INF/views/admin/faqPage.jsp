@@ -37,7 +37,6 @@
 	<!-- Custom styles for this page -->
     <link href="/resources/css/admin/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/resources/css/admin/modal.css">
-    <script src="/resources/js/admin/paging.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> -->
 	
 	<!-- jquery -->
@@ -52,8 +51,8 @@
 
     <!-- Custom scripts for all pages-->
     
-    <script src="/resources/js/admin/sb-admin-2.min.js"></script>
-    
+    <script src="/resources/js/admin/sb-admin-2.min.js"></script>    
+    <script src="/resources/js/admin/paging.js"></script>
     <script type="text/javascript" src="/resources/js/admin/modal.js"></script>
 
 </head>
