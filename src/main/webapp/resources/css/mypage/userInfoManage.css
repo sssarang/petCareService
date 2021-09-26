@@ -11419,11 +11419,16 @@ form .warning-label{
 }
 
 form .check-button{
-  float: right;
+  	float: right;
+	margin: 0 20px 3px 0;  
+    width: 15%;
+    height: 23px;
+    border: 0;
+    border-radius: 3px;
 
-  margin-right: 20px;
-
-  font-size: 65%;
+    font-size: 11px;
+    color: white;
+    background-color: #8f8e8dba;
 }
 
 
