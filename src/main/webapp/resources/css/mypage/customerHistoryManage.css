@@ -11166,6 +11166,7 @@ body{
 
 .btn-modal {
   margin: 2% !important;
+  margin-top: 20px !important;
   width: 150px !important;
   height: 60px !important;
   border: 0 !important;
@@ -11305,5 +11306,5 @@ hr{
 }
 
 .dataIn{
-	width: 100px;
+	width: 120px;
 }

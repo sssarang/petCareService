@@ -44,7 +44,7 @@
 						<c:forEach items="${history}" var="i">
 						<div class="history">
                         	<p>서비스 이용 날짜 : <fmt:formatDate pattern="yyyy-MM-dd" value="${i.startDate}" /></p>
-                        
+                        	
                             <span id="historyImage">
                                 <img src="${i.proPhoto}" id="proPhoto">
                             </span>
@@ -69,20 +69,11 @@
                                 		</tr>
                                 		<tr>
                                 			<td class="boldText">금액</td>
-                                			<td class="dataIn amount" value="${i.totalAmount}"></td>
+                                			<td class="dataIn"><fmt:formatNumber type="number" maxFractionDigits="3" value="${i.totalAmount}" />원</td>
                                 		</tr>
                                 		                                	
                                 	</table>
-                                	<!-- <li>펫시터 닉네임 </li>
-                                	<li>${i.userNickname}</li>
-                                	<hr>
-                                    <li>펫시터 연락처 </li>
-                                    <li>${i.userContact}</li>
-                                    <hr>
-                                    <li>서비스 유형 </li>
-                                    <li>${i.codeName}</li>-->
-                                    <br>
-                                 	  <!-- Button to Open the Modal -->
+                                	<!-- Button to Open the Modal -->
 							        <!-- NOTE 1: if ( data-toggle="modal" ) not exists, modal window not appeared. -->
 							        <!-- NOTE 2: if ( data-target="#myModal" ) not exists or incorrect, modal window not appeared. -->
 							        <button type="button" class="btn-modal" id="btn_reviewModal" data-toggle="modal" data-target="#myModal" data-backdrop="static">
@@ -160,15 +151,6 @@
         <script>
         
       	  $(function() {
-      		  	// 금액 정규식
-      		  //	var amountt = $('.amount').val();
-      		  //	console.log(amountt);
-      		//  var price = String(amountt).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      		//  var amount = price+"원";
-      		//	console.log('price'+price);
-      		//  console.log('amount'+amount);
-      		//	$('.amount').html(amount);
-      		  
       		  	// 이력 내역이 없을때
 				 if($('input[name=serviceId]').val() == null){
 					$('#customerHistory').hide(); 
