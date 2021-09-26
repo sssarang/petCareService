@@ -120,11 +120,6 @@
 						                        </div>
 						                    </div>
 						
-						                    <!-- Modal footer -->
-						                    <div class="modal-footer">
-						                        <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
-						                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-						                    </div>
 						
 						                </div>
 						
@@ -166,8 +161,8 @@
 						
 						                    <!-- Modal footer -->
 						                    <div class="modal-footer">
-						                        <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
-						                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+						                        
+						                        
 						                    </div>
 						
 						                </div>
