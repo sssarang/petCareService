@@ -29,6 +29,12 @@
 	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
 	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
 	
+	<!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet" type="text/css" />
+	
+	<!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/resources/assets/favicon2.ico" />
+	
 	<!-- alert js -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
@@ -40,7 +46,7 @@
 	<script type="text/javascript" src="/resources/js/user/articleModal.js"></script>
 	<!-- https://ddorang-d.tistory.com/10?category=664194 -->
 
-	<title> 이용약관 동의 </title>
+	<title>쓰담쓰담 | 이용약관 동의 </title>
 </head>
 
 <body>
@@ -65,7 +71,7 @@
                 </li>
                 <li class="checkBox check02">
                     <ul class="clearfix">
-                        <li>이용약관 동의(필수)</li>
+                        <li>*이용약관 동의(필수)</li>
                         <li class="checkBtn">
                             <input type="checkbox" name="chk" id="necessary1" onclick="checkSelectAll()"> 
                         </li>
@@ -76,7 +82,7 @@
                 </li>
                 <li class="checkBox check03">
                     <ul class="clearfix">
-                        <li>개인정보 수집 및 이용에 대한 안내(필수)</li>
+                        <li>*개인정보 수집 및 이용에 대한 안내(필수)</li>
                         <li class="checkBtn">
                             <input type="checkbox" name="chk" id="necessary2" onclick="checkSelectAll()">
                         </li>
@@ -88,7 +94,7 @@
                 </li>
                 <li class="checkBox check03">
                     <ul class="clearfix">
-                        <li>위치정보 이용약관 동의(필수)</li>
+                        <li>*위치정보 이용약관 동의(필수)</li>
                         <li class="checkBtn">
                             <input type="checkbox" name="chk" id="necessary3" onclick="checkSelectAll()">
                         </li>

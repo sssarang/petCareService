@@ -91,15 +91,15 @@ $(function() {
 			//이메일을 입력하지 않은 경우
 	        $('#keyLabel').text(" *이메일을 입력하세요");
 			swal({
-				title : '안내!',
+				title : '',
 				text : '이메일을 입력하세요.',
-				icon : 'info',
+				icon : 'warning',
 			});
 	        return;
 		}//if
 	  	
 		swal({
-			title : '안내!',
+			title : '',
 			text : '인증번호가 이메일로 전송되었습니다.',
 			icon : 'info',
 		});
@@ -194,9 +194,9 @@ $(function() {
 		} else if(emailCheck != $('#emailId').val()) {
 			//alert('이메일 중복확인 버튼을 클릭하세요.')
 			swal({
-				title : '경고!',
+				title : '',
 				text : '이메일 중복확인 버튼을 클릭하세요.',
-				icon : 'info',
+				icon : 'warning',
 			});
 			$('#emailLabel').text("");
 			return false;
@@ -209,9 +209,9 @@ $(function() {
 		} else if(authKey != $('#inputKey').val()) {
 			//alert('인증번호가 일치하지 않습니다.')
 			swal({
-				title : '경고!',
+				title : '',
 				text : '인증번호가 일치하지 않습니다.',
-				icon : 'info',
+				icon : 'warning',
 			});
 			$('#keyLabel').text("");
 			return false;
@@ -224,9 +224,9 @@ $(function() {
 		} else if(passwordCheck != $('#inputPw').val()) {
 			//alert('비밀번호를 다시 설정해주세요.')
 			swal({
-				title : '경고!',
+				title : '',
 				text : '비밀번호를 다시 설정해주세요.',
-				icon : 'info',
+				icon : 'warning',
 			});
 			$('#pwLabel').text("");
 			$('#inputPw').val('');
@@ -240,9 +240,9 @@ $(function() {
 		} else if(nickNameCheck != $('#nickName').val()) {
 			//alert('닉네임 중복확인 버튼을 클릭하세요.')
 			swal({
-				title : '경고!',
+				title : '',
 				text : '닉네임 중복확인 버튼을 클릭하세요.',
-				icon : 'info',
+				icon : 'warning',
 			});
 			$('#nickNameLabel').text("");
 			return false;
@@ -255,9 +255,9 @@ $(function() {
 		} else if(phoneNumberCheck != $('#inputPhone').val()) {
 			//alert('전화번호를 정확히 입력해주세요.');
 			swal({
-				title : '경고!',
+				title : '',
 				text : '전화번호를 정확히 입력해주세요.',
-				icon : 'info',
+				icon : 'warning',
 			});
 			$('#phoneLabel').text("* ex)010-1234-5678");
 			return false;
@@ -282,9 +282,9 @@ function checkExistData(value, dataName) {
     if (value == "") {
         //alert(dataName + " 입력해주세요!");
 		swal({
-			title : '경고!',
+			title : '',
 			text : dataName + ' 입력해주세요!',
-			icon : 'info',
+			icon : 'warning',
 		});
         return false;
     }

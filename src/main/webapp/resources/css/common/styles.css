@@ -227,7 +227,6 @@ svg {
 .btn span:before,
 .btn span:after{
   content: "";
-  background: #333;
   position: absolute;
   top: 0;
   left: 0;
