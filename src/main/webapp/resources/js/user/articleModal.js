@@ -18,7 +18,11 @@ function pJoin(){
 	console.log(isCheck1, isCheck2, isCheck3)
 	
 	if( (isCheck1 == false) || (isCheck2 == false) || (isCheck3 == false)) {
-		alert('필수항목을 체크해주세요');
+		swal({
+			title : '필수!',
+			text : '필수항목을 체크해주세요',
+			icon : 'info',
+		});
 	} else {
 		//펫시터 가입
 		var sendData = "classify="+2;
@@ -59,13 +63,17 @@ function nJoin(){
 		$(this).attr("type","submit");
 		window.location.href="http://localhost:8090/user/joinPage";
 	} else {
-		alert('필수항목을 체크해주세요');
+		swal({
+			title : '필수!',
+			text : '필수항목을 체크해주세요',
+			icon : 'info',
+		});
 	}//if-else
 }//nJoin
 
 //전체선택 버튼 클릭시
 function selectAll(selectAll) {
-	console.log("gd");
+
 	const checkboxes = document.getElementsByName('chk');
 	
 	checkboxes.forEach((checkbox) => {

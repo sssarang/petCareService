@@ -121,7 +121,12 @@ $(document).ready(function() {
 			$('#emailId').val('');
 			return false;
 		} else if(emailCheck != $('#emailId').val()) {
-			alert('이메일 중복확인 버튼을 클릭하세요.')
+			//alert('이메일 중복확인 버튼을 클릭하세요.');
+			swal({
+				title : '경고!',
+				text : '이메일 중복확인 버튼을 클릭하세요.',
+				icon : 'info',
+			});
 			$('#emailLabel').text("");
 			return false;
 		}//if
@@ -131,7 +136,12 @@ $(document).ready(function() {
 			$('#inputKey').val('');
 			return false;
 		} else if(authKey != $('#inputKey').val()) {
-			alert('인증번호가 일치하지 않습니다.')
+			//alert('인증번호가 일치하지 않습니다.')
+			swal({
+				title : '경고!',
+				text : '인증번호가 일치하지 않습니다.',
+				icon : 'info',
+			});
 			$('#keyLabel').text("");
 			return false;
 		}//if
@@ -141,7 +151,12 @@ $(document).ready(function() {
 			$('#inputPw').val('');
 			return false;
 		} else if(passwordCheck != $('#inputPw').val()) {
-			alert('비밀번호를 다시 설정해주세요.')
+			//alert('비밀번호를 다시 설정해주세요.')
+			swal({
+				title : '경고!',
+				text : '비밀번호를 다시 설정해주세요.',
+				icon : 'info',
+			});
 			$('#pwLabel').text("");
 			$('#inputPw').val('');
 			return false;
@@ -225,7 +240,12 @@ $(document).ready(function() {
 // 공백확인 함수
 function checkExistData(value, dataName) {
     if (value == "") {
-        alert(dataName + " 입력해주세요!");
+        //alert(dataName + " 입력해주세요!");
+		swal({
+			title : '경고!',
+			text : dataName + '입력해주세요.',
+			icon : 'info',
+		});
         return false;
     }
     return true;

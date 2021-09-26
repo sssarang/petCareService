@@ -181,12 +181,12 @@ public class UserController {
 	//좌표값 받아오는 메소드
 	@RequestMapping(value="coordinate", method=RequestMethod.POST)
 	@ResponseBody
-	public boolean coordinate(String x, String y) {
+	public String coordinate(String x, String y) {
 		log.debug("coordinate({}, {}) invoked",x, y);
 		this.x = Double.parseDouble(x);
 		this.y = Double.parseDouble(y);
 		
-		return true;
+		return "success";
 	}//coordinate
 	
 	//회원 구분

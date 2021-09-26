@@ -109,6 +109,7 @@ form .form-footer a{
 
 form .form-footer a:hover{
     text-decoration-line: none;
+    cursor: pointer;
     
 }
 

@@ -175,13 +175,18 @@ $(function() {
 		var joinForm = document.joinForm;
 		
 		if(kakaoMap() == true){
-			
+			console.log('테스트1');
 			if(checkExistData($('#emailId').val(), "이메일을") == false){
 				$('#emailLabel').text("");
 				$('#emailId').val('');
 				return false;
 			} else if(emailCheck != $('#emailId').val()) {
-				alert('이메일 중복확인 버튼을 클릭하세요.')
+				//alert('이메일 중복확인 버튼을 클릭하세요.')
+				swal({
+					title : '경고!',
+					text : '이메일 중복확인 버튼을 클릭하세요.',
+					icon : 'info',
+				});
 				$('#emailLabel').text("");
 				return false;
 			}
@@ -191,7 +196,12 @@ $(function() {
 				$('#inputKey').val('');
 				return false;
 			} else if(authKey != $('#inputKey').val()) {
-				alert('인증번호가 일치하지 않습니다.')
+				//alert('인증번호가 일치하지 않습니다.')
+				swal({
+					title : '경고!',
+					text : '인증번호가 일치하지 않습니다.',
+					icon : 'info',
+				});
 				$('#keyLabel').text("");
 				return false;
 			}//if-else
@@ -201,7 +211,12 @@ $(function() {
 				$('#inputPw').val('');
 				return false;
 			} else if(passwordCheck != $('#inputPw').val()) {
-				alert('비밀번호를 다시 설정해주세요.')
+				//alert('비밀번호를 다시 설정해주세요.')
+				swal({
+					title : '경고!',
+					text : '비밀번호를 다시 설정해주세요.',
+					icon : 'info',
+				});
 				$('#pwLabel').text("");
 				$('#inputPw').val('');
 				return false;
@@ -212,7 +227,12 @@ $(function() {
 				$('#nickName').val('');
 				return false;
 			} else if(nickNameCheck != $('#nickName').val()) {
-				alert('닉네임 중복확인 버튼을 클릭하세요.')
+				//alert('닉네임 중복확인 버튼을 클릭하세요.')
+				swal({
+					title : '경고!',
+					text : '닉네임 중복확인 버튼을 클릭하세요.',
+					icon : 'info',
+				});
 				$('#nickNameLabel').text("");
 				return false;
 			}
@@ -222,7 +242,12 @@ $(function() {
 				$('#inputPhone').val('');
 				return false;
 			} else if(phoneNumberCheck != $('#inputPhone').val()) {
-				alert('전화번호를 정확히 입력해주세요.');
+				//alert('전화번호를 정확히 입력해주세요.');
+				swal({
+					title : '경고!',
+					text : '전화번호를 정확히 입력해주세요.',
+					icon : 'info',
+				});
 				$('#phoneLabel').text("* ex)010-1234-5678");
 				return false;
 			}
@@ -312,16 +337,25 @@ $(function() {
 // 공백확인 함수
 function checkExistData(value, dataName) {
     if (value == "") {
-        alert(dataName + " 입력해주세요!");
+        //alert(dataName + " 입력해주세요!");
+		swal({
+			title : '경고!',
+			text : dataName + ' 입력해주세요!',
+			icon : 'info',
+		});
         return false;
     }
     return true;
 }
 
+
+var isCheck = false;
+
+//promise 사용해볼것!!
 //위치 좌표로 변경
 function kakaoMap(){
     var geocoder = new kakao.maps.services.Geocoder();
-	var isCheck = false;
+	//var isCheck = false;
 
     geocoder.addressSearch($('#inputAddress').val(), function(result, status) {
        
@@ -339,15 +373,19 @@ function kakaoMap(){
 		        type : 'POST',
 		        data: sendData,
 				success: function(resp){
-					if(resp == true){
+					console.log('success');
+					if(resp == 'success'){
+						console.log(resp);
 						isCheck = true;
-					}
-				}
+						return isCheck;						
+					}//if
+				}//success
 	   	   })//.ajax
 	    }//if
 	});
-	return isCheck;
-}
+	//console.log(isCheck);
+	//return isCheck;
+}//kakaoMap
 
 function sample4_execDaumPostcode() {
     new daum.Postcode({
