@@ -86,7 +86,8 @@
                                 <input type="hidden" name="medicine" value="${i.medicine}">
                                 <input type="hidden" name="specialNote" value="${i.specialNote}">  
                                 <!-- Button to Open the Modal -->
-                                <button type="button" class="btn-primary btn-modal" id="resvModalBtn" data-toggle="modal" data-target="#modal" data-backdrop="static">더보기</button>
+                                <button type="button" class="btn-primary btn-modal" id="resvModalBtn" data-toggle="modal" data-target="#modal" data-backdrop="static">
+                                더보기&nbsp;<img src="/resources/assets/img/mypage/magnifier.png" width="25px"></button>
                                 <!-- The Modal -->
                                 <div class="modal" id="modal">
             

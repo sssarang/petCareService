@@ -3,7 +3,6 @@ package com.bitcamp.petcare.mypage.mapper;
 import java.util.List;
 
 import com.bitcamp.petcare.mypage.domain.ActivityPhotoDTO;
-import com.bitcamp.petcare.mypage.domain.ActivityPhotoVO;
 import com.bitcamp.petcare.mypage.domain.PetsitterProfileDTO;
 import com.bitcamp.petcare.mypage.domain.PetsitterProfileVO;
 import com.bitcamp.petcare.mypage.domain.PetsitterSkillDTO;
@@ -22,7 +21,7 @@ public interface SitterProfileManageMapper {
 	public abstract List<PetsitterSkillVO> getPetsitterSkill(Integer userNo);		 
 	public abstract List<ServicePetkindsVO> getServicePetKinds(Integer userNo);	 
 	public abstract List<ServiceCalendarDTO> getServiceCalendar(Integer userNo);	 	
-	public abstract List<ActivityPhotoVO> getActivityPhoto(Integer userNo);
+	public abstract List<ActivityPhotoDTO> getActivityPhoto(Integer userNo);
 	
 	// insert
 	public abstract int insertPetsitterProfile(PetsitterProfileDTO dto);
@@ -37,7 +36,9 @@ public interface SitterProfileManageMapper {
 	public abstract int updateServiceType(ServiceTypeDTO dto);	
 	public abstract int updatePetsitterSkill(PetsitterSkillDTO dto);
 	public abstract int updateServicePetkinds(ServicePetkindsDTO dto);
-	public abstract int updateActivityPhoto(ActivityPhotoDTO dto);
+	
+	// delete
+	public abstract int deleteActivityPhoto(ActivityPhotoDTO dto);
 	public abstract int deleteServiceCalendar(ServiceCalendarDTO dto);
 	
 	public abstract int mergeServiceType(ServiceTypeDTO dto);

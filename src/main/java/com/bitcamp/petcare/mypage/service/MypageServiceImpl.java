@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.petcare.mypage.domain.ActivityPhotoDTO;
-import com.bitcamp.petcare.mypage.domain.ActivityPhotoVO;
 import com.bitcamp.petcare.mypage.domain.CustomerHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerInfoManageDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerInfoManageVO;
@@ -335,7 +334,7 @@ public class MypageServiceImpl implements MypageService {
 	} // getServiceCalendar
 
 	@Override
-	public List<ActivityPhotoVO> getActivityPhoto(Integer userNo) {
+	public List<ActivityPhotoDTO> getActivityPhoto(Integer userNo) {
 		log.debug("getActivityPhoto({}) invoked.", userNo);
 		
 		Objects.requireNonNull(this.sTprofileMapper);
@@ -383,15 +382,6 @@ public class MypageServiceImpl implements MypageService {
 		
 		return this.sTprofileMapper.insertServicePetkinds(dto);
 	} // insertServicePetkinds
-
-	@Override
-	public int insertServiceCalendar(ServiceCalendarDTO dto) {
-		log.debug("insertServiceCalendar({}) invoked.", dto);
-		
-		Objects.requireNonNull(dto);
-		
-		return this.sTprofileMapper.insertServiceCalendar(dto);
-	} // insertServiceCalendar
 
 	@Override
 	public int insertActivityPhoto(ActivityPhotoDTO dto) {
@@ -466,7 +456,7 @@ public class MypageServiceImpl implements MypageService {
 		
 		Objects.requireNonNull(dto);
 		
-		return this.sTprofileMapper.updateActivityPhoto(dto);
+		return this.sTprofileMapper.deleteActivityPhoto(dto);
 	} // updateActivityPhoto
 	
 	
@@ -482,42 +472,6 @@ public class MypageServiceImpl implements MypageService {
 		return this.sThistoryMapper.getHistory(petSitterNo);
 		
 	} // getHistory
-	
-	//--------------------------------------------------------------------//
-	
-	@Override
-	public SitterReviewManageVO getReview(Integer serviceId) {
-		log.debug("getReview({}) invoked.", serviceId);
-		
-		return this.sTreplyMapper.getReview(serviceId);
-	} // readReply
-
-	@Override
-	public SitterReplyManageVO getReply(Integer serviceId) {
-		log.debug("getReply({}) invoked.", serviceId);
-		
-		return this.sTreplyMapper.getReply(serviceId);
-	} // readReply
-	
-	@Override
-	public int insertReply(SitterReplyManageDTO dto) {
-		log.debug("insertReply() invoked.");
-		
-		Objects.requireNonNull(this.sTreplyMapper);
-		
-		return this.sTreplyMapper.insertReply(dto);
-	} // insertReply
-
-
-	@Override
-	public int updateReply(SitterReplyManageDTO dto) {
-		log.debug("modifyReview() invoked.");
-		
-		Objects.requireNonNull(this.sTreplyMapper);
-		
-		return this.sTreplyMapper.updateReply(dto);
-		
-	} // updateReply
 
 	
 	//--------------------------------------------------------------------//
@@ -554,7 +508,41 @@ public class MypageServiceImpl implements MypageService {
 		return this.sTresvMapper.resvCompletion(serviceId);
 	} // resvCompletion
 
+	//--------------------------------------------------------------------//
+	
+	@Override
+	public SitterReviewManageVO getReview(Integer serviceId) {
+		log.debug("getReview({}) invoked.", serviceId);
+		
+		return this.sTreplyMapper.getReview(serviceId);
+	} // readReply
 
+	@Override
+	public SitterReplyManageVO getReply(Integer serviceId) {
+		log.debug("getReply({}) invoked.", serviceId);
+		
+		return this.sTreplyMapper.getReply(serviceId);
+	} // readReply
+	
+	@Override
+	public int insertReply(SitterReplyManageDTO dto) {
+		log.debug("insertReply() invoked.");
+		
+		Objects.requireNonNull(this.sTreplyMapper);
+		
+		return this.sTreplyMapper.insertReply(dto);
+	} // insertReply
+
+
+	@Override
+	public int updateReply(SitterReplyManageDTO dto) {
+		log.debug("modifyReview() invoked.");
+		
+		Objects.requireNonNull(this.sTreplyMapper);
+		
+		return this.sTreplyMapper.updateReply(dto);
+		
+	} // updateReply
 	
 	//--------------------------------------------------------------------//
 

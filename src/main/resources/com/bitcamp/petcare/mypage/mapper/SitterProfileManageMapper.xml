@@ -50,7 +50,7 @@
    </select>
    
    <select id="getActivityPhoto" resultType="com.bitcamp.petcare.mypage.domain.ActivityPhotoVO">
-      SELECT p.user_no, a.photo_no, a.act_photo
+      SELECT p.user_no, a.photo_no, a.act_photo, a.file_name
       FROM tbl_petsitter_profile p
       INNER JOIN tbl_activity_photo a ON p.user_no = a.user_no
       WHERE p.user_no = #{userNo}
@@ -75,9 +75,9 @@
 
    <insert id="insertActivityPhoto">
       INSERT INTO tbl_activity_photo
-            (user_no, photo_no, act_photo, reg_user_no, reg_date)
+            (user_no, photo_no, act_photo, reg_user_no, reg_date, file_name)
       VALUES
-            (#{userNo}, #{photoNo}, #{actPhoto}, #{userNo}, current_date)      
+            (#{userNo}, (SELECT MAX(photo_no)+1 FROM tbl_activity_photo WHERE user_no = #{userNo}), #{actPhoto}, #{userNo}, current_date,#{fileName})      
    </insert>
 
 
@@ -106,18 +106,6 @@
       WHERE
          user_no = #{userNo}      
    </update>
-
-   <update id="updateActivityPhoto">
-      UPDATE 
-         tbl_activity_photo
-      SET
-         photo_no = #{photoNo},
-         act_photo = #{actPhoto},
-         mod_user_no = #{userNo},
-         mod_date = current_date
-      WHERE
-         user_no = #{userNo}      
-   </update>
    
    
    <!-- delete -->
@@ -128,6 +116,15 @@
 		AND TO_CHAR(service_date,'YYYY-MM') = #{serviceYM}
 	</delete>
 	 
+	
+   <delete id="deleteActivityPhoto">
+	 	DELETE FROM tbl_activity_photo
+		WHERE user_no = #{userNo}
+		AND act_photo NOT IN 
+		<foreach collection="photoNoList" item="item" index="index" separator="," open="(" close=")"> 
+             #{item} 
+        </foreach>    
+   </delete>
 	  
    <!-- merge문 -->
    <update id="mergeServiceType">

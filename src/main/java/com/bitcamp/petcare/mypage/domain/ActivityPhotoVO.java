@@ -10,5 +10,9 @@ public class ActivityPhotoVO {
 	private Integer userNo;
 	private Integer photoNo;
 	private String actPhoto;
+	private String fileName;
 
 } // end class
+
+
+

@@ -43,23 +43,22 @@
 			<!-- page content -->
 			<form action="/mypage/sitterProfileModify" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="userNo" value="${userNo}">
-                <div id="part1">  
-                	<p id="profile_p">프로필 사진</p>              	               		
-                    <img src="/mypage/link/${userNo}" id="profilePhoto" width="350x" height="300px" onerror="this.src='/resources/assets/img/mypage/basicImg.jpg'">    
+                <div id="part1">                	               		
+                    <img src="/mypage/link/${userNo}" id="profilePhoto" onerror="this.src='/resources/assets/img/mypage/basicImg.jpg'">    
 					<label for="proPhotoUpload" class="btn_proPhoto">사진 변경</label>
 					<input type="file" name="proPhotoFile" id="proPhotoUpload">
 					<button type="submit" id="btn_save1">저장</button>                                                       	            	            
                 </div>
                 <div id="part2">
-					<label for="introduce">About me</label><br>
-                    <textarea name="introduce" cols="70" rows="8" maxlength="50" placeholder="&nbsp;자기소개를 적어주세요." id="introduce">${sitterProfile.introduce}</textarea>
+					<label for="introduce"><img src="/resources/assets/img/mypage/comment.png" width="25px">&nbsp;&nbsp;About me</label><br>
+                    <textarea name="introduce" class="notes" cols="70" rows="6" maxlength="100" placeholder="&nbsp;자기소개를 적어주세요." id="introduce">${sitterProfile.introduce}</textarea>
                     <button type="submit" id="btn_save2">저장</button>  
                 </div>
                   
             </form>
 			
                 <div id="part3">                	
-                    <p class="part_p">가능한 서비스 & 금액</p>
+                    <p class="part_p"><img src="/resources/assets/img/mypage/dogfoot.png" width="25px">&nbsp;가능한 서비스 & 금액&nbsp;<img src="/resources/assets/img/mypage/dogfoot.png" width="25px"></p>
                     <div id="part345_2_1">	
 	                	<form action="/mypage/serviceTypeModify" method="POST">
 							<input type="hidden" name="userNo" value="${userNo}">
@@ -100,7 +99,7 @@
             
             
                 <div id="part4">
-                    <p class="part_p">가능한 스킬</p>
+                    <p class="part_p"><img src="/resources/assets/img/mypage/dogfoot.png" width="25px">&nbsp;가능한 스킬&nbsp;<img src="/resources/assets/img/mypage/dogfoot.png" width="25px"></p>
                     <div id="part345_2_2">
                         <form action="/mypage/skillTypeModify" method="POST">
                             <input type="hidden" name="userNo" value="${userNo}">
@@ -131,7 +130,7 @@
                     </div>
                 </div>
                 <div id="part5">
-                    <p class="part_p">가능한 반려동물</p>
+                    <p class="part_p"><img src="/resources/assets/img/mypage/dogfoot.png" width="25px">&nbsp;가능한 반려동물&nbsp;<img src="/resources/assets/img/mypage/dogfoot.png" width="25px"></p>
                     <div id="part345_2_3">
                         <form action="/mypage/petTypeModify" method="POST">
                             <input type="hidden" name="userNo" value="${userNo}">
@@ -162,7 +161,6 @@
                     </div>
                 </div>
                 <div id="part6">
-                    <p class="part_p">가능한 날짜</p>
                     <div id="part6_2">
                     	<form action="/mypage/serviceDateModify" method="POST">						
 							<table id="calendar"></table>
@@ -172,7 +170,19 @@
                     </div>
                 </div>
                 <div id="part7">
-   					활동사진 
+				    <p class="part_p">활동사진등록</p>
+				    <span style="font-size:13px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
+					<form name="dataForm" id="dataForm" onsubmit="return registerAction()">
+						<button id="btn-upload" type="button">파일 추가</button>
+						<input id="input_file" multiple="multiple" type="file" >
+						
+						<div class="data_file_txt" id="data_file_txt">
+							<br>
+							<div id="articlefileChange">
+							</div>
+						</div>
+						<button type="submit" id="btn_save7">저장</button>
+					</form> 
                     
                 </div>
 			</div>
@@ -186,6 +196,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
+        
+     	// 파일 고유넘버
+	    var fileNum = 0;
+	    // 첨부파일 배열
+	    var content_files = new Array()
 	
         $(function(){
         	
@@ -252,6 +267,31 @@
             		}
             		
              }) // click
+             
+             //활동사진첨부파일확인
+   	    	 // input file 파일 첨부시 fileCheck 함수 실행
+ 	    	 $("#input_file").on("change", fileCheck);
+        	
+ 	         $('#btn-upload').click(function (e) {
+ 	            e.preventDefault();
+ 	            $('#input_file').click();
+ 	         });
+ 	         
+ 	         
+ 	         // 사진목록출력
+ 	         
+ 	        <c:forEach items="${activityPhotoList}" var="item">
+ 	       	fileNum = ${item.photoNo};
+ 	        content_files.push(fileNum);
+        	$('#articlefileChange').append(
+        			'<div id="file${item.photoNo}" onclick="fileDelete(\'file' + ${item.photoNo} + '\')">'
+	           		+ '<input type="hidden" name="photoNoList" value="${item.photoNo}">'
+	           		+ '<font style="font-size:15px">${item.fileName}</font>'  
+	           		+ '<img src="/resources/assets/img/mypage/del.png" style="width:20px; height:auto; vertical-align: middle; cursor: pointer;"/>' 
+	           		+ '</p><div/>'
+	           );
+			</c:forEach>
+			fileNum = fileNum+1;             
          
 
        	})	// jq
@@ -296,6 +336,7 @@
         scTable += "<td> <input id='calPre' type = 'button' value = '◀'/> </td>";
         scTable += "<td id='YM' colspan='3' style='padding: 0; width: 43%;''>year-month</td>";
         scTable += "<td> <input id='calNext' type = 'button' value = '▶'/> </td>";
+        scTable += "<br>";
         scTable += "<td> </td>";
         scTable += "</tr></thead>";
         scTable += "<tbody><tr id='day7'>";
@@ -434,7 +475,96 @@
 			</c:forEach>
 	        
 	    } //fnMakecalender
+
+       	//----------------활동사진 파일업로드-------------------//
 		
+	    // 파일 현재 필드 숫자 totalCount랑 비교값
+	    var fileCount = 0;
+	    
+	    // 해당 숫자를 수정하여 전체 업로드 갯수를 정한다.
+	    var totalCount = 10;
+	  
+	    function fileCheck(e) {
+	        var files = e.target.files;
+	        var filesArr = Array.prototype.slice.call(files); //파일 배열 담기
+	        
+	        // 파일 개수 확인 및 제한
+	        if (fileCount + filesArr.length > totalCount) {
+				swal("", '파일은 최대 '+totalCount+'개까지 업로드 할 수 있습니다.', "warning");
+
+	          return;
+	        } else {
+	        	 fileCount = fileCount + filesArr.length;
+	        } //if-else
+			
+	        // 각각의 파일 배열담기 및 기타
+	        filesArr.forEach(function (f) {
+	          var reader = new FileReader();
+	          
+	          reader.onload = function (e) {
+				content_files.push(f);
+	            $('#articlefileChange').append(
+	           		'<div id="file' + (fileNum) + '" onclick="fileDelete(\'file' + (fileNum) + '\')">'
+	           		+ '<input type="hidden" name="photoNoList" value='+(fileNum)+'>'
+	           		+ '<font style="font-size:15px">' + f.name + '</font>'  
+	           		+ '<img src="/resources/assets/img/mypage/del.png" style="width:20px; height:auto; vertical-align: middle; cursor: pointer;"/>' 
+	           		+ '</p><div/>'
+	    		);
+	            fileNum++;
+	            
+	          };
+	          reader.readAsDataURL(f);
+	        });
+	        
+	        //초기화 한다.
+	        $("#input_file").val("");
+	      } //fileCheck
+
+	     // 파일 부분 삭제 함수
+	     function fileDelete(num){
+	    	console.log("fileNum : "+num);
+	        var no = num.replace(/[^0-9]/g, "")-1;	//배열 0부터 시작 이므로 -1
+	        console.log("no : "+no);
+	        console.log(content_files);
+	        if(typeof content_files[no] != "number"){
+	        	content_files[no].is_delete = true;	
+	        }
+	    	$('#' + num).remove();
+	    	fileCount--;
+	     } //fileDelete
+
+	     
+		 //파일 등록
+    	 function registerAction(){
+    	 	
+    	 var form = $("#dataForm")[0];        
+     	 var formData = new FormData(form);
+     	 console.log(formData);
+    		for (var x = 0; x < content_files.length; x++) {
+    			// 삭제 안한것만 담아 준다. 
+    			if(!content_files[x].is_delete){
+    				 formData.append("article_file", content_files[x]);
+    			} //if
+    		} //for
+    		console.log(formData);
+			//파일업로드 multiple ajax처리   
+	    	$.ajax({
+	       	      type: "POST",
+	       	   	  enctype: "multipart/form-data",
+	       	      url: "/mypage/fileUpload",
+	           	  data : formData,
+	           	  processData: false,
+	       	      contentType: false,
+	       	      success: function (data) {
+	       	    	swal("파일업로드 성공!");
+	       	      },
+	       	      error: function (xhr, status, error) {
+	       	    	swal("서버오류로 지연되고있습니다. 잠시 후 다시 시도해주시기 바랍니다.");
+	       	     return false;
+	       	      }
+	       	    });
+	       	    return false;
+	    	}	    
 		</script>
     </body>
 </html>

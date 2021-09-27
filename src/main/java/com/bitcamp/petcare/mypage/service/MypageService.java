@@ -3,7 +3,6 @@ package com.bitcamp.petcare.mypage.service;
 import java.util.List;
 
 import com.bitcamp.petcare.mypage.domain.ActivityPhotoDTO;
-import com.bitcamp.petcare.mypage.domain.ActivityPhotoVO;
 import com.bitcamp.petcare.mypage.domain.CustomerHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerInfoManageDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerInfoManageVO;
@@ -73,14 +72,13 @@ public interface MypageService {
 	public abstract List<PetsitterSkillVO> getPetsitterSkill(Integer userNo);		 
 	public abstract List<ServicePetkindsVO> getServicePetkinds(Integer userNo);	 
 	public abstract List<ServiceCalendarDTO> getServiceCalendar(Integer userNo);	 	
-	public abstract List<ActivityPhotoVO> getActivityPhoto(Integer userNo);	
+	public abstract List<ActivityPhotoDTO> getActivityPhoto(Integer userNo);	
 
 	// insert
 	public abstract int insertPetsitterProfile(PetsitterProfileDTO dto);
 	public abstract int insertServiceType(ServiceTypeDTO dto);	
 	public abstract int insertPetsitterSkill(PetsitterSkillDTO dto);
 	public abstract int insertServicePetkinds(ServicePetkindsDTO dto);
-	public abstract int insertServiceCalendar(ServiceCalendarDTO dto);
 	public abstract int insertActivityPhoto(ActivityPhotoDTO dto);
 	
 	// update
@@ -107,8 +105,8 @@ public interface MypageService {
 	//-----------------------------------------------------------------------//
 	
 	// sitterReply
-	public abstract SitterReviewManageVO getReview(Integer serviceId);
 	public abstract SitterReplyManageVO getReply(Integer serviceId);
+	public abstract SitterReviewManageVO getReview(Integer serviceId);
 	public abstract int insertReply(SitterReplyManageDTO dto);						
 	public abstract int updateReply(SitterReplyManageDTO dto);				
 	

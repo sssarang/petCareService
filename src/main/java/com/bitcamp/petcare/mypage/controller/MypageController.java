@@ -2,14 +2,17 @@ package com.bitcamp.petcare.mypage.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -26,8 +29,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.bitcamp.petcare.mypage.domain.ActivityPhotoVO;
+import com.bitcamp.petcare.mypage.domain.ActivityPhotoDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.CustomerInfoManageDTO;
 import com.bitcamp.petcare.mypage.domain.CustomerInfoManageVO;
@@ -417,7 +421,7 @@ public class MypageController {
 			log.info("\t+ serviceCalendarList : {}", serviceCalendar);
 			model.addAttribute("serviceCalendar", serviceCalendar);
 			
-			List<ActivityPhotoVO> activityPhoto = this.service.getActivityPhoto(vo.getUserNo());
+			List<ActivityPhotoDTO> activityPhoto = this.service.getActivityPhoto(vo.getUserNo());
 			//Objects.requireNonNull(activityPhotoList);
 			log.info("\t+ activityPhotoList : {}", activityPhoto);
 			model.addAttribute("activityPhotoList", activityPhoto);
@@ -512,6 +516,68 @@ public class MypageController {
 						
 		} // updatePetType		
 		
+		
+	    @ResponseBody
+		@PostMapping("/fileUpload")
+		public String fileUpload(
+				@RequestParam("article_file") List<MultipartFile> multipartFile
+				, ActivityPhotoDTO modify
+				, HttpServletRequest request
+				,HttpSession session) {
+	    	log.debug("fileUpload({}) invoked.", modify);
+	    	
+	    	UserVO vo = (UserVO) session.getAttribute(loginKey);
+	    	int userNo = vo.getUserNo();
+	    	modify.setUserNo(userNo);
+			try {
+				// 지워진 데이터 삭제
+//				List<ActivityPhotoDTO> activityPhotoList = this.service.getActivityPhoto(userNo);
+//				for(ActivityPhotoDTO dto: activityPhotoList) {
+//					List<String> arrNo = modify.getActPhotoList();
+//					if(arrNo.contains(dto.getActPhoto())) {
+//						System.out.println("포함안됨>>>>>>>>>>>"+dto.getActPhoto());
+//					}
+//				}
+//				
+				// 파일이 있을때 탄다.
+				if(multipartFile.size() > 0 && !multipartFile.get(0).getOriginalFilename().equals("")) {
+					int idx = 0;
+					for(MultipartFile file:multipartFile) {
+						String fileRoot = "C:/opt/eclipse/workspace/JEE/petCareService/src/main/webapp/resources/assets/img/mypage/act/";
+						
+						String originalFileName = file.getOriginalFilename();								//오리지날 파일명
+						String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+						String savedFileName = UUID.randomUUID() + extension;								//저장될 파일 명
+						
+						File targetFile = new File(fileRoot + savedFileName);	
+						modify.setActPhoto("/resources/assets/img/mypage/act/"+savedFileName);
+						modify.setFileName(originalFileName);
+						modify.setPhotoNo(modify.getPhotoNoList()[idx]);
+						idx++;
+						try {
+							InputStream fileStream = file.getInputStream();
+							FileUtils.copyInputStreamToFile(fileStream, targetFile); 	//파일 저장
+							this.service.insertActivityPhoto(modify);
+							
+						} catch (Exception e) {
+							//파일삭제
+							FileUtils.deleteQuietly(targetFile);	//저장된 현재 파일 삭제
+							this.service.updateActivityPhoto(modify);
+							e.printStackTrace();
+							break;
+						} //try-catch
+						
+					} //for
+					
+				} //if
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			} //try-catch
+			
+			return "redirect: /mypage/sitterProfileManage";
+			
+		} //fileUpload
 	     
 	   //-----------------------------------------------------------------------------------------------------------------//
 	   
