@@ -16,7 +16,7 @@
 	    <meta name="description" content="" />
 	    <meta name="author" content="" />
 	
-	    <title>쓰담쓰담 | 펫시터 예약 서비스</title>
+	    <title>쓰담쓰담 | 펫시터 검색</title>
 	
 	    <!-- Favicon-->
 	    <link rel="icon" type="image/x-icon" href="/resources/assets/favicon2.ico" />
