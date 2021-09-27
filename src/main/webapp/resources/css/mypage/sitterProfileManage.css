@@ -11390,8 +11390,25 @@ body{
   width: 100%;
 }
 
-#part0 {
-	height: 100px;
+.navTitle{
+   margin-top: 10px;
+   margin-bottom: 10px;
+   
+}
+
+.navTitleIn{
+   font-size: 10px;
+   
+   float: right;
+   
+   margin-top: 10px;
+   margin-right:25%;
+}
+
+.hhr{
+   width: 75%;
+   
+   margin-top:56px;
 }
 
 #part1 {
@@ -11737,5 +11754,67 @@ input[type='radio']:checked:before {
  font-weight: bold;
  text-align: center;
  
+}
+
+#calendar{
+	margin-top: 7%;
+    padding: 5% 1% 2% 1%;	
+
+	width: 100%;
+		
+	text-align: center;
+}
+
+#day7{
+	font-weight: bold; 
+}
+
+
+#calPre,
+#calNext{
+	padding: 0;
+	
+	border: 0px;
+    font-size: 1rem;
+	background-color: white;
+}
+
+#YM{
+	font-size: 1.2rem;	
+    font-weight: bold;
+}
+
+.btn-date input[type=checkbox]{
+    display: none;
+}
+
+.btn-date input[type=checkbox] + label{
+    display: inline-block;
+    cursor: pointer;
+
+    width: 90%;
+    height: 90%;
+    line-height: 40px;
+    border-radius:10%;
+    background-color: #fdfdfc;
+
+    text-align: center;
+    font-weight:bold;
+    font-size: 0.9rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    box-shadow: 0px 1px 3px rgb(0 0 0 / 26%);
+}
+
+.btn-date input[type=checkbox] +label:hover {
+    background-color: #fcebb8;
+}
+
+.btn-date input[type=checkbox]:checked +label:hover {
+    background-color: #fcebb8;
+}
+
+.btn-date input[type=checkbox]:checked +label {
+    background-color: #fae29a;
+    font-color: #fdfdfc;
 }
 

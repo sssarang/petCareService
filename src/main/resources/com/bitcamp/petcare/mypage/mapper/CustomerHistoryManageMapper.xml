@@ -15,7 +15,8 @@
 	    u.user_nickname,
 	    u.user_contact,
 	    p.pro_photo,
-	    m.service_id
+	    m.service_id,
+	    m.total_amount
 	FROM tbl_service_matching m
 	INNER JOIN tbl_user u ON (m.pet_sitter_no = u.user_no)
 	INNER JOIN tbl_petsitter_profile p ON ( u.user_no = p.user_no )

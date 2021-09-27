@@ -19,7 +19,6 @@ import com.bitcamp.petcare.mypage.domain.PetsitterProfileVO;
 import com.bitcamp.petcare.mypage.domain.PetsitterSkillDTO;
 import com.bitcamp.petcare.mypage.domain.PetsitterSkillVO;
 import com.bitcamp.petcare.mypage.domain.ServiceCalendarDTO;
-import com.bitcamp.petcare.mypage.domain.ServiceCalendarVO;
 import com.bitcamp.petcare.mypage.domain.ServicePetkindsDTO;
 import com.bitcamp.petcare.mypage.domain.ServicePetkindsVO;
 import com.bitcamp.petcare.mypage.domain.ServiceTypeDTO;
@@ -28,6 +27,7 @@ import com.bitcamp.petcare.mypage.domain.SitterHistoryManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageDTO;
 import com.bitcamp.petcare.mypage.domain.SitterReplyManageVO;
 import com.bitcamp.petcare.mypage.domain.SitterResvManageVO;
+import com.bitcamp.petcare.mypage.domain.SitterReviewManageVO;
 import com.bitcamp.petcare.mypage.domain.UserPasswordDTO;
 import com.bitcamp.petcare.mypage.domain.userPasswordVO;
 
@@ -72,9 +72,9 @@ public interface MypageService {
 	public abstract List<ServiceTypeVO> getServiceType(Integer userNo);		
 	public abstract List<PetsitterSkillVO> getPetsitterSkill(Integer userNo);		 
 	public abstract List<ServicePetkindsVO> getServicePetkinds(Integer userNo);	 
-	public abstract List<ServiceCalendarVO> getServiceCalendar(Integer userNo);	 	
-	public abstract List<ActivityPhotoVO> getActivityPhoto(Integer userNo);
-	
+	public abstract List<ServiceCalendarDTO> getServiceCalendar(Integer userNo);	 	
+	public abstract List<ActivityPhotoVO> getActivityPhoto(Integer userNo);	
+
 	// insert
 	public abstract int insertPetsitterProfile(PetsitterProfileDTO dto);
 	public abstract int insertServiceType(ServiceTypeDTO dto);	
@@ -107,6 +107,7 @@ public interface MypageService {
 	//-----------------------------------------------------------------------//
 	
 	// sitterReply
+	public abstract SitterReviewManageVO getReview(Integer serviceId);
 	public abstract SitterReplyManageVO getReply(Integer serviceId);
 	public abstract int insertReply(SitterReplyManageDTO dto);						
 	public abstract int updateReply(SitterReplyManageDTO dto);				

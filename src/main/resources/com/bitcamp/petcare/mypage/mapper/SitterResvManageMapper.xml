@@ -19,6 +19,7 @@
 	          m.start_date "서비스 시작일",
 	          m.end_date "서비스 종료일",
 	          cc.code_name "종류",
+	          ccc.code_name "서비스",
 	          p.pet_name "이름",
 	          p.pet_birthday "나이", 
 	          p.pet_gender "성별",
@@ -31,6 +32,7 @@
 	    INNER JOIN tbl_pet_profile p ON (u.user_no = p.user_no)
 	    INNER JOIN tbl_common_code c ON (m.service_type_code = c.code)
 	    INNER JOIN tbl_common_code cc ON (p.pet_type_code = cc.code)
+	    INNER JOIN tbl_common_code ccc ON (m.step_type_code = ccc.code)
 	    INNER JOIN tbl_service_type t ON (m.service_type_code = t.service_type_code AND m.pet_sitter_no = t.user_no)
 	    WHERE m.pet_sitter_no = #{petSitterNo}
 		AND m.step_type_code BETWEEN 31 AND 33

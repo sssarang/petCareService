@@ -28,11 +28,15 @@
         <%@ include file="/WEB-INF/views/common/mypageSidebar.jsp" %> 
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
+            	<div class="navTitle">
+            		<p class="navTitleIn">마이페이지 > 회원정보관리</p>
+            	</div>
+            	<hr class="hhr">
                 <!-- Page content-->
                 <div class="userInfoModify">
                     <div id="modify_flex">
                         <form name="joinForm" action="/mypage/userInfoModify" method="POST">
-                            <h1 id="head">회원정보관리</h1>
+                            <!-- <h1 id="head">회원정보관리</h1> -->
                             <div id="form-group">
                                 <div>
                                     <label>닉네임 </label>
@@ -42,6 +46,7 @@
                                     
                                 </div>
                                     <label>아이디 </label>
+                                    <label class="warning-label">* 아이디는 변경하실 수 없습니다.</label>
                                     <input type="text" name="user_id" class="form-control" placeholder="${info.userId}" readonly>
                                     
 

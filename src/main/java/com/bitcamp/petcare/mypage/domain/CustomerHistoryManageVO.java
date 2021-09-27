@@ -14,7 +14,7 @@ public class CustomerHistoryManageVO {
 	private String userNickname;	// 펫시터 닉네임
 	private String userContact;		// 펫시터 연락처
 	private String proPhoto;		// 펫시터 프로필사진
-	
+	private Integer totalAmount;	// 서비스 총 금액
 	
 	// 리뷰관련
 	private Integer serviceId;		// 서비스 ID

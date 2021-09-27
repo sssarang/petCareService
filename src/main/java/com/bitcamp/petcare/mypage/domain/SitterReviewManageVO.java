@@ -1,12 +1,13 @@
 package com.bitcamp.petcare.mypage.domain;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
-public class SitterReplyManageVO {
+@Data
+public class SitterReviewManageVO {
 	
 	private Integer serviceId;	
-	private String repContent;		
+	private Integer grade;
+	private String revContent;		
 	private String userNickname;
 
 } // end class

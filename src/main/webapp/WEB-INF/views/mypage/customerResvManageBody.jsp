@@ -33,10 +33,13 @@
 		<%@ include file="/WEB-INF/views/common/mypageSidebar.jsp" %> 
  	       <!-- Page content wrapper-->
             <div id="page-content-wrapper">
+            	<div class="navTitle">
+            		<p class="navTitleIn">마이페이지 > 서비스 이용 내역</p>
+            	</div>
+            	<hr class="hhr">
                 <!-- Page content-->
                 <div id="customerResv">
                     <div id="customerResvManage">
-                        <h1 id="head">서비스 예약 내역</h1>
 
                         <div id="reservation">
                             <div>
@@ -117,11 +120,6 @@
 						                        </div>
 						                    </div>
 						
-						                    <!-- Modal footer -->
-						                    <div class="modal-footer">
-						                        <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
-						                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-						                    </div>
 						
 						                </div>
 						
@@ -163,8 +161,8 @@
 						
 						                    <!-- Modal footer -->
 						                    <div class="modal-footer">
-						                        <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
-						                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+						                        
+						                        
 						                    </div>
 						
 						                </div>

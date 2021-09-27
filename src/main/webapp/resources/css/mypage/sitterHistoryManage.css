@@ -11391,35 +11391,33 @@ body{
   width: 90%;
 }
 
+
+
 #history_list {
-  margin: 25px auto;
+  margin: 25px;
   padding: 10px;
   border: 2px solid rgb(255, 210, 127);
-  width: 800px;
-  height: 370px;
+  width: 600px;
+  height: 280px;
   border-radius: 20px;
 }
 
 #historyImage {
   float: left;
   width: 40%;
-  height: 300px;
   text-align: center;
 }
 
 #proPhoto {
-  margin-top : 20px;	
-  width: 240px;
-  height: 220px;
-  border-radius: 50%;
-  border: 1px solid;
+  float:left;	
+  width: 140px;
+  height: 140px;
+  margin-top: 30px;
+  margin-left: 50px;
+  border-radius: 20%;
 }
 
-#historyInformation {
-  float: left;
-  width: 60%;
-  height: 300px;
-}
+
 
 #historyInformationUl {
   margin-top: 50px;
@@ -11430,9 +11428,9 @@ body{
 #reviewBtn {
   float: right;
   display: inline;
-  margin-top: 70px;
+  margin-top: 30px;
   margin-right: 30px;
-  width: 100px;
+  width: 130px;
   height: 50px;
   border: 0;
   border-radius: 50% 20% / 10% 40%;
@@ -11451,6 +11449,7 @@ body{
 
 #sitterHistory {
 	font-size: 18px;
+	margin-left:20%;
 }
 
 #reply_btn1,
@@ -11512,3 +11511,89 @@ body{
 #repContent {
 	resize:none;
 }
+
+.navTitle {
+   margin-top: 10px;
+   margin-bottom: 10px;
+   
+}
+
+.navTitleIn {
+   font-size: 10px;
+   
+   float: right;
+   
+   margin-top: 10px;
+   margin-right:25%;
+}
+
+.hhr {
+   width: 75%;
+   
+   margin-top:56px;
+}
+
+.tdText {
+	font-weight: bold;	
+	width: 100px;
+}
+
+.tdData {
+	margin-left: 10px;	
+	width: 150px;
+}
+
+.star {
+	border:none;
+	border-right:0px; 
+	border-top:0px; 
+	boder-left:0px; 
+	boder-bottom:0px;
+	text-align: center;
+	float: left;
+	color: #fce303;
+	font-family: 'Jua', sans-serif;
+	font-size:13px;
+}
+
+.revrep {
+	float: left;
+	font-weight: bold;
+}
+
+#historyTable {
+	float: right;
+	margin-right: 40px;
+}
+
+#historyTable_td {
+	font-size: 14px;
+}
+
+input:focus {
+	outline:none;
+}
+
+#saveBtn {
+  float: right;
+  display: inline;
+  margin: 2%;
+  width: 70px;
+  height: 50px;
+  border: 0;
+  border-radius: 50% 20% / 10% 40%;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: white;
+  background-color:rgb(255, 210, 127);
+}
+
+
+
+
+
+
+
+

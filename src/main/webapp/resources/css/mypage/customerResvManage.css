@@ -11378,7 +11378,8 @@ body{
 /* content 부분 css */
 
 #customerResv{
-  margin-left: 200px;
+  margin-top: 5%;
+  margin-left: 30%;
 }
 
 #customerResv #head{
@@ -11716,6 +11717,9 @@ body{
   background-color:rgb(255, 210, 127);
 	
 }
+.btn_cancelYes{
+	margin-bottom: 20px !important;
+}
 
 .btn-payment{
 	margin: 50px 140px 0px 0px !important;
@@ -11724,4 +11728,25 @@ body{
 .btn_cancelYes:hover,
 .btn-payment:hover{
   box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+}
+
+.navTitle{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	
+}
+
+.navTitleIn{
+	font-size: 10px;
+	
+	float: right;
+	
+	margin-top: 10px;
+	margin-right:25%;
+}
+
+.hhr{
+	width: 75%;
+	
+	margin-top:56px;
 }

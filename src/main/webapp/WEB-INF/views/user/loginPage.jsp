@@ -41,10 +41,13 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 	
-	<title>쓰담쓰담 | 펫시터 예약 서비스</title>
+	<!-- alert js -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
+	<title>쓰담쓰담 | 로그인</title>
 </head>
 
-<body>
+<body style="padding-right: 0 !important">
 	 <div class="demo form-bg">
 	        <div class="container">
 	            <div class="row text-center">
@@ -58,7 +61,7 @@
 	                <div class="col-md-offset-3 col-md-6">
 	                    <form action="/user/login" method="POST">
 	                        <div class="form-group">
-	                        	<h1 class="heading">Login</h1>
+	                        	<h1 class="heading">로그인</h1>
 	                            <input type="text" name="userId" class="form-control" placeholder="Email"/>
 	
 	                            <input type="password" name="userPw" class="form-control" placeholder="Password"/>

@@ -4,6 +4,7 @@ var nickNameCheck = ""; 	//페이지 제출시 최종확인용 변수(닉네임)
 var passwordCheck = "";		//페이지 제출시 최종확인용 변수(비밀번호)
 var phoneNumberCheck = "";	//페이지 제출시 최종확인용 변수(전화번호)
 var addressCheck = "";		//페이지 제출시 최종확인용 변수(주소)
+var isCheck = false;		//주소 위도, 경도로 변경
 
 $(function() {
 
@@ -14,7 +15,7 @@ $(function() {
 		
 		if(email.trim() == ''){
 			//이메일을 입력하지 않은 경우
-	        $('#emailLabel').text("* 이메일을 입력하세요.");
+	        $('#emailLabel').text(" *이메일을 입력하세요.");
 	        return;
 		} else {
 			//이메일 정규식
@@ -22,7 +23,7 @@ $(function() {
 			
 			if(email.match(regExp) == null){
 				//이메일 형식에 맞지 않는 경우
-				$('#emailLabel').text("* 이메일 형식에 맞지 않습니다.");
+				$('#emailLabel').text(" *이메일 형식에 맞지 않습니다.");
 				return;
 			}//if
 		}//if-else
@@ -36,10 +37,10 @@ $(function() {
 				if(resp == 'success'){
 					//인증 성공
 					$('#emailLabel').css("color", "blue");
-					$('#emailLabel').text("* 사용 가능한 이메일입니다.");
+					$('#emailLabel').text(" *사용 가능한 이메일입니다.");
 					emailCheck = email;
 				} else{
-					$('#emailLabel').text("* 이미 사용중인 이메일입니다.");
+					$('#emailLabel').text(" *이미 사용중인 이메일입니다.");
 				}//if-else
 			}
 		})//.ajax
@@ -52,11 +53,11 @@ $(function() {
 		
 		if(nickName.trim() == ''){
 			//닉네임을 입력하지 않은 경우
-			$('#nickNameLabel').text("* 닉네임을 입력하세요");
+			$('#nickNameLabel').text(" *닉네임을 입력하세요");
 			return;
 		} else {
 			 if(nickName.length < 1 || nickName.length > 8){
-				$('#nickNameLabel').text("* 닉네임은 1~8자 이내로 가능합니다.");
+				$('#nickNameLabel').text(" *닉네임은 1~8자 이내로 가능합니다.");
 				return;
 			 }
 		}//if-else
@@ -71,10 +72,10 @@ $(function() {
 				if(resp == 'success'){
 					//인증성공
 					$('#nickNameLabel').css("color", "blue");
-					$('#nickNameLabel').text("* 사용 가능한 닉네임입니다.");
+					$('#nickNameLabel').text(" *사용 가능한 닉네임입니다.");
 					nickNameCheck = nickName;
 				} else{
-					$('#nickNameLabel').text("* 이미 사용중인 닉네임입니다.");
+					$('#nickNameLabel').text(" *이미 사용중인 닉네임입니다.");
 				}//if-else
 			}
 		})//.ajax
@@ -88,10 +89,21 @@ $(function() {
 	    
 		if(email.trim() == ''){
 			//이메일을 입력하지 않은 경우
-	        $('#keyLabel').text("* 이메일을 입력하세요");
+	        $('#keyLabel').text(" *이메일을 입력하세요");
+			swal({
+				title : '',
+				text : '이메일을 입력하세요.',
+				icon : 'warning',
+			});
 	        return;
 		}//if
-	  
+	  	
+		swal({
+			title : '',
+			text : '인증번호가 이메일로 전송되었습니다.',
+			icon : 'info',
+		});
+
 	    //서버로 보낼 데이터 준비 : 파라미터로 만들기
 	    var sendData = "email="+email;
 	    $.ajax({
@@ -99,7 +111,7 @@ $(function() {
 	        method : 'POST',
 	        data: sendData,
 	        success :function(resp){
-				$('#keyLabel').text("* 인증번호가 발급되었습니다.");
+				$('#keyLabel').text(" *인증번호가 발급되었습니다.");
 				authKey = resp;
 			}
 	    })//.ajax	
@@ -111,15 +123,15 @@ $(function() {
 		$('#keyLabel').css("color", "red");
 		
 		if(inputKey.trim() == ''){
-			$('#keyLabel').text("* 인증번호를 입력하세요");
+			$('#keyLabel').text(" *인증번호를 입력하세요");
 			return;
 		} else {
 			if(inputKey == authKey){
 				$('#keyLabel').css("color", "blue");
-				$('#keyLabel').text("* 인증번호가 일치합니다.");
+				$('#keyLabel').text(" *인증번호가 일치합니다.");
 				return;
 			} else{
-				$('#keyLabel').text("* 인증번호가 일치하지 않습니다.");
+				$('#keyLabel').text(" *인증번호가 일치하지 않습니다.");
 				return;
 			}//if-else
 		}//if-else
@@ -132,16 +144,16 @@ $(function() {
 		$('#pwLabel').css("color", "red");
 		
 		if(pw.trim() == ''){
-			$('#pwLabel').text("* 비밀번호를 입력하세요");
+			$('#pwLabel').text(" *비밀번호를 입력하세요");
 			return;
 		} else {
 			if(pw.match(pwReg) == null){
 				//비밀번호 형식에 맞지 않는 경우
-				$('#pwLabel').text("* 숫자와 문자포함 6~12자리 이내");
+				$('#pwLabel').text(" *숫자와 문자포함 6~12자리 이내");
 				return;
 			} else {
 				$('#pwLabel').css("color", "blue");
-				$('#pwLabel').text("* 사용할 수 있는 비밀번호 입니다");
+				$('#pwLabel').text(" *사용할 수 있는 비밀번호 입니다");
 				passwordCheck = pw;
 			}
 		}//if-else
@@ -154,16 +166,16 @@ $(function() {
 		$('#phoneLabel').css("color", "red");
 		
 		if(phone.trim() == ''){
-			$('#phoneLabel').text("* ex)010-1234-5678");
+			$('#phoneLabel').text("*ex)010-1234-5678");
 			return;
 		} else {
 			if(phone.match(phoneReg) == null){
 				//전화번호 형식에 맞지 않는 경우
-				$('#phoneLabel').text("* 전화번호 형식이 일치하지 않습니다.");
+				$('#phoneLabel').text(" *전화번호 형식이 일치하지 않습니다.");
 				return;
 			} else {
 				$('#phoneLabel').css("color", "blue");
-				$('#phoneLabel').text("* 전화번호 형식이 일치합니다.");
+				$('#phoneLabel').text(" *전화번호 형식이 일치합니다.");
 				phoneNumberCheck = phone;
 			}
 		}//if-else
@@ -174,154 +186,115 @@ $(function() {
 	$('#submitBtn').click(function (){
 		var joinForm = document.joinForm;
 		
-		if(kakaoMap() == true){
-			
-			if(checkExistData($('#emailId').val(), "이메일을") == false){
-				$('#emailLabel').text("");
-				$('#emailId').val('');
-				return false;
-			} else if(emailCheck != $('#emailId').val()) {
-				alert('이메일 중복확인 버튼을 클릭하세요.')
-				$('#emailLabel').text("");
-				return false;
-			}
-			
-			if(checkExistData($('#inputKey').val(), "인증번호를") == false){
-				$('#keyLabel').text("");
-				$('#inputKey').val('');
-				return false;
-			} else if(authKey != $('#inputKey').val()) {
-				alert('인증번호가 일치하지 않습니다.')
-				$('#keyLabel').text("");
-				return false;
-			}//if-else
-			
-			if(checkExistData($('#inputPw').val(), "비밀번호를") == false){
-				$('#pwLabel').text("");
-				$('#inputPw').val('');
-				return false;
-			} else if(passwordCheck != $('#inputPw').val()) {
-				alert('비밀번호를 다시 설정해주세요.')
-				$('#pwLabel').text("");
-				$('#inputPw').val('');
-				return false;
-			}//if-else
-			
-			if(checkExistData($('#nickName').val(), "닉네임을") == false){
-				$('#nickNameLabel').text("");
-				$('#nickName').val('');
-				return false;
-			} else if(nickNameCheck != $('#nickName').val()) {
-				alert('닉네임 중복확인 버튼을 클릭하세요.')
-				$('#nickNameLabel').text("");
-				return false;
-			}
-			
-			if(checkExistData($('#inputPhone').val(), "전화번호를") == false){
-				$('#phoneLabel').text("");
-				$('#inputPhone').val('');
-				return false;
-			} else if(phoneNumberCheck != $('#inputPhone').val()) {
-				alert('전화번호를 정확히 입력해주세요.');
-				$('#phoneLabel').text("* ex)010-1234-5678");
-				return false;
-			}
-			
-			if(checkExistData($('#inputAddress').val(), "주소를") == false){
-				$('#inputAddress').text("");
-				$('#inputAddress').val('');
-				return false;
-			} else {
-				//최종 확인
-				$(this).attr("type","submit");
-				window.location.href="http://localhost:8090/user/loginPage";
-			}//if-else
+		console.log('테스트1');
+		if(checkExistData($('#emailId').val(), "이메일을") == false){
+			$('#emailLabel').text("");
+			$('#emailId').val('');
+			return false;
+		} else if(emailCheck != $('#emailId').val()) {
+			//alert('이메일 중복확인 버튼을 클릭하세요.')
+			swal({
+				title : '',
+				text : '이메일 중복확인 버튼을 클릭하세요.',
+				icon : 'warning',
+			});
+			$('#emailLabel').text("");
+			return false;
 		}
 		
+		if(checkExistData($('#inputKey').val(), "인증번호를") == false){
+			$('#keyLabel').text("");
+			$('#inputKey').val('');
+			return false;
+		} else if(authKey != $('#inputKey').val()) {
+			//alert('인증번호가 일치하지 않습니다.')
+			swal({
+				title : '',
+				text : '인증번호가 일치하지 않습니다.',
+				icon : 'warning',
+			});
+			$('#keyLabel').text("");
+			return false;
+		}//if-else
+		
+		if(checkExistData($('#inputPw').val(), "비밀번호를") == false){
+			$('#pwLabel').text("");
+			$('#inputPw').val('');
+			return false;
+		} else if(passwordCheck != $('#inputPw').val()) {
+			//alert('비밀번호를 다시 설정해주세요.')
+			swal({
+				title : '',
+				text : '비밀번호를 다시 설정해주세요.',
+				icon : 'warning',
+			});
+			$('#pwLabel').text("");
+			$('#inputPw').val('');
+			return false;
+		}//if-else
+		
+		if(checkExistData($('#nickName').val(), "닉네임을") == false){
+			$('#nickNameLabel').text("");
+			$('#nickName').val('');
+			return false;
+		} else if(nickNameCheck != $('#nickName').val()) {
+			//alert('닉네임 중복확인 버튼을 클릭하세요.')
+			swal({
+				title : '',
+				text : '닉네임 중복확인 버튼을 클릭하세요.',
+				icon : 'warning',
+			});
+			$('#nickNameLabel').text("");
+			return false;
+		}
+		
+		if(checkExistData($('#inputPhone').val(), "전화번호를") == false){
+			$('#phoneLabel').text("");
+			$('#inputPhone').val('');
+			return false;
+		} else if(phoneNumberCheck != $('#inputPhone').val()) {
+			//alert('전화번호를 정확히 입력해주세요.');
+			swal({
+				title : '',
+				text : '전화번호를 정확히 입력해주세요.',
+				icon : 'warning',
+			});
+			$('#phoneLabel').text("* ex)010-1234-5678");
+			return false;
+		}
+		
+		if(checkExistData($('#inputAddress').val(), "주소를") == false){
+			$('#inputAddress').text("");
+			$('#inputAddress').val('');
+			return false;
+		} else {
+			//최종 확인
+			$(this).attr("type","submit");
+			window.location.href="http://localhost:8090/user/loginPage";
+		}//if-else
 		
 	});//beforeSubmit
 	
 });//end function
 
-/*function submitBtn(){
-	var joinForm = document.joinForm;
-	kakaoMap();
-	
-	if(checkExistData($('#emailId').val(), "이메일을") == false){
-		$('#emailLabel').text("");
-		$('#emailId').val('');
-		return false;
-	} else if(emailCheck != $('#emailId').val()) {
-		alert('이메일 중복확인 버튼을 클릭하세요.')
-		$('#emailLabel').text("");
-		return false;
-	}
-	
-	if(checkExistData($('#inputKey').val(), "인증번호를") == false){
-		$('#keyLabel').text("");
-		$('#inputKey').val('');
-		return false;
-	} else if(authKey != $('#inputKey').val()) {
-		alert('인증번호가 일치하지 않습니다.')
-		$('#keyLabel').text("");
-		return false;
-	}//if-else
-	
-	if(checkExistData($('#inputPw').val(), "비밀번호를") == false){
-		$('#pwLabel').text("");
-		$('#inputPw').val('');
-		return false;
-	} else if(passwordCheck != $('#inputPw').val()) {
-		alert('비밀번호를 다시 설정해주세요.')
-		$('#pwLabel').text("");
-		$('#inputPw').val('');
-		return false;
-	}//if-else
-	
-	if(checkExistData($('#nickName').val(), "닉네임을") == false){
-		$('#nickNameLabel').text("");
-		$('#nickName').val('');
-		return false;
-	} else if(nickNameCheck != $('#nickName').val()) {
-		alert('닉네임 중복확인 버튼을 클릭하세요.')
-		$('#nickNameLabel').text("");
-		return false;
-	}
-	
-	if(checkExistData($('#inputPhone').val(), "전화번호를") == false){
-		$('#phoneLabel').text("");
-		$('#inputPhone').val('');
-		return false;
-	} else if(phoneNumberCheck != $('#inputPhone').val()) {
-		alert('전화번호를 정확히 입력해주세요.');
-		$('#phoneLabel').text("* ex)010-1234-5678");
-		return false;
-	}
-	
-	if(checkExistData($('#inputAddress').val(), "주소를") == false){
-		$('#inputAddress').text("");
-		$('#inputAddress').val('');
-		return false;
-	} else {
-		//최종 확인
-		$(this).attr("type","submit");
-		window.location.href="http://localhost:8090/user/loginPage";
-	}//if-else
-};//beforeSubmit*/
-
 // 공백확인 함수
 function checkExistData(value, dataName) {
     if (value == "") {
-        alert(dataName + " 입력해주세요!");
+        //alert(dataName + " 입력해주세요!");
+		swal({
+			title : '',
+			text : dataName + ' 입력해주세요!',
+			icon : 'warning',
+		});
         return false;
     }
     return true;
 }
 
+
 //위치 좌표로 변경
 function kakaoMap(){
     var geocoder = new kakao.maps.services.Geocoder();
-	var isCheck = false;
 
     geocoder.addressSearch($('#inputAddress').val(), function(result, status) {
        
@@ -334,20 +307,26 @@ function kakaoMap(){
 		   console.log(x, y);
 					
 		   var sendData = "x="+x+'&y='+y;
-		   $.ajax({
-		        url:'coordinate',
-		        type : 'POST',
-		        data: sendData,
-				success: function(resp){
-					if(resp == true){
-						isCheck = true;
-					}
-				}
-	   	   })//.ajax
+		   _promise(sendData)
+		   .then(isCheck = true)
 	    }//if
 	});
-	return isCheck;
-}
+}//kakaoMap
+
+var _promise = function (param) {
+
+	return new Promise(function (resolve, reject) {
+		$.ajax({
+	        url:'coordinate',
+	        type : 'POST',
+	        data: param,
+			success: function(resp){
+				console.log(resp);		
+			}//success
+ 		})//.ajax
+	});
+};
+
 
 function sample4_execDaumPostcode() {
     new daum.Postcode({
@@ -383,28 +362,8 @@ function sample4_execDaumPostcode() {
                 document.getElementById("inputAddress").value = expJibunAddr;
             }
 			
-            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-/*            if(roadAddr !== ''){
-                document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-            } else {
-                document.getElementById("sample4_extraAddress").value = '';
-            }*/
+			kakaoMap();
 
-/*            var guideTextBox = document.getElementById("guide");
-            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-            if(data.autoRoadAddress) {
-                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                guideTextBox.style.display = 'block';
-
-            } else if(data.autoJibunAddress) {
-                var expJibunAddr = data.autoJibunAddress;
-                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                guideTextBox.style.display = 'block';
-            } else {
-                guideTextBox.innerHTML = '';
-                guideTextBox.style.display = 'none';
-            }*/
         }
     }).open();
 }

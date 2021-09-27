@@ -29,14 +29,15 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
+ 	<!-- Custom styles for this template-->
     <link href="/resources/css/admin/sb-admin-2.min.css" rel="stylesheet">
 	<link href="/resources/css/admin/faq.css" rel="stylesheet">
 	<link href="/resources/css/admin/paging.css" rel="stylesheet">
 	
 	<!-- Custom styles for this page -->
     <link href="/resources/css/admin/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/resources/css/admin/modal.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> -->
 	
 	<!-- jquery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -49,11 +50,11 @@
     <script src="/resources/js/admin/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="/resources/js/admin/paging.js"></script>
-    <script src="/resources/js/admin/sb-admin-2.min.js"></script>
     
+    <script src="/resources/js/admin/sb-admin-2.min.js"></script>    
+    <script src="/resources/js/admin/paging.js"></script>
     <script type="text/javascript" src="/resources/js/admin/modal.js"></script>
-	<link rel="stylesheet" type="text/css" href="/resources/css/admin/modal.css">
+
 </head>
 
 <body id="page-top">
@@ -148,7 +149,7 @@
                                 <img class="img-profile rounded-circle"
                                     src="/resources/assets/img/admin/undraw_profile.svg">
                             </a>
-                            <!-- Dropdown - User Information -->
+                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="/user/logout">
