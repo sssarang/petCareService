@@ -77,7 +77,7 @@
       INSERT INTO tbl_activity_photo
             (user_no, photo_no, act_photo, reg_user_no, reg_date, file_name)
       VALUES
-            (#{userNo}, (SELECT MAX(photo_no)+1 FROM tbl_activity_photo WHERE user_no = #{userNo}), #{actPhoto}, #{userNo}, current_date,#{fileName})      
+            (#{userNo}, (SELECT NVL(MAX(photo_no),0)+1 FROM tbl_activity_photo WHERE user_no = #{userNo}), #{actPhoto}, #{userNo}, current_date,#{fileName})      
    </insert>
 
 
