@@ -11379,7 +11379,7 @@ body{
 
 #customerResv{
   margin-top: 5%;
-  margin-left: 30%;
+  margin-left: 25%;
 }
 
 #customerResv #head{
@@ -11764,4 +11764,6 @@ body{
 
 .stepTypeCodeInfo{
 	margin-left: 0px !important;
+	
+	cursor: default;
 }
