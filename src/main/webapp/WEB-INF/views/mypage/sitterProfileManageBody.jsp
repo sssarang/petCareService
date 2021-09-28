@@ -190,8 +190,6 @@
         </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="/resources/js/mypage/sideBarScripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -222,7 +220,6 @@
         	
         	//서비스 가능한 날짜 체크(DB 바탕으로)
         	<c:forEach items="${serviceCalendar}" var="item">
-				console.log(${item.serviceDate});
 				$("input[type='checkbox'][name='serviceDateList'][value='${item.serviceDate}']").attr("checked", true);        
 			</c:forEach>
             
@@ -419,7 +416,6 @@
         
        	
        	function fnMakecalender(){
-			console.debug('fnMakecalender invoked.');
 	    	
 			calendar = document.getElementById("calendar");
 	        row = calendar.insertRow();
@@ -470,7 +466,6 @@
 	        } //for
 	        
         	<c:forEach items="${serviceCalendar}" var="item">
-				console.log(${item.serviceDate});
 				$("input[type='checkbox'][name='serviceDateList'][value='${item.serviceDate}']").attr("checked", true);        
 			</c:forEach>
 	        
