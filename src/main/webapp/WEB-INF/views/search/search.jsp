@@ -67,7 +67,7 @@
 		<script src="/resources/js/common/address2.js" type="application/javascript"></script>
 
 	    <!-- map(App-key 포함) js -->
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services&libraries=clusterer"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69ee49c8ad00e09bd2df373af87ef12f&libraries=services&libraries=clusterer"></script>
 		<script src="/resources/js/search/map.js"></script>
 		     	
      	<!-- 프로필 활동사진 -->
