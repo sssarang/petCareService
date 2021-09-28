@@ -82,9 +82,7 @@
 	
 	//----------------서비스일정달력준비-------------------//
 	
-	function fnMakecalender(){
-		console.debug('fnMakecalender invoked.');
-    	
+	function fnMakecalender(){    	
 		calendar = document.getElementById("calendar");
         row = calendar.insertRow();
         
@@ -124,12 +122,7 @@
 		let month = today.getMonth() + 1;   // 월
 		let date = today.getDate();         // 날짜
 		let day = today.getDay();           // 요일
-		
-		console.log(targetMonth);
-		console.log(month);
-		console.log(targetDate);
-		console.log(date);
-		
+				
 		if(targetMonth+1 == month){
 			for(i=1; i<=last_date; i++){
 	                set_id = document.getElementById([i]);
@@ -301,7 +294,6 @@
 				
 				document.getElementById("YM").innerHTML = YM;
 				document.getElementById("calPre").addEventListener("click", function before_month() {
-					console.log('before_month invoked.');
 					
 					if(month == new Date().getMonth()){
 												
@@ -338,7 +330,6 @@
 			    }); //before_month
     		    
 				document.getElementById("calNext").addEventListener("click", function next_month() {
-					console.log('next_month invoked.');
 					
 			        if(month === maxDate.getMonth()){
 						swal("", "3개월 내에서 조회가능합니다", "warning");

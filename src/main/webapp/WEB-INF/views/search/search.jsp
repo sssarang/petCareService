@@ -69,16 +69,11 @@
 	    <!-- map(App-key 포함) js -->
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69ee49c8ad00e09bd2df373af87ef12f&libraries=services&libraries=clusterer"></script>
 		<script src="/resources/js/search/map.js"></script>
-		     	
-     	<!-- 프로필 활동사진 -->
-		<script src="/resources/js/search/swiper.js"></script>
 
 		<script>
 		
 		
 		 $(function(){
-            console.log('jq started.');
-                                    
             <!-- ================================ -->
 			<!-- 1. 쿼리스트링으로 받은 데이터 조작         -->
             <!-- ================================ -->
@@ -87,16 +82,10 @@
             //dogType
             if($("input[type='radio'][name='petType'][value='dog']").is(":checked")){
             	$('.btn-toggle').show();
-            	$("input[type='radio'][name='dogType'][value='${filter.dogType}']").attr("checked", true);
-            	
-            	console.log(${filter.dogType});
+            	$("input[type='radio'][name='dogType'][value='${filter.dogType}']").attr("checked", true);            	
             } //if
             
             //serviceLocation
-            console.log(${filter.addrSido});
-            console.log(${filter.addrSigugun});
-            console.log(${filter.addrDong});
-
             //${filter.addrSido} 선택
             if("${filter.addrSido}" != null && "${filter.addrSido}" != ""){
 	            $("select[id='sido'] > option[value='${filter.addrSido}']").attr("selected", true);
@@ -117,13 +106,11 @@
             //serviceType
             <c:forEach items="${filter.serviceType}" var="item">
 				$("input[type='checkbox'][name='serviceType'][value='${item}']").attr("checked", true);        
-				console.log(${item});
 			</c:forEach>
 			
 			//skillType
             <c:forEach items="${filter.skillType}" var="item">
 				$("input[type='checkbox'][name='skillType'][value='${item}']").attr("checked", true);        
-				console.log(${item});
 			</c:forEach>
             
 			
