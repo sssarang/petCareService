@@ -1,5 +1,5 @@
 $(function(){
-	console.debug("review...");
+	//console.debug("review...");
 	
 	$(document).ready(function(){
 		// 비동기식으로 데이터를 받아온다.
@@ -7,7 +7,7 @@ $(function(){
 			url: "review",
 			method: "GET",
 			success: function(list) {
-				console.log(list);
+				//console.log(list);
 				
 				// 리스트에서 필요한 값만 배열로 담는다.	
 				function getFields(input, field){

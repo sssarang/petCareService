@@ -6,7 +6,7 @@ $(function() {
 	function searchParam(key) {
 		// 쿼리스트링을 가져온다.
 		sch = location.search;
-		console.log(sch);
+		//console.log(sch);
 		
 		// key=value 값을 가져온다.
 		var params = new URLSearchParams(sch).get(key);
@@ -15,7 +15,7 @@ $(function() {
 	} //searchParam
 	
 	var sch_key = searchParam('userNo');
-	console.log(sch_key);
+	//console.log(sch_key);
 	//=========================================================================
 	
 	$(document).ready(function(){
@@ -29,7 +29,7 @@ $(function() {
 				userNo : sch_key
 			},
 			success: function(list) {
-				console.log(list);
+				//console.log(list);
 				
 				for(var i=0; i<list.length; i++){
                     var code = list[i].serviceTypeCode;
@@ -37,9 +37,9 @@ $(function() {
                     var price = String(list[i].price).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					
 
-					console.log(code);	
-					console.log(codeName);	
-					console.log(price);	
+					//console.log(code);	
+					//console.log(codeName);	
+					//console.log(price);	
 					
 					// 동적으로 option 목록 생성
 					$('#serviceType').append('<option value='+code+'>'+codeName+' ('+price+'원)</option>');
@@ -71,7 +71,7 @@ $(function() {
 					ableDates.push(date.getFullYear()+ "-" + (date.getMonth()+1) + "-" + date.getDate());
 				} //for
 				
-				console.log(ableDates);
+				//console.log(ableDates);
 				
 				//===============================================================================================//
 			
@@ -120,19 +120,19 @@ $(function() {
 		$("#serviceType").change(function() {
 			// 시작인덱스
 			var start  = $("#serviceType option:selected").text().indexOf('(')+1;
-			console.log('start: ' + start);
+			//console.log('start: ' + start);
 			
 			// 종료인덱스
 			var end  = $("#serviceType option:selected").text().indexOf(')')-1;
-			console.log('end: ' + end);
+			//console.log('end: ' + end);
 			
 			// 금액 추출
 			price  = $("#serviceType option:selected").text().substring(start, end).replace(/[^\d]+/g, '');
-			console.log('price: ' + price);	
+			//console.log('price: ' + price);	
 			
 			// 총결제금액 
 			sum = price * date;
-			console.log('sum: ' + sum);
+			//console.log('sum: ' + sum);
 			
 			// 3자리마다 콤마찍기
 			sumComma = String(sum).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -146,20 +146,20 @@ $(function() {
 		$(".flatpickr").change(function() {
 			// 시작일
 			var startDate  = new Date(document.getElementById("firstRangeInput").value);
-			console.log('startDate: ' + startDate);
+			//console.log('startDate: ' + startDate);
 			
 			// 종료일
 			var endDate  = new Date(document.getElementById("secondRangeInput").value);
-			console.log('endDate: ' + endDate);
+			//console.log('endDate: ' + endDate);
 			
 			// 총 서비스 받는 일자
 			// getTime()은 밀리세컨드 단위로 변환하기 때문에 1000(초), 60(분), 60(시), 24(일)로 나눠준다.
 			date = ((endDate.getTime()-startDate.getTime())/1000/60/60/24)+1;
-			console.log('date: ' + date);
+			//console.log('date: ' + date);
 			
 			// 총결제금액 
 			sum = price * date;
-			console.log('sum: ' + sum);
+			//console.log('sum: ' + sum);
 			
 			// 3자리마다 콤마찍기
 			sumComma = String(sum).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -181,8 +181,8 @@ $(function() {
 			success: function(list) {
 				
 				var userNo = $('input[name=petUserNo]').val();
-				console.log('>>>>>userNo:' , userNo);
-				console.log('>>>>>list:' , list);
+				//console.log('>>>>>userNo:' , userNo);
+				//console.log('>>>>>list:' , list);
 				
 				for(var i=0; i<list.length; i++){
 					if(list[i].stepTypeCode == "31" || list[i].stepTypeCode == "32" || list[i].stepTypeCode == "33"){
@@ -204,7 +204,7 @@ function check(){
 	var startDate = document.booking.startDate.value;
 	var endDate = document.booking.endDate.value;
 	
-	console.log('>>>>>>>>>>isUserNo: ', isUserNo);
+	//console.log('>>>>>>>>>>isUserNo: ', isUserNo);
 	
 	if(serviceType == "서비스 선택"){
 		swal("", "서비스를 선택해주세요.", "warning")
