@@ -31,6 +31,8 @@
 
     <!-- Custom styles for this template-->
     <link href="/resources/css/admin/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/resources/assets/favicon2.ico" />
 
 </head>
 

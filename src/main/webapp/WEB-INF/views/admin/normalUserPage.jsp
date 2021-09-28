@@ -36,6 +36,9 @@
     <link href="/resources/css/admin/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="/resources/css/admin/paging.css" rel="stylesheet">
     
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/resources/assets/favicon2.ico" />
+    
     <!-- jquery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>

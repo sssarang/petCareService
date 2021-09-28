@@ -37,6 +37,8 @@
 	<!-- Custom styles for this page -->
     <link href="/resources/css/admin/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/resources/css/admin/modal.css">
+	<!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/resources/assets/favicon2.ico" />
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> -->
 	
 	<!-- jquery -->
