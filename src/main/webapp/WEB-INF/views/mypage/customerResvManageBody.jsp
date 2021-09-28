@@ -44,9 +44,13 @@
                         <div id="reservation">
                             <div>
                             <p>예약 하신 날짜 : ${resv.regDate}</p>
-                            
-                            
-                            <input type="text" id="stepTypeCodeName" name="stepTypeCodeName" value="${resv.stepTypeCodeName}" readonly>
+                            <input type="hidden" id="stepTypeCodeName" name="stepTypeCodeName" value="${resv.stepTypeCodeName}" readonly>
+                            <c:choose>
+                            <c:when test="${resv.stepTypeCodeName eq '서비스예약'}"><button type="button" class="btn-outline-secondary stepTypeCode">승인 대기</button></c:when>
+                            <c:when test="${resv.stepTypeCodeName eq '예약승인'}"><button type="button" class="btn btn-outline-success stepTypeCode">예약 승인</button></c:when>
+                            <c:when test="${resv.stepTypeCodeName eq '예약거절'}"><button type="button" class="btn btn-outline-danger stepTypeCode">예약 거절</button></c:when>
+                            <c:otherwise></c:otherwise>
+                            </c:choose>
                             <img id="reload-btn" src="/resources/assets/img/mypage/reload.png" width="20px" height="20px">
                             </div>
                             <span id="historyImage">
@@ -178,16 +182,16 @@
                             <h4 id="head2">진행 상황</h4>
 
                             <span>
-                            <button type="button" id="btn_wait">서비스예약</button>
+                            <button type="button" class="btn-outline-secondary stepTypeCode stepTypeCodeInfo">승인 대기</button>
                             <p> 펫시터가 예약을 확인하고 있습니다.</p>
                             </span>
                             <span>
-                            <button type="button" id="btn_approve">예약승인</button>
+                            <button type="button" class="btn btn-outline-success stepTypeCode stepTypeCodeInfo">예약 승인</button>
                             <p> 예약이 승인되었습니다.</p>
                             </span>
                             <span>
-                            <button type="button" id="btn_refuse">예약거절</button>
-                            <p> 예약이 거절되었습니다.</p>
+                            <button type="button" class="btn btn-outline-danger stepTypeCode stepTypeCodeInfo">예약 거절</button>
+                            <p> 예약이 거절되었습니다. 펫시터와 연락바랍니다.</p>
                             </span>
                         </div>
 						
