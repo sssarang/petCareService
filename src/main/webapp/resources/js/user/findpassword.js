@@ -73,7 +73,7 @@ $(document).ready(function() {
 	        success :function(resp){
 				$('#keyLabel').text(" *인증번호가 발급되었습니다.");
 				authKey = resp;
-				console.log(resp);
+				//console.log(resp);
 			}
 	    })//.ajax	
 	});//end function

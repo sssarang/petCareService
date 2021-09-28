@@ -15,8 +15,6 @@ function pJoin(){
 	var isCheck2 = $(check2).prop("checked");
 	var isCheck3 = $(check3).prop("checked");
 	
-	console.log(isCheck1, isCheck2, isCheck3)
-	
 	if( (isCheck1 == false) || (isCheck2 == false) || (isCheck3 == false)) {
 		swal({
 			title : '',
@@ -48,8 +46,6 @@ function nJoin(){
 	var isCheck1 = $(check1).prop("checked");
 	var isCheck2 = $(check2).prop("checked");
 	var isCheck3 = $(check3).prop("checked");
-	
-	console.log(isCheck1, isCheck2, isCheck3)
 	
 	if( (isCheck1 == true) && (isCheck2 == true) && (isCheck3 == true)) {
 		//일반 회원으로 가입

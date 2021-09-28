@@ -186,7 +186,7 @@ $(function() {
 	$('#submitBtn').click(function (){
 		var joinForm = document.joinForm;
 		
-		console.log('테스트1');
+		//console.log('테스트1');
 		if(checkExistData($('#emailId').val(), "이메일을") == false){
 			$('#emailLabel').text("");
 			$('#emailId').val('');
@@ -299,12 +299,12 @@ function kakaoMap(){
     geocoder.addressSearch($('#inputAddress').val(), function(result, status) {
        
 	    if (status === kakao.maps.services.Status.OK) {
-           console.log(result[0].x, result[0].y);    
+           //console.log(result[0].x, result[0].y);    
 		   //result[0].x : 경도
 		   //result[0].y : 위도
 		   var x = result[0].x;
 		   var y = result[0].y;
-		   console.log(x, y);
+		   //console.log(x, y);
 					
 		   var sendData = "x="+x+'&y='+y;
 		   _promise(sendData)
