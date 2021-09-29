@@ -215,7 +215,6 @@
         		
         		var gap = dday.getTime() - today.getTime();						// 남은 날짜(밀리초 단위)
         		var result = Math.ceil(gap / (1000 * 60 * 60 * 24));			// 남은 날짜(날 단위)
-        		console.log('디데이 : ' + result);
 
 				$('.diffDate').html(result);
         		

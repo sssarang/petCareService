@@ -154,10 +154,8 @@
       		  	// 이력 내역이 없을때
 				 if($('input[name=serviceId]').val() == null){
 					$('#customerHistory').hide(); 
-					console.log('폼 사라짐!');
 				 }else{
 					 $('#noHistory').hide();
-					 console.log('사진 사라짐!');
 				 }
     
         		<!-- 리뷰남기기 버튼 클릭시 리뷰 DB 불러오기 -->
