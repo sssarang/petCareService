@@ -126,7 +126,7 @@
                         <!-- Button to Open the Modal -->
                         <input type="submit" id="regBtn" value="예약" >
                        <!-- <input type="submit" value="예약" id="regBtn" data-toggle="modal" data-target="#modal"> -->
-                        <span class="sum">결제 예상 금액: <span id="totalPrice"></span>￦</span>
+                        <span class="sum">결제 금액: <span id="totalPrice"></span>￦</span>
                     </div>
                 </div> 
             </form> 

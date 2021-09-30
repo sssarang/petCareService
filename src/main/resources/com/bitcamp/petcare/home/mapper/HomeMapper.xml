@@ -19,7 +19,7 @@
 		FROM tbl_review r
 		INNER JOIN tbl_user u ON u.user_no = r.writer_no  
 		INNER JOIN tbl_pet_profile p ON p.user_NO = r.writer_no
-		WHERE r.service_id IN(178, 165, 19)
+		WHERE r.service_id IN(230, 286, 282)
 	</select>
 	
 	
