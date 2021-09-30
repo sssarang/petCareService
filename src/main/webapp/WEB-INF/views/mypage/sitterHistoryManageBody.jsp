@@ -90,14 +90,14 @@
 																	
 																													
 															<label for="revContent"></label>
-															<textarea name="revContent" id="revContent" cols="90" rows="5" maxlength="300" style="resize: none;" placeholder="아직 리뷰가 달리지 않았습니다." value="" readonly></textarea><br>
+															<textarea name="revContent" id="revContent" cols="85" rows="5" maxlength="300" style="resize: none;" placeholder="아직 리뷰가 달리지 않았습니다." value="" readonly></textarea><br>
 														</div>
 														<div class="reply">
 															<br><br>
 															<h6 class="revrep">&nbsp;&nbsp;답글 남기기</h6>
 															
                                       						<label for="repContent"></label>	
-															<textarea name="repContent" id="repContent" cols="90" rows="5" maxlength="300"></textarea>	
+															<textarea name="repContent" id="repContent" cols="85" rows="5" maxlength="300"></textarea>	
 														</div>	
 														<button type="button" class="btn-primary btn-save" id="saveBtn" placeholder="답글을 달아주세요." >저장</button>
 													</div>

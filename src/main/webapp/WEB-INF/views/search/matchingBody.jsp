@@ -96,7 +96,7 @@
                     
                     <div class="form-item pb-3">
                         <label for="specialNote">특이사항</label>
-                        <textarea id="specialNote" rows="10" cols="63" placeholder="${matching.specialNote}" readonly ></textarea>
+                        <textarea id="specialNote" rows="10" cols="62" placeholder="${matching.specialNote}" readonly ></textarea>
                     </div>
                 </div>  
                 
