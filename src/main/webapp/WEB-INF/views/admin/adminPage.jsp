@@ -47,7 +47,8 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <!-- <i class="fas fa-laugh-wink"></i> -->
+                    <img class="img-fluid" src="/resources/assets/img/common/6.png" style="width: 100px;">
                 </div>
                 <div class="sidebar-brand-text mx-3">쓰담쓰담<sup>Admin</sup></div>
             </a>
@@ -147,7 +148,6 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-					<img src="/resources/assets/img/admin/dogs_image.png">
                     
                 </div>
                 <!-- /.container-fluid -->

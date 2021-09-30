@@ -5,6 +5,7 @@ var passwordCheck = "";		//페이지 제출시 최종확인용 변수(비밀번�
 var phoneNumberCheck = "";	//페이지 제출시 최종확인용 변수(전화번호)
 var addressCheck = "";		//페이지 제출시 최종확인용 변수(주소)
 var isCheck = false;		//주소 위도, 경도로 변경
+var swalCheck = false;
 
 $(function() {
 
@@ -270,9 +271,9 @@ $(function() {
 		} else {
 			//최종 확인
 			$(this).attr("type","submit");
-			window.location.href="http://localhost:8090/user/loginPage";
+			window.location.href="http://localhost:8090/user/loginPage";	
 		}//if-else
-		
+
 	});//beforeSubmit
 	
 });//end function
