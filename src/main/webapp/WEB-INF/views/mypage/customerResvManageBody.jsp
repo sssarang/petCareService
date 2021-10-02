@@ -145,7 +145,7 @@
 							                            </select> -->
 							                        </div>    
 							                            
-							                            <button type="button" class="btn-payment" > 결제 </button>
+							                            <button type="button" class="btn-payment1" > 결제하기 </button>
 						             				
 						                        </div>
 						                        <div class="dataExist">
@@ -256,9 +256,7 @@
         		var userNo = $('input[name=userNo]').val();
         		var payment = $('input[name=paymentUserNo]').val();
         		
-        		$('.btn-payment').click(function(){
-        			console.log('눌림!');
-        			console.log($('input[name=price1]').val());
+        		$('.btn-payment1').click(function(){
         			// IMP.request_pay(param, callback) 결제창 호출
         		      IMP.request_pay({ // param
         		          pg: "html5_inicis",
@@ -272,7 +270,6 @@
         		          buyer_addr: $('input[name=userAddress]').val(),		// 구매자 주소
         		          buyer_postcode: "01181"
         		      }, function (rsp) { // callback
-        		    	  console.log(rsp);
         		          if (rsp.success) {	// 결제 성공 시 로직
         		        	  $.ajax({
         	        				url: "/mypage/paymentSend",
@@ -315,10 +312,6 @@
         			$('#btn_charge').hide();
         		}
         		
-        		//==================== 서비스 예약, 예약 승인일때만 취소 버튼 활성화 =====
-        		/* if(stepTypeCodeName == "예약거절"){
-        			$('#btn_cancel').hide();
-        		} */
         			
         		//==================== 새로고침표시 클릭시 페이지 리로드 ===============
         		$('#reload-btn').click(function(){
@@ -329,7 +322,6 @@
         		$('#btn_charge').click(function(){
         			
         			var payment = $('input[name=paymentUserNo]').val();
-        			console.log(payment);
         			
         			if(payment == ""){
         				$('.dataExist').hide();
