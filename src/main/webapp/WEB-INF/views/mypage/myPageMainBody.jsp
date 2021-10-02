@@ -16,7 +16,9 @@
         <link href="/resources/css/mypage/myPageMain.css" rel="stylesheet" />
         <!-- Google fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-        
+        <!-- Swiper -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
       
 	      
     </head>
@@ -26,26 +28,26 @@
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
                 <!-- Page content-->
-                <div class="container-fluid">
-                     <!-- <img src="/resources/assets/img/mypage/main/pet1.jpg" id="mypageMainImg"/>-->
-                     <div id="slideShow"> 
-                     	<ul class="slides"> 
-                     		<li><img src="/resources/assets/img/mypage/main/pet.jpg" width="400px"></li>
-                     		<li><img src="/resources/assets/img/mypage/main/pet1.jpg" width="400px"></li> 
-                     		<li><img src="/resources/assets/img/mypage/main/pet3.jpg" width="400px"></li> 
-                     		<li><img src="/resources/assets/img/mypage/main/pet4.jpg" width="400px"></li> 
-                     		<li><img src="/resources/assets/img/mypage/main/pet5.jpg" width="400px"></li> 
-                     		<li><img src="/resources/assets/img/mypage/main/pet6.jpg" width="400px"></li>
-                     		<!-- <li><img src="/resources/assets/img/mypage/main/pet7.jpg" width="400px"></li>-->  
-                     	</ul> 
-                     	<p class="controller"> 
-                     	<!-- &lang: 왼쪽 방향 화살표 &rang: 오른쪽 방향 화살표 --> 
-                     	<span class="prev">&lang;</span> 
-                     	<span class="next">&rang;</span> 
-                     	</p> 
-                     </div>
-                  
-                </div>
+                <!-- 클래스명은 변경하면 안 됨 -->
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"><img src="/resources/assets/img/mypage/main/pet1.jpg"></div>
+						<div class="swiper-slide"><img src="/resources/assets/img/mypage/main/pet2.jpg"></div>
+						<div class="swiper-slide"><img src="/resources/assets/img/mypage/main/pet3.jpg"></div>
+						<div class="swiper-slide"><img src="/resources/assets/img/mypage/main/pet4.jpg"></div>
+						<div class="swiper-slide"><img src="/resources/assets/img/mypage/main/pet5.jpg"></div>
+						<div class="swiper-slide"><img src="/resources/assets/img/mypage/main/pet6.jpg"></div>
+						<div class="swiper-slide"><img src="/resources/assets/img/mypage/main/pet7.png"></div>
+						<div class="swiper-slide"><img src="/resources/assets/img/mypage/main/pet8.jpeg"></div>
+					</div>
+				
+					<!-- 네비게이션 -->
+					<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+					<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+				
+					<!-- 페이징 -->
+					<div class="swiper-pagination"></div>
+				</div>
             </div>
         </div>
         <!-- Bootstrap core JS-->
@@ -57,27 +59,27 @@
         
         
         <script>
-        	let slides = document.querySelector(".slides"); 
-        	let slideImg = document.querySelectorAll(".slides li"); 
-        	currentIdx = 0;
-        	slideCount = slideImg.length; 
-        	prev = document.querySelector(".prev"); 
-        	next = document.querySelector(".next"); 
-        	slideWidth = 400; slideMargin = 100; 
-        	slides.style.width = (slideWidth + slideMargin)*slideCount + "px"; 
-        	
-        	function moveSlide(num){ 
-        		// 왼쪽으로 400px씩 이동 
-        		slides.style.left = -num * 575 + "px"; currentIdx = num; } prev.addEventListener('click', function(){ 
-        		// 첫 번째 슬라이드로 표시 됐을때는 이전 버튼 눌러도 아무런 반응 없게 하기 위해 
-        		// currentIdx !==0일때만 moveSlide 함수 불러옴 
-        		if(currentIdx !== 0) moveSlide(currentIdx - 1); }); 
-        		
-        		next.addEventListener('click', function(){ 
-        			// 마지막 슬라이드로 표시 됐을때는 다음 버튼 눌러도 아무런 반응 없게 하기 위해 
-        			// currentIdx !==slideCount - 1 일때만 moveSlide 함수 불러옴 
-        			if(currentIdx !== slideCount - 1) moveSlide(currentIdx + 1); })
-
+	        new Swiper('.swiper-container', {
+	
+	        	// 자동높이 사용여부 : 사용하지 않을시 기본값은 false
+	        	autoHeight : true,
+	        	effect : 'fade',
+	
+	        	loop : true, // 슬라이드 반복
+	        	autoplay : { // 자동 재생
+	        		delpay : 1500
+	        	},
+	        	speed : 2000,
+	        	
+	        	pagination : { // 페이징
+	        		el : '.swiper-pagination',
+	        		clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+	        	},
+	        	navigation : { // 네비게이션
+	        		nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+	        		prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+	        	},
+	        });
         </script>
         
     </body>
