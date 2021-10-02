@@ -44,7 +44,8 @@
                         <div id="reservation">
                             <div>
                             <p>예약 하신 날짜 : ${resv.regDate}</p>
-                            <input type="hidden" id="stepTypeCodeName" name="stepTypeCodeName" value="${resv.stepTypeCodeName}" readonly>
+                            <input type="hidden" name="stepTypeCodeName" value="${resv.stepTypeCodeName}" readonly>
+                            <input type="hidden" name="userNo" value="${resv.petUserNo}">
                             <c:choose>
                             <c:when test="${resv.stepTypeCodeName eq '서비스예약'}"><button type="button" class="btn-outline-secondary stepTypeCode">승인 대기</button></c:when>
                             <c:when test="${resv.stepTypeCodeName eq '예약승인'}"><button type="button" class="btn btn-outline-success stepTypeCode">예약 승인</button></c:when>
@@ -61,13 +62,13 @@
                                 	<input type="hidden" name="serviceId" value="${resv.serviceId}">
                                 	<input type="hidden" name="paymentUserNo" value="${payment.userNo}">
                                     <label for="userNickname">시터 닉네임</label>
-                            		<input type="text" name="userNickname" class="form-control" value="${resv.userNickname}" readonly>
+                            		<input type="text" name="userNickname" class="form-control" value="${resv.userNicknameP}" readonly>
                             		<label for="userContact">시터 연락처</label>
-                            		<input type="text" name="userContact" class="form-control" value="${resv.userContact}" readonly>
+                            		<input type="text" name="userContact" class="form-control" value="${resv.userContactP}" readonly>
                             		<label for="serviceCodeName">서비스 유형</label>
                             		<input type="text" name="serviceCodeName" class="form-control" value="${resv.serviceCodeName}" readonly>
                             		<label for="price">금액</label>
-                            		<input type="text" name="price" class="form-control" value="${resv.totalAmount}원" readonly>
+                            		<input type="text" name="price" class="form-control" value="<fmt:formatNumber type="number" maxFractionDigits="3" value="${resv.totalAmount}" />원" readonly>
                             		<br>
                             		<label for="startDate">서비스 시작 일자</label>
                             		<input type="text" name="startDate" class="form-control" value="<fmt:formatDate pattern="yyyy년 MM월 dd일" value="${resv.startDate}" />" readonly>
@@ -83,14 +84,14 @@
 						        <!-- NOTE 3: if (  class="modal" ) not exists, the below <div> box appeared without button click. -->
 						        <div class="modal fade" id="myModal1">
 						            <!-- NOTE 4: if ( class="modal-dialog" ) not exists, modal window appeared by full width on viewport. -->
-						            <div class="modal-dialog modal-lg">
+						            <div class="modal-dialog modal-sm">
 						
 						                <!-- NOTE 5: if ( class="modal-content" ) not exists, the background of modal window not appeared. -->
 						                <div class="modal-content">
 						
 						                    <!-- Modal Header -->
 						                    <div class="modal-header">
-						                        <h4 class="modal-title">결제방법 선택하기</h4>
+						                        <h4 class="modal-title">주문서</h4>
 						
 						                        <!-- NOTE 6: if ( data-dismiss="modal" ) not exists, model window not closed if clicked. -->
 						                        <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -99,20 +100,53 @@
 						                    <!-- Modal body -->
 						                    <div class="modal-body">
 						                        <div class="nonData">
-						                        	<form action="/mypage/paymentSend" method="POST" class="nonDataForm">
-						                        	<input type="hidden" name="serviceId" value="${resv.serviceId}">
-						                        	<input type="hidden" name="price" value="${resv.totalAmount}">
-						                        	<input type="hidden" name="userNo" value="${resv.petUserNo}">
-						                        	
-						                        	<label>결제 방식 선택</label>
-						                        	<br>
-						                            <select name="paymentTypeCode">
-						                                <option value="41" selected>신용카드 결제 방식</option>
-						                                <option value="42" >무통장입금 결제 방식</option>
-						                            </select>
-						                            
-						                            <button type="submit" class="btn-payment" > 결제 </button>
-						                            </form>
+						                        	<div  class="order">
+							                        	<h5>주문 정보</h5>
+							                        	<ul>
+							                        	<table>
+															  <tr class="tr">
+															    <td class="boldText">주문 번호</th>
+															    <td class="dataIn">${resv.serviceId}</th>
+															  </tr>
+															  <br>
+															  <tr class="tr">
+															    <td class="boldText">주문자 명</td>
+															    <td class="dataIn">${resv.userNicknameC}</td>
+															  </tr>
+															  <tr class="tr">
+															  	<td class="boldText">서비스 종류</td>
+															  	<td class="dataIn">${resv.serviceCodeName}</td>
+															  </tr>
+															  <tr class="tr">
+															  	<td class="boldText">서비스 기간</td>
+															  	<td class="dataIn"><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${resv.startDate}" /> 시작 <br> <fmt:formatDate pattern="yyyy년 MM월 dd일" value="${resv.endDate}" /> 종료</td>
+															  </tr>
+															  <tr class="tr">
+															  	<td class="boldText">금액</td>
+															  	<td class="dataIn"><fmt:formatNumber type="number" maxFractionDigits="3" value="${resv.totalAmount}" />원</td>
+															  </tr>
+															</table>
+	
+							                        	
+							                        	
+							                        	</ul>
+							                        	<input type="hidden" name="serviceId" value="${resv.serviceId}">
+							                        	<input type="hidden" name="price1" value="${resv.totalAmount}">
+							                        	<!-- input type="hidden" name="userNo" value="${resv.petUserNo}"> -->
+							                        	<input type="hidden" name="userNicknameC" value="${resv.userNicknameC}">
+							                        	<input type="hidden" name="userContactC" value="${resv.userContactC}">
+							                        	<input type="hidden" name="userId" value="${resv.userId}">
+							                        	<input type="hidden" name="userAddress" value="${resv.userAddress}">
+							                        	<!-- <label>결제 방식 선택</label>
+							                        	<br>
+							                            <select name="paymentTypeCode">
+							                                <option value="41" selected>신용카드 결제 방식</option>
+							                                <option value="42" >무통장입금 결제 방식</option>
+							                            </select> -->
+							                        </div>    
+							                            
+							                            <button type="button" class="btn-payment" > 결제 </button>
+						             				
 						                        </div>
 						                        <div class="dataExist">
 						                        	<p>고객님께선 이미 결제를 완료하셨습니다!</p>
@@ -149,7 +183,7 @@
 						                    </div>
 						
 						                    <!-- Modal body -->
-						                    <div class="modal-body">
+						                    <div class="modal-body2">
 						                        <div class="cancelResv">
 						                        <p>예약 취소는 서비스 시작일(<p><fmt:formatDate pattern="yyyy-MM-dd" value="${resv.startDate}" /></p><p>)</p>
 						                        <br>
@@ -204,10 +238,66 @@
       	
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
+        
+         <!-- jQuery -->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+		<!-- iamport.payment.js -->
+		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
         <script>
+        
+        
         
         	$(function() {
         		
+        		//==================== 결제를 위한 jq ============================
+        		var IMP = window.IMP; // 생략 가능
+        		IMP.init("imp01777109"); // 예: imp00000000
+        		
+        		var userNo = $('input[name=userNo]').val();
+        		var payment = $('input[name=paymentUserNo]').val();
+        		
+        		$('.btn-payment').click(function(){
+        			console.log('눌림!');
+        			console.log($('input[name=price1]').val());
+        			// IMP.request_pay(param, callback) 결제창 호출
+        		      IMP.request_pay({ // param
+        		          pg: "html5_inicis",
+        		          pay_method: "card",
+        		          merchant_uid: $('input[name=serviceId]').val(),		// 구매번호
+        		          name: $('input[name=serviceCodeName]').val(),			// 구매상품 이름
+        		          amount: $('input[name=price1]').val(),					// 금액
+        		          buyer_email: $('input[name=userId]').val(),			// 구매자 id
+        		          buyer_name: $('input[name=userNicknameC]').val(),		// 구매자 닉네임
+        		          buyer_tel: $('input[name=userContactC]').val(),		// 구매자 연락처
+        		          buyer_addr: $('input[name=userAddress]').val(),		// 구매자 주소
+        		          buyer_postcode: "01181"
+        		      }, function (rsp) { // callback
+        		    	  console.log(rsp);
+        		          if (rsp.success) {	// 결제 성공 시 로직
+        		        	  $.ajax({
+        	        				url: "/mypage/paymentSend",
+        	        				method: "POST",
+        	        				data: {
+        	        					serviceId : rsp.merchant_uid,
+        	        					paymentTypeCode : 41,
+        	        					price : amount,
+        	        					userNo : userNo,
+        	        					paymentId : rsp.imp_uid
+        	        				},
+        	        				success: function(data){
+        	        					console.log('success');
+        	        					location.reload();
+        	        				}	// success
+        	        				})	// ajax
+        		          } else {
+        		              
+        		          }
+        		      });
+        			
+        			
+        		})	// click
+        			
+        			
         		//==================== 서비스까지 남은 날짜 구하기====================
         			
         		var today = new Date();											// 현재날짜
@@ -221,6 +311,7 @@
         		//==================== 승인 되었을때만 결제버튼 활성화 ================
         		var stepTypeCodeName = $('input[name=stepTypeCodeName]').val()
         		if(stepTypeCodeName != "예약승인"){
+        			console.log('스텝타입코드');
         			$('#btn_charge').hide();
         		}
         		
@@ -300,54 +391,6 @@
         			});
         			
         		}	// if
-        		
-        		//==================== 서비스 시작일자까지 남은 일 수 계산 =============
-        		
-        		/* function dateFormat(date) {
-			        let month = date.getMonth() + 1;
-			        let day = date.getDate();
-			
-			        month = month >= 10 ? month : '0' + month;
-			        day = day >= 10 ? day : '0' + day;
-			
-			        return date.getFullYear() + '-' + month + '-' + day;
-			  	} //dateFormat
-        			
-        		const currDay = new Date();
-        		console.log(currDay);
-        		
-        		const currDay1 = dateFormat(currDay);
-        		console.log(currDay1);
-        		
-        		const serviceDay = new Date(<fmt:formatDate pattern="yyyy-MM-dd" value="${resv.startDate}" />);
-        		console.log(serviceDay);
-        		
-        		const serviceDay1 = dateFormat(serviceDay);
-        		console.log(serviceDay1);
-        		
-        		const diffDay = Math.floor((serviceDay.getTime() - currDay1.getTime()) / (1000 * 60 * 60 * 24));
-        		console.log(diffDay);
-        		
-        		$('.diffDate').html(diffDay); */
-        		
-        		//==================== 예약 취소 클릭시 진행단계코드 수정 ==============
-	        			
-       			/* $(".btn-cancel").click(function({
-       				
-       				var serviceId = $('input[name="serviceId"]').val();
-       				console.log(serviceId);
-       			
-       				$.ajax({
-        				url: "/mypage/cancelResv",
-        				method: "POST",
-        				data:{
-        					serviceId : serviceId
-        				},
-        				success:function(data){
-        					
-        				}
-        			}); // ajax
-       			}) // click */
         		
         	})	// jq
         	

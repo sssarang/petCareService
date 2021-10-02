@@ -59,7 +59,9 @@
         <script>
         	let slides = document.querySelector(".slides"); 
         	let slideImg = document.querySelectorAll(".slides li"); 
-        	currentIdx = 0; slideCount = slideImg.length; prev = document.querySelector(".prev"); 
+        	currentIdx = 0;
+        	slideCount = slideImg.length; 
+        	prev = document.querySelector(".prev"); 
         	next = document.querySelector(".next"); 
         	slideWidth = 400; slideMargin = 100; 
         	slides.style.width = (slideWidth + slideMargin)*slideCount + "px"; 

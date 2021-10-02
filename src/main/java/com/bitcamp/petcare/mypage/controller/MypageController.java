@@ -365,9 +365,27 @@ public class MypageController {
 		
 	}	// customerResvManage
 	
+	@ResponseBody
 	@PostMapping("paymentSend")
-	public String paymentSend(CustomerPaymentManageDTO dto) {
+	public String paymentSend(CustomerPaymentManageDTO dto,
+							  @RequestParam(value = "serviceId" )Integer serviceId,
+							  @RequestParam(value = "paymentTypeCode" )String paymentTypeCode,
+							  @RequestParam(value = "price" )Integer price,
+							  @RequestParam(value = "userNo" )Integer userNo,
+							  @RequestParam(value = "paymentId" )String paymentId) {
 		log.debug("paymentSend() invoked.");
+		
+		log.info(serviceId);
+		log.info(paymentTypeCode);
+		log.info(price);
+		log.info(userNo);
+		log.info(paymentId);
+		
+		dto.setServiceId(serviceId);
+		dto.setPaymentTypeCode(paymentTypeCode);
+		dto.setPrice(price);
+		dto.setUserNo(userNo);
+		dto.setPaymentId(paymentId);
 		
 		this.service.insertPayment(dto);
 		

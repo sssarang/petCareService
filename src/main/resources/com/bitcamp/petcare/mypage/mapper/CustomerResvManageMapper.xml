@@ -16,10 +16,16 @@
 		       u.user_contact "펫시터 연락처",
 		       d.code_name "서비스유형",
 		       m.total_amount "금액",
-		       m.start_date "서비스날짜",
-		       m.pet_user_no "반려인 회원번호"
+		       m.start_date "서비스시작날짜",
+		       m.end_date "서비스종료날짜",
+		       m.pet_user_no "반려인 회원번호",
+               c.user_nickname "반려인 닉네임",
+               c.user_contact "반려인 연락처",
+               c.user_id "반려인 id",
+               c.user_address "반려인 주소"
 		FROM tbl_service_matching m
 		INNER JOIN tbl_user u ON ( m.pet_sitter_no = u.user_no)
+        INNER JOIN tbl_user c ON ( m.pet_user_no = c.user_no)
 		INNER JOIN tbl_petsitter_profile p ON ( m.pet_sitter_no = p.user_no )
 		INNER JOIN tbl_common_code d ON (m.service_type_code = d.code)
         INNER JOIN tbl_common_code s ON (m.step_type_code = s.code)
@@ -40,7 +46,8 @@
 				#{paymentTypeCode},
 				#{price},
 				current_date,
-				#{userNo}
+				#{userNo},
+				#{paymentId}
 		)
 	</insert>
 	

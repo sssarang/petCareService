@@ -11639,13 +11639,37 @@ body{
   text-decoration: none;
 }
 
+
+.modal-content{
+	width: 200% !important;
+	height: 150% !important;
+}
  .nonDataForm{
    margin-top: 50px;
    margin-left: 300px;
  }
 
  .modal-body{
-   height: 300px;
+   width: 400px;
+   height: 400px;
+   
+   margin: 10px auto;
+   
+   padding: 0px !important;
+ }
+ 
+ .order{
+ 	 height: 300px;
+ 	 
+ 	 padding: 1rem;
+ 
+	  pointer-events: auto;
+	  background-color: #fff;
+	  background-clip: padding-box;
+	  border: 1px solid rgba(0, 0, 0, 0.2);
+	  border-radius: 0.3rem;
+	  outline: 0;
+	  box-shadow: 10px 10px 20px grey;
  }
 
  .modal-content2{
@@ -11723,7 +11747,7 @@ body{
 }
 
 .btn-payment{
-	margin: 50px 140px 0px 0px !important;
+	margin: 20px 10px 0px 0px !important;
 }
 
 .btn_cancelYes:hover,
@@ -11766,4 +11790,10 @@ body{
 	margin-left: 0px !important;
 	
 	cursor: default;
+}
+
+.boldText{
+	font-weight: bold;
+	
+	width: 100px;
 }
