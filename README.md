@@ -51,7 +51,7 @@
 
 
 # 프로젝트 구현화면
-+ PPT(https://www.slideshare.net/ssuser4d888a/ss-250358914)
++ [PPT](https://www.slideshare.net/ssuser4d888a/ss-250358980)
 + 구현 페이지
   + 메인페이지
   + 로그인
